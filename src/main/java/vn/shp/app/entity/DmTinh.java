@@ -19,7 +19,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "dm_tinh", uniqueConstraints=@UniqueConstraint(columnNames="id"))
+@Table(name = "dm_tinh", uniqueConstraints=@UniqueConstraint(columnNames="id_tinh"))
 @Data
 public class DmTinh implements Serializable {
 
@@ -28,7 +28,7 @@ public class DmTinh implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "dm_tinh_ID_SEQ")
 	@SequenceGenerator(name = "dm_tinh_ID_SEQ", sequenceName = "dm_tinh_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id_tinh")
 	private Long dmTinhId;
 	
 	@NotEmpty
