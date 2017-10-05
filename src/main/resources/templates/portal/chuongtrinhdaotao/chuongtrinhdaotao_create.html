@@ -1,53 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="portal/fragments/head :: head">
-<meta charset="utf-8" />
 </head>
-<body class="hold-transition skin-blue layout-top-nav">
-	<div class="wrapper">
 
-		<!-- HEADER -->
-		<header class="main-header"
-			th:replace="portal/fragments/header :: header"></header>
-		<!-- .HEADER -->
+<body class="nav-md skin-brown">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
+        </div>
+        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
+        </div>
 
-		<!-- CONTENT RIGHT -->
-		<div class="content-wrapper">
-			<section class="content-header">
-				<h1 th:text="#{chuongtrinhdaotao.page}" ></h1>
-				<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_button :: content" />
-			</section>
-			<section class="content">
-				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-				<form th:action="@{/portal/chuongtrinhdaotao/create}" th:object="${chuongTrinhDaoTaoModel}" method="post" role="form" id="chuongtrinhdaotao-form">
-					
-					<div class="box">
-			            <div class="box-header with-border">
-				            <h3 class="box-title" th:text="#{chuongtrinhdaotao.create.title}"></h3>
-				        </div>
-			            
-			            <div class="box-body">
-			            	<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_form :: content" />
-			            </div>
-			        </div>
-			        
-<!-- 			        <div class="box" id="roleForBranch"> -->
-<!-- 			            <th:block th:include="portal/chuongtrinhdaotao/chuongtrinhdaotao_roleForBranchTable :: content"/> -->
-<!-- 			        </div> -->
-			        
-			        <div class="box-footer">
-			            <button class="btn btn-primary" th:text="#{create.button}" id="btn-submit"></button>
-			            <a class="btn btn-default" th:href="@{/portal/chuongtrinhdaotao/create}" th:text="#{refresh.button}"></a>
-			        </div>
-		       	</form>	
-			</section>
-		</div>
+        <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Tìm kiếm bậc đào tạo  </h1>
 
-	</div>
-	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
-	<script type="text/javascript" th:src="@{/js/chuongtrinhdaotao/chuongtrinhdaotao_chuongtrinhdaotaoForm.js}"></script>
-	<!-- Config template -->
-  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
-  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a th:href="@{/portal/chuongtrinhdaotao/create}"><button type="button" class="btn btn-default">Tạo mới </button></a>
+
+                        <button type="button" class="btn btn-default">Edit  </button>
+                        <button type="button" class="btn btn-default">Import  </button>
+                        <button type="button" class="btn btn-default">Export PDF  </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+
+                    <div class="section-content">
+                        <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+                        <!-- Content here -->
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-content">
+                                <!-- Content here -->
+
+                                <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+                                <form th:action="@{/portal/chuongtrinhdaotao/create}" th:object="${chuongTrinhDaoTaoModel}" method="post" role="form" id="chuongtrinhdaotao-form">
+
+                                    <div class="box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title" th:text="#{chuongtrinhdaotao.create.title}"></h3>
+                                        </div>
+
+                                        <div class="box-body">
+                                            <th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_form :: content" />
+                                        </div>
+                                    </div>
+
+                                    <!-- 			        <div class="box" id="roleForBranch"> -->
+                                    <!-- 			            <th:block th:include="portal/chuongtrinhdaotao/chuongtrinhdaotao_roleForBranchTable :: content"/> -->
+                                    <!-- 			        </div> -->
+
+                                    <div class="box-footer">
+                                        <button class="btn btn-primary" th:text="#{create.button}" id="btn-submit"></button>
+                                        <a class="btn btn-default" th:href="@{/portal/chuongtrinhdaotao/create}" th:text="#{refresh.button}"></a>
+                                    </div>
+                                </form>
+
+
+
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
+        <!-- /Main -->
+        <footer th:replace="portal/fragments/footer :: footer">
+        </footer>
+    </div>
+</div>
+
+
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+
+
 </body>
 </html>
+

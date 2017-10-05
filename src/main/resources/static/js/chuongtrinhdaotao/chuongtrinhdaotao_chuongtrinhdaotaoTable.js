@@ -1,10 +1,6 @@
 $(document).ready(function(){
 	
-	$(".box-table").datatables({
-		url		: BASE_URL + 'portal/chuongtrinhdaotao/ajaxList',
-		type	: 'POST',
-		setData	: setConditionSearch
-	});
+
 	
 	$(".portal-chuongtrinhdaotao-edit").on("click", function(event){
 		event.preventDefault();

@@ -1,73 +1,150 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="portal/fragments/head :: head">
-<meta charset="utf-8" />
 </head>
-<body class="hold-transition skin-blue layout-top-nav">
-	<div class="wrapper">
 
-		<!-- HEADER -->
-		<header class="main-header"
-			th:replace="portal/fragments/header :: header"></header>
-		<!-- .HEADER -->
+<body class="nav-md skin-brown">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
+        </div>
+        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
+        </div>
 
-		<!-- CONTENT RIGHT -->
-		<div class="content-wrapper">
-			<section class="content-header">
-				<h1 th:text="#{chuongtrinhdaotao.page}" ></h1>
-				<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_button :: content" />
-			</section>
-			<section class="content">
-				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-				<div class="box">
-					<form th:action="@{/portal/chuongtrinhdaotao/list}" th:object="${chuongTrinhDaoTaoModel}" method="post" role="form">
-						<div class="box-header with-border">
-							<h3 class="box-title" th:text="#{chuongtrinhdaotao.search.title}"></h3>
-							<div class="box-tools pull-right">
-		                        <button data-widget="collapse" class="btn btn-box-tool" type="button">
-		                            <i class="fa fa-minus"></i>
-		                        </button>
-		                    </div>
-						</div>
-						<div class="box-body">
-							
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label th:text="#{chuongtrinhdaotao.field.chuongtrinhdaotaoName}"></label>
-									    <input type="text" class="form-control" th:field="*{entity.chuongTrinhDaoTaoName}" id="chuongtrinhdaotao_chuongtrinhdaotaoName"/>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label th:text="#{chuongtrinhdaotao.field.chuongtrinhdaotaoCode}"></label>
-									    <input type="text" class="form-control" th:field="*{entity.chuongTrinhDaoTaoCode}" id="chuongtrinhdaotao_chuongtrinhdaotaoCode"/>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-						<div class="box-footer">
-							<div class="row">
-								<div class="col-md-12 text-center">
-									<button type="submit" class="btn btn-primary" th:text="#{search.button}"></button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				
-				<div class="box box-table">
-					<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_table :: content"/>
-			    </div>
-			    
-			</section>
-		</div>
+        <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Tìm kiếm bậc đào tạo </h1>
 
-	</div>
-  	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
-	<!-- Config template -->
-  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
-  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a th:href="@{/portal/chuongtrinhdaotao/create}">
+                            <button type="button" class="btn btn-default">Tạo mới</button>
+                        </a>
+
+                        <button type="button" class="btn btn-default">Edit</button>
+                        <button type="button" class="btn btn-default">Import</button>
+                        <button type="button" class="btn btn-default">Export PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+
+                    <div class="section-content">
+                        <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+                        <!-- Content here -->
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2 class="heading">Danh sách chương trình</h2>
+                                        <h3 class="sub-heading">Danh sách chương trình đào tạo tìm thấy theo từ
+                                            khóa </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <!-- Content here -->
+                                <div class="table-shp">
+                                    <table class="table table1 bulk_action">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </th>
+                                            <th>Mã chương trình đào tạo</th>
+                                            <th>Tên chương trình đào tạo</th>
+            <th>Thao Tác</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+
+                                        <tr th:each="chuongTrinhDaoTao,i : ${pageWrapper.data}">
+                                            <td>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </td>
+                                            <td><a href="shp-new-ct-DaoTao.html"
+                                                   th:text="${chuongTrinhDaoTao.chuongTrinhDaoTaoCode}">HV0001</a></td>
+                                            <td th:text="${chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Chương trình chủ
+                                                đề
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default btn-sm portal-chuongtrinhdaotao-edit"
+                                                        type="button"
+                                                        sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-default btn-sm portal-chuongtrinhdaotao-delete"
+                                                        type="button"
+                                                        th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                        sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="paginations">
+                                    <ul class="pagination">
+                                        <li><a href="#">Previous</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng</button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
+        <!-- /Main -->
+        <footer th:replace="portal/fragments/footer :: footer">
+        </footer>
+    </div>
+</div>
+
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+
+
 </body>
 </html>
+
