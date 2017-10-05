@@ -12,73 +12,147 @@
 		<!-- Main-->
 		<div class="main_content" role="main">
 			<div class="container-fluid top-heading">
-				<h1 class="">Tìm kiếm bậc đào tạo </h1>
+				<h1 class="">Chuyên ngành đào tạo </h1>
 
 				<div class="pull-right hidden-xs">
 					<div class="btn-group">
-						<a th:href="@{/portal/chuongtrinhdaotao/create}">
-							<button type="button" class="btn btn-default">Tạo mới</button>
-						</a>
+						<a href="shp-new-cn-DaoTao.html"><button type="button" class="btn btn-default">Tạo mới </button></a>
+						<button type="button" class="btn btn-default">Lưu </button>
 
-						<button type="button" class="btn btn-default">Edit</button>
-						<button type="button" class="btn btn-default">Import</button>
-						<button type="button" class="btn btn-default">Export PDF</button>
+						<a href="shp-ds-chuyennganh.html"><button type="button" class="btn btn-default">Danh sách chuyên ngành </button></a>
 					</div>
 				</div>
 			</div>
 
 			<div class="container-fluid">
-
 				<section class="section bgTrans">
-
 					<div class="section-content">
-						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 						<!-- Content here -->
-						<section class="section"> <!-- Start section table -->
+						<div class="row">
+							<div class="col-sm-12">
+								<form class="form-muted" novalidate>
 
-							<div class="section-content">
-								<!-- Content here -->
-
-								<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-								<form th:action="@{/portal/chuongtrinhdaotao/create}" th:object="${chuongTrinhDaoTaoModel}" method="post"
-									role="form" id="chuongtrinhdaotao-form">
-
-									<div class="box">
-										<div class="box-header with-border">
-											<h3 class="box-title" th:text="#{chuongtrinhdaotao.create.title}"></h3>
+									<div class="item form-group col-xs-12">
+										<h5> Tạo mới chuyên ngành đào tạo </h5>
+										<i> Thông tin tạo mới </i>
+									</div>
+									<!-- Compobox -->
+									<div class="item form-group col-xs-12">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chương trình đào tạo <span class="required">*</span></label>
+										<div class="col-md-10 col-sm-10 col-xs-12">
+											<select class="input-sm col-sm-12 col-xs-12">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+											</select>
 										</div>
-
-										<div class="box-body">
-											<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_form :: content" />
+									</div>
+									<div class="item form-group col-xs-12">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã chuyên ngành <span class="required">*</span>
+										</label>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
 										</div>
 									</div>
 
-									<!-- 			        <div class="box" id="roleForBranch"> -->
-									<!-- 			            <th:block th:include="portal/chuongtrinhdaotao/chuongtrinhdaotao_roleForBranchTable :: content"/> -->
-									<!-- 			        </div> -->
+									<div class="item form-group col-xs-12">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên chuyên ngành <span class="required">*</span>
+										</label>
+										<div class="col-md-10 col-sm-10 col-xs-12">
+											<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+										</div>
 
-									<div class="box-footer">
-										<button class="btn btn-primary" th:text="#{create.button}" id="btn-submit"></button>
-										<a class="btn btn-default" th:href="@{/portal/chuongtrinhdaotao/create}"
-											th:text="#{refresh.button}"></a>
 									</div>
 								</form>
-
-								<!-- End Content here -->
 							</div>
-
-						</section> <!-- End section table -->
-
+						</div>
 						<!-- End Content here -->
 					</div>
 
 					<div class="section-footer">
 						<div class="btn-group">
-							<button type="button" class="btn btn-default"> Đóng</button>
+							<button type="button" class="btn btn-default mgL0">Lưu </button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default"> Đóng </button>
 						</div>
 					</div>
 				</section> <!-- End section -->
 
+				<section class="section bgTrans"> <!-- Start section table -->
+
+					<div class="section-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h2 class="heading">Danh sách chuyên ngành</h2>
+								<h3 class="sub-heading">Danh sách chuyên ngành đào tạo tìm thấy theo từ khóa  </h3>
+							</div>
+						</div>
+					</div>
+
+					<div class="section-content">
+						<!-- Content here -->
+						<div class="table-shp">
+							<table class="table table1 bulk_action">
+								<thead>
+								<tr>
+									<th>
+										<div class="checkbox checkbox-success">
+											<input id="checkbox1" type="checkbox" class="flat check-all">
+											<label for="checkbox1"></label>
+										</div>
+									</th>
+									<th>Mã chuyên ngành đào tạo</th>
+									<th>Tên chuyên nhành đào tạo </th>
+									<th>Chương trình đào tạo</th>
+
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										<div class="checkbox checkbox-success">
+											<input id="checkbox1" type="checkbox" class="flat check-all">
+											<label for="checkbox1"></label>
+										</div>
+									</td>
+									<td><a href="shp-new-cn-DaoTao.html">HV0001</a></td>
+									<td>Ẩm thực châu Á</td>
+									<td>Chương trình chủ đề</td>
+								</tr>
+
+								<tr>
+									<td>
+										<div class="checkbox checkbox-success">
+											<input id="checkbox1" type="checkbox" class="flat check-all">
+											<label for="checkbox1"></label>
+										</div>
+									</td>
+									<td><a href="shp-new-cn-DaoTao.html">HV0001</a></td>
+									<td>Ẩm thực châu Âu </td>
+									<td>Chương trình chủ đề</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="paginations">
+							<ul class="pagination">
+								<li><a href="#">Previous</a></li>
+								<li><a href="#">...</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">...</a></li>
+								<li><a href="#">Next</a></li>
+							</ul>
+						</div>
+						<!-- End Content here -->
+					</div>
+
+				</section> <!-- End section table -->
 			</div>
 		</div>
 		<!-- /Main -->

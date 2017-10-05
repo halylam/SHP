@@ -13,7 +13,606 @@
         </div>
 
         <!-- Main-->
-        
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Đăng ký giảng viên mới </h1>
+
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a href="shp-form-dkgv.html"><button type="button" class="btn btn-default">Tạo mới </button></a>
+                        <button type="button" class="btn btn-default">Lưu </button>
+
+                        <a href="shp-form-dsgv.html">  <button type="button" class="btn btn-default">Danh sách giảng viên</button> </a>
+                        <button type="button" class="btn btn-default">Export PDF </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+
+
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form class="form-muted" novalidate>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Thông tin Giảng viên </h5>
+                                        <i> Thông tin cá nhân </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã giảng viên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ tên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Giới tính <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radio1" type="radio" name="gender">
+                                                <label style="margin-right: 25px;" for="radio1">Nam</label>
+                                                <input  id="radio2" type="radio" name="gender">
+                                                <label for="radio2">Nữ </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Số ĐT <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày sinh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Email SHP<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Email <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">CMND/Passport <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Ngày cấp <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Tại <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tôn giáo<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Dân tộc<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Thông tin giảng dậy </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Bộ môn<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Phân hệ<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for=""> Học vị <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chuyên môn  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for=""> Chuyên môn khác<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngoại ngữ 1<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Ngoại ngữ 2 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox11" type="checkbox">
+                                            <label for="checkbox11">
+                                                Đang dậy
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Tạm ngừng
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox23" type="checkbox">
+                                            <label for="checkbox23">
+                                                Nghỉ dậy
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number">Trang thái<span class="required">*</span>
+                                        </label>
+
+
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ thường trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Quận / huyện <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">P/Xã  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Số nhà/ đường<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ tạm trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Quận / huyện <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">P/Xã  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Số nhà/ đường<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Thời gian giảng dậy <span class="required">*</span></h5>
+                                        <p> Lý Thuyết: <i> Ca 1: 8h30 - 10h20; Ca 2: 10h30 - 12h20; Ca 3: 13h20 - 15h20; Ca 4: 15h30 - 17h20; Ca 5: 18h - 20h45 </i> </p>
+
+                                        <p> Thực hành 4h: <i>Ca 6: 6h - 10h; Ca 7: 10h - 14h; Ca 8: 14h - 18h; Ca 9: 18h - 22h;  </i></p>
+
+                                        <p> Thực hành 8h: <i>Ca 10: 6h - 14h; Ca 11: 14h - 22h </i>   </p>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 2 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 3 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 4 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 5 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 6 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thứ 7 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chủ nhật <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
+                                                <option>Cả ngày</option>
+                                                <option>Ca 1</option>
+                                                <option>Ca 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Kinh nghiệm làm việc </h5>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Vị trí <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Tên công ty<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Từ <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for=""> Đến <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number">Địa chỉ <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number">
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default mgL0"> + </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Hồ sơ các nhân  </h5>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox11" type="checkbox">
+                                            <label for="checkbox11">
+                                                Hình
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Bản sao CMT
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Bằng cấp chuyên môn
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Hộ khẩu
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Bằng NVSP
+                                            </label>
+                                        </div>
+                                        <!-- /Input check --> <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Bằng cấp khác
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+                                        <!-- Input check -->
+                                        <div class="checkbox checkbox-inline checkbox-success">
+                                            <input id="checkbox22" type="checkbox">
+                                            <label for="checkbox22">
+                                                Giấy khám sức khỏe
+                                            </label>
+                                        </div>
+                                        <!-- /Input check -->
+
+
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number"> Đính kèm file </label>
+                                        <div class="col-md-5 col-sm-5 col-xs-12">
+
+                                            <input type="file" id="exampleInputFile">
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default mgL0">Lưu </button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
         <!-- /Main -->
         <footer th:replace="portal/fragments/footer :: footer">
         </footer>

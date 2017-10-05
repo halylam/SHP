@@ -13,7 +13,178 @@
         </div>
 
         <!-- Main-->
-        
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class=""> Khóa học </h1>
+
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a href="shp-new-khoahoc.html"><button type="button" class="btn btn-default">Tạo mới </button> </a>
+                        <button type="button" class="btn btn-default">Lưu </button>
+
+                        <a href="shp-ds-khoahoc.html"><button type="button" class="btn btn-default">Danh sách khóa học</button> </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <section class="section bgTrans">
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form class="form-muted" novalidate>
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Tạo mới khóa học   </h5>
+                                        <i> Thông tin tạo mới </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã khóa học <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên khóa học  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Bậc đào tạo <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12">
+                                                <option>Sơ cấp</option>
+                                                <option>Trung cấp </option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Thời gian từ<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' class="form-control" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="firstname">Thời gian đến  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' class="form-control" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h2 class="heading">Danh sách môn học </h2>
+                                        <h3 class="sub-heading"> Danh sách toàn bộ môn học cho khóa đào tạo này </h3>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-default mgL0" data-toggle="modal" data-target="#add-monhoc-khoa" >Thêm môn học </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <!-- Content here -->
+                                <div class="table-shp">
+                                    <table class="table table1 bulk_action">
+                                        <thead>
+                                        <tr>
+                                            <th> STT </th>
+                                            <th>Mã môn học </th>
+                                            <th>Tên môn học </th>
+                                            <th>Tín chỉ</th>
+                                            <th>Tổng giờ dậy </th>
+                                            <th>Hệ số</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td> 1</td>
+                                            <td><a href="#">Ma-007</a></td>
+                                            <td> L1 - LISTENING & CONVERSATION </td>
+                                            <td>  8 </td>
+                                            <td>  50 </td>
+                                            <td>  2 </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> 2</td>
+                                            <td><a href="#">Ma-007</a></td>
+                                            <td> L1 - LISTENING & CONVERSATION </td>
+                                            <td>  8 </td>
+                                            <td>  50 </td>
+                                            <td>  2 </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="paginations">
+                                    <ul class="pagination">
+                                        <li><a href="#">Previous</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default mgL0">Lưu </button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
         <!-- /Main -->
         <footer th:replace="portal/fragments/footer :: footer">
         </footer>

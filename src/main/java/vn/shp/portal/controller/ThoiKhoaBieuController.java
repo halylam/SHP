@@ -33,7 +33,7 @@ public class ThoiKhoaBieuController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/thoikhoabieu/ctdt_edit";
+        return "portal/thoikhoabieu/thoikhoabieu_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_DELETE')")

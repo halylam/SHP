@@ -33,7 +33,7 @@ public class GiangVienController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/giangvien/ctdt_edit";
+        return "portal/giangvien/giangvien_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_DELETE')")

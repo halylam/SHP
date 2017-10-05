@@ -33,7 +33,7 @@ public class BacDaoTaoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/bacdaotao/ctdt_edit";
+        return "portal/bacdaotao/bacdaotao_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_DELETE')")

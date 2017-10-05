@@ -33,7 +33,7 @@ public class MonHocController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/monhoc/ctdt_edit";
+        return "portal/monhoc/monhoc_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")

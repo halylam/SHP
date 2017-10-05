@@ -33,7 +33,7 @@ public class BoMonController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/bomon/ctdt_edit";
+        return "portal/bomon/bomon_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")

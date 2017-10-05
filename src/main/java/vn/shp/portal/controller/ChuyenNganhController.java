@@ -46,7 +46,7 @@ public class ChuyenNganhController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
-        return "portal/chuyennganh/ctdt_edit";
+        return "portal/chuyennganh/chuyennganh_edit";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_DELETE')")

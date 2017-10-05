@@ -13,7 +13,134 @@
         </div>
 
         <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Tìm kiếm giảng viên  </h1>
 
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a th:href="@{/portal/giangvien/create}"><button type="button" class="btn btn-default">Tạo mới </button></a>
+
+                        <a th:href="@{/portal/giangvien/create}"><button type="button" class="btn btn-default">Edit  </button></a>
+                        <a th:href="@{/portal/giangvien/create}"><button type="button" class="btn btn-default">Import  </button></a>
+                        <a th:href="@{/portal/giangvien/create}"><button type="button" class="btn btn-default">Export PDF </button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 ">
+                                    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+                                        <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2 class="heading">Danh sách giảng viên</h2>
+                                        <h3 class="sub-heading">Danh sách giảng viên tìm thấy theo từ khóa  </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <!-- Content here -->
+                                <div class="table-shp">
+                                    <table class="table table1 bulk_action">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </th>
+                                            <th>Mã giảng viên</th>
+                                            <th>Họ và tên</th>
+                                            <th>Giới tính</th>
+                                            <th>Năm sinh</th>
+                                            <th>Trạng thái</th>
+                                            <th>Bộ môn </th>
+                                            <th>Phân hệ </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </td>
+                                            <td><a href="shp-form-dkgv.html">HV0001</a></td>
+                                            <td>Nguyen Manh Ha</td>
+                                            <td>Nam</td>
+                                            <td>1985</td>
+                                            <td>Đang dậy</td>
+                                            <td>Bếp Á </td>
+                                            <td>Cơ hữu </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </td>
+                                            <td><a href="shp-form-dkgv.html">HV0001</a></td>
+                                            <td>Nguyen Manh Ha</td>
+                                            <td>Nam</td>
+                                            <td>1985</td>
+                                            <td>Mất dậy </td>
+                                            <td>Bếp Âu</td>
+                                            <td> Thỉnh giảng  </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="paginations">
+                                    <ul class="pagination">
+                                        <li><a href="#">Previous</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
         <!-- /Main -->
         <footer th:replace="portal/fragments/footer :: footer">
         </footer>
