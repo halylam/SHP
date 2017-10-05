@@ -12,10 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.shp.portal.common.PageMode;
@@ -33,167 +30,154 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("portal/chuongtrinhdaotao")
 public class ChuongTrinhDaoTaoController {
 
-	@Autowired
-	private MessageSource messageSource;
-	
-	
-	@Autowired
-	ChuongTrinhDaoTaoService chuongTrinhDaoTaoService;
+    @Autowired
+    private MessageSource messageSource;
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
-	@RequestMapping(value = "/list", method = GET)
-	public ModelAndView getList(Model model, HttpServletRequest request) {
-		
 
-		ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
-		chuongTrinhDaoTaoModel.setPageMode(PageMode.LIST);
+    @Autowired
+    ChuongTrinhDaoTaoService chuongTrinhDaoTaoService;
 
-		ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-		mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
-		mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
-		return mav;
-	}
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
+    @RequestMapping(value = "/list", method = GET)
+    public ModelAndView getList(Model model, HttpServletRequest request) {
 
-	@RequestMapping(value = "/ajaxList", method = GET)
-	@ResponseBody
-	public ModelAndView ajaxList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-			HttpServletRequest request) {
 
-		ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-		mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_table");
-		return mav;
-	}
+        ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
+        chuongTrinhDaoTaoModel.setPageMode(PageMode.LIST);
 
-	@RequestMapping(value = "/list", method = POST)
-	public ModelAndView postList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-			Model model, HttpServletRequest request) {
-		;
-		ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-		mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
-		return mav;
-	}
+        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
+        mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
+        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
+        return mav;
+    }
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
-	@RequestMapping(value = "/create", method = GET)
-	public ModelAndView getCreate(Model model, HttpServletRequest request) {
-		;
-		ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
+    @RequestMapping(value = "/ajaxList", method = GET)
+    @ResponseBody
+    public ModelAndView ajaxList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
+                                 HttpServletRequest request) {
 
-		// =========
-		chuongTrinhDaoTaoModel.setPageMode(PageMode.CREATE);
+        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
+        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_table");
+        return mav;
+    }
 
-		ModelAndView mav = new ModelAndView("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
-		mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
+    @RequestMapping(value = "/list", method = POST)
+    public ModelAndView postList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
+                                 Model model, HttpServletRequest request) {
+        ;
+        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
+        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
+        return mav;
+    }
 
-		return mav;
-	}
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
+    @RequestMapping(value = "/create", method = GET)
+    public ModelAndView getCreate(Model model, HttpServletRequest request) {
+        ;
+        ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
 
-	@RequestMapping(value = "/create", method = POST)
-	public ModelAndView postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-			BindingResult bindingResult, Model model, HttpServletRequest request,
-			RedirectAttributes redirectAttributes, Locale locale) {
-		;
-		ModelAndView mav = new ModelAndView("redirect:/portal/chuongtrinhdaotao/list");
+        // =========
+        chuongTrinhDaoTaoModel.setPageMode(PageMode.CREATE);
 
-		MessageList messageLst = new MessageList(Message.SUCCESS);
-		String msgInfo = "";
-		try {
-			if (bindingResult.hasErrors()) {
-				throw new Exception();
-			}
-			// create user
-			ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoModel.getEntity();
-			chuongTrinhDaoTao.setChuongTrinhDaoTaoCode(chuongTrinhDaoTao.getChuongTrinhDaoTaoCode().toUpperCase());
-			chuongTrinhDaoTao.setChuongTrinhDaoTaoName(chuongTrinhDaoTao.getChuongTrinhDaoTaoName().toUpperCase());
-			chuongTrinhDaoTaoService.save(chuongTrinhDaoTao);
+        ModelAndView mav = new ModelAndView("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
+        mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
 
-			msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
-			messageLst.add(msgInfo);
-			redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
+        return mav;
+    }
 
-		} catch (Exception e) {
-			if (e instanceof DataIntegrityViolationException) {
-				bindingResult.rejectValue("entity.chuongTrinhDaoTaoCode", "Exists.error.code", null, "");
-			}
-			messageLst.setStatus(Message.ERROR);
-			msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
-			messageLst.add(msgInfo);
-			mav.addObject(CoreConstant.MSG_LST, messageLst);
-			mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
-		}
-		return mav;
-	}
+    @RequestMapping(value = "/create", method = POST)
+    public ModelAndView postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
+                                   BindingResult bindingResult, Model model, HttpServletRequest request,
+                                   RedirectAttributes redirectAttributes, Locale locale) {
+        ;
+        ModelAndView mav = new ModelAndView("redirect:/portal/chuongtrinhdaotao/list");
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
-	@RequestMapping(value = "/edit", method = GET)
-	public ModelAndView getEdit(@RequestParam(value = "chuongTrinhDaoTaoId") Long id,
-			@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel, Model model) {
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
+        try {
+            if (bindingResult.hasErrors()) {
+                throw new Exception();
+            }
+            // create user
+            ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoModel.getEntity();
+            chuongTrinhDaoTao.setChuongTrinhDaoTaoCode(chuongTrinhDaoTao.getChuongTrinhDaoTaoCode().toUpperCase());
+            chuongTrinhDaoTao.setChuongTrinhDaoTaoName(chuongTrinhDaoTao.getChuongTrinhDaoTaoName().toUpperCase());
+            chuongTrinhDaoTaoService.save(chuongTrinhDaoTao);
 
-		;
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+            messageLst.add(msgInfo);
+            redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
 
-		ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoService.findOne(id);
-		chuongTrinhDaoTaoModel.setEntity(chuongTrinhDaoTao);
+        } catch (Exception e) {
+            if (e instanceof DataIntegrityViolationException) {
+                bindingResult.rejectValue("entity.chuongTrinhDaoTaoCode", "Exists.error.code", null, "");
+            }
+            messageLst.setStatus(Message.ERROR);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
+            messageLst.add(msgInfo);
+            mav.addObject(CoreConstant.MSG_LST, messageLst);
+            mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
+        }
+        return mav;
+    }
 
-		chuongTrinhDaoTaoModel.setPageMode(PageMode.EDIT);
-		ModelAndView mav = new ModelAndView("portal/chuongtrinhdaotao/chuongtrinhdaotao_edit");
-		mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
-		return mav;
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
+    @RequestMapping(value = "/edit/{id}", method = GET)
+    public String getEdit(@PathVariable(value = "") Long id,
+                          ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel, Model model) {
 
-	}
+        ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoService.findOne(id);
+        chuongTrinhDaoTaoModel.setEntity(chuongTrinhDaoTao);
 
-	/**
-	 * EDIT - POST
-	 */
-	@RequestMapping(value = "/edit", method = POST)
-	public ModelAndView postEdit(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-			Model model, Locale locale, HttpServletRequest request, RedirectAttributes redirectAttributes,
-			BindingResult bindingResult) {
+        chuongTrinhDaoTaoModel.setPageMode(PageMode.EDIT);
 
-		;
-		ModelAndView mav = new ModelAndView("redirect:/portal/chuongtrinhdaotao/edit");
+        return "portal/chuongtrinhdaotao/ctdt_edit";
 
-		MessageList messageLst = new MessageList(Message.SUCCESS);
-		try {
-			if (bindingResult.hasErrors()) {
-				throw new Exception();
-			}
-			ChuongTrinhDaoTao chuongtrinhdaotao = chuongTrinhDaoTaoModel.getEntity();
-			chuongtrinhdaotao.setChuongTrinhDaoTaoCode(chuongtrinhdaotao.getChuongTrinhDaoTaoCode().toUpperCase());
-			chuongtrinhdaotao.setChuongTrinhDaoTaoName(chuongtrinhdaotao.getChuongTrinhDaoTaoName().toUpperCase());
-			chuongTrinhDaoTaoService.save(chuongtrinhdaotao);
+    }
 
-			String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
-			messageLst.add(msgInfo);
-			redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
-		} catch (Exception e) {
-			if (e instanceof DataIntegrityViolationException) {
-				bindingResult.rejectValue("entity.chuongTrinhDaoTaoCode", "Exists.error.code", null, "");
-			}
-			messageLst.setStatus(Message.ERROR);
-			String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
-			messageLst.add(msgInfo);
-			mav.addObject(CoreConstant.MSG_LST, messageLst);
-			mav.setViewName("redirect:/portal/chuongtrinhdaotao/edit");
-		}
+    /**
+     * EDIT - POST
+     */
+    @RequestMapping(value = "/edit", method = POST)
+    public String postEdit(ChuongTrinhDaoTaoModel bean, Model model, Locale locale,  BindingResult bindingResult) {
 
-		redirectAttributes.addAttribute("chuongTrinhDaoTaoId", chuongTrinhDaoTaoModel.getEntity().getChuongTrinhDaoTaoId());
-		return mav;
-	}
+        ChuongTrinhDaoTao entity = bean.getEntity();
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')")
-	@RequestMapping(value = "/delete", method = GET)
-	public String getDelete(@RequestParam(value = "chuongTrinhDaoTaoId") Long chuongTrinhDaoTaoId, Model model, HttpServletRequest request,
-			Locale locale, RedirectAttributes redirectAttributes) {
-		try {
-			chuongTrinhDaoTaoService.delete(chuongTrinhDaoTaoId);
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        try {
 
-			MessageList messageLst = new MessageList(Message.SUCCESS);
-			String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
-			messageLst.add(msgInfo);
-			redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/portal/chuongtrinhdaotao/list";
-	}
+            entity.setChuongTrinhDaoTaoCode(entity.getChuongTrinhDaoTaoCode().toUpperCase());
+            entity.setChuongTrinhDaoTaoName(entity.getChuongTrinhDaoTaoName().toUpperCase());
+            chuongTrinhDaoTaoService.save(entity);
+
+            String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
+            messageLst.add(msgInfo);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        } catch (Exception e) {
+           e.printStackTrace();
+            messageLst.setStatus(Message.ERROR);
+            String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+            messageLst.add(msgInfo);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+
+        return "portal/chuongtrinhdaotao/ctdt_edit";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')")
+    @RequestMapping(value = "/delete", method = GET)
+    public String getDelete(@RequestParam(value = "chuongTrinhDaoTaoId") Long chuongTrinhDaoTaoId, Model model, HttpServletRequest request,
+                            Locale locale, RedirectAttributes redirectAttributes) {
+        try {
+            chuongTrinhDaoTaoService.delete(chuongTrinhDaoTaoId);
+
+            MessageList messageLst = new MessageList(Message.SUCCESS);
+            String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
+            messageLst.add(msgInfo);
+            redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/portal/chuongtrinhdaotao/list";
+    }
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="portal/fragments/head :: head">
+</head>
+
+<body class="nav-md skin-brown">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
+        </div>
+        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
+        </div>
+
+        <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Tìm kiếm bậc đào tạo  </h1>
+
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a href="shp-new-bac-DaoTao.html"><button type="button" class="btn btn-default">Tạo mới </button></a>
+
+                        <button type="button" class="btn btn-default">Edit  </button>
+                        <button type="button" class="btn btn-default">Import  </button>
+                        <button type="button" class="btn btn-default">Export PDF  </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 ">
+                                    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+                                        <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2 class="heading">Danh sách bậc đào tạo </h2>
+                                        <h3 class="sub-heading">Danh sách bậc đào tạo tìm thấy theo từ khóa  </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <!-- Content here -->
+                                <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
+                                <form th:action="@{/portal/chuongtrinhdaotao/edit}" th:object="${chuongTrinhDaoTaoModel}" method="post" role="form"
+                                      id="chuongtrinhdaotao-form">
+                                    <input type="hidden" th:field="*{entity.chuongTrinhDaoTaoId}" />
+                                    <div class="box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title" th:text="#{chuongtrinhdaotao.edit.label}"></h3>
+                                        </div>
+
+                                        <div class="box-body">
+                                            <th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_form :: content" />
+                                        </div>
+                                    </div>
+
+                                    <!-- 			         <div class="box" id="roleForAccountId"> -->
+                                    <!-- 				            <th:block th:include="portal/chuongtrinhdaotao/chuongtrinhdaotao_roleForBranchTable :: content"/> -->
+                                    <!-- 			        </div> -->
+
+                                    <div class="box-footer">
+                                        <button class="btn btn-primary" th:text="#{edit.button}" id="btn-submit"></button>
+                                    </div>
+                                </form>
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
+        <!-- /Main -->
+        <footer th:replace="portal/fragments/footer :: footer">
+        </footer>
+    </div>
+</div>
+
+
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+
+
+</body>
+</html>
+

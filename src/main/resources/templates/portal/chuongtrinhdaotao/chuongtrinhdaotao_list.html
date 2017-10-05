@@ -66,7 +66,6 @@
 										</thead>
 
 										<tbody>
-
 										<tr th:each="chuongTrinhDaoTao,i : ${pageWrapper.data}">
 											<td>
 												<div class="checkbox checkbox-success">
@@ -74,16 +73,18 @@
 													<label for="checkbox1"></label>
 												</div>
 											</td>
-											<td><a href="shp-new-ct-DaoTao.html"
+											<td><a href="shp-new-ct-DaoTao.html" th:title="${chuongTrinhDaoTao.chuongTrinhDaoTaoName}"
 												th:text="${chuongTrinhDaoTao.chuongTrinhDaoTaoCode}">HV0001</a></td>
 											<td th:text="${chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Chương trình chủ
 												đề
 											</td>
 											<td>
+												<a th:href="@{/portal/chuongtrinhdaotao/edit/{id}(id=${chuongTrinhDaoTao.chuongTrinhDaoTaoId})}">
 												<button class="btn btn-default btn-sm portal-chuongtrinhdaotao-edit" type="button"
 													sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')">
 													<i class="fa fa-edit"></i>
 												</button>
+												</a>
 												<button class="btn btn-default btn-sm portal-chuongtrinhdaotao-delete" type="button"
 													th:attr="data-msg-confirm=#{message.confirm.delete.content}"
 													sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')">
