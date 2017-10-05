@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{chuongtrinhdaotao.page}" ></h1>
+				<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_button :: content" />
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+				<div class="box">
+					<form th:action="@{/portal/chuongtrinhdaotao/list}" th:object="${chuongTrinhDaoTaoModel}" method="post" role="form">
+						<div class="box-header with-border">
+							<h3 class="box-title" th:text="#{chuongtrinhdaotao.search.title}"></h3>
+							<div class="box-tools pull-right">
+		                        <button data-widget="collapse" class="btn btn-box-tool" type="button">
+		                            <i class="fa fa-minus"></i>
+		                        </button>
+		                    </div>
+						</div>
+						<div class="box-body">
+							
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{chuongtrinhdaotao.field.chuongtrinhdaotaoName}"></label>
+									    <input type="text" class="form-control" th:field="*{entity.chuongTrinhDaoTaoName}" id="chuongtrinhdaotao_chuongtrinhdaotaoName"/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{chuongtrinhdaotao.field.chuongtrinhdaotaoCode}"></label>
+									    <input type="text" class="form-control" th:field="*{entity.chuongTrinhDaoTaoCode}" id="chuongtrinhdaotao_chuongtrinhdaotaoCode"/>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="box-footer">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<button type="submit" class="btn btn-primary" th:text="#{search.button}"></button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="box box-table">
+					<th:block th:replace="portal/chuongtrinhdaotao/chuongtrinhdaotao_table :: content"/>
+			    </div>
+			    
+			</section>
+		</div>
+
+	</div>
+  	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	<!-- Config template -->
+  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>
