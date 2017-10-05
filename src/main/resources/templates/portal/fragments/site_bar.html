@@ -16,41 +16,41 @@
                     <li>
                         <a><i class="fa fa-home"></i> <span class="text-main">Học Viên</span> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="shp-form-dkhv.html"><i class="fa fa-star-o"></i> Đăng ký mới </a></li>
-                            <li><a href="shp-form-dshv.html"><i class="fa fa-star-o"></i> Danh sách </a></li>
+                            <li><a th:href="@{/portal/hocvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới </a></li>
+                            <li><a th:href="@{/portal/hocvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
 
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="shp-form-dkgv.html"><i class="fa fa-star-o"></i> Đăng ký mới</a></li>
-                            <li><a href="shp-form-dsgv.html"><i class="fa fa-star-o"></i> Danh sách </a></li>
+                            <li><a th:href="@{/portal/giangvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới</a></li>
+                            <li><a th:href="@{/portal/giangvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
 
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> <span class="text-main">Đào tạo</span> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="shp-new-thoikhoabieu.html"><i class="fa fa-star-o"></i> Thời khóa biểu</a></li>
+                            <li><a th:href="@{/portal/thoikhoabieu/list}"><i class="fa fa-star-o"></i> Thời khóa biểu</a></li>
                             <li><a th:href="@{/portal/chuongtrinhdaotao/list}"><i class="fa fa-star-o"></i> CT Đào tạo</a></li>
                             <li><a th:href="@{/portal/chuyennganh/list}"><i class="fa fa-star-o"></i> Chuyên ngành</a></li>
-                            <li><a href="shp-new-bac-DaoTao.html"><i class="fa fa-star-o"></i> Bậc Đào tạo</a></li>
-                            <li><a href="shp-new-bomon.html"><i class="fa fa-star-o"></i> Bộ môn </a></li>
-                            <li><a href="shp-new-monhoc.html"><i class="fa fa-star-o"></i> Môn học </a></li>
-                            <li><a href="shp-new-cahoc.html"><i class="fa fa-star-o"></i> Ca học </a></li>
-                            <li><a href="shp-new-khoahoc.html"><i class="fa fa-star-o"></i> Khóa học</a></li>
+                            <li><a th:href="@{/portal/bacdaotao/list}"><i class="fa fa-star-o"></i> Bậc Đào tạo</a></li>
+                            <li><a th:href="@{/portal/bomon/list}"><i class="fa fa-star-o"></i> Bộ môn </a></li>
+                            <li><a th:href="@{/portal/monhoc/list}"><i class="fa fa-star-o"></i> Môn học </a></li>
+                            <li><a th:href="@{/portal/cahoc/list}"><i class="fa fa-star-o"></i> Ca học </a></li>
+                            <li><a th:href="@{/portal/khoahoc/list}"><i class="fa fa-star-o"></i> Khóa học</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-tags"></i> <span class="text-main">Quản lý</span> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="#"><i class="fa fa-star-o"></i> Học viên </a>
+                                <a th:href="@{/portal/quanly/hocvien}"><i class="fa fa-star-o"></i> Học viên </a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Điểm</a></li>
+                                    <li><a th:href="@{/portal/quanly/diem}"><i class="fa fa-star-o"></i> Điểm</a></li>
 
                                 </ul>
                             </li>
-                            <li><a href="#"><i class="fa fa-star-o"></i> Giáo viên</a></li>
-                            <li><a href="#"><i class="fa fa-star-o"></i> Học vụ</a></li>
+                            <li><a th:href="@{/portal/quanly/giaovien}"><i class="fa fa-star-o"></i> Giáo viên</a></li>
+                            <li><a th:href="@{/portal/quanly/hocvu}"><i class="fa fa-star-o"></i> Học vụ</a></li>
 
                         </ul>
                     </li>
