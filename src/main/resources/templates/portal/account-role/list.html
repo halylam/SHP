@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="${'Trang quyền tài khoản'}" ></h1>
+			</section>
+			<section class="content">
+				
+				<div class="box box-table">
+				
+					<div class="box-header">
+				        <h3 class="box-title" th:text="${'Danh sách quyền tài khoản'}"></h3>
+				    </div>
+				    <div class="box-body no-padding">
+				        <table class="table table-bordered table-hover out-tbl">
+				        	<thead>
+				                <tr>
+				                    <th style="width: 10px">#</th>
+				                    <th th:text="${'Mã quyền tài khoản'}"></th>
+				                    <th th:text="${'Quyền hệ thống'}"></th>
+				                    <th th:text="${'Tài khoản'}"></th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				            	<th:block th:each="portalAccountRole,i : ${portalAccountRoleLst}">
+					              	<tr th:attr="data-portal-account-role-id=${portalAccountRole.accountRoleId}">
+					                    <td th:text="${i.index + 1}"></td>
+					                    <td th:text="${portalAccountRole.accountRoleId}"></td>
+					                    <td th:text="${portalAccountRole.role.roleName}"></td>
+					                    <td th:text="${portalAccountRole.account.username}"></td>
+				                   	</tr>
+			                   	</th:block>
+				            </tbody>
+			            </table>
+		            </div>
+		            
+			    </div>
+			</section>
+		</div>
+
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	<!-- Config template -->
+  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

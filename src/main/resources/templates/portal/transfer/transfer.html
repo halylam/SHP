@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{transfer.page}" ></h1>
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+				<form th:object="${portalTransferTitleModel}" method="post" role="form">
+					
+					<div class="box">
+			            <div class="box-header with-border">
+				            <h3 class="box-title" th:text="#{workflow.create.title}"></h3>
+				        </div>
+			            <div class="box-body">
+			            	<div class="row">
+								<div class="col-md-1">
+									<label th:text="#{user.field.username}"></label> 
+								</div>
+								<div class="col-md-6"></div>
+								<div class="col-md-1">
+									<label th:text="#{user.field.username}"></label> 
+								</div>
+							</div>
+			            	<div class="row">
+								<div class="col-md-5">
+									<div class="form-group">
+										<div class="input-group">
+											<input type="text" class="form-control" id="user_left" placeholder="Enter username" autocomplete="off">
+											<div class="input-group-addon" id="searchLeftButton">
+												<a href="#" onkeypress="runScript(event)"><i class="fa fa-search"></i></a>
+											</div>
+										</div>
+										<div id="resultLeftId" class="listResult" style="margin-right: 38px;"></div>
+									</div>
+								</div>
+								<div class="col-md-2 text-center">
+									<button class="btn btn-default" type="button" style="width: 100%;" onclick="transferFunction()">
+		                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+		                            </button>
+								</div>
+								<div class="col-md-5">
+									<div class="input-group">
+										<input type="text" class="form-control" id="user_right" placeholder="Enter username" autocomplete="off">
+										<div class="input-group-addon" id="searchRightButton">
+											<a href="#" onkeypress="runScript(event)"><i class="fa fa-search"></i></a>
+										</div>
+									</div>
+									<div id="resultRightId" class="listResult" style="margin-right: 38px;"></div>
+								</div>
+							</div>
+							<br/>
+							<div class="row">
+								<div class="col-md-2"></div>
+								<div class="col-md-3">
+									<div class="form-group">
+						                <label> <input type="radio" name="r1" checked th:value="#{user.field.manager}"> <th:block th:text="#{user.field.manager}" /></label>
+						            </div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+						                <label> <input type="radio" name="r1" th:value="#{department.manager}"><th:block th:text="#{department.manager}" /></label>
+						            </div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+						                <label> <input type="radio" name="r1" th:value="#{department.vicedirector}"> <th:block th:text="#{department.vicedirector}" /></label>
+						            </div>
+								</div>
+								<div class="col-md-1"></div>
+								
+							</div>
+			            </div>
+			        </div>
+		       	</form>	
+			</section>
+		</div>
+
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			$('#resultLeftId').hide();
+			$('#resultRightId').hide();
+		    $("#searchLeftButton a").click(function() {
+		    	searchLeftUser();
+		    });
+		    $("#searchRightButton a").click(function() {
+		    	searchRightUser();
+		    });
+		});
+		
+		
+		$('#user_left').keypress(function(e) {
+			if (e.which == 13) {
+				searchLeftUser();
+			}
+		});
+		$('#user_right').keypress(function(e) {
+			if (e.which == 13) {
+				searchRightUser();
+			}
+		});
+	
+		function searchLeftUser() {
+			var username = $('#user_left').val();
+	
+			$.ajax({
+				type : "GET",
+				url : BASE_URL + "portal/user/ajaxSearchUser",
+				data : {
+					"username" : username
+				},
+				success : function(data) {
+					$('#resultLeftId').empty();
+					$('#resultLeftId').show();
+					$.each(data, function(i, item) {
+						$('#resultLeftId').append(
+								'<a href=\"#\" onclick=\"relLeftUser(\''
+										+ item.username
+										+ '\');\" style=\"margin-left: 5px;\">'
+										+ item.username + '</a><br/>');
+					});
+				}
+			});
+		}
+		function searchRightUser() {
+			var username = $('#user_right').val();
+	
+			$.ajax({
+				type : "GET",
+				url : BASE_URL + "portal/user/ajaxSearchUser",
+				data : {
+					"username" : username
+				},
+				success : function(data) {
+					$('#resultRightId').empty();
+					$('#resultRightId').show();
+					$.each(data, function(i, item) {
+						$('#resultRightId').append(
+								'<a href=\"#\" onclick=\"relRightUser(\''
+										+ item.username
+										+ '\');\" style=\"margin-left: 5px;\">'
+										+ item.username + '</a><br/>');
+					});
+				}
+			});
+		}
+	
+		function relLeftUser(username) {
+			$('#resultLeftId').hide();
+			$('#user_left').val(username);
+		}
+		function relRightUser(username) {
+			$('#resultRightId').hide();
+			$('#user_right').val(username);
+		}
+		
+		function transferFunction() {
+			var userLeft = $('#user_left').val();
+			var userRight = $('#user_right').val();
+			var radio = $('input[name=r1]:checked').val();
+			
+			if (userLeft == '' || userRight == '') {
+				alert("Không bỏ trống dữ liệu nhập");
+				return false;
+			}
+			var msgConfirm = "Bạn có muốn chuyển chức vụ \"" + radio + "\" từ tài khoản " + userLeft + " sang tài khoản " + userRight;
+			popupConfirm(msgConfirm, function(result) {
+				if (result) {
+					var url = BASE_URL + "portal/transfer-title/data?userLeft="+userLeft+"&userRight="+userRight+"&title="+radio;
+					redirect(url);
+				}
+			});
+		}
+	</script>
+	
+	<!-- Config template -->
+  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

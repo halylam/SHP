@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+	<title>VCCB</title>	
+	<!--  -->
+	<script type="text/javascript" src="/plugins/bootbox/bootbox.js"></script>
+	<script type="text/javascript" src="/datatables/datatables.js"></script>
+	<script type="text/javascript" src="/main/bms.js"></script>
+	<script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript">
+        var BASE_URL = '';
+        var APP_LOCALE = 'vi';
+        var DATE_FORMAT = 'dd-mm-yyyy';
+
+		$(function() {
+			$("[data-mask]").inputmask();
+		});
+	</script>
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+  	<div class="wrapper">
+    <!-- HEADER -->
+    	<header class="main-header">
+      		<!-- Logo -->
+     		<!-- Header Navbar: style can be found in header.less -->
+      		<nav class="navbar navbar-static-top">
+	        	<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> 
+	        		<span class="logo-lg"><b>Vietcapital Bank</b></span>
+	        	</a>
+
+        		<div class="navbar-custom-menu">
+          			<ul class="nav navbar-nav">
+            			<li class="dropdown user user-menu">
+            				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            					<img src="/images/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            					<span class="hidden-xs" th:text="${token.name}">User Joy</span>
+            				</a>
+              				<ul class="dropdown-menu">
+                				<!-- User image -->
+                				<li class="user-header">
+                					<img th:src="@{/images/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                  					<p th:text="${token.name}">User Joy - Web Developer <small>Member since Nov. 2012</small></p>
+                  				</li>
+                				<!-- Menu Footer-->
+                				<li class="user-footer">
+                  					<div class="pull-right">
+                    					<a href="/portal/logout" class="btn btn-default btn-flat">Đăng xuất</a>
+                  					</div>
+                				</li>
+              				</ul>
+              			</li>
+            			<li>
+              				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                				<i class="fa fa-bars"></i>
+              				</button>
+            			</li>
+          			</ul>
+        		</div>
+      		</nav>
+    	</header>
+
+    	<!-- CONTENT RIGHT -->
+    	<div class="content-wrapper">
+      		<section class="content-header">
+        		<h1>Thông tin tài khoản</h1>
+      		</section>
+
+      		<!-- Main content -->
+      		<section class="content">
+        		<div class="row">
+          			<div class="col-md-3">
+            			<!-- Profile Image -->
+            			<div class="box box-primary">
+              				<div class="box-body box-profile">
+                				<img class="profile-user-img img-responsive img-circle" src="/images/img/user2-160x160.jpg" alt="User profile picture">
+                				<h3 class="profile-username text-center" th:text="${token.name}">User Joy</h3>
+                				<p class="text-muted text-center">Kĩ sư công nghệ thông tin</p>
+                				<ul class="list-group list-group-unbordered">
+									<li class="list-group-item"><b>Sinh nhật</b> <a class="pull-right" th:text="${token.birthdate}">07/10/2000</a></li>
+									<li class="list-group-item"><b>Email</b> <a class="pull-right" th:text="${token.email}">thejoy@gmail.com</a></li>
+									<li class="list-group-item"><b>Số điện thoại</b> <a class="pull-right" th:text="${token.phoneNumber}">0907989777</a></li>
+                				</ul>
+              				</div>
+            			</div>
+
+            			<!-- About Me Box -->
+            			<div class="box box-primary" th:if="${true}">
+              				<div class="box-header with-border">
+                				<h3 class="box-title">Sơ lược</h3>
+              				</div>
+              				<!-- /.box-header -->
+              				<div class="box-body">
+                				<strong><i class="fa fa-book margin-r-5"></i> Giáo dục</strong>
+                				<p class="text-muted">Trình độ đại học</p>
+                				<hr>
+                				<strong><i class="fa fa-map-marker margin-r-5"></i> Vị trí</strong>
+				                <p class="text-muted">TPHCM, Việt Nam</p>
+							</div>
+              				<!-- /.box-body -->
+            			</div>
+            			<!-- /.box -->
+          			</div>
+          			<!-- /.col -->
+          			<div class="col-md-9">
+            			<div class="nav-tabs-custom">
+              				<ul class="nav nav-tabs">
+                				<li class="active"><a href="#tab-1" data-toggle="tab">Tổng quan</a></li>
+                				<li><a href="#tab-2" data-toggle="tab">Cài đặt</a></li>
+              				</ul>
+              				<div class="tab-content">
+                				<div class="active tab-pane" id="tab-1">
+                  					<!-- Post -->
+                  					<div class="post">
+                    					<div class="user-block">
+                      						<img class="img-circle img-bordered-sm" src="/images/img/user2-160x160.jpg" alt="user image">
+                      						<span class="username"> <a href="#">User Joy</a> <a href="#" class="pull-right btn-box-tool"></a></span>
+                      						<span class="description">Công bố - 7:30 PM Hôm nay</span>
+                    					</div>
+                    					<!-- /.user-block -->
+					                    <p>Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some
+					                      people hate it and argue for its demise, but others ignore the hate as they create awesome tools
+					                      to help create filler text for everyone from bacon lovers to Charlie Sheen fans.</p>
+                    					<br />
+					                    <p>Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some
+					                      people hate it and argue for its demise, but others ignore the hate as they create awesome tools
+					                      to help create filler text for everyone from bacon lovers to Charlie Sheen fans.</p>
+                    					<a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                    					<a class="btn btn-social-icon btn-google"> <i class="fa fa-google-plus"></i></a>
+                      					<a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                      					<a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                  					</div>
+                				</div>
+                				<!-- /.tab-pane -->
+                				<div class="tab-pane" id="tab-2">
+                  					<div class="post">
+                    					<h2>Cài đặt tài khoản</h2>
+                    					<hr />
+                    					<h3 class="text-center">
+                      						<b>Thay đổi mật khẩu</b>
+                    					</h3>
+                    					<form class="form-horizontal">
+                      						<div class="box-body">
+                        						<div class="form-group">
+                          							<label class="col-sm-3 control-label">Mật khẩu hiện tại: </label>
+                          							<div class="col-sm-9">
+                            							<input type="password" class="form-control">
+                          							</div>
+                        						</div>
+                        						<div class="form-group">
+                          							<label class="col-sm-3 control-label">Mật khẩu mới:</label>
+                          							<div class="col-sm-9">
+                            							<input type="password" class="form-control">
+                          							</div>
+                        						</div>
+	                        					<div class="form-group">
+	                          						<label class="col-sm-3 control-label">Xác thực mật khẩu: </label>
+	                          						<div class="col-sm-9">
+	                            						<input type="password" class="form-control">
+                          							</div>
+                        						</div>
+                      						</div>
+                      						<div class="box-footer">
+                        						<button type="submit" class="btn btn-info pull-right">Lưu</button>
+                      						</div>
+                    					</form>
+                  					</div>
+                				</div>
+                				<!-- /.tab-pane -->
+                				<div class="tab-pane" id="tab-3"></div>
+              				</div>
+              				<!-- /.tab-content -->
+            			</div>
+            			<!-- /.nav-tabs-custom -->
+          			</div>
+          			<!-- /.col -->
+        		</div>
+        		<!-- /.row -->
+      		</section>
+      		<!-- /.content -->
+    	</div>
+    	<footer class="main-footer">
+      		<div class="pull-right hidden-xs">
+        		<b>Version</b> 0.0.1
+      		</div>
+      		<strong>Copyright &copy; 2016 <a href="#">Bản quyền thuộc về Ngân hàng TMCP Bản Việt</a>.</strong> All rights reserved.
+    	</footer>
+	</div>
+    <!-- Config template -->
+    <script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+    <script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

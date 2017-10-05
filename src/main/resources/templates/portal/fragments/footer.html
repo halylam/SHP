@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="utf-8" />
+<title>VCCB</title>
+</head>
+<body>
+  <footer class="main-footer" th:fragment="footer">
+
+    <!-- jQuery -->
+    <script th:src="@{/mcr/js/jquery.min.js}"></script>
+
+    <!-- Bootstrap -->
+    <script th:src="@{/mcr/js/bootstrap.min.js}"></script>
+
+    <!-- Slimscroll -->
+    <script type="text/javascript" th:src="@{/mcr/js/jquery.slimscroll.js}"></script>
+
+    <!-- validator -->
+    <script th:src="@{/mcr/js/vendors/validator/validator.js}"></script>
+
+    <!-- iCheck / Check all -->
+    <script th:src="@{/mcr/js/vendors/iCheck/icheck.min.js}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script th:src="@{/mcr/js/main.js}"></script>
+    <script th:src="@{/mcr/js/custom.js}"></script>
+
+    <strong style="margin-left: 100px;">Copyright &copy; 2017. Bản quyền thuộc về Ngân hàng TMCP Bản Việt. </strong>
+    <!-- jQuery 3 -->
+
+    <script>
+        $('.nav-md .scroll-view').slimscroll({
+            height: '100%'
+        });
+    </script>
+  </footer>
+</body>
+</html>

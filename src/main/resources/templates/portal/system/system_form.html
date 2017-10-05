@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.system.code}"></label> 
+				<input type="text" class="form-control" th:field="*{entity.systemCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.systemCode')}" th:errors="*{entity.systemCode}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.system.name}"></label> 
+				<input type="text" class="form-control" th:field="*{entity.systemName}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.systemName')}" th:errors="*{entity.systemName}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.status}"></label> 
+				<select class="form-control" th:field="*{entity.status}">
+					<option value="1" th:text="#{active.label}"></option>
+					<option value="0" th:text="#{active.no.label}"></option>
+                </select>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.url}"></label> <input type="text"
+					class="form-control" th:field="*{entity.url}" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.param}"></label> <input type="text"
+					class="form-control" th:field="*{entity.param}" />
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.browser}"></label> <input type="text"
+					class="form-control" th:field="*{entity.browser}" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.group}"></label> 
+				<select class="form-control" th:field="*{entity.group.groupId}">
+					<option th:each="portalGroup : ${portalGroupLst}"
+						th:value="${portalGroup.groupId}"
+						th:text="${portalGroup.groupName}">
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{systemgroup.field.remark}"></label> 
+				<input type="number" class="form-control" th:field="*{entity.remark}" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{system.field.icon}"></label> 
+				<input type='file' id="imgInp" accept="image/jpeg,image/gif,image/png" />
+    			<img id="blah" th:src="*{pageMode == null OR pageMode.name() == 'CREATE'} ? @{/images/img/logo.png} : *{entity.icon}" alt="your image" style="width: 80px; height: 80px"/>
+    			<input type="hidden" id="imgId" th:field="*{entity.icon}"/>
+			</div>
+		</div>
+	</div>
+	<script th:inline="javascript">
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+	
+		        reader.onload = function (e) {
+		            $('#blah').attr('src', e.target.result);
+		        }
+	
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+	
+		$("#imgInp").change(function(){
+		    readURL(this);
+		});
+	</script>
+</body>
+</html>

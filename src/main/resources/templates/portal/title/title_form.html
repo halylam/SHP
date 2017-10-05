@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-title">
+				<label th:text="#{title.field.title.code}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.titleCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.titleCode')}" th:errors="*{entity.titleCode}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-title">
+				<label th:text="#{title.field.title.name}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.titleName}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.titleName')}" th:errors="*{entity.titleName}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-title">
+				<label th:text="#{title.field.status}"></label>
+				<select class="form-control" th:field="*{entity.status}">
+					<option value="1" th:text="#{active.label}"></option>
+					<option value="0" th:text="#{active.no.label}"></option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

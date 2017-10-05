@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{systemgroup.field.systemgroup.code}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.groupCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.groupCode')}" th:errors="*{entity.groupCode}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{systemgroup.field.systemgroup.name}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.groupName}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.groupName')}" th:errors="*{entity.groupName}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{systemgroup.field.remark}" class="required"></label> 
+				<input type="number" class="form-control" th:field="*{entity.remark}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.remark')}" th:errors="*{entity.remark}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{systemgroup.field.status}"></label>
+				<select class="form-control" th:field="*{entity.status}">
+					<option value="1" th:text="#{active.label}"></option>
+					<option value="0" th:text="#{active.no.label}"></option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

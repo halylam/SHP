@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	
+	<title>All document</title>
+</head>
+<body>
+	<h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash">Message</h3>
+	<th:block th:each="doc, i : ${docLst}">
+		<a th:href="@{'/download/doc/' + ${doc.id}}">
+			<span class="box-title" th:text="${doc.name}"></span>
+		</a><br/>
+    </th:block>
+</body>
+</html>

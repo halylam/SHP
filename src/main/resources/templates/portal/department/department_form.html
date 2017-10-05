@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.department.code}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.departmentCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.departmentCode')}" th:errors="*{entity.departmentCode}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.department.name}" class="required"></label> 
+				<input type="text" class="form-control" th:field="*{entity.departmentName}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.departmentName')}" th:errors="*{entity.departmentName}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="required" th:text="#{department.manager}"></label> 
+				<div  class="input-group">
+					<div class="input-group-addon" id="searchManagerButton">
+						<a href="#" onkeypress="runScript(event)"><i class="fa fa-search"></i></a>
+					</div>
+				</div>
+				<div id="resultManagerId" class="listResult"></div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="required" th:text="#{department.vicedirector}"></label> 
+				<div class="input-group">
+					<input type="text" value="" th:field="*{entity.viceDirector}" class="form-control" id="user_vicedirector" placeholder="Enter username" autocomplete="off">
+					<div class="input-group-addon" id="searchViceDirectorButton">
+						<a href="#" onkeypress="runScript(event)"><i class="fa fa-search"></i></a>
+					</div>
+				</div>
+				<div id="resultViceDirectorId" class="listResult" style="margin-right: 38px;"></div>
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.viceDirector')}" th:errors="*{entity.viceDirector}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.status}"></label>
+				<select class="form-control" th:field="*{entity.status}">
+					<option value="1" th:text="#{active.label}"></option>
+					<option value="0" th:text="#{active.no.label}"></option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<!--add more-->
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.transCode.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.transCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.transCode')}" th:errors="*{entity.transCode}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.parentCode.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.parentCode}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.parentCode')}" th:errors="*{entity.parentCode}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.address1.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.address1}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.address1')}" th:errors="*{entity.address1}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.address2.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.address2}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.address2')}" th:errors="*{entity.address2}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.address3.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.address3}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.address3')}" th:errors="*{entity.address3}"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.address4.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.address4}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.address4')}" th:errors="*{entity.address4}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label th:text="#{department.field.departmentType.code}" ></label>
+				<input type="text" class="form-control" th:field="*{entity.departmentType}" />
+				<span class="text-danger" th:if="${#fields.hasErrors('entity.departmentType')}" th:errors="*{entity.departmentType}"></span>
+			</div>
+		</div>
+	</div>
+<script th:inline="javascript">
+	$(document).ready(function() {
+		$('#resultManagerId').hide();
+		$('#resultViceDirectorId').hide();
+	    $("#searchManagerButton a").click(function() {
+	    	searchManagerUser();
+	    });
+	    $("#searchViceDirectorButton a").click(function() {
+	    	searchViceDirectorUser();
+	    });
+	});
+	
+	
+	$('#user_manager').keypress(function(e) {
+		if (e.which == 13) {
+			searchManagerUser();
+		}
+	});
+	$('#user_vicedirector').keypress(function(e) {
+		if (e.which == 13) {
+			searchViceDirectorUser();
+		}
+	});
+
+	function searchManagerUser() {
+		var username = $('#user_manager').val();
+
+		$.ajax({
+			type : "GET",
+			url : BASE_URL + "portal/user/ajaxSearchUser",
+			data : {
+				"username" : username
+			},
+			success : function(data) {
+				$('#resultManagerId').empty();
+				$('#resultManagerId').show();
+				$.each(data, function(i, item) {
+					$('#resultManagerId').append(
+							'<a href=\"#\" onclick=\"relManagerUser(\''
+									+ item.username
+									+ '\');\" style=\"margin-left: 5px;\">'
+									+ item.username + '</a><br/>');
+				});
+			}
+		});
+	}
+	function searchViceDirectorUser() {
+		var username = $('#user_vicedirector').val();
+
+		$.ajax({
+			type : "GET",
+			url : BASE_URL + "portal/user/ajaxSearchUser",
+			data : {
+				"username" : username
+			},
+			success : function(data) {
+				$('#resultViceDirectorId').empty();
+				$('#resultViceDirectorId').show();
+				$.each(data, function(i, item) {
+					$('#resultViceDirectorId').append(
+							'<a href=\"#\" onclick=\"relViceDirectorUser(\''
+									+ item.username
+									+ '\');\" style=\"margin-left: 5px;\">'
+									+ item.username + '</a><br/>');
+				});
+			}
+		});
+	}
+
+	function relManagerUser(username) {
+		$('#resultManagerId').hide();
+		$('#user_manager').val(username);
+	}
+	function relViceDirectorUser(username) {
+		$('#resultViceDirectorId').hide();
+		$('#user_vicedirector').val(username);
+	}
+</script>
+</body>
+</html>

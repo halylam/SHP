@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<body th:fragment="content">
+	<ul class="button-right">
+	    <li th:if="${portalSystemModel.pageMode == null OR portalSystemModel.pageMode.name() != 'LIST'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM_LIST')">
+            <a class="btn btn-primary btn-circle" th:href="@{/portal/system/list}"><i class="fa fa-list"></i></a>
+        </li>
+        <li th:if="${portalSystemModel.pageMode == null OR portalSystemModel.pageMode.name() != 'CREATE'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM_CREATE')">
+            <a class="btn btn-success btn-circle" th:href="@{/portal/system/create}"><i class="fa fa-plus"></i></a>
+        </li>
+    </ul>
+</body>
+</html>
+

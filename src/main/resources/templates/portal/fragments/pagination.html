@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body th:fragment="content">
+    <div class="box-tools" th:if="${pageWrapper} and ${pageWrapper.totalPages > 1}">
+		<ul class="pagination pagination-sm no-margin pull-right">
+        
+            <li th:if="${pageWrapper.currentPage > pageWrapper.maxPage}">
+                <a href="#" data-page="0" th:text="${'← Đầu'}"></a>
+            </li>
+            
+            <li th:if="${pageWrapper.preMaxPage > 0}">
+                <a href="#" th:attr="data-page=${pageWrapper.preMaxPage}">«</a>
+            </li>
+            <li th:if="${pageWrapper.preMaxPage > 0}">
+                <a href="#" th:attr="data-page=${pageWrapper.prePage}">‹</a>
+            </li>
+            
+            <th:block th:each="item,iterStat : ${pageWrapper.items}">
+                 <th:block th:if="${item.current}">
+                    <li class="active">
+                        <span th:text="${item.number}">Current page</span>
+                    </li>
+                 </th:block>
+                 <th:block th:if="${item.current == false}">
+                    <li>
+                        <a href="#" th:attr="data-page=${item.number}" th:text="${item.number}">Number page</a>
+                    </li>
+                 </th:block>
+            </th:block>
+            
+             <li th:if="${pageWrapper.nextMaxPage > 0}">
+                <a href="#" th:attr="data-page=${pageWrapper.nextPage}">›</a>
+            </li>
+            <li th:if="${pageWrapper.nextMaxPage > 0}">
+                <a href="#" th:attr="data-page=${pageWrapper.nextMaxPage}">»</a>
+            </li>
+            
+            <li th:if="${pageWrapper.nextMaxPage > 0}">
+                <a href="#" th:attr="data-page=${pageWrapper.totalPages}" th:text="${'Cuối →'}"></a>
+            </li>
+         </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="portal/fragments/head :: head">
+	<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+	    <!-- HEADER -->
+	    <header class="main-header" th:replace="fragments/error_header :: header"></header>
+	    <!-- END HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+			    <h1 th:text="#{error.page}">Error page</h1>
+			</section>
+				
+		    <section class="content">
+			    <div class="error-page">
+		            <h2 class="headline text-yellow" th:text="${errorCode}"> ERROR</h2>
+		            <div class="error-content">
+		                <h3>
+		                    <i class="fa fa-warning text-yellow"></i> 
+		                    <th:block th:text="${errorMsg}"> Oops! Page not found.</th:block>
+		                </h3>
+		                <p>
+		                    <th:block th:text="#{error.welcome}">Meanwhile, you may</th:block> <a th:href="@{/}"><th:block th:text="#{error.return.home}"></th:block></a>.
+		                </p>
+						<p>
+							<th:block th:text="#{error.return.chrome}"></th:block>
+						</p>
+		            </div>
+		        </div>
+			</section>
+		</div>
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+</body>
+</html>

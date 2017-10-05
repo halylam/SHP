@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body th:fragment="content(messageLst)">
+    <th:block th:if="${messageLst}">
+        <th:block th:if="${messageLst.status}">
+            <th:block th:switch="${messageLst.status}">
+            
+                <th:block th:case="'error'">
+                    <div class="alert alert-danger alert-dismissible" id="vccb-error">
+	                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                    <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                        <div th:text="${message.content}"/>
+	                    </th:block>
+	                </div>
+                </th:block>
+                
+                <th:block th:case="'info'">
+                    <div class="alert alert-info alert-dismissible" id="vccb-info">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+                
+                <th:block th:case="'success'">
+                    <div class="alert alert-success alert-dismissible"  id="vccb-success">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+                
+                <th:block th:case="'warning'">
+                    <div class="alert alert-warning alert-dismissible" id="vccb-warning">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+	        </th:block>
+        </th:block>
+        
+        <th:block th:unless="${messageLst.status}">
+            <th:block th:each="message,iterStat : ${messageLst.messages}">
+                <th:block th:switch="${message.status}">
+            
+	                <th:block th:case="'error'">
+	                    <div class="alert alert-danger alert-dismissible" id="vccb-danger">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+                
+	                <th:block th:case="'info'">
+	                    <div class="alert alert-info alert-dismissible" id="vccb-info">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	                <th:block th:case="'success'">
+	                    <div class="alert alert-success alert-dismissible" id="vccb-success">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	                <th:block th:case="'warning'">
+	                    <div class="alert alert-warning alert-dismissible" id="vccb-warning">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	            </th:block>
+            </th:block>
+        </th:block>
+	</th:block>
+</body>
+</html>

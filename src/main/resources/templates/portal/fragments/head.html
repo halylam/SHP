@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <!--<meta http-equiv="refresh" content="60" />-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <title>VCCB</title>
+    <link rel="shortcut icon" th:href="@{/images/logo_new.png}" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <title>Admin SHP</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/mcr/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link th:href="@{/mcr/css/font-awesome.min.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{/mcr/css/main.css}" rel="stylesheet">
+    <link th:href="@{/mcr/css/section1.css}" rel="stylesheet">
+
+
+
+  <script th:inline="javascript">
+      var BASE_URL = [[@{/}]] ;
+      var APP_LOCALE = 'vi';
+      var MESSAGE_DEL = [[#{message.confirm.delete.content}]];
+  </script>
+</head>
+<body>
+
+</body>
+</html>

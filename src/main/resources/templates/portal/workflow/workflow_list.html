@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{role.page}" ></h1>
+				<th:block th:replace="portal/workflow/workflow_button :: content" />
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+				<div class="box box-table">
+					<div class="box-header">
+						<h3 class="box-title" th:text="#{workflow.list.title}"></h3>
+					</div>
+					<div class="box-body no-padding">
+						<table class="table table-bordered table-hover out-tbl">
+							<thead>
+								<tr>
+									<th style="width: 10px">#</th>
+									<th th:text="#{workflow.field.code}"></th>
+									<th th:text="#{workflow.field.name}"></th>
+									<th th:text="#{workflow.field.link}"></th>
+									<th th:text="#{action.label}" class="action"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="item,i : ${portalWorkflowModel.data}">
+									<tr>
+										<td th:text="${i.index + 1}"></td>
+										<td th:text="${item.code}"></td>
+										<td th:text="${item.name}"></td>
+										<td th:text="${item.link}"></td>
+										<td>
+											<button class="btn btn-default btn-sm" type="button" th:onclick="'editRow(' + ${item.id} + ')'">
+												<i class="fa fa-edit"></i>
+											</button>
+											<button class="btn btn-default btn-sm " type="button" th:onclick="'delRow(' + ${item.id} + ')'">
+												<i class="fa fa-trash-o"></i>
+											</button>
+										</td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</div>
+			    </div>
+			    
+			</section>
+		</div>
+
+	</div>
+  	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+  	
+  	<script th:inline="javascript">
+	  	function editRow(id) {
+	  		var url = BASE_URL + "portal/workflow/edit?id=" + id;
+	  		redirect(url);
+	  	}
+	  	function delRow(id) {
+	  		var msgConfirm = [[#{message.confirm.delete.content}]];
+	  		popupConfirm(msgConfirm, function(result) {
+	  			if (result) {
+	  				var url = BASE_URL + "portal/workflow/delete?id=" + id;
+	  				redirect(url);
+	  			}
+	  		});
+	  	}
+  	</script>
+	<!-- Config template -->
+	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

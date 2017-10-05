@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header">
+		</header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{system.page}" ></h1>
+				<ul class="button-right">
+					<li><a class="btn btn-primary btn-circle" th:href="@{/portal/system/list}"><i class="fa fa-list"></i></a></li>
+					<li><a class="btn btn-success btn-circle" th:href="@{/portal/system/create}"><i class="fa fa-plus"></i></a></li>
+				</ul>
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
+				<form th:action="@{/portal/system/edit}" th:object="${portalSystemModel}" method="post" role="form" id="system-form">
+					<input type="hidden" th:field="*{entity.systemId}" />
+					<div class="box">
+			            <div class="box-header with-border">
+				            <h3 class="box-title" th:text="#{system.edit.label}"></h3>
+				        </div>
+			            
+			            <div class="box-body">
+			            	<th:block th:replace="portal/system/system_form :: content" />
+			            </div>
+			            
+			        </div>
+			        
+			        <div class="box-footer">
+			            <button class="btn btn-primary" th:text="#{edit.button}" id="btn-submit"></button>
+			        </div>
+		       	</form>	
+			</section>
+		</div>
+
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	<script type="text/javascript" th:src="@{/main/portal/system/system_systemForm.js}"></script>
+	<!-- Config template -->
+	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

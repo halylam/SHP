@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="content">
+	<div class="box-header with-border">
+		<h3 class="box-title" th:text="#{user.label.group.of.user}"></h3>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="text-center">
+					<label th:text="#{user.label.not.belong}"></label>
+				</div>
+				<table class="dataTable table table-bordered table-hover"
+					id="tableLeftRole">
+					<thead>
+						<tr>
+							<th class="col-md-1" style="width: 4%"></th>
+							<th class="col-md-11" th:text="#{group.field.name}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="group : ${groupLeftLst}">
+							<tr>
+								<td>
+									<input type="checkbox" name="checkRoleLeft" th:value="${group.groupId}" id="checkRoleLeft"/>
+								</td>
+								<td th:text="${group.groupName}"></td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-2">
+				
+				<button class="btn btn-default btn-block" id="addAllRole"
+					type="button">
+					<i class="glyphicon glyphicon-forward"></i>
+				</button>
+				
+				<button class="btn btn-default btn-block" id="addRole"
+					type="button">
+					<i class="glyphicon glyphicon-chevron-right"></i>
+				</button>
+				
+				<button class="btn btn-default btn-block" id="removeRole"
+					type="button">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+				</button>
+				
+				
+				<button class="btn btn-default btn-block" id="removeAllRole"
+					type="button">
+					<i class="glyphicon glyphicon-backward"></i>
+				</button>
+				
+			</div>
+			<div class="col-md-5">
+				<div class="text-center">
+					<label th:text="#{user.label.belong}"></label>
+				</div>
+				<table class="dataTable table table-bordered table-hover"
+					id="tableRightRole">
+					<thead>
+						<tr>
+							<th class="col-md-1" style="width: 4%"></th>
+							<th class="col-md-11" th:text="#{group.field.name}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="group : ${groupRightLst}">
+							<tr>
+								<td>
+									<input type="checkbox" name="checkRoleRight" th:value="${group.groupId}" id="checkRoleRight"/>
+								</td>
+								<td th:text="${group.groupName}"></td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/main/portal/user/user_userForm.js}"></script>
+</body>
+</html>

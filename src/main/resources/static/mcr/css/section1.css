@@ -1,0 +1,177 @@
+/*=== Section 1 ===*/
+
+/* tab style 1 */
+.tab-style1 {
+  /* background: #48413b; */
+}
+.tab-style1 > .tab-nav {clear: both;background: #48413b;}
+.tab-style1 > .tab-nav li{margin-left: 0;}
+.tab-style1 > .tab-nav li a{color: #fff;padding: 15px 30px;}
+.tab-style1 > .tab-nav li.active a,
+.tab-style1 > .tab-nav li a:hover{
+  color: #b65f34;
+  background: #2b2724;
+  border-radius: 0;
+}
+
+.tab-style1 .tab-content {
+  padding: 30px;
+  margin-bottom: 4px;
+  background: #48413b;
+}
+
+.tab-style1 .tab-content .nav-pills li a{
+  font-size: 18px;
+  color: #fff;
+}
+.tab-style1 .tab-content .nav-pills li.active a,
+.tab-style1 .tab-content .nav-pills li a:hover{
+  color: #cc6733;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid;
+}
+.tab-style1 .tab-content .nav-pills li.nav-back a:hover,
+.tab-style1 .tab-content .nav-pills li.nav-back a:focus{
+  border: 0;
+  background: transparent;
+}
+
+.tab-style1 .nav-control > div{
+  padding: 5px 10px;
+  display: inline-block;
+}
+.tab-style1 .nav-control i{
+  font-size: 30px;
+  line-height: 0.4;
+}
+.tab-style1 .tab-content-child{padding: 75px 30px;}
+
+.modal-content .tab-style1 > .tab-nav {background: rgba(177, 177, 177, 0.2);}
+.modal-content .tab-style1 .tab-content {
+  background: transparent;
+  padding: 30px 0;
+}
+.modal-content .tab-style1 .tab-content .nav-pills li.active a, .modal-content .tab-style1 .tab-content .nav-pills li a:hover {
+  border: 0;
+
+}
+@media screen and (max-width:767px) {
+  .tab-style1 > .tab-nav li{
+    width: 100%;
+    text-align: center;
+  }
+  .tab-style1 .tab-content .nav-pills{ float: none !important;}
+  .tab-style1 .tab-content .nav-pills li{width: 100%;}
+
+  .tab-style1 .tab-content .nav-pills li a{width: 100%;text-align: center;}
+
+  .tab-style1 .tab-content .nav-pills li.active a, .tab-style1 .tab-content .nav-pills li a:hover {
+    border: 0;
+    background: rgba(51, 51, 51, 0.23);
+  }
+
+  .tab-style1 .tab-content-child{padding: 75px 0px;}
+}
+/* Icon circle Component*/
+.circle-icon {display: inline-block;margin: 0;padding: 0;margin: 0 auto;}
+.circle-icon li{
+  list-style: none;
+  display: inline-table;
+  margin: 14px;
+  position: relative;
+}
+.circle-icon button{
+  /*display: table-cell;*/
+  border-radius: 50%;
+  border: 1px solid;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
+  color: #ffffff;
+  vertical-align: middle;
+  font-size: 61px;
+  background: transparent;
+  position: relative;
+}
+.circle-icon button.btn-xs {font-size: 22px; width: 60px; height: 60px; }
+.circle-icon button.btn-sm {font-size: 33px;width: 90px;height: 90px;}
+.circle-icon button.btn-md {font-size: 45px;width: 105px;height: 105px;}
+
+.circle-icon button:hover{
+  -webkit-transform: scale(0.95);
+     -moz-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+       -o-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.orange-circle button,.orange-circle button:hover,.orange-circle button:focus{
+  color: #b65f34;
+}
+.blue-circle button,.blue-circle button:hover,.blue-circle button:focus{
+  color: #00ffdf;
+}
+.circle-icon button img{
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.circle-icon .badge{
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 29px;
+  padding: 2px 6px;
+  position: absolute;
+  right: 5px;
+  top: 1px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #cc6631;
+}
+.circle-icon .number-list{position: absolute;top: 0;left: -25px;text-align: center;background: #003334;padding: 0 10px;}
+.circle-icon .number-list:after{
+  content: '[';
+  position: absolute;
+  left: 5px;
+  top: 0px;
+}
+.circle-icon .number-list:before{
+  content: ']';
+  position: absolute;
+  right: 5px;
+  top: 0px;
+}
+.circle-icon .number-list ul{margin: 0;padding: 0;}
+.circle-icon .number-list li{margin: 1px;}
+.circle-icon .status{
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+@media screen and (max-width:767px) {
+  .circle-icon { text-align: center; }
+}
+
+/* Box circle page */
+.box-circle {
+  background: #2d2825;
+  padding: 20px;
+}
+.box-circle .circle-icon button {
+
+}
+.box-circle .circle-icon > li {
+  height: 150px;
+}
+
+
+
+.section-content h5 {
+	color: #cc9900;}

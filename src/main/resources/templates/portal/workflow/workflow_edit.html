@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{role.page}" ></h1>
+				<th:block th:replace="portal/workflow/workflow_button :: content" />
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+				<form th:action="*{pageMode.name() == 'EDIT'} ? @{/portal/workflow/edit} : @{/portal/workflow/create}" th:object="${portalWorkflowModel}" method="post" role="form">
+					
+					<div class="box">
+			            <div class="box-header with-border">
+				            <h3 class="box-title" th:text="#{workflow.create.title}"></h3>
+				        </div>
+			            <div class="box-body">
+			            	<input type="hidden" th:field="*{pageMode}"/>
+            				<input type="hidden" th:field="*{entity.id}"/>
+			            	<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label th:text="#{workflow.field.code}" class="required"></label> 
+										<input th:if="*{pageMode == null OR pageMode.name() == 'CREATE'}" type="text" class="form-control roleClass" th:field="*{entity.code}" />
+										<input th:if="*{pageMode == null OR pageMode.name() == 'EDIT'}" type="text" class="form-control" th:field="*{entity.code}" readonly />
+										<span class="text-danger" th:if="${#fields.hasErrors('entity.code')}" th:errors="*{entity.code}"></span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="required" th:text="#{workflow.field.name}"></label> 
+										<input type="text" class="form-control" th:field="*{entity.name}" />
+										<span class="text-danger" th:if="${#fields.hasErrors('entity.name')}" th:errors="*{entity.name}"></span>
+									</div>
+								</div>
+							</div>
+			            	<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="required" th:text="#{workflow.field.link}"></label> 
+										<input type="text" class="form-control" th:field="*{entity.link}" />
+									</div>
+								</div>
+							</div>
+			            </div>
+			        </div>
+			        <div class="box-footer">
+			        	
+			            <button class="btn btn-primary" type="submit" th:text="*{pageMode.name() == 'EDIT'} ? #{edit.button} : #{create.button}"></button>
+			            <a class="btn btn-default" th:if="*{pageMode.name() == 'CREATE'}" th:href="@{/portal/workflow/create}" th:text="#{refresh.button}"></a>
+			        </div>
+		       	</form>	
+			</section>
+		</div>
+
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	<!-- Config template -->
+  	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+  	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>

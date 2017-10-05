@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body th:fragment="content(messageLst)">
+    <th:block th:if="${messageLst}">
+        <th:block th:if="${messageLst.status}">
+            <th:block th:switch="${messageLst.status}">
+            
+                <th:block th:case="'error'">
+                    <div class="alert alert-danger alert-dismissible">
+	                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                    <h4>
+	                        <i class="icon fa fa-ban"></i><th:block th:text="${'Thông báo'}"></th:block>
+	                    </h4>
+	                    <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                        <div th:text="${message.content}"/>
+	                    </th:block>
+	                </div>
+                </th:block>
+                
+                <th:block th:case="'info'">
+                    <div class="alert alert-info alert-dismissible">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4>
+                            <i class="icon fa fa-info"></i><th:block th:text="${'Thông báo'}"></th:block>
+                        </h4>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+                
+                <th:block th:case="'success'">
+                    <div class="alert alert-success alert-dismissible">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4>
+                            <i class="icon fa fa-check"></i><th:block th:text="${'Thông báo'}"></th:block>
+                        </h4>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+                
+                <th:block th:case="'warning'">
+                    <div class="alert alert-warning alert-dismissible">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4>
+                            <i class="icon fa fa-warning"></i><th:block th:text="${'Thông báo'}"></th:block>
+                        </h4>
+                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+                            <div th:text="${message.content}"/>
+                        </th:block>
+                    </div>
+                </th:block>
+	        </th:block>
+        </th:block>
+        
+        <th:block th:unless="${messageLst.status}">
+            <th:block th:each="message,iterStat : ${messageLst.messages}">
+                <th:block th:switch="${message.status}">
+            
+	                <th:block th:case="'error'">
+	                    <div class="alert alert-danger alert-dismissible">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <h4>
+	                            <i class="icon fa fa-ban"></i><th:block th:text="${'Thông báo'}"></th:block>
+	                        </h4>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+                
+	                <th:block th:case="'info'">
+	                    <div class="alert alert-info alert-dismissible">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <h4>
+	                            <i class="icon fa fa-info"></i><th:block th:text="${'Thông báo'}"></th:block>
+	                        </h4>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	                <th:block th:case="'success'">
+	                    <div class="alert alert-success alert-dismissible">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <h4>
+	                            <i class="icon fa fa-check"></i><th:block th:text="${'Thông báo'}"></th:block>
+	                        </h4>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	                <th:block th:case="'warning'">
+	                    <div class="alert alert-warning alert-dismissible">
+	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                        <h4>
+	                            <i class="icon fa fa-warning"></i><th:block th:text="${'Thông báo'}"></th:block>
+	                        </h4>
+	                        <th:block th:each="message,iterStat : ${messageLst.messages}">
+	                            <div th:text="${message.content}"/>
+	                        </th:block>
+	                    </div>
+	                </th:block>
+	                
+	            </th:block>
+            </th:block>
+        </th:block>
+	</th:block>
+</body>
+</html>

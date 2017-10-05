@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="portal/fragments/head :: head">
+<meta charset="utf-8" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+
+		<!-- HEADER -->
+		<header class="main-header"
+			th:replace="portal/fragments/header :: header"></header>
+		<!-- .HEADER -->
+
+		<!-- CONTENT RIGHT -->
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 th:text="#{title.page}" ></h1>
+				<th:block th:replace="portal/title/title_button :: content" />
+			</section>
+			<section class="content">
+				<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+				<form th:action="@{/portal/title/edit}" th:object="${portalTitleModel}" method="post" role="form">
+					<input type="hidden" th:field="*{entity.titleId}" />
+					<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title" th:text="#{title.edit.label}"></h3>
+						</div>
+						<div class="box-body">
+							<th:block th:replace="portal/title/title_form :: content" />
+						</div>
+					</div>
+					<div class="box-footer">
+						<button class="btn btn-primary" type="submit" th:text="#{edit.button}"></button>
+						<a class="btn btn-default" th:href="@{/portal/title/edit?titleId=}+*{entity.titleId}"
+							th:text="#{refresh.button}"></a>
+					</div>
+		       	</form>	
+			</section>
+		</div>
+
+	</div>
+	<footer class="main-footer" th:replace="portal/fragments/footer :: footer"></footer>
+	<!-- Config template -->
+	<script type="text/javascript" th:src="@{/adminLTE/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/adminLTE/js/config_app.js}"></script>
+</body>
+</html>
