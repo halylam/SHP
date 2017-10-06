@@ -1,12 +1,8 @@
 package vn.shp.portal.service;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.servlet.ModelAndView;
 import vn.shp.app.entity.ChuongTrinhDaoTao;
-import vn.shp.portal.model.ChuongTrinhDaoTaoModel;
+
+import java.util.List;
 
 public interface ChuongTrinhDaoTaoService {
 
@@ -20,7 +16,6 @@ public interface ChuongTrinhDaoTaoService {
 	
 	void delete(ChuongTrinhDaoTao entity);
 
-	ModelAndView initSearch(ChuongTrinhDaoTaoModel condition, HttpServletRequest request);
-	
+
 	ChuongTrinhDaoTao findByChuongTrinhDaoTaoCode(String chuongTrinhDaoTaoCode);
 }

@@ -1,27 +1,31 @@
 package vn.shp.portal.controller;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.shp.app.entity.ChuongTrinhDaoTao;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
-import vn.shp.app.entity.ChuongTrinhDaoTao;
 import vn.shp.portal.model.ChuongTrinhDaoTaoModel;
 import vn.shp.portal.service.ChuongTrinhDaoTaoService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -39,54 +43,57 @@ public class ChuongTrinhDaoTaoController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = GET)
-    public ModelAndView getList(Model model, HttpServletRequest request) {
+    public String getList(Model model, HttpServletRequest request) {
 
+        ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
 
-        ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
-        chuongTrinhDaoTaoModel.setPageMode(PageMode.LIST);
+        List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
 
-        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-        mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
-        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
-        return mav;
-    }
+        model.addAttribute("bean", bean);
 
-    @RequestMapping(value = "/ajaxList", method = GET)
-    @ResponseBody
-    public ModelAndView ajaxList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-                                 HttpServletRequest request) {
-
-        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_table");
-        return mav;
+        return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
     @RequestMapping(value = "/list", method = POST)
-    public ModelAndView postList(@ModelAttribute(value = "chuongTrinhDaoTaoModel") ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
-                                 Model model, HttpServletRequest request) {
-        ;
-        ModelAndView mav = chuongTrinhDaoTaoService.initSearch(chuongTrinhDaoTaoModel, request);
-        mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_list");
-        return mav;
+    public String postList(@ModelAttribute(value = "bean") ChuongTrinhDaoTaoModel bean,
+                           Model model, HttpServletRequest request) {
+
+        List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+
+        model.addAttribute("chuongTrinhDaoTaoModel", bean);
+
+        return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public ModelAndView getCreate(Model model, HttpServletRequest request) {
         ;
-        ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel = new ChuongTrinhDaoTaoModel();
+        ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
 
         // =========
-        chuongTrinhDaoTaoModel.setPageMode(PageMode.CREATE);
+        bean.setPageMode(PageMode.CREATE);
 
         ModelAndView mav = new ModelAndView("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
-        mav.addObject("chuongTrinhDaoTaoModel", chuongTrinhDaoTaoModel);
+        mav.addObject("chuongTrinhDaoTaoModel", bean);
 
         return mav;
     }
 
     @RequestMapping(value = "/create", method = POST)
-    public ModelAndView postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel,
+    public ModelAndView postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel bean,
                                    BindingResult bindingResult, Model model, HttpServletRequest request,
                                    RedirectAttributes redirectAttributes, Locale locale) {
         ;
@@ -99,7 +106,7 @@ public class ChuongTrinhDaoTaoController {
                 throw new Exception();
             }
             // create user
-            ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoModel.getEntity();
+            ChuongTrinhDaoTao chuongTrinhDaoTao = bean.getEntity();
             chuongTrinhDaoTao.setChuongTrinhDaoTaoCode(chuongTrinhDaoTao.getChuongTrinhDaoTaoCode().toUpperCase());
             chuongTrinhDaoTao.setChuongTrinhDaoTaoName(chuongTrinhDaoTao.getChuongTrinhDaoTaoName().toUpperCase());
             chuongTrinhDaoTaoService.save(chuongTrinhDaoTao);
@@ -124,12 +131,12 @@ public class ChuongTrinhDaoTaoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
-                          ChuongTrinhDaoTaoModel chuongTrinhDaoTaoModel, Model model) {
+                          ChuongTrinhDaoTaoModel bean, Model model) {
 
         ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoService.findOne(id);
-        chuongTrinhDaoTaoModel.setEntity(chuongTrinhDaoTao);
+        bean.setEntity(chuongTrinhDaoTao);
 
-        chuongTrinhDaoTaoModel.setPageMode(PageMode.EDIT);
+        bean.setPageMode(PageMode.EDIT);
 
         return "portal/chuongtrinhdaotao/ctdt_edit";
 
