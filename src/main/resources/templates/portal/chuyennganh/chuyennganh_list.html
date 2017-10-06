@@ -37,6 +37,7 @@
 
 				<section class="section bgTrans">
 					<div class="section-content">
+						<form th:object="${bean}" method="post" th:action="@{/portal/chuyennganh/list}">
 						<!-- Content here -->
 						<div class="row">
 							<div class="col-sm-12">
@@ -80,7 +81,7 @@
 										</tr>
 										</thead>
 										<tbody>
-										<tr th:each="chuyenNganh,i : ${pageWrapper.data}">
+										<tr th:each="chuyenNganh,i : ${bean.data}">
 											<td>
 												<div class="checkbox checkbox-success">
 													<input id="checkbox1" type="checkbox" class="flat check-all">
@@ -112,7 +113,7 @@
 							</div>
 
 						</section> <!-- End section table -->
-
+						</form>
 						<!-- End Content here -->
 					</div>
 

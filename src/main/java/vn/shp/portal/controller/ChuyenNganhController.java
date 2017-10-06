@@ -1,19 +1,23 @@
 package vn.shp.portal.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import vn.shp.portal.common.PageMode;
+import vn.shp.app.entity.ChuyenNganh;
+import vn.shp.portal.constant.CoreConstant;
+import vn.shp.portal.core.Message;
+import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.ChuyenNganhModel;
-import vn.shp.portal.service.ChuongTrinhDaoTaoService;
 import vn.shp.portal.service.ChuyenNganhService;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -30,14 +34,17 @@ public class ChuyenNganhController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_LIST')")
     @RequestMapping(value = "/list", method = GET)
-    public ModelAndView getList(Model model, HttpServletRequest request) {
-        ChuyenNganhModel chuyenNganhModel = new ChuyenNganhModel();
-        chuyenNganhModel.setPageMode(PageMode.LIST);
-
-        ModelAndView mav = chuyenNganhService.initSearch(chuyenNganhModel, request);
-        mav.addObject("chuyenNganhModel", chuyenNganhModel);
-        mav.setViewName("portal/chuyennganh/chuyennganh_list");
-        return mav;
+    public String getList(Model model, HttpServletRequest request) {
+        ChuyenNganhModel bean = new ChuyenNganhModel();
+        List<ChuyenNganh> lstData = chuyenNganhService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/chuyennganh/chuyennganh_list";
     }
 
     @RequestMapping(value = "/ajaxList", method = GET)
