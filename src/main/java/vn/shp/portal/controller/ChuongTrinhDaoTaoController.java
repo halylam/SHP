@@ -46,7 +46,6 @@ public class ChuongTrinhDaoTaoController {
     public String getList(Model model, HttpServletRequest request) {
 
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
-
         List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {

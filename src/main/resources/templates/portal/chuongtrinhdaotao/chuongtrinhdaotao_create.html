@@ -32,12 +32,49 @@
 				<section class="section bgTrans">
 
 					<div class="section-content">
+
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 						<!-- Content here -->
 						<section class="section"> <!-- Start section table -->
 
 							<div class="section-content">
 								<!-- Content here -->
+
+
+								<div class="row">
+									<div class="col-sm-12">
+										<form class="form-muted" novalidate>
+
+											<div class="item form-group col-xs-12">
+												<h5> Tạo mới chương trình đào tạo </h5>
+												<i> Thông tin tạo mới </i>
+											</div>
+
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã chương trình <span class="required">*</span>
+												</label>
+												<div class="col-md-3 col-sm-3 col-xs-12">
+													<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+												</div>
+											</div>
+
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên chương trình  <span class="required">*</span>
+												</label>
+												<div class="col-md-10 col-sm-10 col-xs-12">
+													<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+												</div>
+
+											</div>
+										</form>
+									</div>
+								</div>
+
+
+
+
+
+
 
 								<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 								<form th:action="@{/portal/chuongtrinhdaotao/create}" th:object="${chuongTrinhDaoTaoModel}" method="post"

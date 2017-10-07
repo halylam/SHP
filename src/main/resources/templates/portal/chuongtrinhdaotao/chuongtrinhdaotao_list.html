@@ -27,11 +27,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					bs3-
-				</div>
-			</div>
+
 
 			<div class="container-fluid">
 
@@ -41,6 +37,20 @@
 						<form th:object="${bean}" method="post" th:action="@{/portal/chuongtrinhdaotao/list}">
 							<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 							<!-- Content here -->
+
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-12 ">
+										<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+											<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
 							<section class="section"> <!-- Start section table -->
 
 								<div class="section-header">
