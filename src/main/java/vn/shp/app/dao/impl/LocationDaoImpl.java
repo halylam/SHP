@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public class LocationDaoImpl extends GenericDAOImpl<Location, Long> implements LocationDao {
+
     @Override
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {

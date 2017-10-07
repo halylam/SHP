@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -25,4 +26,8 @@ public class ApplicationConfig {
 	  return messageBundle;
 	}
 
+	@Bean(name = "sessionFactory")
+	public HibernateJpaSessionFactoryBean sessionFactory() {
+		return new HibernateJpaSessionFactoryBean();
+	}
 }

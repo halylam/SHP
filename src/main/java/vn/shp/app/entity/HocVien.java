@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "HOC_VIEN", uniqueConstraints=@UniqueConstraint(columnNames="CMND"))
+@Table(name = "HOC_VIEN", uniqueConstraints=@UniqueConstraint(columnNames="MA_HOC_VIEN"))
 @Data
 public class HocVien implements Serializable{
 
@@ -17,6 +17,13 @@ public class HocVien implements Serializable{
     @SequenceGenerator(name = "HOC_VIEN_ID_SEQ", sequenceName = "HOC_VIEN_SEQ", allocationSize = 1)
     @Column(name = "id")
     private Long id;
+
+    @NotEmpty
+    @Column(name = "MA_HOC_VIEN", length = 50)
+    private String maHocVien;
+
+    @Column(name = "LOAI_HOC_VIEN", length = 1)
+    private String loaiHocVien;
 
     @NotEmpty
     @Column(name = "HO_TEN", length = 50)

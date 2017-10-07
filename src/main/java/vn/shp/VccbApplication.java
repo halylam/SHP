@@ -24,11 +24,6 @@ public class VccbApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) throws ParseException {
 		ConfigurableApplicationContext context = SpringApplication.run(VccbApplication.class, args);
-//		configTestData(context);
-
-		// save user admin
-		//adminData(context);
-
 	}
 	
 	@Bean

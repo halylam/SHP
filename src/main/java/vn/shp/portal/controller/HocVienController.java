@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import vn.shp.app.bean.HocVienBean;
 import vn.shp.app.config.SystemConfig;
+import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.Location;
 import vn.shp.app.utils.Utils;
 
@@ -49,6 +51,9 @@ public class HocVienController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
+        HocVienBean bean = new HocVienBean();
+        bean.setEntity(new HocVien());
+        model.addAttribute("bean", bean);
         return "portal/hocvien/hocvien_create";
     }
 
