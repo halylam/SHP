@@ -28,13 +28,13 @@ public class BacDaoTaoController {
     private MessageSource messageSource;
 
     @Autowired
-    BacDaoTaoService cacDaoTaoService;
+    BacDaoTaoService bacDaoTaoService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         BacDaoTaoModel bean = new BacDaoTaoModel();
-        List<BacDaoTao> lstData = cacDaoTaoService.findAll();
+        List<BacDaoTao> lstData = bacDaoTaoService.findAll();
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

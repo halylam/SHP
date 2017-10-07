@@ -15,14 +15,22 @@
         <!-- Main-->
         <div class="main_content" role="main">
             <div class="container-fluid top-heading">
-                <h1 class="">Tìm kiếm khóa học   </h1>
+                <h1 class="">Tìm kiếm khóa học </h1>
 
                 <div class="pull-right hidden-xs">
                     <div class="btn-group">
-                        <a th:href="@{/portal/khoahoc/create}"><button type="button" class="btn btn-default">Tạo mới </button> </a>
-                        <a th:href="@{/portal/khoahoc/edit}"><button type="button" class="btn btn-default">Edit  </button></a>
-                        <a th:href="@{/portal/khoahoc/import}"><button type="button" class="btn btn-default">Import  </button></a>
-                        <a th:href="@{/portal/khoahoc/export}"><button type="button" class="btn btn-default">Export PDF  </button></a>
+                        <a th:href="@{/portal/khoahoc/create}">
+                            <button type="button" class="btn btn-default">Tạo mới</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/edit}">
+                            <button type="button" class="btn btn-default">Edit</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/import}">
+                            <button type="button" class="btn btn-default">Import</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/export}">
+                            <button type="button" class="btn btn-default">Export PDF</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -31,110 +39,100 @@
 
                 <section class="section bgTrans">
                     <div class="section-content">
-                        <!-- Content here -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12 ">
-                                    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
-                                        <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <section class="section"> <!-- Start section table -->
-
-                            <div class="section-header">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h2 class="heading">Danh sách khóa học </h2>
-                                        <h3 class="sub-heading">Danh sách khóa học tìm thấy theo từ khóa  </h3>
+                        <form th:object="${bean}" method="post" th:action="@{/portal/khoahoc/list}">
+                            <!-- Content here -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12 ">
+                                        <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
+                                                   type="text">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="section-content">
-                                <!-- Content here -->
-                                <div class="table-shp">
-                                    <table class="table table1 bulk_action">
-                                        <thead>
-                                        <tr>
-                                            <th>
-                                                <div class="checkbox checkbox-success">
-                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                    <label for="checkbox1"></label>
-                                                </div>
-                                            </th>
-                                            <th>Mã khóa học </th>
-                                            <th>Tên khóa học </th>
-                                            <th>CT đào tạo </th>
-                                            <th>Chuyên ngành</th>
-                                            <th>Bậc đào tạo </th>
-                                            <th>Bắt đầu </th>
-                                            <th>Kết thúc </th>
+                            <section class="section"> <!-- Start section table -->
 
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox checkbox-success">
-                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                    <label for="checkbox1"></label>
-                                                </div>
-                                            </td>
-                                            <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                            <td> 3 tháng </td>
-                                            <td> Ngắn hạn </td>
-                                            <td> Ẩm thực châu á  </td>
-                                            <td> Sơ cấp  </td>
-                                            <td> 01/09/2017 </td>
-                                            <td> 01/11/2017  </td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox checkbox-success">
-                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                    <label for="checkbox1"></label>
-                                                </div>
-                                            </td>
-                                            <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                            <td> 9 tháng </td>
-                                            <td> Dài hạn </td>
-                                            <td> Ẩm thực châu Âu  </td>
-                                            <td> Sơ cấp  </td>
-                                            <td> 01/09/2017 </td>
-                                            <td> 01/11/2017  </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="section-header">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h2 class="heading">Danh sách khóa học </h2>
+                                            <h3 class="sub-heading">Danh sách khóa học tìm thấy theo từ khóa </h3>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="paginations">
-                                    <ul class="pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
+                                <div class="section-content">
+                                    <!-- Content here -->
+                                    <div class="table-shp">
+                                        <table class="table table1 bulk_action">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="checkbox checkbox-success">
+                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                        <label for="checkbox1"></label>
+                                                    </div>
+                                                </th>
+                                                <th>Mã khóa học</th>
+                                                <th>Tên khóa học</th>
+                                                <th>CT đào tạo</th>
+                                                <th>Chuyên ngành</th>
+                                                <th>Bậc đào tạo</th>
+                                                <th>Bắt đầu</th>
+                                                <th>Kết thúc</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="khoaHoc,i : ${bean.data}">
+                                                <td>
+                                                    <div class="checkbox checkbox-success">
+                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                        <label for="checkbox1"></label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}"
+                                                       th:title="${khoaHoc.khoaHocCode}"
+                                                       th:text="${khoaHoc.khoaHocCode}">HV0001</a></td>
+                                                <td th:text="${khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
+                                                <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Ẩm thực châu Á</td>
+                                                <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuyenNganhName}">Ẩm thực châu Á</td>
+                                                <td th:text="${khoaHoc.bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
+                                                <td th:text="${khoaHoc.timeFrom}">Ẩm thực châu Á</td>
+                                                <td th:text="${khoaHoc.timeTo}">Ẩm thực châu Á</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="paginations">
+                                        <ul class="pagination">
+                                            <li><a href="#">Previous</a></li>
+                                            <li><a href="#">...</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">...</a></li>
+                                            <li><a href="#">Next</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- End Content here -->
                                 </div>
-                                <!-- End Content here -->
-                            </div>
 
-                        </section> <!-- End section table -->
+                            </section> <!-- End section table -->
 
-                        <!-- End Content here -->
+                            <!-- End Content here -->
+                        </form>
                     </div>
 
                     <div class="section-footer">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default"> Đóng </button>
+                            <a th:href="@{/portal/khoahoc/list}">
+                                <button type="button" class="btn btn-default">Đóng</button>
+                            </a>
                         </div>
                     </div>
                 </section> <!-- End section -->
@@ -147,7 +145,6 @@
         </footer>
     </div>
 </div>
-
 
 
 <!-- .Popup detail view Task list -->
