@@ -895,7 +895,7 @@ if (typeof NProgress != 'undefined') {
 		};
 	   
 		
-		  /* INPUTS */
+		  /* INPUTS
 		  
 			function onAddTag(tag) {
 				alert("Added a tag: " + tag);
@@ -921,7 +921,7 @@ if (typeof NProgress != 'undefined') {
 				}
 				
 		    };
-	   
+	   */
 		/* SELECT2 */
 	  
 		function init_select2() {
