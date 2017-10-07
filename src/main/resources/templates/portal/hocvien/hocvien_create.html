@@ -227,12 +227,14 @@
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh <span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
+                                            <select class="col-md-3 col-sm-3 col-xs-12"
+                                                    onchange="loadDist('selCity','selDistrict','selDetail');"
+                                                    id="selCity">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}" th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
                                             </select>
+
                                         </div>
 
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Quận / huyện <span class="required">*</span>
