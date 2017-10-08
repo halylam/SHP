@@ -16,57 +16,47 @@
 </head>
 <body class="login-img3-body">
 
-
-
-<div class="container login-body">
-	<div class="row">
-		<div class="col-sm-4 col-sm-offset-2 login-bg-left">
-			<p>
-				<input type="text" class="form-control" placeholder="Username" autofocus>
-			</p>
-			<p>
-				<input type="text" class="form-control" placeholder="Password" autofocus>
-			</p>
-			<label class="checkbox">
-				<input type="checkbox" value="remember-me"> Remember me
-				<span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-			</label>
-			<button class="btn btn-default btn-lg btn-block" type="submit">Login</button>
-
-
-		</div>
-		<div class="col-sm-4 login-bg-right">
-			<img src="img/logo-shp.png" width="200px" />
-			<h2> HỆ THỐNG QUẢN LÝ ĐÀO TẠO </h2>
-		</div>
-	</div>
-
-</div>
-
-
-
-
-
 <div th:fragment="content">
 	<form name="f" th:action="@{/login}" method="post">
 		<fieldset>
-			<legend>Please Login</legend>
-			<div th:if="${param.error}" class="alert alert-error">
-				Invalid username and password.
+
+
+			<div class="container login-body">
+
+				<div th:if="${param.error}" class="alert alert-error">
+					Invalid username and password.
+				</div>
+				<div th:if="${param.logout}" class="alert alert-success">
+					You have been logged out.
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-2 login-bg-left">
+						<p>
+							<input class="form-control" placeholder="Username" autofocus type="text" id="username" name="username"/>
+						</p>
+						<p>
+							<input class="form-control" placeholder="Password" type="password" id="password" name="password"/>
+						</p>
+						<label class="checkbox">
+							<input type="checkbox" value="remember-me"> Remember me
+							<span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+						</label>
+						<button class="btn btn-default btn-lg btn-block" type="submit">Login</button>
+					</div>
+					<div class="col-sm-4 login-bg-right">
+						<img th:src="@{/mcr/images/logo-shp.png}" width="200px" />
+						<h2> HỆ THỐNG QUẢN LÝ ĐÀO TẠO </h2>
+					</div>
+				</div>
+
 			</div>
-			<div th:if="${param.logout}" class="alert alert-success">
-				You have been logged out.
-			</div>
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username"/>
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password"/>
-			<div class="form-actions">
-				<button type="submit" class="btn">Log in111</button>
-			</div>
+
 		</fieldset>
 	</form>
 </div>
+
+
 
 </body>
 </html>
