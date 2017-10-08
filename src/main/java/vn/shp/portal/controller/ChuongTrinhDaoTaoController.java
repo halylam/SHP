@@ -171,12 +171,11 @@ public class ChuongTrinhDaoTaoController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')")
-    @RequestMapping(value = "/delete", method = GET)
-    public String getDelete(@RequestParam(value = "chuongTrinhDaoTaoId") Long chuongTrinhDaoTaoId, Model model, HttpServletRequest request,
+    @RequestMapping(value = "/delete/{id}", method = GET)
+    public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
         try {
-            chuongTrinhDaoTaoService.delete(chuongTrinhDaoTaoId);
-
+            chuongTrinhDaoTaoService.delete(id);
             MessageList messageLst = new MessageList(Message.SUCCESS);
             String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
             messageLst.add(msgInfo);
