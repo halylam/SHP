@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="portal/fragments/head :: head">
+</head>
+
+<body class="nav-md skin-brown">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
+        </div>
+        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
+        </div>
+
+        <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Quản Lý Học Viên  </h1>
+
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a href="shp-new-bac-DaoTao.html"><button type="button" class="btn btn-default">Tạo mới </button></a>
+
+                        <button type="button" class="btn btn-default">Edit  </button>
+                        <button type="button" class="btn btn-default">Import  </button>
+                        <button type="button" class="btn btn-default">Export PDF  </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 ">
+                                    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+                                        <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="section"> <!-- Start section table -->
+
+                            <div class="section-header">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2 class="heading">Danh sách bậc đào tạo </h2>
+                                        <h3 class="sub-heading">Danh sách bậc đào tạo tìm thấy theo từ khóa  </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <!-- Content here -->
+                                <div class="table-shp">
+                                    <table class="table table1 bulk_action">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </th>
+                                            <th>Mã bậc đào tạo</th>
+                                            <th>Tên bậc đào tạo </th>
+                                            <th>Chuyên ngành đào tạo</th>
+                                            <th>Chương trình đào tạo</th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </td>
+                                            <td><a href="shp-new-bac-DaoTao.html">HV0001</a></td>
+                                            <td>Sơ cấp </td>
+                                            <td>Ẩm thực châu Á</td>
+                                            <td>Chương trình chủ đề</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-success">
+                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                    <label for="checkbox1"></label>
+                                                </div>
+                                            </td>
+                                            <td><a href="shp-new-bac-DaoTao.html">HV0001</a></td>
+                                            <td>Trung cấp </td>
+                                            <td>Ẩm thực châu Âu </td>
+                                            <td>Chương trình chủ đề</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="paginations">
+                                    <ul class="pagination">
+                                        <li><a href="#">Previous</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">Next</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Content here -->
+                            </div>
+
+                        </section> <!-- End section table -->
+
+                        <!-- End Content here -->
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> Đóng </button>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
+        <!-- /Main -->
+        <footer th:replace="portal/fragments/footer :: footer">
+        </footer>
+    </div>
+</div>
+
+
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+
+
+</body>
+</html>
+
