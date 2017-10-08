@@ -37,14 +37,12 @@ public class ChuongTrinhDaoTaoController {
     @Autowired
     private MessageSource messageSource;
 
-
     @Autowired
     ChuongTrinhDaoTaoService chuongTrinhDaoTaoService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
-
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
         List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
         bean.setData(lstData);
@@ -53,58 +51,29 @@ public class ChuongTrinhDaoTaoController {
             messageLst.add("Không tìm thấy thông tin");
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
-
         model.addAttribute("bean", bean);
-
-        return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
-    }
-
-    @RequestMapping(value = "/list", method = POST)
-    public String postList(@ModelAttribute(value = "bean") ChuongTrinhDaoTaoModel bean,
-                           Model model, HttpServletRequest request) {
-
-        List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
-        bean.setData(lstData);
-        if (CollectionUtils.isEmpty(lstData)) {
-            MessageList messageLst = new MessageList(Message.INFO);
-            messageLst.add("Không tìm thấy thông tin");
-            model.addAttribute(CoreConstant.MSG_LST, messageLst);
-        }
-
-        model.addAttribute("chuongTrinhDaoTaoModel", bean);
-
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = GET)
-    public ModelAndView getCreate(Model model, HttpServletRequest request) {
-        ;
+    public String getCreate(Model model, HttpServletRequest request) {
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
-
-        // =========
         bean.setPageMode(PageMode.CREATE);
-
-        ModelAndView mav = new ModelAndView("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
-        mav.addObject("chuongTrinhDaoTaoModel", bean);
-
-        return mav;
+        model.addAttribute("chuongTrinhDaoTaoModel", bean);
+        return "portal/chuongtrinhdaotao/chuongtrinhdaotao_create";
     }
 
     @RequestMapping(value = "/create", method = POST)
-    public ModelAndView postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel bean,
-                                   BindingResult bindingResult, Model model, HttpServletRequest request,
-                                   RedirectAttributes redirectAttributes, Locale locale) {
-        ;
-        ModelAndView mav = new ModelAndView("redirect:/portal/chuongtrinhdaotao/list");
-
+    public String postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel bean,
+                             BindingResult bindingResult, Model model, HttpServletRequest request,
+                             RedirectAttributes redirectAttributes, Locale locale) {
         MessageList messageLst = new MessageList(Message.SUCCESS);
         String msgInfo = "";
         try {
             if (bindingResult.hasErrors()) {
                 throw new Exception();
             }
-            // create user
             ChuongTrinhDaoTao chuongTrinhDaoTao = bean.getEntity();
             chuongTrinhDaoTao.setChuongTrinhDaoTaoCode(chuongTrinhDaoTao.getChuongTrinhDaoTaoCode().toUpperCase());
             chuongTrinhDaoTao.setChuongTrinhDaoTaoName(chuongTrinhDaoTao.getChuongTrinhDaoTaoName().toUpperCase());
@@ -112,7 +81,7 @@ public class ChuongTrinhDaoTaoController {
 
             msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
             messageLst.add(msgInfo);
-            redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
 
         } catch (Exception e) {
             if (e instanceof DataIntegrityViolationException) {
@@ -121,52 +90,42 @@ public class ChuongTrinhDaoTaoController {
             messageLst.setStatus(Message.ERROR);
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
-            mav.addObject(CoreConstant.MSG_LST, messageLst);
-            mav.setViewName("portal/chuongtrinhdaotao/chuongtrinhdaotao_create");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
-        return mav;
+        return "redirect:/portal/chuongtrinhdaotao/list";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
                           ChuongTrinhDaoTaoModel bean, Model model) {
-
         ChuongTrinhDaoTao chuongTrinhDaoTao = chuongTrinhDaoTaoService.findOne(id);
         bean.setEntity(chuongTrinhDaoTao);
-
         bean.setPageMode(PageMode.EDIT);
-
         return "portal/chuongtrinhdaotao/ctdt_edit";
-
     }
 
     /**
      * EDIT - POST
      */
     @RequestMapping(value = "/edit", method = POST)
-    public String postEdit(ChuongTrinhDaoTaoModel bean, Model model, Locale locale,  BindingResult bindingResult) {
-
+    public String postEdit(ChuongTrinhDaoTaoModel bean, Model model, Locale locale, BindingResult bindingResult) {
         ChuongTrinhDaoTao entity = bean.getEntity();
-
         MessageList messageLst = new MessageList(Message.SUCCESS);
         try {
-
             entity.setChuongTrinhDaoTaoCode(entity.getChuongTrinhDaoTaoCode().toUpperCase());
             entity.setChuongTrinhDaoTaoName(entity.getChuongTrinhDaoTaoName().toUpperCase());
             chuongTrinhDaoTaoService.save(entity);
-
             String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
             messageLst.setStatus(Message.ERROR);
             String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
-
         return "portal/chuongtrinhdaotao/ctdt_edit";
     }
 
@@ -174,14 +133,18 @@ public class ChuongTrinhDaoTaoController {
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
+        MessageList messageLst = new MessageList(Message.SUCCESS);
         try {
             chuongTrinhDaoTaoService.delete(id);
-            MessageList messageLst = new MessageList(Message.SUCCESS);
             String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
             messageLst.add(msgInfo);
-            redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
         } catch (Exception e) {
             e.printStackTrace();
+            messageLst.setStatus(Message.ERROR);
+            String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+            messageLst.add(msgInfo);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         return "redirect:/portal/chuongtrinhdaotao/list";
     }
