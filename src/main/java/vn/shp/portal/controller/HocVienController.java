@@ -57,6 +57,18 @@ public class HocVienController {
         return "portal/hocvien/hocvien_create";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+    @RequestMapping(value = "/create", method = POST)
+    public String postCreate(Model model, HocVienBean bean) {
+       HocVien entity = bean.getEntity();
+       if(entity != null && entity.getId() != null){
+
+       }
+
+        model.addAttribute("bean", bean);
+        return "portal/hocvien/hocvien_create";
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
