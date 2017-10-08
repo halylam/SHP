@@ -18,14 +18,11 @@
     <!-- Font Awesome -->
     <link th:href="@{/mcr/css/font-awesome.min.css}" rel="stylesheet">
 
-    <link th:href="@{/css/AdminLTE.css}" rel="stylesheet">
-
     <link th:href="@{/plugins/DataTables/datatables.css}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link th:href="@{/mcr/css/main.css}" rel="stylesheet">
     <link th:href="@{/mcr/css/section1.css}" rel="stylesheet">
-
     <!-- jQuery -->
     <script th:src="@{/mcr/js/jquery.min.js}"></script>
 
@@ -35,7 +32,12 @@
     <script th:src="@{/plugins/DataTables/datatables.js}"></script>
     <script th:src="@{/plugins/bootbox/bootbox.js}"></script>
 
-  <script th:inline="javascript">
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/datepicker/css/bootstrap-datepicker3.css}">
+    <script type="text/javascript" th:src="@{/plugins/datepicker/js/bootstrap-datepicker.js}"></script>
+    <script type="text/javascript" th:src="@{/plugins/datepicker/locales/bootstrap-datepicker.vi.min.js}"></script>
+
+
+    <script th:inline="javascript">
       var BASE_URL = [[@{/}]] ;
       var APP_LOCALE = 'vi';
       var MESSAGE_DEL = [[#{message.confirm.delete.content}]];

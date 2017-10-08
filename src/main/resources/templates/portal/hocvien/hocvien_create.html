@@ -39,20 +39,6 @@
                             <!-- Content here -->
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <form class="form-muted" novalidate>
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Khóa
-                                                học <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="item form-group col-xs-12">
                                             <h5> Thông tin Sinh viên </h5>
                                             <i> Thông tin cá nhân </i>
@@ -63,8 +49,8 @@
                                                 học viên
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="firstname" class="form-control col-md-7 col-xs-12" th:field="*{entity.maHocVien}"
-                                                       placeholder="" required type="text">
+                                                <input id="firstname" class="form-control col-md-7 col-xs-12 disabled" th:field="*{entity.maHocVien}"
+                                                       placeholder="" readonly required type="text" >
                                             </div>
                                         </div>
 
@@ -105,8 +91,11 @@
                                                 sinh <span class="required">*</span>
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
-                                                       placeholder="" required type="text">
+                                                <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
+                                                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+
+
+
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Email
@@ -114,7 +103,7 @@
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.emailShp}"
-                                                       placeholder="" required type="text">
+                                                       placeholder="" required type="email">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Email <span
@@ -122,7 +111,7 @@
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.email}"
-                                                       placeholder="" required type="text">
+                                                       placeholder="" required type="email">
                                             </div>
 
                                         </div>
@@ -140,8 +129,8 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
-                                                       placeholder="" required type="text">
+                                                <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
+                                                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Tại <span
@@ -703,7 +692,6 @@
                                             </label>
                                         </div>
 
-                                    </form>
 
 
                                 </div>
@@ -731,6 +719,22 @@
     </div>
 </div>
 <script>
+    $('#txtNgaySinh').datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy",
+        todayBtn: true,
+        todayHighlight: true, language: "vi"
+    });
+
+    $('#txtNgayCapCmnd').datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy",
+        todayBtn: true,
+        todayHighlight: true, language: "vi"
+    });
+
+
+
     function loadDist(source, dist, detail) {
         $('#' + dist).find('option').remove().end();
         $('#' + detail).find('option').remove().end();
