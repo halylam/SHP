@@ -866,7 +866,7 @@ button.btn:focus,
 button.btn:active,
 .open > .dropdown-toggle.btn-default:hover,
 .open > .dropdown-toggle.btn-default:focus {
-    background: transparent !important;
+    background: #161a61 !important;
     color: #d0cccb;
 }
 
