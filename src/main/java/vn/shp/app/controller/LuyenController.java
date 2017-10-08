@@ -24,9 +24,14 @@ public class LuyenController {
 	public String quanLyHv(Model model, HttpServletRequest request) {
 		return "portal/quanly/quanlyhv";
 	}
+
 	@RequestMapping(value = "/quanlygv", method = GET)
 	public String quanLyGv(Model model, HttpServletRequest request) {
 		return "portal/quanly/quanlygv";
 	}
 
+	@RequestMapping(value = "/dangkyhocvienmoistep2", method = GET)
+	public String dangkyHv2(Model model, HttpServletRequest request) {
+		return "portal/hocvien/hocvien_create_step2";
+	}
 }
