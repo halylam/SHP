@@ -1336,3 +1336,51 @@ select option {
 .addlist-popup button {
     text-transform: uppercase;
 }
+
+
+/* Login -2 */
+.login-body {
+    background-color: #f1f2f7;
+}
+.login-img-body{
+    background: url('../images/bg-1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.login-img2-body{
+    background: url('../images/bg-1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.login-img3-body{
+    background: url('../images/bg-1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.login-body {
+    margin-top:  150px;
+    background: transparent;
+}
+
+.login-body .login-bg-left {
+    padding: 30px;
+    background: #fff;
+    min-height: 230px;
+}
+.login-body .login-bg-right {
+    padding: 30px;
+    background: url('../images/bg-1.png') no-repeat center center fixed;
+    text-align: center;
+    min-height: 230px;
+}
+.login-body h2 {
+    font-family: arial;
+    color: #fff;
+}
