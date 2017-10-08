@@ -908,7 +908,7 @@ button.btn.dropdown-toggle span.fa {
 .form-group input, .form-group textarea {
     background: transparent;
     border: 1px solid #9b908a;
-    color: #c3bfbb;
+    color: #222;
 }
 
 .form-group .control-label {

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="portal/fragments/head :: head">
+</head>
+
+<body class="nav-md skin-brown">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
+        </div>
+        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
+        </div>
+
+        <!-- Main-->
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Đăng ký khóa học </h1>
+
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a th:href="@{/portal/khoahoc/create}">
+                            <button type="button" class="btn btn-default">Tạo mới</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/edit}">
+                            <button type="button" class="btn btn-default">Edit</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/import}">
+                            <button type="button" class="btn btn-default">Import</button>
+                        </a>
+                        <a th:href="@{/portal/khoahoc/export}">
+                            <button type="button" class="btn btn-default">Export PDF</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <section class="section bgTrans">
+                    <div class="section-content">
+                        <form th:object="${bean}" method="post" th:action="@{/portal/khoahoc/dangky}">
+                            <!-- Content here -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12 ">
+                                        <!-- Compobox -->
+                                        <div class="item form-group col-xs-12">
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Khóa học <span class="required">*</span></label>
+                                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                                <select class="input-sm col-sm-12 col-xs-12">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Compobox -->
+                                        <div class="item form-group col-xs-12">
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã học viên  <span class="required">*</span></label>
+                                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                                <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
+                                                       type="text">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Content here -->
+                        </form>
+                    </div>
+
+                    <div class="section-footer">
+                        <div class="btn-group">
+                            <a th:href="@{/portal/khoahoc/dangky}">
+                                <button type="button" class="btn btn-default"> Lưu </button>
+                            </a>
+                        </div>
+                    </div>
+                </section> <!-- End section -->
+
+
+            </div>
+        </div>
+        <!-- /Main -->
+        <footer th:replace="portal/fragments/footer :: footer">
+        </footer>
+    </div>
+</div>
+
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+
+
+</body>
+</html>
+

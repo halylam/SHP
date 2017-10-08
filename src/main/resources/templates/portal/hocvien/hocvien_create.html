@@ -91,10 +91,16 @@
                                                 sinh <span class="required">*</span>
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
-                                                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
 
-
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
+                                                               placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                        <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
@@ -129,8 +135,16 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
-                                                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
+                                                               placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                        <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" for="">Tại <span
@@ -145,7 +159,7 @@
                                         <div class="item form-group col-xs-12">
                                             <!-- Input check -->
 
-                                            <div class="checkbox checkbox-inline checkbox-success">
+                                            <div class="radio checkbox-inline">
                                                 <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DH">
                                                 <label for="radDiHoc">
                                                     Đi học
@@ -154,7 +168,7 @@
                                             <!-- /Input check -->
 
                                             <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
+                                            <div class="radio checkbox-inline">
                                                 <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DL">
                                                 <label for="radDiLam">
                                                     Đi làm
@@ -162,7 +176,7 @@
                                             </div>
                                             <!-- /Input check -->
                                             <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
+                                            <div class="radio checkbox-inline">
                                                 <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="TD">
                                                 <label for="radTuDo">
                                                     Tự do
@@ -170,8 +184,7 @@
                                             </div>
                                             <!-- /Input check -->
 
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tình
-                                                trạng cá nhân <span class="required">*</span>
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tình trạng cá nhân <span class="required">*</span>
                                             </label>
 
 
@@ -352,18 +365,13 @@
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Trình
                                                 độ văn hóa <span class="required">*</span></label>
 
-                                            <div class="checkbox col-md-3 col-sm-3 col-xs-12 checkbox-inline checkbox-success">
-                                                <input id="thcs" type="checkbox">
-                                                <label for="thcs">
-                                                    TN THCS
-                                                </label>
-                                            </div>
+
                                             <!-- /Input check -->
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường <span class="required">*</span>
+                                                trường THCS <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThcs}"
                                                        placeholder="" required type="text">
                                             </div>
@@ -372,18 +380,13 @@
                                             <!-- Input check -->
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
 
-                                            <div class="checkbox col-md-3 col-sm-3 col-md-offset-2 col-sm-offset-2 col-xs-12 checkbox-inline checkbox-success">
-                                                <input id="thpt" type="checkbox">
-                                                <label for="thpt">
-                                                    TN THPT
-                                                </label>
-                                            </div>
+
                                             <!-- /Input check -->
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường <span class="required">*</span>
+                                                trường THPT <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThpt}"
                                                        placeholder="" required type="text">
                                             </div>
@@ -392,20 +395,15 @@
                                             <!-- Input check -->
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
 
-                                            <div class="checkbox col-md-3 col-sm-3 col-xs-12 checkbox-inline checkbox-success">
-                                                <input id="khac" type="checkbox">
-                                                <label for="khac">
-                                                    Khác
-                                                </label>
-                                            </div>
+
                                             <!-- /Input check -->
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường
+                                                trường khác
                                             </label>
-                                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input id="" class="form-control col-md-7 col-xs-12" th:field="*{entity.truongKhac}"
-                                                       placeholder="" required type="text">
+                                                       placeholder="" type="text">
                                             </div>
                                         </div>
 
@@ -547,11 +545,28 @@
 
 
                                         <div class="item form-group col-xs-12">
+
                                             <h5> Thông tin tài chính </h5>
                                             <i> Thông tin người phụ trách nhiệm đóng học phí </i>
-                                        </div>
 
-                                        <div class="item form-group col-xs-12">
+
+
+                                        </div>
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-2 col-md-offset-2">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="hocvien" type="radio" name="hocvien">
+                                                <label style="margin-right: 25px;" for="hocvien">Học viên</label>
+                                                <input  id="khachocvien" type="radio" name="hocvien">
+                                                <label for="khachocvien">Khác </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
                                                 tên <span class="required">*</span>
                                             </label>
@@ -635,62 +650,45 @@
                                             <p> 1. Đối với khóa Topic & Short Coutses, Tiếng Anh </p>
                                         </div>
 
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
-                                                <input id="checkbox11" type="checkbox">
-                                                <label for="checkbox11">
-                                                    Đóng trọn khóa
-                                                </label>
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="chuadong" type="radio" name="chuadong">
+                                                <label style="margin-right: 25px;" for="radio1"> Chưa đóng </label>
+                                                <input id="tronkhoa" type="radio" name="hocphi">
+                                                <label style="margin-right: 25px;" for="radio1"> Đóng trọn khóa </label>
+                                                <input  id="chiathanhnhieudot" type="radio" name="hocphi">
+                                                <label for="radio2"> Chia thành nhiều đợt  </label>
                                             </div>
-                                            <!-- /Input check -->
-
-                                            <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
-                                                <input id="checkbox22" type="checkbox">
-                                                <label for="checkbox22">
-                                                    Chịa thành nhiều đợt
-                                                </label>
-                                            </div>
-                                            <!-- /Input check -->
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number">Học
-                                                phí <span class="required">*</span>
-                                            </label>
+                                            <!-- /Input radio -->
                                         </div>
+                                    </div>
 
-                                        <div class="item form-group col-xs-12">
+                                    <div class="item form-group col-xs-12">
                                             <p> 2. Đối với khóa học 2 năm </p>
                                         </div>
 
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
-                                                <input id="checkbox11" type="checkbox">
-                                                <label for="checkbox11">
-                                                    Đóng trọn khóa
-                                                </label>
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="chuadong" type="radio" name="chuadong">
+                                                <label style="margin-right: 25px;" for="radio1"> Chưa đóng </label>
+                                                <input id="tronkhoa" type="radio" name="hocphi">
+                                                <label style="margin-right: 25px;" for="radio1"> Đóng trọn khóa </label>
+                                                <input  id="chiathanhnhieudot" type="radio" name="hocphi">
+                                                <label style="margin-right: 25px;" for="radio2"> Chia thành nhiều đợt  </label>
+                                                <input  id="hocky" type="radio" name="hocky">
+                                                <label for="radio2"> Đóng theo học kỳ  </label>
                                             </div>
-                                            <!-- /Input check -->
-
-                                            <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
-                                                <input id="checkbox22" type="checkbox">
-                                                <label for="checkbox22">
-                                                    Chịa thành nhiều đợt
-                                                </label>
-                                            </div>
-                                            <!-- Input check -->
-                                            <div class="checkbox checkbox-inline checkbox-success">
-                                                <input id="checkbox22" type="checkbox">
-                                                <label for="checkbox22">
-                                                    Đóng theo học kỳ
-                                                </label>
-                                            </div>
-                                            <!-- /Input check -->
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="number">Học
-                                                phí <span class="required">*</span>
-                                            </label>
+                                            <!-- /Input radio -->
                                         </div>
+                                    </div>
 
 
 

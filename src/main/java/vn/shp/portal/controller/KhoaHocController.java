@@ -62,4 +62,10 @@ public class KhoaHocController {
     public String getDelete() {
         return "redirect:/portal/khoahoc/list";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
+    @RequestMapping(value = "/dangky", method = GET)
+    public String getDangKy() {
+        return "/portal/khoahoc/khoahoc_dangkykhoahoc";
+    }
 }
