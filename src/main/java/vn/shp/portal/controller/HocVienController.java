@@ -10,10 +10,16 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import vn.shp.app.bean.HocVienBean;
+import vn.shp.app.config.Constants;
 import vn.shp.app.config.SystemConfig;
+import vn.shp.app.entity.HocVi;
 import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.Location;
 import vn.shp.app.utils.Utils;
+import vn.shp.portal.constant.CoreConstant;
+import vn.shp.portal.core.Message;
+import vn.shp.portal.core.MessageList;
+import vn.shp.portal.service.HocVienService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +35,8 @@ public class HocVienController {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    @Autowired
+    HocVienService hocVienService;
 
     @Autowired
     private MessageSource messageSource;
@@ -52,7 +60,11 @@ public class HocVienController {
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         HocVienBean bean = new HocVienBean();
-        bean.setEntity(new HocVien());
+        HocVien entity = new HocVien();
+        entity.setNdhp(Constants.NDHP_HOC_VIEN);
+        entity.setHp1(Constants.HP_TRON_KHOA);
+        entity.setHp2(Constants.HP_TRON_KHOA);
+        bean.setEntity(entity);
         model.addAttribute("bean", bean);
         return "portal/hocvien/hocvien_create";
     }
@@ -60,13 +72,21 @@ public class HocVienController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(Model model, HocVienBean bean) {
-       HocVien entity = bean.getEntity();
-       if(entity != null && entity.getId() != null){
+        HocVien entity = bean.getEntity();
+        if (entity != null && entity.getId() == null) {
+entity.setMaHocVien(String.valueOf(System.currentTimeMillis()));
+            hocVienService.save(entity);
+        }
 
-       }
-
+        if (entity.getId() != null) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Lưu thông tin học viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        bean.setEntity(entity);
         model.addAttribute("bean", bean);
-        return "portal/hocvien/hocvien_create";
+        return "portal/hocvien/hocvien_create_step2";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")

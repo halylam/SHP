@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "HOC_VIEN", uniqueConstraints=@UniqueConstraint(columnNames="MA_HOC_VIEN"))
+@Table(name = "HOC_VIEN", uniqueConstraints = @UniqueConstraint(columnNames = "MA_HOC_VIEN"))
 @Data
-public class HocVien implements Serializable{
+public class HocVien implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HOC_VIEN_ID_SEQ")
@@ -110,8 +110,35 @@ public class HocVien implements Serializable{
     @Column(name = "TRUONG_KHAC", length = 250)
     private String truongKhac;
 
+    @Column(name = "NDHP", length = 3)
+    private String ndhp;
 
+    @Column(name = "NDHP_HO_TEN", length = 50)
+    private String ndhpHoTen;
 
+    @Column(name = "NDHP_SDT", length = 15)
+    private String ndhpSdt;
+
+    @Column(name = "NDHP_EMAIL", length = 50)
+    private String ndhpEmail;
+
+    @Column(name = "NDHP_TINH", length = 10)
+    private String ndhpTinh;
+
+    @Column(name = "NDHP_QUAN", length = 10)
+    private String ndhpQuan;
+
+    @Column(name = "NDHP_XA", length = 10)
+    private String ndhpXa;
+
+    @Column(name = "NDHP_DIA_CHI", length = 250)
+    private String ndhpDiaChi;
+
+    @Column(name = "HOC_PHI_1", length = 10)
+    private String hp1;
+
+    @Column(name = "HOC_PHI_2", length = 10)
+    private String hp2;
 
 
 }

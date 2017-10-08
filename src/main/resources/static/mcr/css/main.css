@@ -1384,3 +1384,13 @@ select option {
     font-family: arial;
     color: #fff;
 }
+.input-lable{
+    border-radius: 0px !important;
+    background-color: transparent !important;
+    border-top: none !important;
+    border-right: 0px !important;
+    border-left: 0px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+

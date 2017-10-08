@@ -29,4 +29,13 @@ public class Constants {
     public static final String ACTION_REJECT = "REJECT";
     public static final String ACTION_DELETE = "DELETE";
     public static final String ACTION_EXPORT = "EXPORT";
+    public static final String NDHP_HOC_VIEN = "HV";
+    public static final String NDHP_KHAC = "KH";
+
+    public static final String HP_CHUA_DONG = "CHUA_DONG";
+    public static final String HP_TRON_KHOA = "TRON_KHOA";
+    public static final String HP_NHIEU_DOT = "NHIEU_DOT";
+    public static final String HP_HOC_KY = "HOC_KY";
+
+
 }

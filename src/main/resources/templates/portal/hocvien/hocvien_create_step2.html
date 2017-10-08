@@ -32,14 +32,127 @@
             </div>
 
             <div class="container-fluid">
-                <form class="form-muted" novalidate>
+
+
+                <form method="POST" th:action="@{/portal/hocvien/create2}" th:object="${bean}" id="formNewHocVien">
                     <section class="section bgTrans">
                         <div class="section-content">
+                            <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
                             <!-- Content here -->
                             <div class="row">
                                 <div class="item form-group col-xs-12">
                                     <h5> Cập nhật hông tin học viên </h5>
-                                    <i> Cập nhật thêm thông tin kinh nghiệm làm việc và hồ sơ cá nhân của học viên </i>
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Thông tin Sinh viên </h5>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname" style="padding-top: 10px;">Mã
+                                            học viên
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12 disabled input-lable" th:field="*{entity.maHocVien}"
+                                                   readonly required type="text" >
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname" style="padding-top: 10px;">Họ
+                                            tên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.hoTen}"
+                                                   readonly type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname" style="padding-top: 10px;">Giới
+                                            tính <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M">
+                                                <label style="margin-right: 25px;" for="radio1">Nam</label>
+                                                <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F">
+                                                <label for="radio2">Nữ </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12"  style="padding-top: 10px;">Số ĐT <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12  input-lable" th:field="*{entity.soDienThoai}"
+                                                    readonly type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12  input-lable" for="firstname"  style="padding-top: 10px;">Ngày
+                                            sinh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input readonly class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.ngaySinh}"
+                                                          >
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"  style="padding-top: 10px;">Email
+                                            SHP<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.emailShp}"
+                                                    readonly type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12 input-lable"  style="padding-top: 10px;">Email <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.email}"
+                                                    readonly type="email">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12 input-lable" for="firstname" style="padding-top: 10px;">CMND/Passport
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.cmnd}"
+                                                    readonly type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12 input-lable"  style="padding-top: 10px;">Ngày cấp
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input  class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.ngayCapCmnd}"
+                                                           >
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12"  style="padding-top: 10px;">Tại <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12 input-lable" th:field="*{entity.noiCapCmnd}"
+                                                    readonly type="text">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="item form-group col-xs-12">
                                     <h5> Kinh nghiệm làm việc </h5>
