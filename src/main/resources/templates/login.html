@@ -1,8 +1,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Please Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<!-- Bootstrap -->
+	<link th:href="@{/mcr/css/bootstrap.min.css}" rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link th:href="@{/mcr/css/font-awesome.min.css}" rel="stylesheet">
+
+	<!-- Custom Theme Style -->
+	<link th:href="@{/mcr/css/main.css}" rel="stylesheet">
+	<link th:href="@{/mcr/css/bootstrap-theme.css}" rel="stylesheet">
+
 </head>
-<body>
+<body class="login-img3-body">
+
+
+
+<div class="container login-body">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-2 login-bg-left">
+			<p>
+				<input type="text" class="form-control" placeholder="Username" autofocus>
+			</p>
+			<p>
+				<input type="text" class="form-control" placeholder="Password" autofocus>
+			</p>
+			<label class="checkbox">
+				<input type="checkbox" value="remember-me"> Remember me
+				<span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+			</label>
+			<button class="btn btn-default btn-lg btn-block" type="submit">Login</button>
+
+
+		</div>
+		<div class="col-sm-4 login-bg-right">
+			<img src="img/logo-shp.png" width="200px" />
+			<h2> HỆ THỐNG QUẢN LÝ ĐÀO TẠO </h2>
+		</div>
+	</div>
+
+</div>
+
+
+
+
 
 <div th:fragment="content">
 	<form name="f" th:action="@{/login}" method="post">
