@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="portal/fragments/head :: head">
 </head>
@@ -21,10 +21,6 @@
                     <div class="btn-group">
                         <a th:href="@{/portal/bacdaotao/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-
-                        <a th:href="@{/portal/bacdaotao/edit}">
-                            <button type="button" class="btn btn-default">Edit</button>
                         </a>
                         <a th:href="@{/portal/bacdaotao/import}">
                             <button type="button" class="btn btn-default">Import</button>
@@ -80,8 +76,7 @@
                                                 <th>Tên bậc đào tạo</th>
                                                 <th>Chuyên ngành đào tạo</th>
                                                 <th>Chương trình đào tạo</th>
-
-
+                                                <th>Thao Tác</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -97,6 +92,22 @@
                                                 <td th:text="${bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
                                                 <td th:text="${bacDaoTao.chuyenNganh.chuyenNganhName}">Chương trình chủ đề</td>
                                                 <td th:text="${bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Chương trình chủ đề</td>
+                                                <td>
+                                                    <a th:href="@{/portal/bacdaotao/edit/{id}(id=${bacDaoTao.bacDaoTaoId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+                                                        th:href="@{/portal/bacdaotao/delete/{id}(id=${bacDaoTao.bacDaoTaoId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_DELETE')">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
