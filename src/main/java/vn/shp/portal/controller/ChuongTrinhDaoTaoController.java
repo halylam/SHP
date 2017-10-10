@@ -91,6 +91,7 @@ public class ChuongTrinhDaoTaoController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
+            return "portal/chuongtrinhdaotao/chuongtrinhdaotao_create";
         }
         return "redirect:/portal/chuongtrinhdaotao/list";
     }
