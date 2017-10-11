@@ -94,6 +94,8 @@ public class HocVienController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         bean.setEntity(entity);
+        KinhNghiemLamViec knlv = new KinhNghiemLamViec(entity.getId());
+        bean.setKnlv(knlv);
         model.addAttribute("bean", bean);
         return "portal/hocvien/hocvien_create_step2";
     }
