@@ -1,8 +1,8 @@
 package vn.shp.portal.service;
 
-import vn.shp.app.entity.LopHoc;
-
 import java.util.List;
+
+import vn.shp.app.entity.LopHoc;
 
 public interface LopHocService {
 

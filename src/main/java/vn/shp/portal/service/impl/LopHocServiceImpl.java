@@ -1,13 +1,13 @@
 package vn.shp.portal.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.LopHoc;
 import vn.shp.portal.repository.LopHocRepository;
 import vn.shp.portal.service.LopHocService;
-
-import java.util.List;
 
 @Service("LopHocService")
 public class LopHocServiceImpl implements LopHocService {
@@ -17,7 +17,7 @@ public class LopHocServiceImpl implements LopHocService {
 
 	@Override
 	public List<LopHoc> findAll() {
-		List<LopHoc> lopHocLst = LopHocRepo.findAll();
+		List<LopHoc> lopHocLst = lopHocRepo.findAll();
 		return lopHocLst;
 	}
 
