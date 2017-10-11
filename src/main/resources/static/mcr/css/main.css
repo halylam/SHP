@@ -1231,6 +1231,7 @@ select option {
 }
 
 /* Popup */
+/*
 .modal-dialog {
     min-width: 80%;
 }
@@ -1239,7 +1240,10 @@ select option {
     min-height: 690px;
     padding: 30px;
 }
-
+.modal-body {
+    min-height: 472px;
+}
+*/
 .modal-content .heading {
     color: #161a61;
 }
@@ -1265,9 +1269,7 @@ select option {
     border: 0;
 }
 
-.modal-body {
-    min-height: 472px;
-}
+
 
 .modal-footer {
     border: 0;
