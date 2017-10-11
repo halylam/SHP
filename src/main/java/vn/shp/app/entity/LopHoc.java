@@ -40,7 +40,11 @@ public class LopHoc implements Serializable {
 
 	@NotNull
 	@Column(name = "succhua")
-	private String sucChua;
+	private int sucChua;
+
+	@NotNull
+	@Column(name = "soluonghv")
+	private int soLuongHV;
 
 	@NotNull
 	@Column(name = "id_loailophoc")
