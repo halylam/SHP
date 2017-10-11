@@ -69,9 +69,9 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <!-- Input radio -->
                                                 <div class="radio checkbox-inline">
-                                                    <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M">
+                                                    <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M" required>
                                                     <label style="margin-right: 25px;" for="radio1">Nam</label>
-                                                    <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F">
+                                                    <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F"  required>
                                                     <label for="radio2">Nữ </label>
                                                 </div>
                                                 <!-- /Input radio -->
@@ -160,7 +160,7 @@
                                             <!-- Input  -->
 
                                             <div class="radio checkbox-inline">
-                                                <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DH">
+                                                <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DH" required>
                                                 <label for="radDiHoc">
                                                     Đi học
                                                 </label>
@@ -169,7 +169,7 @@
 
                                             <!-- Input option -->
                                             <div class="radio checkbox-inline">
-                                                <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DL">
+                                                <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DL" required>
                                                 <label for="radDiLam">
                                                     Đi làm
                                                 </label>
@@ -177,7 +177,7 @@
                                             <!-- /Input option -->
                                             <!-- Input option -->
                                             <div class="radio checkbox-inline">
-                                                <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="TD">
+                                                <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="TD" required>
                                                 <label for="radTuDo">
                                                     Tự do
                                                 </label>
@@ -210,7 +210,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhThuongTru}"
+                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhThuongTru}" required
                                                         onchange="loadDist('selTinhThuongTru','selQuanThuongTru','selXaThuongTru')"
                                                         id="selTinhThuongTru">
                                                     <option value=""></option>
@@ -225,7 +225,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanThuongTru" th:field="*{entity.quanThuongTru}"
+                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanThuongTru" th:field="*{entity.quanThuongTru}" required
                                                         onchange="loadDetail('selQuanThuongTru','selXaThuongTru')">
 
                                                 </select>
@@ -235,7 +235,7 @@
                                                     class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaThuongTru" th:field="*{entity.xaThuongTru}">
+                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaThuongTru" th:field="*{entity.xaThuongTru}" required>
 
                                                 </select>
                                             </div>
@@ -262,7 +262,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhTamTru}"
+                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhTamTru}" required
                                                         onchange="loadDist('selTinhTamTru','selQuanTamTru','selXaTamTru')"
                                                         id="selTinhTamTru">
                                                     <option value=""></option>
@@ -277,7 +277,7 @@
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanTamTru"tinhTamTru th:field="*{entity.quanTamTru}"
+                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanTamTru"tinhTamTru th:field="*{entity.quanTamTru}" required
                                                         onchange="loadDetail('selQuanTamTru','selXaTamTru')">
 
                                                 </select>
@@ -287,7 +287,7 @@
                                                     class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaTamTru"quanTamTru th:field="*{entity.xaTamTru}">
+                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaTamTru"quanTamTru th:field="*{entity.xaTamTru}" required>
 
                                                 </select>
                                             </div>
@@ -321,7 +321,7 @@
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailCha}"
-                                                        required type="text">
+                                                        required type="email">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT <span
@@ -338,21 +338,21 @@
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenMe}"
-                                                        required type="text">
+                                                         type="text">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailMe}"
-                                                        required type="text">
+                                                         type="email">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtMe}"
-                                                        required type="text">
+                                                         type="text">
                                             </div>
                                         </div>
 
@@ -550,9 +550,6 @@
                                             <!-- /Input radio -->
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                             <!-- End Content here -->
@@ -580,12 +577,11 @@
 <script>
     $(document).ready(function () {
 
-
-
         $('#txtNgaySinh').datepicker({
             autoclose: true,
             format: "dd/mm/yyyy",
             todayBtn: true,
+            endDate: "today",
             todayHighlight: true, language: "vi"
         });
 
@@ -593,6 +589,7 @@
             autoclose: true,
             format: "dd/mm/yyyy",
             todayBtn: true,
+            endDate: "today",
             todayHighlight: true, language: "vi"
         });
 
@@ -623,10 +620,6 @@
         });
 
     });
-
-
-
-
 
     function loadDist(source, dist, detail) {
         $('#' + dist).find('option').remove().end();

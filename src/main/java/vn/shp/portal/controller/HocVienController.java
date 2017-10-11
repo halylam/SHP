@@ -74,7 +74,7 @@ public class HocVienController {
     public String postCreate(Model model, HocVienBean bean) {
         HocVien entity = bean.getEntity();
         if (entity != null && entity.getId() == null) {
-entity.setMaHocVien(String.valueOf(System.currentTimeMillis()));
+            entity.setMaHocVien(String.valueOf(System.currentTimeMillis()));
             hocVienService.save(entity);
         }
 
