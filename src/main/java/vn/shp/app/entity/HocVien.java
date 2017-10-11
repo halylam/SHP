@@ -140,5 +140,16 @@ public class HocVien implements Serializable {
     @Column(name = "HOC_PHI_2", length = 10)
     private String hp2;
 
+    @Column(name = "NGAY_TAO")
+    private Date ngayTao;
+
+    @Column(name = "NGUOI_TAO",length = 50)
+    private String nguoiTao;
+
+    @Column(name = "NGAY_CAP_NHAT")
+    private Date ngayCapNhat;
+
+    @Column(name = "NGUOI_CAP_NHAP",length = 50)
+    private String nguoiCapNhat;
 
 }

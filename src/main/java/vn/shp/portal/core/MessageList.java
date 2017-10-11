@@ -24,6 +24,12 @@ public class MessageList {
         this.messages = new ArrayList<Message>();
         this.status = status;
     }
+
+    public MessageList(String status, String content) {
+        Message message = new Message(status, content);
+        messages.add(message);
+    }
+
     public void add(String content) {
         Message message = new Message(status, content);
         messages.add(message);

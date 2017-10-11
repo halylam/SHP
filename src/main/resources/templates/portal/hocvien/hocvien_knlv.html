@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+<form method="POST"  id="formNewKnlv" th:object="${bean}" onsubmit="return false;">
+    <input type="hidden" th:field="*{knlv.maLienKet}">
+<div class="item form-group col-xs-12">
+    <label class="control-label col-md-2 col-sm-2 col-xs-12" >Vị trí
+    </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <input  class="form-control col-md-7 col-xs-12" th:field="*{knlv.viTri}" maxlength="250"
+               required type="text">
+    </div>
+
+    <label class="control-label col-md-2 col-sm-2 col-xs-12" >Tên công ty
+    </label>
+    <div class="col-md-5 col-sm-5 col-xs-12">
+        <input  class="form-control col-md-7 col-xs-12"  th:field="*{knlv.tenCongTy}" maxlength="250"
+               required type="text">
+    </div>
+
+
+</div>
+<div class="item form-group col-xs-12">
+    <label class="control-label col-md-2 col-sm-2 col-xs-12" >Từ
+    </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                <input id="txtKnlvTuNgay" class="form-control col-md-7 col-xs-12" th:field="*{knlv.tuNgay}"
+                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+            </div>
+        </div>
+
+    </div>
+
+    <label class="control-label col-md-2 col-sm-2 col-xs-12" > Đến
+    </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                <input id="txtKnlvDenNgay" class="form-control col-md-7 col-xs-12" th:field="*{knlv.denNgay}"
+                       placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="item form-group col-xs-12">
+    <!-- Input check -->
+
+    <label class="control-label col-md-2 col-sm-2 col-xs-12">Địa chỉ
+    </label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <input  class="form-control col-md-7 col-xs-12"   th:field="*{knlv.diaChi}" maxlength="300"
+               required type="text">
+    </div>
+
+</div>
+
+<div class="item form-group col-xs-12">
+    <!-- Input check -->
+
+    <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-default mgL0" onclick="submitNewKnlv();"> +</button>
+        </div>
+    </div>
+
+</div>
+<div class="item form-group col-xs-12">
+    <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <table class="table table-striped" style="color: black;">
+            <thead>
+            <tr>
+
+                <th>Vị trí</th>
+                <th>Tên công ty</th>
+                <th>Từ ngày</th>
+                <th>Tới ngày</th>
+                <th>Địa chỉ</th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item,i : ${bean.lstKnlv}">
+
+                <td><a href="shp-form-dkhv.html" th:text="${item.viTri}">HV0001</a>
+                </td>
+                <td th:text="${item.tenCongTy}">Nguyen Manh Ha</td>
+                <td th:text="${#dates.format(item.tuNgay, 'dd/MM/yyyy')}">
+
+                </td>
+                <td th:text="${#dates.format(item.denNgay, 'dd/MM/yyyy')}">1985</td>
+                <td th:text="${item.diaChi}">Bep A viet nam</td>
+                <td style="text-align: center;">
+
+                    <div class="btn-group">
+                        <a th:onclick="'deleteKnlv(' + ${item.id} + ');'"
+                           class="btn btn-danger" style="min-width: 20px;"><i
+                                style="color: white;"
+                                class="glyphicon glyphicon-remove-circle"
+                                title="Xoá kinh nghiệm làm việc."></i></a>
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</form>
+<script>
+    $('#txtKnlvTuNgay').datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy",
+        todayBtn: true,
+        todayHighlight: true, language: "vi"
+    });
+
+    $('#txtKnlvDenNgay').datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy",
+        todayBtn: true,
+        todayHighlight: true, language: "vi"
+    });
+
+</script>
+</body>
+</html>

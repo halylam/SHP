@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.HocVien;
+import vn.shp.app.entity.KinhNghiemLamViec;
 import vn.shp.portal.repository.HocVienRepository;
+import vn.shp.portal.repository.KinhNghiemLamViecRepository;
 import vn.shp.portal.service.HocVienService;
 
 import java.util.List;
@@ -14,6 +16,9 @@ public class HocVienServiceImpl implements HocVienService {
 
 	@Autowired
 	private HocVienRepository hocVienRepository;
+
+	@Autowired
+	private KinhNghiemLamViecRepository kinhNghiemLamViecRepository;
 
 	@Override
 	public List<HocVien> findAll() {
@@ -47,5 +52,25 @@ public class HocVienServiceImpl implements HocVienService {
 	@Override
 	public HocVien findOne(Long id) {
 		return hocVienRepository.findOne(id);
+	}
+
+	@Override
+	public KinhNghiemLamViec save(KinhNghiemLamViec knlv){
+		return kinhNghiemLamViecRepository.save(knlv);
+	}
+
+	@Override
+	public List<KinhNghiemLamViec> findAllByMaLienKetAndLoaiLienKet(Long maLienKet, String loaiLienKet){
+		return kinhNghiemLamViecRepository.findAllByMaLienKetAndLoaiLienKet(maLienKet,loaiLienKet);
+	}
+
+	@Override
+	public void deleteKnlvById(Long id){
+		kinhNghiemLamViecRepository.delete(id);
+	}
+
+	@Override
+	public KinhNghiemLamViec findOneKnlv(Long id){
+		return kinhNghiemLamViecRepository.findOne(id);
 	}
 }

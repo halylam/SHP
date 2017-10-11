@@ -37,5 +37,6 @@ public class Constants {
     public static final String HP_NHIEU_DOT = "NHIEU_DOT";
     public static final String HP_HOC_KY = "HOC_KY";
 
-
+    public static final String HOC_VIEN = "HOC_VIEN";
+    public static final String GIANG_VIEN = "GIANG_VIEN";
 }

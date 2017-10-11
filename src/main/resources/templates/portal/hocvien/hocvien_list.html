@@ -32,7 +32,7 @@
             </div>
 
             <div class="container-fluid">
-
+                <form method="POST" th:action="@{/portal/hocvien/list}" th:object="${bean}" id="formLstHocVien">
                 <section class="section bgTrans">
                     <div class="section-content">
                         <!-- Content here -->
@@ -61,7 +61,7 @@
                             <div class="section-content">
                                 <!-- Content here -->
                                 <div class="table-shp">
-                                    <table class="table table1 bulk_action">
+                                    <table class="table table-striped" style="color: black;">
                                         <thead>
                                         <tr>
                                             <th>
@@ -76,40 +76,33 @@
                                             <th>Năm sinh</th>
                                             <th>Khóa học</th>
                                             <th>Điện thoại</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr th:each="item,i : ${bean.lstData}">
                                             <td>
                                                 <div class="checkbox checkbox-success">
                                                     <input id="checkbox1" type="checkbox" class="flat check-all">
                                                     <label for="checkbox1"></label>
                                                 </div>
                                             </td>
-                                            <td><a href="shp-form-dkhv.html">HV0001</a></td>
-                                            <td>Nguyen Manh Ha</td>
-                                            <td>Nam</td>
-                                            <td>1985</td>
+                                            <td><a href="shp-form-dkhv.html" th:text="${item.maHocVien}">HV0001</a></td>
+                                            <td th:text="${item.hoTen}">Nguyen Manh Ha</td>
+                                            <td><th:block th:if="${item.gioiTinh == 'M'}">Nam</th:block><th:block th:if="${item.gioiTinh == 'F'}">Nữ</th:block> </td>
+                                            <td th:text="${#dates.format(item.ngaySinh, 'dd/MM/yyyy')}">1985</td>
                                             <td>Bep A viet nam</td>
-                                            <td>
+                                            <td th:text="${item.soDienThoai}">
                                                 0987565356
                                             </td>
-                                        </tr>
+                                            <td style="text-align: center;">
 
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox checkbox-success">
-                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                    <label for="checkbox1"></label>
+                                                <div class="btn-group">
+                                                    <a></a>
+                                                    <a th:href="@{/portal/hocvien/info/{id}(id=${item.id})}" class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-paperclip" title="Bổ sung hồ sơ và thông tin."></i></a>
+                                                    <a class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="fa fa-align-center" title="Đăng ký khoá học."></i></a>
+                                                    <a class="btn btn-danger" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-edit" title="Chỉnh sửa học viên"></i></a>
                                                 </div>
-                                            </td>
-                                            <td><a href="shp-form-dkhv.html">HV0001</a></td>
-                                            <td>Nguyen Manh Ha</td>
-                                            <td>Nam</td>
-                                            <td>1985</td>
-                                            <td>Bep A viet nam</td>
-                                            <td>
-                                                0987565356
                                             </td>
                                         </tr>
                                         </tbody>
@@ -145,7 +138,7 @@
                         </div>
                     </div>
                 </section> <!-- End section -->
-
+                </form>
 
             </div>
         </div>
