@@ -336,7 +336,7 @@
 
         var str = $("#formNewKnlv").serialize();
         $.ajax({
-            type: "",
+            type: "GET",
             async: false,
             data: str,
             url: BASE_URL + 'portal/hocvien/ajax_new_knlv',
