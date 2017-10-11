@@ -137,12 +137,17 @@ public class HocVienController {
 
     @RequestMapping(value = "/ajax_delete_knlv", method = RequestMethod.GET)
     public @ResponseBody
-    ModelAndView getLocationDetail(@RequestParam(value = "id") Long id) {
+    ModelAndView getLocationDetail(Model model, @RequestParam(value = "id") Long id) {
+        HocVienBean bean = new HocVienBean();
         KinhNghiemLamViec entity = hocVienService.findOneKnlv(id);
-        //entity.ha
-
-
-        return null;
+        Long maLienKet = entity.getMaLienKet();
+        hocVienService.deleteKnlvById(id);
+        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(maLienKet,Constants.HOC_VIEN);
+        bean.setLstKnlv(lstKnlv);
+        bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
+        model.addAttribute("bean", bean);
+        model.addAttribute(CoreConstant.MSG_LST, "");
+        return new ModelAndView("/portal/hocvien/hocvien_knlv :: content");
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
