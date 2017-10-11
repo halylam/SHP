@@ -15,20 +15,20 @@
         <!-- Main-->
         <div class="main_content" role="main">
             <div class="container-fluid top-heading">
-                <h1 class="">Tìm kiếm ca học </h1>
+                <h1 class="">Tìm kiếm lớp học </h1>
 
                 <div class="pull-right hidden-xs">
                     <div class="btn-group">
-                        <a th:href="@{/portal/cahoc/create}">
+                        <a th:href="@{/portal/lophoc/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
                         </a>
-                        <a th:href="@{/portal/cahoc/edit}">
+                        <a th:href="@{/portal/lophoc/edit}">
                             <button type="button" class="btn btn-default">Edit</button>
                         </a>
-                        <a th:href="@{/portal/cahoc/import}">
+                        <a th:href="@{/portal/lophoc/import}">
                             <button type="button" class="btn btn-default">Import</button>
                         </a>
-                        <a th:href="@{/portal/cahoc/export}">
+                        <a th:href="@{/portal/lophoc/export}">
                             <button type="button" class="btn btn-default">Export PDF</button>
                         </a>
                     </div>
@@ -39,7 +39,7 @@
 
                 <section class="section bgTrans">
                     <div class="section-content">
-                        <form th:object="${bean}" method="post" th:action="@{/portal/cahoc/list}">
+                        <form th:object="${bean}" method="post" th:action="@{/portal/hoc/list}">
                             <!-- Content here -->
                             <div class="row">
                                 <div class="col-sm-12">
@@ -57,8 +57,8 @@
                                 <div class="section-header">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h2 class="heading">Danh sách ca học </h2>
-                                            <h3 class="sub-heading">Danh sách ca học tìm thấy theo từ khóa </h3>
+                                            <h2 class="heading">Danh sách lớp học </h2>
+                                            <h3 class="sub-heading">Danh sách lớp học tìm thấy theo từ khóa  </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -75,31 +75,48 @@
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </th>
-                                                <th>Mã ca học</th>
-                                                <th>Tên ca học</th>
-                                                <th>Từ giờ</th>
-                                                <th>Đến giờ</th>
-                                                <th>Loại ca học</th>
-
+                                                <th>Mã lớp học </th>
+                                                <th>Tên lớp học </th>
+                                                <th>Loại lớp học </th>
+                                                <th>Số hv đang học</th>
+                                                <th>Sức chứa (người) </th>
+                                                <th>Bắt đầu </th>
+                                                <th>Kết thúc </th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="caHoc,i : ${bean.data}">
+                                            <tr>
                                                 <td>
                                                     <div class="checkbox checkbox-success">
                                                         <input id="checkbox1" type="checkbox" class="flat check-all">
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="@{/portal/cahoc/edit/{id}(id=${caHoc.caHocId})}"
-                                                       th:title="${caHoc.caHocCode}"
-                                                       th:text="${caHoc.caHocCode}">HV0001</a></td>
-                                                <td th:text="${caHoc.caHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${caHoc.tuGio}">Ẩm thực châu Á</td>
-                                                <td th:text="${caHoc.denGio}">Ẩm thực châu Á</td>
-                                                <td th:text="${caHoc.loaiCa}">Ẩm thực châu Á</td>
+                                                <td><a href="shp-new-lophoc.html">Ma-007</a></td>
+                                                <td> Lớp học lý thuyết  </td>
+                                                <td> Phòng lý thuyết  </td>
+                                                <td> 35  </td>
+                                                <td> 45  </td>
+                                                <td> 01/09/2017 </td>
+                                                <td> 01/11/2017  </td>
 
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox checkbox-success">
+                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
+                                                        <label for="checkbox1"></label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="shp-new-lophoc.html">ESI-007</a></td>
+                                                <td> Lớp học thực hành </td>
+                                                <td> Phòng thực hành </td>
+                                                <td> 20 </td>
+                                                <td> 45  </td>
+                                                <td> 01/09/2017 </td>
+                                                <td> 01/11/2017  </td>
                                             </tr>
                                             </tbody>
                                         </table>
