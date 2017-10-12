@@ -1,12 +1,15 @@
 package vn.shp.app.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
+import ecm.service.EcmPropertyMapper;
+import ecm.service.EcmService;
+import ecm.service.impl.AlfrescoCmisServiceImpl;
+import ecm.service.impl.AlfrescoPropertyServiceImpl;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.web.context.WebApplicationContext;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -29,5 +32,20 @@ public class ApplicationConfig {
 	@Bean(name = "sessionFactory")
 	public HibernateJpaSessionFactoryBean sessionFactory() {
 		return new HibernateJpaSessionFactoryBean();
+	}
+
+	@Bean
+	@Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+	public EcmService ecmServie(@Value("${alfresco.username}") String username,
+								@Value("${alfresco.password}") String password,
+								@Value("${alfresco.atomUrl}") String atomUrl,
+								@Value("${alfresco.repositoryId}") String repositoryId) {
+		return new AlfrescoCmisServiceImpl(username, password, atomUrl, repositoryId);
+	}
+
+	@Bean
+	@Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+	public EcmPropertyMapper ecmPropertyMapper() {
+		return new AlfrescoPropertyServiceImpl();
 	}
 }

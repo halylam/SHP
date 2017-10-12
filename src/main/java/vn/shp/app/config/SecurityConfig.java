@@ -1,6 +1,7 @@
 package vn.shp.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 	@Autowired
 	PortalUserService portalUserService;
 
+	@Autowired
+	@Qualifier(value = "userProfile")
+	UserProfile userProfile;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 //				}
 //			}
 //		}
+
+
 		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		return new UsernamePasswordAuthenticationToken("nguyenha", "password1", authoritiesRs);
 //		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);

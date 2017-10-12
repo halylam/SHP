@@ -7,6 +7,8 @@ import vn.shp.portal.entity.AlfFile;
 import vn.shp.portal.repository.AlfFileRepository;
 import vn.shp.portal.service.AlfFileService;
 
+import java.util.List;
+
 @Service("vccbFileServiceImpl")
 @Transactional
 public class AlfFileServiceImpl implements AlfFileService {
@@ -17,5 +19,15 @@ public class AlfFileServiceImpl implements AlfFileService {
     @Override
     public AlfFile save(AlfFile entity) {
         return alfFileRepository.save(entity);
+    }
+
+    @Override
+    public List<AlfFile> findBySourceAndSourceId(String source, Long sourceId){
+        return alfFileRepository.findBySourceAndSourceId(source,sourceId);
+    }
+
+    @Override
+    public AlfFile findByUuid(String uuid){
+        return alfFileRepository.findByUuid(uuid);
     }
 }
