@@ -219,12 +219,12 @@
                                                 <td id="tdFileType">
                                                     <select id="selFileType" style="width: 100%;">
                                                         <option value=""></option>
-                                                        <option value="HINH">Hình</option>
-                                                        <option value="CMND">CMND</option>
-                                                        <option value="BANGCAP">Bằng Cấp</option>
-                                                        <option value="HOKHAU">Hộ Khẩu</option>
-                                                        <option value="HOCBA">Học Bạ</option>
-                                                        <option value="GKSK">Giấy KSK</option>
+                                                        <option value="HI">Hình</option>
+                                                        <option value="CM">CMND</option>
+                                                        <option value="BC">Bằng Cấp</option>
+                                                        <option value="HK">Hộ Khẩu</option>
+                                                        <option value="HB">Học Bạ</option>
+                                                        <option value="SK">Giấy KSK</option>
 
                                                     </select>
                                                 </td>
@@ -267,9 +267,9 @@
     <span style="color: red; font-size: 9pt; font-weight: 600; font-family: verdana;">TIP: Để hỗ trợ hệ thống nhận dạng loại hồ sơ nhanh hơn. Bạn có thể đặt tên file theo gợi ý:</span>
     <br>
     <lu>
-        <li>CMND.[Tên file] đối với hồ sơ là CMND.</li>
-        <li>HINH.[Tên file] đối với hồ sơ là hình.</li>
-        <li>Tương tự là BANGCAP, HOKHAU, HOCBA, GKSK</li>
+        <li>CM.[Tên file] đối với hồ sơ là CMND.</li>
+        <li>HI.[Tên file] đối với hồ sơ là hình.</li>
+        <li>Tương tự là BC, HK, HB, SK</li>
         <li style="color: red;">Không sử dụng các ký tự /\:*?"<>|</li>
     </lu>
 
@@ -388,7 +388,7 @@
                 if (res.length >= 2) {
                     var prefix = res[0].toUpperCase();
                     var selFileType = newRow.find('#selFileType');
-                    if (prefix == 'HINH' || prefix == 'CMND' || prefix == 'BANGCAP' || prefix == 'HOKHAU' || prefix == 'HOCBA' || prefix == 'GKSK') {
+                    if (prefix == 'HI' || prefix == 'CM' || prefix == 'BC' || prefix == 'HK' || prefix == 'HB' || prefix == 'SK') {
                         selFileType.val(prefix);
                     }
                 }
