@@ -184,71 +184,61 @@
                                 <div class="item form-group col-xs-12">
                                     <h5> Hồ sơ cá nhân </h5>
                                 </div>
-
                                 <div class="item form-group col-xs-12">
-                                    <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox11" type="checkbox">
-                                        <label for="checkbox11">
-                                            Hình
-                                        </label>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 lable-form"> File</label>
+                                        <div class="col-sm-8">
+                                            <input type="file" name="txtFile" id="txtFile"
+                                                   class="form-control col-sm-10" data-html="true"
+                                                   required multiple>
+                                        </div>
                                     </div>
-                                    <!-- /Input check -->
-
-                                    <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox22" type="checkbox">
-                                        <label for="checkbox22">
-                                            Bản sao CMT
-                                        </label>
-                                    </div>
-                                    <!-- /Input check -->
-                                    <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox22" type="checkbox">
-                                        <label for="checkbox22">
-                                            Bằng cấp
-                                        </label>
-                                    </div>
-                                    <!-- /Input check -->
-                                    <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox22" type="checkbox">
-                                        <label for="checkbox22">
-                                            Hộ khẩu
-                                        </label>
-                                    </div>
-                                    <!-- /Input check -->
-                                    <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox22" type="checkbox">
-                                        <label for="checkbox22">
-                                            Học bạ
-                                        </label>
-                                    </div>
-                                    <!-- /Input check --> <!-- Input check -->
-                                    <div class="checkbox checkbox-inline checkbox-success">
-                                        <input id="checkbox22" type="checkbox">
-                                        <label for="checkbox22">
-                                            Giấy khám sức khỏe
-                                        </label>
-                                    </div>
-                                    <!-- /Input check -->
-
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12">Bao gồm <span
-                                            class="required">*</span>
-                                    </label>
-
-
                                 </div>
-
-
                                 <div class="item form-group col-xs-12">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12"> Đính kèm
-                                        file </label>
-                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+                                    <div class="col-md-10 col-sm-10 col-xs-12">
+                                        <table id="tbTableFile" cellspacing="0" width="100%"
+                                               class="table table-striped" style="color: black;">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 40px" class="text-center vhide">#</th>
+                                                <th class="vhide">Tên File</th>
+                                                <th>Loại Hồ Sơ</th>
+                                                <th>Ngày</th>
+                                                <th class="vhide">Ghi Chú</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        <input type="file" id="exampleInputFile">
+                                            </tbody>
+                                            <tfoot style="display: none;">
+                                            <tr>
+                                                <td class="text-center" id="tdIndex">#</td>
+                                                <td id="tdFileName">...</td>
+                                                <td id="tdFileType">
+                                                    <select id="selFileType" style="width: 100%;">
+                                                        <option value=""></option>
+                                                        <option value="HINH">Hình</option>
+                                                        <option value="CMND">CMND</option>
+                                                        <option value="BANGCAP">Bằng Cấp</option>
+                                                        <option value="HOKHAU">Hộ Khẩu</option>
+                                                        <option value="HOCBA">Học Bạ</option>
+                                                        <option value="GKSK">Giấy KSK</option>
+
+                                                    </select>
+                                                </td>
+                                                <td id="tdUploadDate" class="hightlight">...</td>
+                                                <td id="tdNote" class="text-center">
+                                                    <input class="form-control col-md-7 col-xs-12" type="text"
+                                                           style="width: 100%;">
+                                                </td>
+                                                <td></td>
+                                            </tr>
+
+                                            </tfoot>
+
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -272,6 +262,17 @@
         <footer th:replace="portal/fragments/footer :: footer">
         </footer>
     </div>
+</div>
+<div id="divHidPopupDel" style="display: none;">
+    <span style="color: red; font-size: 9pt; font-weight: 600; font-family: verdana;">TIP: Để hỗ trợ hệ thống nhận dạng loại hồ sơ nhanh hơn. Bạn có thể đặt tên file theo gợi ý:</span>
+    <br>
+    <lu>
+        <li>CMND.[Tên file] đối với hồ sơ là CMND.</li>
+        <li>HINH.[Tên file] đối với hồ sơ là hình.</li>
+        <li>Tương tự là BANGCAP, HOKHAU, HOCBA, GKSK</li>
+        <li style="color: red;">Không sử dụng các ký tự /\:*?"<>|</li>
+    </lu>
+
 </div>
 <script>
     $('#txtKnlvTuNgay').datepicker({
@@ -342,15 +343,15 @@
             url: BASE_URL + 'portal/hocvien/ajax_new_knlv',
 
             success: function (data) {
-                    $('#divKnlv').html(data);
+                $('#divKnlv').html(data);
 
             }
         });
     }
 
     function deleteKnlv(id) {
-        bootbox.confirm("Bạn có muốn xoá kinh nghiệm làm việc này không?", function(result){
-            if(result){
+        bootbox.confirm("Bạn có muốn xoá kinh nghiệm làm việc này không?", function (result) {
+            if (result) {
                 $.ajax({
                     type: "GET",
                     url: BASE_URL + 'portal/hocvien/ajax_delete_knlv',
@@ -364,7 +365,56 @@
     }
 
 </script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
 
+        var htmlDel = $('#divHidPopupDel').html();
+        $('#txtFile').popover({placement: "top", content: htmlDel, trigger: "hover"});
+
+
+        $('#txtFile').change(function (e) {
+            $("#tbTableFile tbody").empty();
+            var index = 1;
+            var files = e.target.files;
+            var cloneRow = $('#tbTableFile tfoot tr:first');
+            $.map(files, function (val) {
+                var fileName = val.name;
+                var newRow = cloneRow.clone(true);
+                var tdIndex = newRow.find('#tdIndex');
+                tdIndex.html(index);
+
+                var res = fileName.split(".");
+                if (res.length >= 2) {
+                    var prefix = res[0].toUpperCase();
+                    var selFileType = newRow.find('#selFileType');
+                    if (prefix == 'HINH' || prefix == 'CMND' || prefix == 'BANGCAP' || prefix == 'HOKHAU' || prefix == 'HOCBA' || prefix == 'GKSK') {
+                        selFileType.val(prefix);
+                    }
+                }
+                var tdFileName = newRow.find('#tdFileName');
+                tdFileName.html(fileName);
+
+                var d = new Date();
+
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+
+                var output = (day < 10 ? '0' : '') + day + '/' +
+                    (month < 10 ? '0' : '') + month + '/' +
+                    d.getFullYear();
+                var tdUploadDate = newRow.find('#tdUploadDate');
+                tdUploadDate.html(output);
+
+                $('#tbTableFile tbody').append(newRow);
+                index = index + 1;
+            });
+
+
+        });
+    });
+    /*]]>*/
+</script>
 
 <!-- .Popup detail view Task list -->
 <!--<div class="control-sidebar-bg"></div>-->

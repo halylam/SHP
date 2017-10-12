@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import vn.shp.app.bean.HocVienBean;
 import vn.shp.app.config.Constants;
 import vn.shp.app.config.SystemConfig;
-import vn.shp.app.entity.HocVi;
 import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.KinhNghiemLamViec;
 import vn.shp.app.entity.Location;
@@ -21,11 +21,9 @@ import vn.shp.app.utils.Utils;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
-import vn.shp.portal.entity.JsonReturn;
 import vn.shp.portal.service.HocVienService;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -162,6 +160,12 @@ public class HocVienController {
         return "redirect:/portal/hocvien/list";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CIC_UPLOAD')")
+    @RequestMapping(value = "upload", method = POST)
+    public String postUploadList(Model model, Locale locale, @RequestParam List<MultipartFile> txtFile) {
+
+        return "document/cic/upload";
+    }
 
     //------AJAX-----
     @RequestMapping(value = "/ajax_loadLocationDet", method = RequestMethod.GET)
