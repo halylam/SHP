@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="portal/fragments/head :: head">
 </head>
@@ -21,9 +21,6 @@
                     <div class="btn-group">
                         <a th:href="@{/portal/bomon/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-                        <a th:href="@{/portal/bomon/edit}">
-                            <button type="button" class="btn btn-default">Edit</button>
                         </a>
                         <a th:href="@{/portal/bomon/import}">
                             <button type="button" class="btn btn-default">Import</button>
@@ -77,6 +74,7 @@
                                             </th>
                                             <th>Mã bộ môn</th>
                                             <th>Tên bộ môn</th>
+                                            <th>Thao Tác</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -90,6 +88,22 @@
                                             <td><a href="@{/portal/bomon/edit/{id}(id=${boMon.boMonId})}" th:title="${boMon.boMonCode}"
                                                    th:text="${boMon.boMonCode}">HV0001</a></td>
                                             <td th:text="${boMon.boMonName}">Ẩm thực châu Á</td>
+                                            <td>
+                                                <a th:href="@{/portal/bomon/edit/{id}(id=${boMon.boMonId})}">
+                                                    <button class="btn btn-default btn-sm" type="button"
+                                                        sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_EDIT')">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                </a>
+                                                <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+                                                    th:href="@{/portal/bomon/delete/{id}(id=${boMon.boMonId})}">
+                                                    <button class="btn btn-default btn-sm" type="button"
+                                                        th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                        sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_DELETE')">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
