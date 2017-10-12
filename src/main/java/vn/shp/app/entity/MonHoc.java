@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -37,11 +38,11 @@ public class MonHoc implements Serializable {
 	@Column(name = "mamon")
 	private String monHocCode;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "tonggioday")
 	private int tongGioDay;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "heso")
 	private int heSo;
 
