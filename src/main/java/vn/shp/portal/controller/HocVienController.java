@@ -26,6 +26,7 @@ import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.entity.AlfFile;
+import vn.shp.portal.entity.JsonReturn;
 import vn.shp.portal.service.AlfFileService;
 import vn.shp.portal.service.HocVienService;
 
@@ -259,6 +260,16 @@ public class HocVienController {
             }
             return results;
         }
+
+        return null;
+    }
+
+    @RequestMapping(value = "/ajax_loadLocationDet", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonReturn deleteAlfFile(@RequestParam(value = "id") Long id, @RequestParam(value = "code") String code) {
+        JsonReturn json = new JsonReturn();
+        json.setStatus(Constants.SUCCESS);
+
 
         return null;
     }
