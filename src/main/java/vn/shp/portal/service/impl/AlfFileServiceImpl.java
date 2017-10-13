@@ -30,4 +30,14 @@ public class AlfFileServiceImpl implements AlfFileService {
     public AlfFile findByUuid(String uuid){
         return alfFileRepository.findByUuid(uuid);
     }
+
+    @Override
+    public void deleteById(Long id){
+         alfFileRepository.deleteById(id);
+    }
+
+    @Override
+    public AlfFile findOne(Long id){
+        return alfFileRepository.findOne(id);
+    }
 }

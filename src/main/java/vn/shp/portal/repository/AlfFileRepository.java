@@ -11,4 +11,6 @@ public interface AlfFileRepository extends JpaRepository<AlfFile, Long> {
     public AlfFile findByUuid(String uuid);
 
     public List<AlfFile> findBySourceAndSourceId(String source, Long sourceId);
+
+    public void deleteById(Long id);
 }

@@ -12,4 +12,8 @@ public interface AlfFileService {
     List<AlfFile> findBySourceAndSourceId(String source, Long sourceId);
 
     AlfFile findByUuid(String uuid);
+
+    void deleteById(Long id);
+
+    AlfFile findOne(Long id);
 }

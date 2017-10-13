@@ -169,6 +169,21 @@ public class HocVienController {
         return new ModelAndView("/portal/hocvien/hocvien_knlv :: content");
     }
 
+    @RequestMapping(value = "/ajax_delete_file", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonReturn deleteFile(@RequestParam(value = "id") Long id) {
+        JsonReturn jsonReturn = new JsonReturn();
+        jsonReturn.setStatus(Constants.FAIL);
+        alfFileService.deleteById(id);
+        AlfFile file = alfFileService.findOne(id);
+        if(file == null){
+            jsonReturn.setStatus(Constants.SUCCESS);
+            jsonReturn.setResult(id);
+        }
+        return jsonReturn;
+    }
+
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = GET)
     public String getEdit() {
@@ -260,16 +275,6 @@ public class HocVienController {
             }
             return results;
         }
-
-        return null;
-    }
-
-    @RequestMapping(value = "/ajax_loadLocationDet", method = RequestMethod.GET)
-    public @ResponseBody
-    JsonReturn deleteAlfFile(@RequestParam(value = "id") Long id, @RequestParam(value = "code") String code) {
-        JsonReturn json = new JsonReturn();
-        json.setStatus(Constants.SUCCESS);
-
 
         return null;
     }

@@ -175,7 +175,10 @@
                                     <h5> Kinh nghiệm làm việc </h5>
                                 </div>
                                 <div class="item form-group col-xs-12" id="divKnlv">
+
                                     <th:block th:replace="/portal/hocvien/hocvien_knlv :: content">
+
+
                                     </th:block>
                                 </div>
                                 <div class="item form-group col-xs-12">
@@ -195,7 +198,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
                                         <div class="col-md-10 col-sm-10 col-xs-12">
@@ -212,7 +214,8 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="item,i : ${bean.lstAlfFiles}" th:id="'trFile' + ${item.id}">
+                                                <tr th:each="item,i : ${bean.lstAlfFiles}"
+                                                    th:id="'trFile' + ${item.id}">
                                                     <td class="text-center">
                                                         <span th:text="${i.count}"></span>
 
@@ -247,10 +250,13 @@
                                                                 style="color: white;"
                                                                 class="glyphicon glyphicon-paperclip"
                                                                 title="Xem nội dung."></i></a>
+
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                                 <tfoot style="display: none;">
+
+
                                                 <tr>
                                                     <td class="text-center">
                                                         <span id="tdIndex"></span>
@@ -296,7 +302,6 @@
 
                                             </table>
                                         </div>
-
                                     </div>
                                     <div class="item form-group col-xs-12">
                                         <input type="submit" class="btn btn-primary" value="Upload File">
@@ -468,6 +473,7 @@
                 var res = fileName.split(".");
                 if (res.length >= 2) {
                     var prefix = res[0].toUpperCase();
+
                     if (prefix == 'HI' || prefix == 'CM' || prefix == 'BC' || prefix == 'HK' || prefix == 'HB' || prefix == 'SK') {
                         selFileType.val(prefix);
                     }
