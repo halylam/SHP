@@ -108,6 +108,7 @@
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:dao:1.2.0" />
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:search:1.2.0" />
           <element id="library" level="project" name="Maven: com.googlecode.genericdao:search-hibernate:1.2.0" />
+          <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.14" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi:3.14" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
@@ -115,6 +116,30 @@
           <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" />
           <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
           <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.03" />
+          <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-client-impl:1.0.0" />
+          <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-client-api:1.0.0" />
+          <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-commons-api:1.0.0" />
+          <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-commons-impl:1.0.0" />
+          <element id="library" level="project" name="Maven: org.codehaus.woodstox:woodstox-core-asl:4.4.1" />
+          <element id="library" level="project" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" />
+          <element id="library" level="project" name="Maven: org.apache.chemistry.opencmis:chemistry-opencmis-client-bindings:1.0.0" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxws:3.0.10" />
+          <element id="library" level="project" name="Maven: xml-resolver:xml-resolver:1.2" />
+          <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-core:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.ws.xmlschema:xmlschema-core:2.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-bindings-soap:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-wsdl:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-databinding-jaxb:3.0.10" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.11" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-core:2.2.11" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-bindings-xml:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-frontend-simple:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-ws-addr:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-transports-http:3.0.10" />
+          <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-ws-policy:3.0.10" />
+          <element id="library" level="project" name="Maven: wsdl4j:wsdl4j:1.6.3" />
+          <element id="library" level="project" name="Maven: org.apache.neethi:neethi:3.0.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
