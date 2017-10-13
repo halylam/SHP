@@ -23,10 +23,11 @@ public class AlfrescoPropertyServiceImpl implements EcmPropertyMapper {
 	}
 
 	@Override
-	public Map<String, Object> mapProperties(MultipartFile file) {
+	public Map<String, Object> mapProperties(MultipartFile file, String desc) {
 		Map<String, Object> result = new HashMap<>();
 		result.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
 		result.put(PropertyIds.NAME, file.getOriginalFilename());
+		result.put(PropertyIds.DESCRIPTION, desc);
 		return result;
 	}
 	

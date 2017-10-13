@@ -13,28 +13,26 @@ import java.util.List;
 @Data
 public class UserProfile {
 
-	private PortalUser user;
-	private String defaultLang;
-	private List<Long> authorizedDepartment;
+    private PortalUser user;
+    private String defaultLang;
+    private List<Long> authorizedDepartment;
 
-	public String getDefaultLang() {
-		return defaultLang;
-	}
+    public String getDefaultLang() {
+        return defaultLang;
+    }
 
-	public void setDefaultLang(String defaultLang) {
-		this.defaultLang = defaultLang;
-	}
+    public void setDefaultLang(String defaultLang) {
+        this.defaultLang = defaultLang;
+    }
 
 
+    public List<Long> getAuthorizedDepartment() {
+        return authorizedDepartment;
+    }
 
-	public List<Long> getAuthorizedDepartment() {
-		return authorizedDepartment;
-	}
-
-	public void setAuthorizedDepartment(List<Long> authorizedDepartment) {
-		this.authorizedDepartment = authorizedDepartment;
-	}
-
+    public void setAuthorizedDepartment(List<Long> authorizedDepartment) {
+        this.authorizedDepartment = authorizedDepartment;
+    }
 
 
 }

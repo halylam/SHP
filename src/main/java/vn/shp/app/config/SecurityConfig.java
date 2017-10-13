@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 
 
 		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		return new UsernamePasswordAuthenticationToken("nguyenha", "password1", authoritiesRs);
+		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
 //		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
 	}
 

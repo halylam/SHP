@@ -9,7 +9,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
@@ -204,8 +203,8 @@ public class HocVienController {
             String newName = type + "." + bean.getEntity().getMaHocVien() + "." + sdf.format(timeProcess);
 
             try {
-                if (Utils.isNullOrEmpty(type)) {
-                    Map<String, Object> properties = propertyMapper.mapProperties(file);
+                if (Utils.isNotNullOrEmpty(type)) {
+                    Map<String, Object> properties = propertyMapper.mapProperties(file, type);
                     Document aDoc = ecmService.upload(file, toDirectory, properties);
                     if (aDoc != null) {
                         AlfFile vFile = new AlfFile(originalFilename, type, aDoc.getId(), newName, Constants.HOC_VIEN, bean.getEntity().getId());
