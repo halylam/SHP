@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="portal/fragments/head :: head">
 </head>
@@ -21,9 +21,6 @@
                     <div class="btn-group">
                         <a th:href="@{/portal/cahoc/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-                        <a th:href="@{/portal/cahoc/edit}">
-                            <button type="button" class="btn btn-default">Edit</button>
                         </a>
                         <a th:href="@{/portal/cahoc/import}">
                             <button type="button" class="btn btn-default">Import</button>
@@ -80,7 +77,7 @@
                                                 <th>Từ giờ</th>
                                                 <th>Đến giờ</th>
                                                 <th>Loại ca học</th>
-
+                                                <th>Thao Tác</th>
 
                                             </tr>
                                             </thead>
@@ -96,10 +93,25 @@
                                                        th:title="${caHoc.caHocCode}"
                                                        th:text="${caHoc.caHocCode}">HV0001</a></td>
                                                 <td th:text="${caHoc.caHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${caHoc.tuGio}">Ẩm thực châu Á</td>
-                                                <td th:text="${caHoc.denGio}">Ẩm thực châu Á</td>
+                                                <td th:text="${#dates.format(caHoc.tuGio, 'hh:mm a')}"></td>
+                                                <td th:text="${#dates.format(caHoc.denGio, 'hh:mm a')}"></td>
                                                 <td th:text="${caHoc.loaiCa}">Ẩm thực châu Á</td>
-
+                                                <td>
+                                                    <a th:href="@{/portal/cahoc/edit/{id}(id=${caHoc.caHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EDIT')">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+                                                        th:href="@{/portal/cahoc/delete/{id}(id=${caHoc.caHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_DELETE')">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

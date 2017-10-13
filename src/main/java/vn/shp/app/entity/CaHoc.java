@@ -1,7 +1,7 @@
 package vn.shp.app.entity;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "cahoc", uniqueConstraints=@UniqueConstraint(columnNames="macahoc"))
@@ -36,13 +38,15 @@ public class CaHoc implements Serializable {
 	@Column(name = "macahoc")
 	private String caHocCode;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "tugio")
-	private Time tuGio;
+	@DateTimeFormat(pattern="hh:mm a")
+	private Date tuGio;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "dengio")
-	private Time denGio;
+	@DateTimeFormat(pattern="hh:mm a")
+	private Date denGio;
 
 	@NotEmpty
 	@Column(name = "loaica")

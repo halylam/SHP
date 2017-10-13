@@ -72,8 +72,14 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="box-footer">
+
+                                    <div class="section-footer">
                                         <button class="btn btn-primary" th:text="#{edit.button}" id="btn-submit"></button>
+                                        <div class="btn-group">
+                                            <a th:href="@{/portal/chuongtrinhdaotao/list}">
+                                                <button type="button" class="btn btn-default">Đóng</button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </form>
                                 <!-- End Content here -->
@@ -81,13 +87,7 @@
                         </section> <!-- End section table -->
                         <!-- End Content here -->
                     </div>
-                    <div class="section-footer">
-                        <div class="btn-group">
-                            <a th:href="@{/portal/chuongtrinhdaotao/list}">
-                                <button type="button" class="btn btn-default">Đóng</button>
-                            </a>
-                        </div>
-                    </div>
+
                 </section> <!-- End section -->
             </div>
         </div>

@@ -16,4 +16,6 @@ public class HocVienBean extends AbstractBean<HocVien> {
 
     private List<AlfFile> lstAlfFiles;
 
+
+
 }

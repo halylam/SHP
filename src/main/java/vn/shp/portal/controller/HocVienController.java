@@ -1,10 +1,15 @@
 package vn.shp.portal.controller;
 
+import ecm.service.EcmPropertyMapper;
+import ecm.service.EcmService;
+import org.apache.chemistry.opencmis.client.api.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,6 +26,8 @@ import vn.shp.app.utils.Utils;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
+import vn.shp.portal.entity.AlfFile;
+import vn.shp.portal.service.AlfFileService;
 import vn.shp.portal.service.HocVienService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +41,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("portal/hocvien")
 public class HocVienController {
 
+    @Value("${dm.toDirectory.hososv}")
+    private String toDirectory;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Autowired
@@ -44,6 +54,15 @@ public class HocVienController {
 
     @Autowired
     SystemConfig systemConfig;
+
+    @Autowired
+    private EcmService ecmService;
+
+    @Autowired
+    AlfFileService alfFileService;
+
+    @Autowired
+    private EcmPropertyMapper propertyMapper;
 
     @InitBinder
     public void initBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
@@ -57,7 +76,7 @@ public class HocVienController {
         HocVienBean bean = new HocVienBean();
         List<HocVien> lstData = hocVienService.findAll();
         bean.setLstData(lstData);
-        model.addAttribute("bean",bean);
+        model.addAttribute("bean", bean);
         return "portal/hocvien/hocvien_list";
     }
 
@@ -102,16 +121,18 @@ public class HocVienController {
     @RequestMapping(value = "/info/{id}", method = GET)
     public String getAddInfo(Model model, HocVienBean bean, @PathVariable(value = "id") Long id) {
         HocVien entity = hocVienService.findOne(id);
-        if(entity != null){
+        if (entity != null) {
             KinhNghiemLamViec knlvNew = new KinhNghiemLamViec();
             knlvNew.setMaLienKet(entity.getId());
             bean.setKnlv(knlvNew);
             bean.setEntity(entity);
-            List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(id,Constants.HOC_VIEN);
+            List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(id, Constants.HOC_VIEN);
             bean.setLstKnlv(lstKnlv);
+            List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.HOC_VIEN, entity.getId());
+            bean.setLstAlfFiles(lstFile);
             model.addAttribute("bean", bean);
-        }else{
-            MessageList messageList = new MessageList(Message.ERROR,"Không tìm thấy thông tin học viên.");
+        } else {
+            MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin học viên.");
         }
         return "portal/hocvien/hocvien_create_step2";
     }
@@ -121,11 +142,11 @@ public class HocVienController {
     public ModelAndView getCustDetail(Model model, @ModelAttribute(value = "bean") HocVienBean bean, Locale locale) {
 
         KinhNghiemLamViec entity = bean.getKnlv();
-        if(entity.getMaLienKet() != null){
+        if (entity.getMaLienKet() != null) {
             entity.setLoaiLienKet(Constants.HOC_VIEN);
             hocVienService.save(entity);
         }
-        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(entity.getMaLienKet(),Constants.HOC_VIEN);
+        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(entity.getMaLienKet(), Constants.HOC_VIEN);
         bean.setLstKnlv(lstKnlv);
         bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
         model.addAttribute("bean", bean);
@@ -140,7 +161,7 @@ public class HocVienController {
         KinhNghiemLamViec entity = hocVienService.findOneKnlv(id);
         Long maLienKet = entity.getMaLienKet();
         hocVienService.deleteKnlvById(id);
-        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(maLienKet,Constants.HOC_VIEN);
+        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(maLienKet, Constants.HOC_VIEN);
         bean.setLstKnlv(lstKnlv);
         bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
         model.addAttribute("bean", bean);
@@ -160,11 +181,67 @@ public class HocVienController {
         return "redirect:/portal/hocvien/list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CIC_UPLOAD')")
-    @RequestMapping(value = "upload", method = POST)
-    public String postUploadList(Model model, Locale locale, @RequestParam List<MultipartFile> txtFile) {
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_UPLOAD')")
+    @RequestMapping(value = "/upload", method = POST)
+    public String postUploadList(Model model, Locale locale, @ModelAttribute(value = "bean") HocVienBean bean, @RequestParam List<MultipartFile> txtFile) {
+        List<AlfFile> lstDocResult = bean.getLstAlfFiles();
 
-        return "document/cic/upload";
+        Date timeProcess = new Date();
+        for (MultipartFile file : txtFile) {
+            String type = "";
+            String note = "";
+            String originalFilename = file.getOriginalFilename();
+            for (AlfFile alfFile : lstDocResult) {
+                if (alfFile != null && alfFile.getFileName() != null) {
+                    if (originalFilename.equals(alfFile.getFileName())) {
+                        type = alfFile.getType();
+                        note = alfFile.getNote();
+                        break;
+                    }
+                }
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+            String newName = type + "." + bean.getEntity().getMaHocVien() + "." + sdf.format(timeProcess);
+
+            try {
+                if (Utils.isNullOrEmpty(type)) {
+                    Map<String, Object> properties = propertyMapper.mapProperties(file);
+                    Document aDoc = ecmService.upload(file, toDirectory, properties);
+                    if (aDoc != null) {
+                        AlfFile vFile = new AlfFile(originalFilename, type, aDoc.getId(), newName, Constants.HOC_VIEN, bean.getEntity().getId());
+                        vFile.setNote(note);
+                        vFile.setDateUpload(new Date());
+                        alfFileService.save(vFile);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                String msgInfo = messageSource.getMessage("message.error.filename", null, locale);
+                MessageList messageList = new MessageList(Message.ERROR, msgInfo);
+                model.addAttribute(CoreConstant.MSG_LST, messageList);
+            }
+
+        }
+        HocVien entity = hocVienService.findOne(bean.getEntity().getId());
+        if (entity != null) {
+            KinhNghiemLamViec knlvNew = new KinhNghiemLamViec();
+            knlvNew.setMaLienKet(entity.getId());
+            bean.setKnlv(knlvNew);
+            bean.setEntity(entity);
+            List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(bean.getEntity().getId(), Constants.HOC_VIEN);
+            bean.setLstKnlv(lstKnlv);
+
+            List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.HOC_VIEN, entity.getId());
+            bean.setLstAlfFiles(lstFile);
+            model.addAttribute("bean", bean);
+
+
+        } else {
+            MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin học viên.");
+            model.addAttribute(CoreConstant.MSG_LST, messageList);
+        }
+
+        return "portal/hocvien/hocvien_create_step2";
     }
 
     //------AJAX-----

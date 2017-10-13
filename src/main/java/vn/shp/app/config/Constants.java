@@ -39,4 +39,12 @@ public class Constants {
 
     public static final String HOC_VIEN = "HOC_VIEN";
     public static final String GIANG_VIEN = "GIANG_VIEN";
+
+    public static final String HOSO_CMND = "CM";
+    public static final String HOSO_BANGCAP = "BC";
+    public static final String HOSO_HINH = "HI";
+    public static final String HOSO_HOCBA = "HB";
+    public static final String HOSO_GKSK = "SK";
+    public static final String HOSO_HOKHAU = "HK";
+
 }
