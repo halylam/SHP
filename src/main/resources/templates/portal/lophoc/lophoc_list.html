@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="portal/fragments/head :: head">
 </head>
@@ -22,9 +22,6 @@
                         <a th:href="@{/portal/lophoc/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
                         </a>
-                        <a th:href="@{/portal/lophoc/edit}">
-                            <button type="button" class="btn btn-default">Edit</button>
-                        </a>
                         <a th:href="@{/portal/lophoc/import}">
                             <button type="button" class="btn btn-default">Import</button>
                         </a>
@@ -39,7 +36,7 @@
 
                 <section class="section bgTrans">
                     <div class="section-content">
-                        <form th:object="${bean}" method="post" th:action="@{/portal/hoc/list}">
+                        <form th:object="${bean}" method="post" th:action="@{/portal/lophoc/list}">
                             <!-- Content here -->
                             <div class="row">
                                 <div class="col-sm-12">
@@ -80,45 +77,46 @@
                                                 <th>Loại lớp học </th>
                                                 <th>Số hv đang học</th>
                                                 <th>Sức chứa (người) </th>
+                                                <th>Khóa học </th>
                                                 <th>Bắt đầu </th>
                                                 <th>Kết thúc </th>
-
+                                                <th>Thao tác </th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
+                                            <tr th:each="lopHoc,i : ${bean.data}">
                                                 <td>
                                                     <div class="checkbox checkbox-success">
                                                         <input id="checkbox1" type="checkbox" class="flat check-all">
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="shp-new-lophoc.html">Ma-007</a></td>
-                                                <td> Lớp học lý thuyết  </td>
-                                                <td> Phòng lý thuyết  </td>
-                                                <td> 35  </td>
-                                                <td> 45  </td>
-                                                <td> 01/09/2017 </td>
-                                                <td> 01/11/2017  </td>
-
-                                            </tr>
-
-                                            <tr>
+                                                <td><a href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}" th:title="${lopHoc.lopHocCode}"
+                                                    th:text="${lopHoc.lopHocCode}">HV0001</a></td>
+                                                <td th:text="${lopHoc.lopHocName}">Ẩm thực châu Á</td>
+                                                <td th:text="${lopHoc.loaiLopHoc.loaiLopHocName}">Ẩm thực châu Á</td>
+                                                <td th:text="${lopHoc.soLuongHV}">Ẩm thực châu Á</td>
+                                                <td th:text="${lopHoc.sucChua}">Ẩm thực châu Á</td>
+                                                <td th:text="${lopHoc.khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
+                                                <td th:text="${#dates.format(lopHoc.khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
+                                                <td th:text="${#dates.format(lopHoc.khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
                                                 <td>
-                                                    <div class="checkbox checkbox-success">
-                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
+                                                    <a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+                                                        th:href="@{/portal/lophoc/delete/{id}(id=${lopHoc.lopHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_DELETE')">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </button>
+                                                    </a>
                                                 </td>
-                                                <td><a href="shp-new-lophoc.html">ESI-007</a></td>
-                                                <td> Lớp học thực hành </td>
-                                                <td> Phòng thực hành </td>
-                                                <td> 20 </td>
-                                                <td> 45  </td>
-                                                <td> 01/09/2017 </td>
-                                                <td> 01/11/2017  </td>
                                             </tr>
-                                            </tbody>
                                         </table>
                                     </div>
 
@@ -145,7 +143,7 @@
 
                     <div class="section-footer">
                         <div class="btn-group">
-                            <a th:href="@{/portal/cahoc/list}">
+                            <a th:href="@{/portal/lophoc/list}">
                                 <button type="button" class="btn btn-default">Đóng</button>
                             </a>
                         </div>

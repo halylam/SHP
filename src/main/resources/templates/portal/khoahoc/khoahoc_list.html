@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="portal/fragments/head :: head">
 </head>
@@ -21,9 +21,6 @@
                     <div class="btn-group">
                         <a th:href="@{/portal/khoahoc/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-                        <a th:href="@{/portal/khoahoc/edit}">
-                            <button type="button" class="btn btn-default">Edit</button>
                         </a>
                         <a th:href="@{/portal/khoahoc/import}">
                             <button type="button" class="btn btn-default">Import</button>
@@ -82,7 +79,7 @@
                                                 <th>Bậc đào tạo</th>
                                                 <th>Bắt đầu</th>
                                                 <th>Kết thúc</th>
-
+                                                <th>Thao Tác</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -100,8 +97,24 @@
                                                 <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Ẩm thực châu Á</td>
                                                 <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuyenNganhName}">Ẩm thực châu Á</td>
                                                 <td th:text="${khoaHoc.bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
-                                                <td th:text="${khoaHoc.timeFrom}">Ẩm thực châu Á</td>
-                                                <td th:text="${khoaHoc.timeTo}">Ẩm thực châu Á</td>
+                                                <td th:text="${#dates.format(khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
+                                                <td th:text="${#dates.format(khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
+                                                <td>
+                                                    <a th:href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EDIT')">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+                                                        th:href="@{/portal/khoahoc/delete/{id}(id=${khoaHoc.khoaHocId})}">
+                                                        <button class="btn btn-default btn-sm" type="button"
+                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

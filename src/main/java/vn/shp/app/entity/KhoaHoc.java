@@ -13,9 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "khoahoc", uniqueConstraints=@UniqueConstraint(columnNames="makhoahoc"))
@@ -38,13 +40,15 @@ public class KhoaHoc implements Serializable {
 	@Column(name = "makhoahoc")
 	private String khoaHocCode;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "thoigiantu")
-	private Date Timefrom;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date timeFrom;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "thoigianden")
-	private Date TimeTo;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date timeTo;
 
 	@ManyToOne
 	@JoinColumn(name = "id_bacdaotao")
