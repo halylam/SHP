@@ -88,15 +88,15 @@ public class GiangVien implements Serializable {
     @JoinColumn(name = "MA_HOC_VI",referencedColumnName = "ma", updatable = false, insertable = false)
     private HocVi hocVi;
 
-    @Column(name = "MA_CHUYEN_MON")
-    private String maChuyenMon;
+    @Column(name = "MA_CHUYEN_NGANH")
+    private String maChuyenNganh;
 
     @OneToOne
-    @JoinColumn(name = "MA_CHUYEN_MON",referencedColumnName = "ma", updatable = false, insertable = false)
-    private ChuyenMon chuyenMon;
+    @JoinColumn(name = "MA_CHUYEN_NGANH",referencedColumnName = "machuyennganh", updatable = false, insertable = false)
+    private ChuyenNganh chuyenNganh;
 
-    @Column(name = "CHUYEN_MON_KHAC", length = 255)
-    private String huyenMoncKhac;
+    @Column(name = "CHUYEN_MGANH_KHAC", length = 255)
+    private String chuyenNganhKhac;
 
     @Column(name = "NGOAI_NGU_1", length = 255)
     private String ngoaiNgu1;

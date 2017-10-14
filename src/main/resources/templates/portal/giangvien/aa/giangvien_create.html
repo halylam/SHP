@@ -169,7 +169,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Dân tộc<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Dân tộc<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maDanToc}">
@@ -199,7 +199,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Phân hệ<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Phân hệ<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maPhanHe}">
@@ -210,7 +210,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for=""> Học vị <span class="required">*</span>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" > Học vị <span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maHocVi}">
@@ -223,21 +223,26 @@
                                     </div>
 
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chuyên môn  <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chuyên ngành  <span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maChuyenNganh}">
                                                 <option value=""></option>
-                                                <option th:each="item : ${lstChuyenMon}"
-                                                        th:value="${item.chuyenMonCode}"
-                                                        th:text="${item.chuyenMonName}"></option>
+                                                <option th:each="item : ${lstChuyenNganh}"
+                                                        th:value="${item.chuyenNganhCode}"
+                                                        th:text="${item.chuyenNganhName}"></option>
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for=""> Chuyên môn khác<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" > Chuyên ngành khác<span class="required">*</span>
                                         </label>
                                         <div class="col-md-5 col-sm-5 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" list="dtlChuyenNganh" th:field="*{entity.chuyenNganhKhac}"  required type="text">
+                                            <datalist id="dtlChuyenNganh">
+                                                <option th:each="item : ${lstChuyenNganh}"
+                                                        th:value="${item.chuyenNganhName}"
+                                                        th:text="${item.chuyenNganhName}"></option>
+                                            </datalist>
                                         </div>
 
 
@@ -248,13 +253,13 @@
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngoại ngữ 1<span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.ngoaiNgu1}"  required type="text">
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Ngoại ngữ 2 <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Ngoại ngữ 2 <span class="required">*</span>
                                         </label>
                                         <div class="col-md-5 col-sm-5 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.ngoaiNgu2}"  required type="text">
                                         </div>
                                     </div>
 

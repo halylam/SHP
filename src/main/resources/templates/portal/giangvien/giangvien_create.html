@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <form method="POST" th:action="@{/portal/giangvien/create}" th:object="${bean}" id="formNewGiangVien">
                     <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-                <section class="section bgTrans">
+                    <section class="section bgTrans">
 
-                    <div class="section-content">
-                        <!-- Content here -->
-                        <div class="row">
-                            <div class="col-sm-12">
+                        <div class="section-content">
+                            <!-- Content here -->
+                            <div class="row">
+                                <div class="col-sm-12">
 
 
 
@@ -169,7 +169,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Dân tộc<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Dân tộc<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maDanToc}">
@@ -199,7 +199,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Phân hệ<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Phân hệ<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maPhanHe}">
@@ -210,7 +210,7 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for=""> Học vị <span class="required">*</span>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" > Học vị <span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maHocVi}">
@@ -223,38 +223,36 @@
                                     </div>
 
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chuyên môn  <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chuyên ngành  <span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maChuyenNganh}">
                                                 <option value=""></option>
-                                                <option th:each="item : ${lstChuyenMon}"
-                                                        th:value="${item.chuyenMonCode}"
-                                                        th:text="${item.chuyenMonName}"></option>
+                                                <option th:each="item : ${lstChuyenNganh}"
+                                                        th:value="${item.chuyenNganhCode}"
+                                                        th:text="${item.chuyenNganhName}"></option>
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for=""> Chuyên môn khác<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" > Chuyên ngành khác<span class="required">*</span>
                                         </label>
                                         <div class="col-md-5 col-sm-5 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.chuyenNganhKhac}"  required type="text">
+
                                         </div>
-
-
-
                                     </div>
 
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngoại ngữ 1<span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.ngoaiNgu1}"  required type="text">
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="">Ngoại ngữ 2 <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Ngoại ngữ 2 <span class="required">*</span>
                                         </label>
                                         <div class="col-md-5 col-sm-5 col-xs-12">
-                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.ngoaiNgu2}"  required type="text">
                                         </div>
                                     </div>
 
@@ -476,20 +474,20 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- End Content here -->
+                        </div>
+
+                        <div class="section-footer">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-default mgL0">Lưu </button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"> Đóng </button>
                             </div>
                         </div>
-                        <!-- End Content here -->
-                    </div>
-
-                    <div class="section-footer">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-default mgL0">Lưu </button>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default"> Đóng </button>
-                        </div>
-                    </div>
-                </section> <!-- End section -->
+                    </section> <!-- End section -->
 
                 </form>
             </div>
@@ -509,84 +507,84 @@
 <!---->
 <!-- Config template -->
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#txtNgaySinh').datepicker({
-                autoclose: true,
-                format: "dd/mm/yyyy",
-                todayBtn: true,
-                endDate: "today",
-                todayHighlight: true, language: "vi"
-            });
-
-            $('#txtNgayCapCmnd').datepicker({
-                autoclose: true,
-                format: "dd/mm/yyyy",
-                todayBtn: true,
-                endDate: "today",
-                todayHighlight: true, language: "vi"
-            });
-
-
-            $("select[id^=selCaHoc]").multiselect({
-                buttonWidth: '500px',
-                includeSelectAllOption: true,
-                enableClickableOptGroups: true,
-                enableCollapsibleOptGroups: true,
-                buttonText: function(options) {
-                    if (options.length == 0) {
-                        return 'Chưa chọn ca học';
-                    }
-                    else {
-                        var selected = '';
-                        options.each(function() {
-                            selected += $(this).text() + ', ';
-                        });
-                        return selected.substr(0, selected.length -2);
-                    }
-                }
-
-            });
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#txtNgaySinh').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            endDate: "today",
+            todayHighlight: true, language: "vi"
         });
 
-        function loadDist(source, dist, detail) {
-            $('#' + dist).find('option').remove().end();
-            $('#' + detail).find('option').remove().end();
-            $('#i' + source).attr('class', 'fa fa-refresh fa-spin');
+        $('#txtNgayCapCmnd').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            endDate: "today",
+            todayHighlight: true, language: "vi"
+        });
 
-            var locCode = $('#' + source).val();
 
-            $.ajax({
-                type: "GET",
-                url: BASE_URL + 'common/ajax_loadLocationDet',
-                data: "parentCode=" + locCode,
-                success: function (response) {
-                    $('#i' + source).attr('class', 'fa fa-search');
-                    $('#' + dist).append($("<option></option>").attr("value", "").text(""));
-                    $.each(response, function (key, value) {
-                        $('#' + dist).append($("<option></option>").attr("value", key).text(value));
-                    });
-                    $('#' + dist).focus();
+        $("select[id^=selCaHoc]").multiselect({
+            buttonWidth: '500px',
+            includeSelectAllOption: true,
+            enableClickableOptGroups: true,
+            enableCollapsibleOptGroups: true,
+            buttonText: function(options) {
+                if (options.length == 0) {
+                    return 'Chưa chọn ca học';
                 }
-            });
-        }
-
-        function loadDetail(source, dist) {
-            $('#' + dist).find('option').remove().end();
-            var locCode = $('#' + source).val();
-            $.ajax({
-                type: "GET",
-                url: BASE_URL + 'common/ajax_loadLocationDet',
-                data: "parentCode=" + locCode,
-                success: function (response) {
-                    $('#' + dist).append($("<option></option>").attr("value", "").text(""));
-                    $.each(response, function (key, value) {
-                        $('#' + dist).append($("<option></option>").attr("value", key).text(value));
+                else {
+                    var selected = '';
+                    options.each(function() {
+                        selected += $(this).text() + ', ';
                     });
-                    $('#' + dist).focus();
+                    return selected.substr(0, selected.length -2);
                 }
-            });
-        }
+            }
+
+        });
+    });
+
+    function loadDist(source, dist, detail) {
+        $('#' + dist).find('option').remove().end();
+        $('#' + detail).find('option').remove().end();
+        $('#i' + source).attr('class', 'fa fa-refresh fa-spin');
+
+        var locCode = $('#' + source).val();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + 'common/ajax_loadLocationDet',
+            data: "parentCode=" + locCode,
+            success: function (response) {
+                $('#i' + source).attr('class', 'fa fa-search');
+                $('#' + dist).append($("<option></option>").attr("value", "").text(""));
+                $.each(response, function (key, value) {
+                    $('#' + dist).append($("<option></option>").attr("value", key).text(value));
+                });
+                $('#' + dist).focus();
+            }
+        });
+    }
+
+    function loadDetail(source, dist) {
+        $('#' + dist).find('option').remove().end();
+        var locCode = $('#' + source).val();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + 'common/ajax_loadLocationDet',
+            data: "parentCode=" + locCode,
+            success: function (response) {
+                $('#' + dist).append($("<option></option>").attr("value", "").text(""));
+                $.each(response, function (key, value) {
+                    $('#' + dist).append($("<option></option>").attr("value", key).text(value));
+                });
+                $('#' + dist).focus();
+            }
+        });
+    }
 </script>
 
 

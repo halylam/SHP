@@ -274,6 +274,9 @@ public class GiangVienController {
     @Autowired
     CaHocService caHocService;
 
+    @Autowired
+    ChuyenNganhService chuyenNganhService;
+
     @ModelAttribute("lstBoMon")
     public List<BoMon> getLstBoMon(){
         return boMonService.findAll();
@@ -299,9 +302,9 @@ public class GiangVienController {
         return hocViService.findAll();
     }
 
-    @ModelAttribute("lstChuyenMon")
-    public List<ChuyenMon> getLstChuyenMon(){
-        return chuyenMonService.findAll();
+    @ModelAttribute("lstChuyenNganh")
+    public List<ChuyenNganh> getLstChuyenNganh(){
+        return chuyenNganhService.findAll();
     }
 
     @ModelAttribute("lstCaHoc")
