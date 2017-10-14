@@ -90,9 +90,8 @@ public class BoMonController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            return "portal/bomon/bomon_create";
         }
-        return "redirect:/portal/bomon/list";
+        return "portal/bomon/bomon_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_EDIT')")

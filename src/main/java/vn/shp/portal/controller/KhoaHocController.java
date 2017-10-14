@@ -97,9 +97,8 @@ public class KhoaHocController {
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
             model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
-            return "portal/khoahoc/khoahoc_create";
         }
-        return "redirect:/portal/khoahoc/list";
+        return "portal/khoahoc/khoahoc_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EDIT')")

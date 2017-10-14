@@ -34,7 +34,7 @@ public class ApplicationConfig {
 		return new HibernateJpaSessionFactoryBean();
 	}
 
-	@Bean
+	@Bean(name="ecmService")
 	@Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public EcmService ecmServie(@Value("${alfresco.username}") String username,
 								@Value("${alfresco.password}") String password,
@@ -43,7 +43,7 @@ public class ApplicationConfig {
 		return new AlfrescoCmisServiceImpl(username, password, atomUrl, repositoryId);
 	}
 
-	@Bean
+	@Bean(name="propertyMapper")
 	@Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public EcmPropertyMapper ecmPropertyMapper() {
 		return new AlfrescoPropertyServiceImpl();

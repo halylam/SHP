@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -26,9 +27,17 @@ public class HocVi implements Serializable {
 	@SequenceGenerator(name = "hocvi_ID_SEQ", sequenceName = "hocvi_SEQ", allocationSize = 1)
 	@Column(name = "id")
 	private Long hocViId;
+
+	@NotEmpty
+	@Column(name = "ma")
+	private String hocViCode;
 	
 	@NotEmpty
 	@Column(name = "ten")
 	private String hocViName;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 
 }

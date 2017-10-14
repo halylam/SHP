@@ -54,4 +54,8 @@ public class KhoaHoc implements Serializable {
 	@JoinColumn(name = "id_bacdaotao")
 	private BacDaoTao bacDaoTao;
 
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
+
 }

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -38,6 +39,10 @@ public class BoMon implements Serializable {
 	@NotEmpty
 	@Column(name = "mabomon")
 	private String boMonCode;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 	
 	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_bomon", updatable = false, insertable = true)

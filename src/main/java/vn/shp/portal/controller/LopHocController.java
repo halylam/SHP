@@ -104,9 +104,8 @@ public class LopHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
             model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
             model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
-            return "portal/lophoc/lophoc_create";
         }
-        return "redirect:/portal/lophoc/list";
+        return "portal/lophoc/lophoc_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')")

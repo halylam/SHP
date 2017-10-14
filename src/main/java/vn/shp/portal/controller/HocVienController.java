@@ -232,8 +232,8 @@ public class HocVienController {
             } catch (Exception e) {
                 e.printStackTrace();
                 String msgInfo = messageSource.getMessage("message.error.filename", null, locale);
-                MessageList messageList = new MessageList(Message.ERROR, msgInfo);
-                model.addAttribute(CoreConstant.MSG_LST, messageList);
+//                MessageList messageList = new MessageList(Message.ERROR, msgInfo);
+//                model.addAttribute(CoreConstant.MSG_LST, messageList);
             }
 
         }

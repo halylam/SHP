@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -43,6 +44,10 @@ public class BacDaoTao implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_chuyennganh")
 	private ChuyenNganh chuyenNganh;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 	
 	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_bacdaotao", updatable = false, insertable = true)
