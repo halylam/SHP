@@ -202,13 +202,8 @@
 
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for=""> Chuyên môn khác<span class="required">*</span>
                                         </label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                            </select>
+                                        <div class="col-md-5 col-sm-5 col-xs-12">
+                                            <input id="" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
                                         </div>
 
 
@@ -449,11 +444,22 @@
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chủ nhật <span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
-                                                <option>Chọn ca ( cho chọn nhiều Ca 1 lần )</option>
-                                                <option>Cả ngày</option>
-                                                <option>Ca 1</option>
-                                                <option>Ca 2</option>
+                                            <select class="input-sm col-sm-12 col-xs-12" multiple id="selCaHocCN">
+
+
+                                                <option value="CA1">Ca 1</option>
+                                                <option value="CA2">Ca 2</option>
+                                                <option value="CA3">Ca 3</option>
+                                                <option value="CA4">Ca 4</option>
+                                                <option value="CA5">Ca 5</option>
+                                                <option value="CA6">Ca 6</option>
+                                                <option value="CA7">Ca 7</option>
+                                                <option value="CA8">Ca 8</option>
+                                                <option value="CA9">Ca 9</option>
+                                                <option value="CA10">Ca 10</option>
+                                                <option value="CA11">Ca 11</option>
+                                                <option value="CA12">Ca 12</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -625,6 +631,30 @@
 <!--<div class="control-sidebar-bg"></div>-->
 <!---->
 <!-- Config template -->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#selCaHocCN').multiselect({
+                buttonWidth: '500px',
+                includeSelectAllOption: true,
+                enableClickableOptGroups: true,
+                enableCollapsibleOptGroups: true,
+                buttonText: function(options) {
+                    if (options.length == 0) {
+                        return 'Chưa chọn ca học';
+                    }
+                    else {
+                        var selected = '';
+                        options.each(function() {
+                            selected += $(this).text() + ', ';
+                        });
+                        return selected.substr(0, selected.length -2);
+                    }
+                }
+
+            });
+        });
+</script>
 
 
 </body>

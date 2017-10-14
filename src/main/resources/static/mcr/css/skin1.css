@@ -19,6 +19,10 @@
 .skin-brown .top-heading {
   /*color: #fff;*/
 }
+.shp_border_b {
+  border-bottom: 1px solid #cccccc;
+}
+
 .skin-brown .top-heading.fixed {
   background: #fff;
   border-color:  #765e51;
