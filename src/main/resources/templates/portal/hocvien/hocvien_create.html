@@ -630,7 +630,7 @@
 
         $.ajax({
             type: "GET",
-            url: BASE_URL + 'portal/hocvien/ajax_loadLocationDet',
+            url: BASE_URL + 'common/ajax_loadLocationDet',
             data: "parentCode=" + locCode,
             success: function (response) {
                 $('#i' + source).attr('class', 'fa fa-search');
@@ -648,7 +648,7 @@
         var locCode = $('#' + source).val();
         $.ajax({
             type: "GET",
-            url: BASE_URL + 'portal/hocvien/ajax_loadLocationDet',
+            url: BASE_URL + 'common/ajax_loadLocationDet',
             data: "parentCode=" + locCode,
             success: function (response) {
                 $('#' + dist).append($("<option></option>").attr("value", "").text(""));

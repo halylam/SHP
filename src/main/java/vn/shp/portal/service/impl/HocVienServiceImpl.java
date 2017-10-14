@@ -54,23 +54,5 @@ public class HocVienServiceImpl implements HocVienService {
 		return hocVienRepository.findOne(id);
 	}
 
-	@Override
-	public KinhNghiemLamViec save(KinhNghiemLamViec knlv){
-		return kinhNghiemLamViecRepository.save(knlv);
-	}
 
-	@Override
-	public List<KinhNghiemLamViec> findAllByMaLienKetAndLoaiLienKet(Long maLienKet, String loaiLienKet){
-		return kinhNghiemLamViecRepository.findAllByMaLienKetAndLoaiLienKet(maLienKet,loaiLienKet);
-	}
-
-	@Override
-	public void deleteKnlvById(Long id){
-		kinhNghiemLamViecRepository.delete(id);
-	}
-
-	@Override
-	public KinhNghiemLamViec findOneKnlv(Long id){
-		return kinhNghiemLamViecRepository.findOne(id);
-	}
 }

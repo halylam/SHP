@@ -29,7 +29,7 @@
             </div>
 
             <div class="container-fluid">
-
+                <form method="POST" th:action="@{/portal/giangvien/list}" th:object="${bean}" id="formLstGiangVien">
                 <section class="section bgTrans">
                     <div class="section-content">
                         <!-- Content here -->
@@ -73,40 +73,45 @@
                                             <th>Trạng thái</th>
                                             <th>Bộ môn </th>
                                             <th>Phân hệ </th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr th:each="item,i : ${bean.lstData}">
                                             <td>
                                                 <div class="checkbox checkbox-success">
                                                     <input id="checkbox1" type="checkbox" class="flat check-all">
                                                     <label for="checkbox1"></label>
                                                 </div>
                                             </td>
-                                            <td><a href="shp-form-dkgv.html">HV0001</a></td>
-                                            <td>Nguyen Manh Ha</td>
-                                            <td>Nam</td>
-                                            <td>1985</td>
+                                            <td><a href="#" th:text="${item.maGiangVien}">HV0001</a></td>
+                                            <td th:text="${item.hoTen}">Nguyen Manh Ha</td>
+                                            <td><th:block th:if="${item.gioiTinh == 'M'}">Nam</th:block><th:block th:if="${item.gioiTinh == 'F'}">Nữ</th:block> </td>
+                                            <td th:text="${#dates.format(item.ngaySinh, 'dd/MM/yyyy')}">1985</td>
                                             <td>Đang dậy</td>
                                             <td>Bếp Á </td>
                                             <td>Cơ hữu </td>
-                                        </tr>
+                                            <td style="text-align: center;">
 
-                                        <tr>
-                                            <td>
-                                                <div class="checkbox checkbox-success">
-                                                    <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                    <label for="checkbox1"></label>
+                                                <div class="btn-group">
+                                                    <a></a>
+                                                    <a th:href="@{/portal/giangvien/info/{id}(id=${item.id})}" class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-paperclip" title="Bổ sung hồ sơ và thông tin."></i></a>
+                                                    <a class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="fa fa-align-center" title="Đăng ký khoá học."></i></a>
+                                                    <a class="btn btn-danger" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-edit" title="Chỉnh sửa học viên"></i></a>
                                                 </div>
                                             </td>
-                                            <td><a href="shp-form-dkgv.html">HV0001</a></td>
-                                            <td>Nguyen Manh Ha</td>
-                                            <td>Nam</td>
-                                            <td>1985</td>
-                                            <td>Mất dậy </td>
-                                            <td>Bếp Âu</td>
-                                            <td> Thỉnh giảng  </td>
                                         </tr>
+
+
+
+
+
+
+
+
+
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -137,7 +142,7 @@
                         </div>
                     </div>
                 </section> <!-- End section -->
-
+                </form>
 
             </div>
         </div>

@@ -15,7 +15,7 @@
         <!-- Main-->
         <div class="main_content" role="main">
             <div class="container-fluid top-heading">
-                <h1 class="">Bổ sung thông tin học viên</h1>
+                <h1 class="">Bổ sung thông tin giảng viên</h1>
                 <div class="pull-right hidden-xs">
                     <div class="btn-group">
                         <a th:href="@{/portal/hocvien/create}">
@@ -24,7 +24,7 @@
                         <button type="button" class="btn btn-default">Lưu</button>
 
                         <a th:href="@{/portal/hocvien/list}">
-                            <button type="button" class="btn btn-default"> Danh sách học viên</button>
+                            <button type="button" class="btn btn-default"> Danh sách giảng viên</button>
                         </a>
                         <button type="button" class="btn btn-default">Export PDF</button>
                     </div>
@@ -40,20 +40,20 @@
                             <!-- Content here -->
                             <div class="row">
                                 <div class="item form-group col-xs-12">
-                                    <h5> Cập nhật hông tin học viên </h5>
+                                    <h5> Cập nhật hông tin giảng viên </h5>
                                     <div class="item form-group col-xs-12">
-                                        <h5> Thông tin Sinh viên </h5>
+                                        <h5> Thông tin Giảng viên </h5>
                                     </div>
 
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname"
                                                style="padding-top: 10px;">Mã
-                                            học viên
+                                            giảng viên
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
                                             <input id="firstname"
                                                    class="form-control col-md-7 col-xs-12 disabled input-lable"
-                                                   th:field="*{entity.maHocVien}"
+                                                   th:field="*{entity.maGiangVien}"
                                                    readonly required type="text">
                                         </div>
                                     </div>
@@ -175,19 +175,16 @@
                                     <h5> Kinh nghiệm làm việc </h5>
                                 </div>
                                 <div class="item form-group col-xs-12" id="divKnlv">
-
                                     <th:block th:replace="/portal/hocvien/hocvien_knlv :: content">
-
-
                                     </th:block>
                                 </div>
                                 <div class="item form-group col-xs-12">
                                     <h5> Hồ sơ cá nhân </h5>
                                 </div>
-                                <form method="POST" id="formNewFile" th:action="@{/portal/hocvien/upload}"
+                                <form method="POST" id="formNewFile" th:action="@{/portal/giangvien/upload}"
                                       enctype="multipart/form-data" th:object="${bean}">
                                     <input type="hidden" th:field="*{entity.id}">
-                                    <input type="hidden" th:field="*{entity.maHocVien}">
+                                    <input type="hidden" th:field="*{entity.maGiangVien}">
                                     <div class="item form-group col-xs-12">
                                         <div class="form-group">
                                             <label class="col-sm-4 lable-form"> File</label>
@@ -198,6 +195,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
                                         <div class="col-md-10 col-sm-10 col-xs-12">
@@ -214,8 +212,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr th:each="item,i : ${bean.lstAlfFiles}"
-                                                    th:id="'trFile' + ${item.id}">
+                                                <tr th:each="item,i : ${bean.lstAlfFiles}" th:id="'trFile' + ${item.id}">
                                                     <td class="text-center">
                                                         <span th:text="${i.count}"></span>
 
@@ -250,13 +247,10 @@
                                                                 style="color: white;"
                                                                 class="glyphicon glyphicon-paperclip"
                                                                 title="Xem nội dung."></i></a>
-
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                                 <tfoot style="display: none;">
-
-
                                                 <tr>
                                                     <td class="text-center">
                                                         <span id="tdIndex"></span>
@@ -302,6 +296,7 @@
 
                                             </table>
                                         </div>
+
                                     </div>
                                     <div class="item form-group col-xs-12">
                                         <input type="submit" class="btn btn-primary" value="Upload File">
@@ -406,7 +401,7 @@
             type: "GET",
             async: false,
             data: str,
-            url: BASE_URL + 'portal/hocvien/ajax_new_knlv',
+            url: BASE_URL + 'portal/giangvien/ajax_new_knlv',
 
             success: function (data) {
                 $('#divKnlv').html(data);
@@ -420,7 +415,7 @@
             if (result) {
                 $.ajax({
                     type: "GET",
-                    url: BASE_URL + 'portal/hocvien/ajax_delete_knlv',
+                    url: BASE_URL + 'portal/giangvien/ajax_delete_knlv',
                     data: "id=" + id,
                     success: function (response) {
                         $('#divKnlv').html(response);
@@ -473,7 +468,6 @@
                 var res = fileName.split(".");
                 if (res.length >= 2) {
                     var prefix = res[0].toUpperCase();
-
                     if (prefix == 'HI' || prefix == 'CM' || prefix == 'BC' || prefix == 'HK' || prefix == 'HB' || prefix == 'SK') {
                         selFileType.val(prefix);
                     }

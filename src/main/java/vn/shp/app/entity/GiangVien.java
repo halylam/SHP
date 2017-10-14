@@ -53,16 +53,59 @@ public class GiangVien implements Serializable {
     @Column(name = "NOI_CAP_CMND", length = 50)
     private String noiCapCmnd;
 
-    @Column(name = "TINH_TRANG_CN", length = 10)
-    private String tinhTrangCaNhan;
+    @Column(name = "MA_TON_GIAO", length = 10)
+    private String maTonGiao;
 
-    @Column(name = "TON_GIAO", length = 10)
-    private String tonGiao;
+    @OneToOne
+    @JoinColumn(name = "MA_TON_GIAO",referencedColumnName = "ma", updatable = false, insertable = false)
+    private TonGiao tonGiao;
 
-    @Column(name = "DAN_TOC", length = 10)
-    private String danToc;
+    @Column(name = "MA_DAN_TOC", length = 10)
+    private String maDanToc;
 
+    @OneToOne
+    @JoinColumn(name = "MA_DAN_TOC",referencedColumnName = "ma", updatable = false, insertable = false)
+    private DanToc danToc;
 
+    @Column(name = "MA_BO_MON")
+    private String maBoMon;
+
+    @OneToOne
+    @JoinColumn(name = "MA_BO_MON",referencedColumnName = "mabomon", updatable = false, insertable = false)
+    private BoMon boMon;
+
+    @Column(name = "MA_PHAN_HE")
+    private String maPhanHe;
+
+    @OneToOne
+    @JoinColumn(name = "MA_PHAN_HE",referencedColumnName = "ma", updatable = false, insertable = false)
+    private PhanHe phanHe;
+
+    @Column(name = "MA_HOC_VI")
+    private String maHocVi;
+
+    @OneToOne
+    @JoinColumn(name = "MA_HOC_VI",referencedColumnName = "ma", updatable = false, insertable = false)
+    private HocVi hocVi;
+
+    @Column(name = "MA_CHUYEN_MON")
+    private String maChuyenMon;
+
+    @OneToOne
+    @JoinColumn(name = "MA_CHUYEN_MON",referencedColumnName = "ma", updatable = false, insertable = false)
+    private ChuyenMon chuyenMon;
+
+    @Column(name = "CHUYEN_MON_KHAC", length = 255)
+    private String huyenMoncKhac;
+
+    @Column(name = "NGOAI_NGU_1", length = 255)
+    private String ngoaiNgu1;
+
+    @Column(name = "NGOAI_NGU_2", length = 255)
+    private String ngoaiNgu2;
+
+    @Column(name = "TRANG_THAI_DAY", length = 30)
+    private String trangThaiDay;
 
     @Column(name = "TINH_THUONG_TRU", length = 10)
     private String tinhThuongTru;
@@ -88,62 +131,26 @@ public class GiangVien implements Serializable {
     @Column(name = "DIA_CHI_TAM_TRU", length = 250)
     private String diaChiTamTru;
 
-    @Column(name = "HO_TEN_CHA", length = 50)
-    private String hoTenCha;
+    @Column(name = "CA_HOC_T2", length = 250)
+    private String caHocT2;
 
-    @Column(name = "EMAIL_CHA", length = 50)
-    private String emailCha;
+    @Column(name = "CA_HOC_T3", length = 250)
+    private String caHocT3;
 
-    @Column(name = "SDT_CHA", length = 15)
-    private String sdtCha;
+    @Column(name = "CA_HOC_T4", length = 250)
+    private String caHocT4;
 
-    @Column(name = "HO_TEN_ME", length = 50)
-    private String hoTenMe;
+    @Column(name = "CA_HOC_T5", length = 250)
+    private String caHocT5;
 
-    @Column(name = "EMIAL_ME", length = 50)
-    private String emailMe;
+    @Column(name = "CA_HOC_T6", length = 250)
+    private String caHocT6;
 
-    @Column(name = "SDT_ME", length = 15)
-    private String sdtMe;
+    @Column(name = "CA_HOC_T7", length = 250)
+    private String caHocT7;
 
-    @Column(name = "TRUONG_THCS", length = 250)
-    private String truongThcs;
-
-    @Column(name = "TRUONG_THPT", length = 250)
-    private String truongThpt;
-
-    @Column(name = "TRUONG_KHAC", length = 250)
-    private String truongKhac;
-
-    @Column(name = "NDHP", length = 3)
-    private String ndhp;
-
-    @Column(name = "NDHP_HO_TEN", length = 50)
-    private String ndhpHoTen;
-
-    @Column(name = "NDHP_SDT", length = 15)
-    private String ndhpSdt;
-
-    @Column(name = "NDHP_EMAIL", length = 50)
-    private String ndhpEmail;
-
-    @Column(name = "NDHP_TINH", length = 10)
-    private String ndhpTinh;
-
-    @Column(name = "NDHP_QUAN", length = 10)
-    private String ndhpQuan;
-
-    @Column(name = "NDHP_XA", length = 10)
-    private String ndhpXa;
-
-    @Column(name = "NDHP_DIA_CHI", length = 250)
-    private String ndhpDiaChi;
-
-    @Column(name = "HOC_PHI_1", length = 10)
-    private String hp1;
-
-    @Column(name = "HOC_PHI_2", length = 10)
-    private String hp2;
+    @Column(name = "CA_HOC_CN", length = 250)
+    private String caHocCn;
 
     @Column(name = "NGAY_TAO")
     private Date ngayTao;

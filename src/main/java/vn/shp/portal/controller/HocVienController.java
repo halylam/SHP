@@ -29,6 +29,7 @@ import vn.shp.portal.entity.AlfFile;
 import vn.shp.portal.entity.JsonReturn;
 import vn.shp.portal.service.AlfFileService;
 import vn.shp.portal.service.HocVienService;
+import vn.shp.portal.service.KinhNghiemLamViecService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -60,6 +61,9 @@ public class HocVienController {
 
     @Autowired
     AlfFileService alfFileService;
+
+    @Autowired
+    KinhNghiemLamViecService kinhNghiemLamViecService;
 
     @Autowired
     private EcmPropertyMapper propertyMapper;
@@ -126,7 +130,7 @@ public class HocVienController {
             knlvNew.setMaLienKet(entity.getId());
             bean.setKnlv(knlvNew);
             bean.setEntity(entity);
-            List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(id, Constants.HOC_VIEN);
+            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(id, Constants.HOC_VIEN);
             bean.setLstKnlv(lstKnlv);
             List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.HOC_VIEN, entity.getId());
             bean.setLstAlfFiles(lstFile);
@@ -144,9 +148,9 @@ public class HocVienController {
         KinhNghiemLamViec entity = bean.getKnlv();
         if (entity.getMaLienKet() != null) {
             entity.setLoaiLienKet(Constants.HOC_VIEN);
-            hocVienService.save(entity);
+            kinhNghiemLamViecService.save(entity);
         }
-        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(entity.getMaLienKet(), Constants.HOC_VIEN);
+        List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getMaLienKet(), Constants.HOC_VIEN);
         bean.setLstKnlv(lstKnlv);
         bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
         model.addAttribute("bean", bean);
@@ -158,29 +162,15 @@ public class HocVienController {
     public @ResponseBody
     ModelAndView getLocationDetail(Model model, @RequestParam(value = "id") Long id) {
         HocVienBean bean = new HocVienBean();
-        KinhNghiemLamViec entity = hocVienService.findOneKnlv(id);
+        KinhNghiemLamViec entity = kinhNghiemLamViecService.findOneKnlv(id);
         Long maLienKet = entity.getMaLienKet();
-        hocVienService.deleteKnlvById(id);
-        List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(maLienKet, Constants.HOC_VIEN);
+        kinhNghiemLamViecService.deleteKnlvById(id);
+        List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(maLienKet, Constants.HOC_VIEN);
         bean.setLstKnlv(lstKnlv);
         bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
         model.addAttribute("bean", bean);
         model.addAttribute(CoreConstant.MSG_LST, "");
         return new ModelAndView("/portal/hocvien/hocvien_knlv :: content");
-    }
-
-    @RequestMapping(value = "/ajax_delete_file", method = RequestMethod.GET)
-    public @ResponseBody
-    JsonReturn deleteFile(@RequestParam(value = "id") Long id) {
-        JsonReturn jsonReturn = new JsonReturn();
-        jsonReturn.setStatus(Constants.FAIL);
-        alfFileService.deleteById(id);
-        AlfFile file = alfFileService.findOne(id);
-        if(file == null){
-            jsonReturn.setStatus(Constants.SUCCESS);
-            jsonReturn.setResult(id);
-        }
-        return jsonReturn;
     }
 
 
@@ -232,8 +222,8 @@ public class HocVienController {
             } catch (Exception e) {
                 e.printStackTrace();
                 String msgInfo = messageSource.getMessage("message.error.filename", null, locale);
-//                MessageList messageList = new MessageList(Message.ERROR, msgInfo);
-//                model.addAttribute(CoreConstant.MSG_LST, messageList);
+                MessageList messageList = new MessageList(Message.ERROR, msgInfo);
+                model.addAttribute(CoreConstant.MSG_LST, messageList);
             }
 
         }
@@ -243,7 +233,7 @@ public class HocVienController {
             knlvNew.setMaLienKet(entity.getId());
             bean.setKnlv(knlvNew);
             bean.setEntity(entity);
-            List<KinhNghiemLamViec> lstKnlv = hocVienService.findAllByMaLienKetAndLoaiLienKet(bean.getEntity().getId(), Constants.HOC_VIEN);
+            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(bean.getEntity().getId(), Constants.HOC_VIEN);
             bean.setLstKnlv(lstKnlv);
 
             List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.HOC_VIEN, entity.getId());
@@ -259,26 +249,7 @@ public class HocVienController {
         return "portal/hocvien/hocvien_create_step2";
     }
 
-    //------AJAX-----
-    @RequestMapping(value = "/ajax_loadLocationDet", method = RequestMethod.GET)
-    public @ResponseBody
-    Map<String, String> getLocationDetail(@RequestParam(value = "parentCode") String parentCode) {
-        Map<String, String> results = new LinkedHashMap<>();
-        if (parentCode != null) {
-            List<Location> lstLocUnit = systemConfig.getLstDebLoc();
-            if (!CollectionUtils.isEmpty(lstLocUnit)) {
-                for (Location locUnit : lstLocUnit) {
-                    if (parentCode.equals(locUnit.getParentCode())) {
-                        results.put(locUnit.getLocCode(), locUnit.getLocName().toUpperCase());
-                    }
-                }
-            }
-            return results;
-        }
-
-        return null;
-    }
-
+    //------ModelAttribute-----
     @ModelAttribute(value = "locationCatalog")
     public List<Location> getListLocation() {
         List<Location> result = new ArrayList<>();

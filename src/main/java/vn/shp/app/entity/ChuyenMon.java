@@ -27,7 +27,11 @@ public class ChuyenMon implements Serializable {
 	@SequenceGenerator(name = "chuyenmon_ID_SEQ", sequenceName = "chuyenmon_SEQ", allocationSize = 1)
 	@Column(name = "id")
 	private Long chuyenMonId;
-	
+
+	@NotEmpty
+	@Column(name = "ma")
+	private String chuyenMonCode;
+
 	@NotEmpty
 	@Column(name = "ten")
 	private String chuyenMonName;

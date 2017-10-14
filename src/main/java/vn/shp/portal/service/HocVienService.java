@@ -17,11 +17,4 @@ public interface HocVienService {
 	
 	void delete(HocVien entity);
 
-    KinhNghiemLamViec save(KinhNghiemLamViec knlv);
-
-	List<KinhNghiemLamViec> findAllByMaLienKetAndLoaiLienKet(Long maLienKet, String loaiLienKet);
-
-    void deleteKnlvById(Long id);
-
-	KinhNghiemLamViec findOneKnlv(Long id);
 }
