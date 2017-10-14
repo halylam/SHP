@@ -1,12 +1,5 @@
 package vn.shp.portal.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,6 +19,11 @@ import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.CaHocModel;
 import vn.shp.portal.service.CaHocService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
