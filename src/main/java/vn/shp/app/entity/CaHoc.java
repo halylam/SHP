@@ -1,22 +1,13 @@
 package vn.shp.app.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-
-import javafx.beans.DefaultProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "cahoc", uniqueConstraints=@UniqueConstraint(columnNames="macahoc"))
@@ -39,15 +30,13 @@ public class CaHoc implements Serializable {
 	@Column(name = "macahoc")
 	private String caHocCode;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "tugio")
-	@DateTimeFormat(pattern="hh:mm a")
-	private Date tuGio;
+	private String tuGio;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "dengio")
-	@DateTimeFormat(pattern="hh:mm a")
-	private Date denGio;
+	private String denGio;
 
 	@NotEmpty
 	@Column(name = "loaica")

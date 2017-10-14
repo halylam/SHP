@@ -93,8 +93,8 @@
                                                        th:title="${caHoc.caHocCode}"
                                                        th:text="${caHoc.caHocCode}">HV0001</a></td>
                                                 <td th:text="${caHoc.caHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${#dates.format(caHoc.tuGio, 'hh:mm a')}"></td>
-                                                <td th:text="${#dates.format(caHoc.denGio, 'hh:mm a')}"></td>
+                                                <td th:text="${caHoc.tuGio}"></td>
+                                                <td th:text="${caHoc.denGio}"></td>
                                                 <td th:text="${caHoc.loaiCa}">Ẩm thực châu Á</td>
                                                 <td>
                                                     <a th:href="@{/portal/cahoc/edit/{id}(id=${caHoc.caHocId})}">
