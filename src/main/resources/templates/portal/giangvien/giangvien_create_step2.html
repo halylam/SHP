@@ -132,6 +132,19 @@
                                         </div>
 
                                     </div>
+                                    <!--<div class="item form-group col-xs-12">-->
+                                        <!--<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Chủ nhật <span class="required">*</span>-->
+                                        <!--</label>-->
+                                        <!--<div class="col-md-3 col-sm-3 col-xs-12">-->
+                                            <!--<select class="input-sm col-sm-12 col-xs-12" multiple="multiple" id="selCaHocCN" name="entity.caHocCn" th:value="${bean.entity.caHocCn}">-->
+                                                <!--<option value=""></option>-->
+                                                <!--<option th:each="item : ${lstCaHoc}"-->
+                                                        <!--th:value="${item.caHocCode}"-->
+                                                        <!--th:text="${item.caHocName}" th:selected="${bean.entity.caHocCn.contains(item.caHocCode)}"></option>-->
+                                            <!--</select>-->
+                                            <!--<input th:field="*{entity.caHocCn}" />-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12 input-lable"
@@ -276,7 +289,7 @@
 
                                                         </select>
                                                     </td>
-
+<td></td>
                                                     <td id="tdNote" class="text-center">
                                                         <input class="form-control col-md-7 col-xs-12" type="text"
                                                                id="txtNote"
@@ -447,6 +460,26 @@
     }
 
     $(document).ready(function () {
+
+        $("select[id^=selCaHoc]").multiselect({
+            buttonWidth: '500px',
+            includeSelectAllOption: true,
+            enableClickableOptGroups: true,
+            enableCollapsibleOptGroups: true,
+            buttonText: function(options) {
+                if (options.length == 0) {
+                    return 'Chưa chọn ca học';
+                }
+                else {
+                    var selected = '';
+                    options.each(function() {
+                        selected += $(this).text() + ', ';
+                    });
+                    return selected.substr(0, selected.length -2);
+                }
+            }
+
+        });
 
         var htmlDel = $('#divHidPopupDel').html();
         $('#txtFile').popover({placement: "top", content: htmlDel, trigger: "hover"});
