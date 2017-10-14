@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -34,4 +35,8 @@ public class LoaiLopHoc implements Serializable {
 	@NotEmpty
 	@Column(name = "maloai")
 	private String loaiLopHocCode;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 }

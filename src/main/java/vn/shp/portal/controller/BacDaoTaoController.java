@@ -96,9 +96,8 @@ public class BacDaoTaoController {
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
             model.addAttribute("lstChuyenNganh", chuyenNganhService.findAll());
-            return "portal/bacdaotao/bacdaotao_create";
         }
-        return "redirect:/portal/bacdaotao/list";
+        return "portal/bacdaotao/bacdaotao_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')")

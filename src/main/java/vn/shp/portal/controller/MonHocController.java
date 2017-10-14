@@ -98,9 +98,8 @@ public class MonHocController {
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
             model.addAttribute("lstBoMon", boMonService.findAll());
-            return "portal/monhoc/monhoc_create";
         }
-        return "redirect:/portal/monhoc/list";
+        return "portal/monhoc/monhoc_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EDIT')")

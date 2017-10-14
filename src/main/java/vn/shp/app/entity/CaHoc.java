@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import javafx.beans.DefaultProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -51,6 +52,10 @@ public class CaHoc implements Serializable {
 	@NotEmpty
 	@Column(name = "loaica")
 	private String loaiCa;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 
 
 }

@@ -97,9 +97,8 @@ public class ChuyenNganhController {
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
             model.addAttribute("lstCtdt", chuongTrinhDaoTaoService.findAll());
-            return "portal/chuyennganh/chuyennganh_create";
         }
-        return "redirect:/portal/chuyennganh/list";
+        return "portal/chuyennganh/chuyennganh_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_EDIT')")

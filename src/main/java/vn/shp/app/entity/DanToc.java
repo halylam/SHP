@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,5 +31,13 @@ public class DanToc implements Serializable {
 	@NotEmpty
 	@Column(name = "ten")
 	private String danTocName;
+
+	@NotEmpty
+	@Column(name = "ma")
+	private String danTocCode;
+
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
 
 }

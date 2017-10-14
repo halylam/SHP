@@ -90,9 +90,8 @@ public class CaHocController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            return "portal/cahoc/cahoc_create";
         }
-        return "redirect:/portal/cahoc/list";
+        return "portal/cahoc/cahoc_create";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EDIT')")

@@ -53,4 +53,8 @@ public class LopHoc implements Serializable {
 	@JoinColumn(name = "id_khoahoc")
 	private KhoaHoc khoaHoc;
 
+	@NotNull
+	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	private boolean trangThai;
+
 }
