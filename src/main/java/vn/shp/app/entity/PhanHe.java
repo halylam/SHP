@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "phanhe", uniqueConstraints=@UniqueConstraint(columnNames="id"))
+@Table(name = "phanhe", uniqueConstraints=@UniqueConstraint(columnNames="ma"))
 @Data
 public class PhanHe implements Serializable {
 

@@ -16,7 +16,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "dantoc", uniqueConstraints=@UniqueConstraint(columnNames="id"))
+@Table(name = "dantoc", uniqueConstraints=@UniqueConstraint(columnNames="ma"))
 @Data
 public class DanToc implements Serializable {
 
