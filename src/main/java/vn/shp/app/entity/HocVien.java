@@ -2,15 +2,19 @@ package vn.shp.app.entity;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+import vn.shp.app.utils.Utils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 @Table(name = "HOC_VIEN", uniqueConstraints = @UniqueConstraint(columnNames = "MA_HOC_VIEN"))
 @Data
 public class HocVien implements Serializable {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HOC_VIEN_ID_SEQ")
@@ -32,11 +36,33 @@ public class HocVien implements Serializable {
     @Column(name = "GIOI_TINH", length = 1)
     private String gioiTinh;
 
+    public String getTenGioiTinh(){
+        if(Utils.isNotNullOrEmpty(gioiTinh)){
+            if(gioiTinh.equals("F")){
+                return "Nữ";
+            }else {
+                return "Nam";
+            }
+        }
+        return gioiTinh;
+    }
+
     @Column(name = "SO_DIEN_THOAI", length = 15)
     private String soDienThoai;
 
     @Column(name = "NGAY_SINH")
     private Date ngaySinh;
+
+    @Transient
+    private String strNgaySinh;
+
+    public String getStrNgaySinh(){
+         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if(ngaySinh != null){
+            strNgaySinh = sdf.format(ngaySinh);
+        }
+        return strNgaySinh;
+    }
 
     @Column(name = "EMAIL_SHP", length = 30)
     private String emailShp;
@@ -49,6 +75,17 @@ public class HocVien implements Serializable {
 
     @Column(name = "NGAY_CAP_CMND")
     private Date ngayCapCmnd;
+
+    @Transient
+    private String strNgayCapCmnd;
+
+    public String getStrNgayCapCmnd(){
+         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if(ngayCapCmnd != null){
+            strNgayCapCmnd = sdf.format(ngayCapCmnd);
+        }
+        return strNgayCapCmnd;
+    }
 
     @Column(name = "NOI_CAP_CMND", length = 50)
     private String noiCapCmnd;
