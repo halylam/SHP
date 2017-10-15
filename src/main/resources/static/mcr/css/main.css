@@ -8,6 +8,10 @@
     outline: none !important;
 }
 
+.required {
+    color: red;
+}
+
 body {
     font-family: Arial, "Helvetica Neue", sans-serif;
     font-size: 13px;
