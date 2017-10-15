@@ -249,6 +249,20 @@ public class HocVienController {
         return "portal/hocvien/hocvien_create_step2";
     }
 
+    @RequestMapping(value = "/ajax_get_hocvien", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonReturn deleteFile(@RequestParam(value = "maHocVien") String maHocVien) {
+        JsonReturn jsonReturn = new JsonReturn();
+        jsonReturn.setStatus(Constants.FAIL);
+       HocVien entity = hocVienService.findByMaHocVien(maHocVien);
+       if(entity != null){
+           jsonReturn.setStatus(Constants.SUCCESS);
+           jsonReturn.setResult(entity);
+       }
+
+        return jsonReturn;
+    }
+
     //------ModelAttribute-----
     @ModelAttribute(value = "locationCatalog")
     public List<Location> getListLocation() {

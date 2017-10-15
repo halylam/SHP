@@ -17,4 +17,5 @@ public interface HocVienService {
 	
 	void delete(HocVien entity);
 
+    HocVien findByMaHocVien(String maHocVien);
 }

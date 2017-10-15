@@ -7,4 +7,5 @@ import vn.shp.app.entity.HocVien;
 @Repository
 public interface HocVienRepository extends JpaRepository<HocVien, Long> {
 
+    HocVien findByMaHocVien(String maHocVien);
 }

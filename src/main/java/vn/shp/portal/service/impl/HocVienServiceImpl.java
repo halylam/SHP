@@ -54,5 +54,9 @@ public class HocVienServiceImpl implements HocVienService {
 		return hocVienRepository.findOne(id);
 	}
 
+	@Override
+	public HocVien findByMaHocVien(String maHocVien){
+		return hocVienRepository.findByMaHocVien(maHocVien);
+	}
 
 }

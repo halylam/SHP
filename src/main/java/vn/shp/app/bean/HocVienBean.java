@@ -12,10 +12,16 @@ import java.util.List;
 @Setter
 public class HocVienBean extends AbstractBean<HocVien> {
 
+    @Getter
+    @Setter
     private KinhNghiemLamViec knlv;
 
+    @Getter
+    @Setter
     private List<KinhNghiemLamViec> lstKnlv;
 
+    @Getter
+    @Setter
     private List<AlfFile> lstAlfFiles;
 
 
