@@ -138,6 +138,10 @@
 	font-weight: 300;
    padding-top: 10px;
 	}
+.skin-brown .checkbox label{
+  padding-top: 0px;
+}
+
 /* Popup */
 .skin-brown .modal-content {
   background: #fff;
