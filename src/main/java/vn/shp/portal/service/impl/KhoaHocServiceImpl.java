@@ -4,16 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.KhoaHoc;
+import vn.shp.portal.dao.KhoaHocDao;
 import vn.shp.portal.repository.KhoaHocRepository;
 import vn.shp.portal.service.KhoaHocService;
 
 import java.util.List;
 
-@Service("KhoaHocService")
+@Service("khoaHocService")
+@Transactional
 public class KhoaHocServiceImpl implements KhoaHocService {
 
 	@Autowired
 	private KhoaHocRepository khoaHocRepo;
+
+	@Autowired
+	private KhoaHocDao khoaHocDao;
 
 	@Override
 	public List<KhoaHoc> findAll() {
@@ -47,6 +52,11 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 	@Override
 	public KhoaHoc findByKhoaHocCode(String khoaHocCode) {
 		return khoaHocRepo.findByKhoaHocCode(khoaHocCode);
+	}
+
+	@Override
+	public List<KhoaHoc>  findKhoaHocDangKy(){
+		return khoaHocDao.findKhoaHocDangKy();
 	}
 	
 }

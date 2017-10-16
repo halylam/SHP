@@ -17,4 +17,6 @@ public interface KhoaHocService {
 	void delete(KhoaHoc entity);
 
 	KhoaHoc findByKhoaHocCode(String khoaHocCode);
+
+    List<KhoaHoc>  findKhoaHocDangKy();
 }

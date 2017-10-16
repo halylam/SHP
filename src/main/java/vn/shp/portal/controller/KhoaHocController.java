@@ -28,10 +28,7 @@ import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.KhoaHocModel;
 import vn.shp.portal.model.KhoaHocModel;
-import vn.shp.portal.service.BacDaoTaoService;
-import vn.shp.portal.service.KhoaHocMonHocService;
-import vn.shp.portal.service.KhoaHocService;
-import vn.shp.portal.service.MonHocService;
+import vn.shp.portal.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -113,7 +110,7 @@ public class KhoaHocController {
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
-		model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
+        model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
         return "portal/khoahoc/khoahoc_create";
     }
 
@@ -134,9 +131,9 @@ public class KhoaHocController {
         return "portal/khoahoc/khoahoc_edit";
     }
 
-	@RequestMapping(value = "/ajax_new_khmh", method = RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView addKhoaHocMonHoc(Model model, KhoaHocModel bean, Locale locale) {
+    @RequestMapping(value = "/ajax_new_khmh", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView addKhoaHocMonHoc(Model model, KhoaHocModel bean, Locale locale) {
         MessageList messageLst = new MessageList(Message.SUCCESS);
         String msgInfo = "";
         try {
@@ -146,21 +143,21 @@ public class KhoaHocController {
             messageLst.setStatus(Message.ERROR);
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
         }
-		List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(bean.getKhmh().getKhoaHoc().getKhoaHocId());
-		bean.setListKhmh(khoaHocMonHocList);
-		KhoaHocMonHoc khmh = new KhoaHocMonHoc();
-		khmh.setKhoaHoc(khoaHocService.findOne(bean.getKhmh().getKhoaHoc().getKhoaHocId()));
-		bean.setKhmh(khmh);
-		model.addAttribute("lstMonHoc", monHocService.findAll());
-		model.addAttribute("khoaHocModel", bean);
+        List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(bean.getKhmh().getKhoaHoc().getKhoaHocId());
+        bean.setListKhmh(khoaHocMonHocList);
+        KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+        khmh.setKhoaHoc(khoaHocService.findOne(bean.getKhmh().getKhoaHoc().getKhoaHocId()));
+        bean.setKhmh(khmh);
+        model.addAttribute("lstMonHoc", monHocService.findAll());
+        model.addAttribute("khoaHocModel", bean);
         messageLst.add(msgInfo);
         model.addAttribute(CoreConstant.MSG_LST, messageLst);
-		return new ModelAndView("/portal/khoahoc/khoahoc_monhoc :: content");
-	}
+        return new ModelAndView("/portal/khoahoc/khoahoc_monhoc :: content");
+    }
 
     @RequestMapping(value = "/ajax_delete_khmh", method = RequestMethod.GET)
     public @ResponseBody
-    ModelAndView removeKhoaHocMonHoc(Model model, @RequestParam(value = "id") Long id,  Locale locale) {
+    ModelAndView removeKhoaHocMonHoc(Model model, @RequestParam(value = "id") Long id, Locale locale) {
         KhoaHocModel bean = new KhoaHocModel();
         KhoaHocMonHoc entity = khoaHocMonHocService.findOne(id);
         MessageList messageLst = new MessageList(Message.SUCCESS);
@@ -209,12 +206,12 @@ public class KhoaHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
-		List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(entity.getKhoaHocId());
-		bean.setListKhmh(khoaHocMonHocList);
-		KhoaHocMonHoc khmh = new KhoaHocMonHoc();
-		khmh.setKhoaHoc(entity);
-		bean.setKhmh(khmh);
-		model.addAttribute("khoaHocModel", bean);
+        List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(entity.getKhoaHocId());
+        bean.setListKhmh(khoaHocMonHocList);
+        KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+        khmh.setKhoaHoc(entity);
+        bean.setKhmh(khmh);
+        model.addAttribute("khoaHocModel", bean);
         model.addAttribute("lstMonHoc", monHocService.findAll());
         return "portal/khoahoc/khoahoc_edit";
     }
@@ -239,9 +236,14 @@ public class KhoaHocController {
         return "redirect:/portal/khoahoc/list";
     }
 
+    @Autowired
+    HocVienDkService hocVienDkService;
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
     @RequestMapping(value = "/dangky", method = GET)
-    public String getDangKy() {
+    public String getDangKy(Model model, KhoaHocModel bean) {
+        bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
+        model.addAttribute("bean",bean);
         return "/portal/khoahoc/khoahoc_dangkykhoahoc";
     }
 }

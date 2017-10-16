@@ -259,12 +259,7 @@
                                                                 <table class="table table1 bulk_action">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>
-                                                                            <div class="checkbox checkbox-success">
-                                                                                <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                                                <label for="checkbox1"></label>
-                                                                            </div>
-                                                                        </th>
+
                                                                         <th>Mã khóa học</th>
                                                                         <th>Tên khóa học</th>
                                                                         <th>CT đào tạo</th>
@@ -276,54 +271,21 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="checkbox checkbox-success">
-                                                                                <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                                                <label for="checkbox1"></label>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                                                        <td> 3 tháng</td>
-                                                                        <td> Ngắn hạn</td>
-                                                                        <td> Ẩm thực châu á</td>
-                                                                        <td> Sơ cấp</td>
-                                                                        <td> 01/09/2017</td>
-                                                                        <td> 01/11/2017</td>
+                                                                    <tr th:each="item,i : ${bean.lstKhoaHocDangKy}">
 
-                                                                    </tr>
+                                                                        <td th:text="${item.khoaHocCode}"></td>
+                                                                        <td th:text="${item.khoaHocName}"> 3 tháng</td>
+                                                                        <td th:text="${item.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}"></td>
+                                                                        <td th:text="${item.bacDaoTao.chuyenNganh.chuyenNganhName}"></td>
+                                                                        <td th:text="${item.bacDaoTao.bacDaoTaoName}"></td>
+                                                                        <td th:text="${#dates.format(item.timeFrom, 'dd/MM/yyyy')}"> 01/09/2017</td>
+                                                                        <td th:text="${#dates.format(item.timeTo, 'dd/MM/yyyy')}"> 01/11/2017</td>
 
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="checkbox checkbox-success">
-                                                                                <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                                                <label for="checkbox1"></label>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                                                        <td> 9 tháng</td>
-                                                                        <td> Dài hạn</td>
-                                                                        <td> Ẩm thực châu Âu</td>
-                                                                        <td> Sơ cấp</td>
-                                                                        <td> 01/09/2017</td>
-                                                                        <td> 01/11/2017</td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
 
-                                                            <div class="paginations">
-                                                                <ul class="pagination">
-                                                                    <li><a href="#">Previous</a></li>
-                                                                    <li><a href="#">...</a></li>
-                                                                    <li><a href="#">1</a></li>
-                                                                    <li><a href="#">2</a></li>
-                                                                    <li><a href="#">3</a></li>
-                                                                    <li><a href="#">4</a></li>
-                                                                    <li><a href="#">...</a></li>
-                                                                    <li><a href="#">Next</a></li>
-                                                                </ul>
-                                                            </div>
                                                             <!-- End Content here -->
                                                         </div>
 
@@ -376,6 +338,15 @@
         $('#txtMaHocVien').keyup(function (e) {
             $('#divMess').html("");
             $('#btnPopupChonKhoaHoc').hide();
+            $('#txtHoTen').val("");
+            $('#txtGioiTinh').val("");
+            $('#txtSoDienThoai').val("");
+            $('#txtNgaySinh').val("");
+            $('#txtEmailShp').val("");
+            $('#txtEmail').val("");
+            $('#txtSoCMND').val("");
+            $('#txtNgayCap').val("");
+            $('#txtNoiCap').val("");
             var maHocVien = $(this).val().trim();
             if (maHocVien.length >= 7) {
                 searchHocVien(maHocVien);

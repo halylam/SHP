@@ -18,6 +18,8 @@ public class KhoaHocModel extends AbstractModel<KhoaHoc> {
 	@Setter
 	private List<KhoaHocMonHoc> listKhmh;
 
+	private List<KhoaHoc> lstKhoaHocDangKy;
+
 //	List<PortalGroup> groupLeftLst;
 //
 //	List<PortalGroup> groupRightLst;
