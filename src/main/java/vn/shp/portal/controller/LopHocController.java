@@ -89,7 +89,6 @@ public class LopHocController {
             lopHoc.setLopHocCode(lopHoc.getLopHocCode().toUpperCase());
             lopHoc.setLopHocName(lopHoc.getLopHocName().toUpperCase());
             lopHocService.save(lopHoc);
-
             msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
@@ -102,9 +101,9 @@ public class LopHocController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
-            model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
         }
+        model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
+        model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
         return "portal/lophoc/lophoc_create";
     }
 

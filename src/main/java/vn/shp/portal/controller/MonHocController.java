@@ -97,8 +97,8 @@ public class MonHocController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute("lstBoMon", boMonService.findAll());
         }
+        model.addAttribute("lstBoMon", boMonService.findAll());
         return "portal/monhoc/monhoc_create";
     }
 
