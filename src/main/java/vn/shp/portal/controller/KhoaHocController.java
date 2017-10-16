@@ -172,6 +172,12 @@ public class KhoaHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
+		List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(entity.getKhoaHocId());
+		bean.setListKhmh(khoaHocMonHocList);
+		KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+		khmh.setKhoaHoc(entity);
+		bean.setKhmh(khmh);
+		model.addAttribute("khoaHocModel", bean);
         return "portal/khoahoc/khoahoc_edit";
     }
 

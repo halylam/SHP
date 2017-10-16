@@ -95,8 +95,8 @@ public class BacDaoTaoController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute("lstChuyenNganh", chuyenNganhService.findAll());
         }
+        model.addAttribute("lstChuyenNganh", chuyenNganhService.findAll());
         return "portal/bacdaotao/bacdaotao_create";
     }
 

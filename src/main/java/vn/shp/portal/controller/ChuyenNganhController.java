@@ -96,8 +96,8 @@ public class ChuyenNganhController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute("lstCtdt", chuongTrinhDaoTaoService.findAll());
         }
+        model.addAttribute("lstCtdt", chuongTrinhDaoTaoService.findAll());
         return "portal/chuyennganh/chuyennganh_create";
     }
 
