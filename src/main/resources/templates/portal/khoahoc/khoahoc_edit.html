@@ -103,6 +103,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </form>
                                 </div>
@@ -121,6 +123,11 @@
                             </div>
                         </div>
                     </form>
+                    <div class="item form-group col-xs-12" id="divKhmh">
+                        <th:block th:replace="/portal/khoahoc/khoahoc_monhoc :: content">
+                        </th:block>
+                    </div>
+
                 </section> <!-- End section -->
 
             </div>
@@ -154,6 +161,41 @@
             todayHighlight: true, language: "vi"
         });
     });
+
+    function submitNewKhmh() {
+        var checkReduceFrom = $('#formNewKhmh')[0].checkValidity();
+        if (!checkReduceFrom) {
+            return;
+        }
+
+        var str = $("#formNewKhmh").serialize();
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: str,
+            url: BASE_URL + 'portal/khoahoc/ajax_new_khmh',
+
+            success: function (data) {
+                $('#divKhmh').html(data);
+
+            }
+        });
+    }
+
+    function deleteKhmh(id) {
+        bootbox.confirm("Bạn có muốn xoá môn học này không?", function (result) {
+            if (result) {
+                $.ajax({
+                    type: "GET",
+                    url: BASE_URL + 'portal/khoahoc/ajax_delete_khmh',
+                    data: "id=" + id,
+                    success: function (response) {
+                        $('#divKhmh').html(response);
+                    }
+                });
+            }
+        })
+    }
 </script>
 </body>
 </html>

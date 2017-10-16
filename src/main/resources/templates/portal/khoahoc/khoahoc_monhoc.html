@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="content">
+<form method="POST"  id="formNewKhmh" th:object="${khoaHocModel}" onsubmit="return false;">
+    <input type="hidden" th:field="*{khmh.khoaHoc.khoaHocId}">
+<div class="item form-group col-xs-12">
+    <label class="control-label col-md-2 col-sm-2 col-xs-12" >Môn Học
+    </label>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <select class="input-sm col-sm-12 col-xs-12"
+            th:field="*{khmh.monHoc.monHocId}" required id="selBacDaoTao">
+            <option value=""></option>
+            <option th:each="item : ${lstMonHoc}" th:value="${item.monHocId}"
+                th:text="${item.monHocName}"></option>
+        </select>
+    </div>
+</div>
+
+<div class="item form-group col-xs-12">
+    <!-- Input check -->
+
+    <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-default mgL0" onclick="submitNewKhmh();"> +</button>
+        </div>
+    </div>
+
+</div>
+<div class="item form-group col-xs-12">
+    <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <table class="table table-striped" style="color: black;">
+            <thead>
+            <tr>
+                <th>Mã môn học</th>
+                <th>Tên môn học</th>
+                <th>Tên bộ môn</th>
+                <th>Tổng giờ dậy</th>
+                <th>Hệ số</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item,i : ${khoaHocModel.listKhmh}">
+                <td><a href="@{/portal/monhoc/edit/{id}(id=${item.monHocId})}" th:title="${item.monHoc.monHocCode}"
+                    th:text="${item.monHoc.monHocCode}">HV0001</a></td>
+                <td th:text="${item.monHoc.monHocName}">Ẩm thực châu Á</td>
+                <td th:text="${item.monHoc.boMon.boMonName}">Ẩm thực châu Á</td>
+                <td th:text="${item.monHoc.tongGioDay}">Ẩm thực châu Á</td>
+                <td th:text="${item.monHoc.heSo}">Ẩm thực châu Á</td>
+
+                <td style="text-align: center;">
+
+                    <div class="btn-group">
+                        <a th:onclick="'deleteKhmh(' + ${item.id} + ');'"
+                           class="btn btn-danger" style="min-width: 20px;"><i
+                                style="color: white;"
+                                class="glyphicon glyphicon-remove-circle"
+                                title="Xoá Môn Học."></i></a>
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</form>
+</body>
+</html>

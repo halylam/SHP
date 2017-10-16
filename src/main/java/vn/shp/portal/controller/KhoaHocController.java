@@ -11,9 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.shp.app.bean.HocVienBean;
+import vn.shp.app.config.Constants;
 import vn.shp.app.entity.KhoaHoc;
 import vn.shp.app.entity.KhoaHoc;
+import vn.shp.app.entity.KhoaHocMonHoc;
+import vn.shp.app.entity.KinhNghiemLamViec;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
@@ -21,7 +29,9 @@ import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.KhoaHocModel;
 import vn.shp.portal.model.KhoaHocModel;
 import vn.shp.portal.service.BacDaoTaoService;
+import vn.shp.portal.service.KhoaHocMonHocService;
 import vn.shp.portal.service.KhoaHocService;
+import vn.shp.portal.service.MonHocService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -44,6 +54,12 @@ public class KhoaHocController {
 
     @Autowired
     BacDaoTaoService bacDaoTaoService;
+
+    @Autowired
+    MonHocService monHocService;
+
+    @Autowired
+    KhoaHocMonHocService khoaHocMonHocService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
@@ -103,14 +119,36 @@ public class KhoaHocController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
-    public String getEdit(@PathVariable(value = "") Long id,
-                          KhoaHocModel bean, Model model) {
+    public String getEdit(@PathVariable(value = "") Long id, KhoaHocModel bean, Model model) {
         KhoaHoc khoaHoc = khoaHocService.findOne(id);
         bean.setEntity(khoaHoc);
         model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
+        model.addAttribute("lstMonHoc", monHocService.findAll());
+        List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(khoaHoc.getKhoaHocId());
+        bean.setListKhmh(khoaHocMonHocList);
+        KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+        khmh.setKhoaHoc(khoaHoc);
+        bean.setKhmh(khmh);
+        model.addAttribute("khoaHocModel", bean);
         bean.setPageMode(PageMode.EDIT);
         return "portal/khoahoc/khoahoc_edit";
     }
+
+	@RequestMapping(value = "/ajax_new_khmh", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView addKhoaHocMonHoc(Model model, KhoaHocModel bean, Locale locale) {
+
+		khoaHocMonHocService.save(bean.getKhmh());
+		List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(bean.getKhmh().getKhoaHoc().getKhoaHocId());
+		bean.setListKhmh(khoaHocMonHocList);
+		KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+		khmh.setKhoaHoc(khoaHocService.findOne(bean.getKhmh().getKhoaHoc().getKhoaHocId()));
+		bean.setKhmh(khmh);
+		model.addAttribute(CoreConstant.MSG_LST, "");
+		model.addAttribute("lstMonHoc", monHocService.findAll());
+		model.addAttribute("khoaHocModel", bean);
+		return new ModelAndView("/portal/khoahoc/khoahoc_monhoc :: content");
+	}
 
     /**
      * EDIT - POST
@@ -136,6 +174,23 @@ public class KhoaHocController {
         model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
         return "portal/khoahoc/khoahoc_edit";
     }
+
+
+
+//    @RequestMapping(value = "/ajax_delete_khmh", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ModelAndView removeKhoaHocMonHoc(Model model, @RequestParam(value = "id") Long id) {
+//        KhoaBean bean = new HocVienBean();
+//        KinhNghiemLamViec entity = kinhNghiemLamViecService.findOneKnlv(id);
+//        Long maLienKet = entity.getMaLienKet();
+//        kinhNghiemLamViecService.deleteKnlvById(id);
+//        List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(maLienKet, Constants.HOC_VIEN);
+//        bean.setLstKnlv(lstKnlv);
+//        bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
+//        model.addAttribute("bean", bean);
+//        model.addAttribute(CoreConstant.MSG_LST, "");
+//        return new ModelAndView("/portal/khoahoc/khoahoc_khmh :: content");
+//    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)
