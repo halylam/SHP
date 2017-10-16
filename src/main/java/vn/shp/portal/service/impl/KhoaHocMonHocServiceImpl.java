@@ -1,19 +1,24 @@
 package vn.shp.portal.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.KhoaHocMonHoc;
+import vn.shp.portal.dao.KhoaHocMonHocDao;
 import vn.shp.portal.repository.KhoaHocMonHocRepository;
 import vn.shp.portal.service.KhoaHocMonHocService;
 
+import java.util.List;
+
 @Service("KhoaHocMonHocService")
+@Transactional
 public class KhoaHocMonHocServiceImpl implements KhoaHocMonHocService {
 
 	@Autowired
 	private KhoaHocMonHocRepository khoaHocMonHocRepo;
+
+	@Autowired
+	KhoaHocMonHocDao khoaHocMonHocDao;
 
 	@Override
 	public List<KhoaHocMonHoc> findAll() {
@@ -41,7 +46,8 @@ public class KhoaHocMonHocServiceImpl implements KhoaHocMonHocService {
 
 	@Override
 	public List<KhoaHocMonHoc> findByKhoaHocId(Long khoaHocId) {
-		return khoaHocMonHocRepo.findBy(khoaHocId);
+		//return khoaHocMonHocRepo.findBy(khoaHocId);
+		return khoaHocMonHocDao.searchByKhoaHocId(khoaHocId);
 	}
 
 	@Override
