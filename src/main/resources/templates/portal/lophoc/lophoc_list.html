@@ -91,7 +91,7 @@
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}" th:title="${lopHoc.lopHocCode}"
+                                                <td><a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}" th:title="${lopHoc.lopHocCode}"
                                                     th:text="${lopHoc.lopHocCode}">HV0001</a></td>
                                                 <td th:text="${lopHoc.lopHocName}">Ẩm thực châu Á</td>
                                                 <td th:text="${lopHoc.loaiLopHoc.loaiLopHocName}">Ẩm thực châu Á</td>

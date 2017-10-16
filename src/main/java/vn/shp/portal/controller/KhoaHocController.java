@@ -112,8 +112,8 @@ public class KhoaHocController {
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
         }
+		model.addAttribute("lstBacDaoTao", bacDaoTaoService.findAll());
         return "portal/khoahoc/khoahoc_create";
     }
 
@@ -137,18 +137,55 @@ public class KhoaHocController {
 	@RequestMapping(value = "/ajax_new_khmh", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView addKhoaHocMonHoc(Model model, KhoaHocModel bean, Locale locale) {
-
-		khoaHocMonHocService.save(bean.getKhmh());
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
+        try {
+            khoaHocMonHocService.save(bean.getKhmh());
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+        } catch (Exception e) {
+            messageLst.setStatus(Message.ERROR);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
+        }
 		List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(bean.getKhmh().getKhoaHoc().getKhoaHocId());
 		bean.setListKhmh(khoaHocMonHocList);
 		KhoaHocMonHoc khmh = new KhoaHocMonHoc();
 		khmh.setKhoaHoc(khoaHocService.findOne(bean.getKhmh().getKhoaHoc().getKhoaHocId()));
 		bean.setKhmh(khmh);
-		model.addAttribute(CoreConstant.MSG_LST, "");
 		model.addAttribute("lstMonHoc", monHocService.findAll());
 		model.addAttribute("khoaHocModel", bean);
+        messageLst.add(msgInfo);
+        model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		return new ModelAndView("/portal/khoahoc/khoahoc_monhoc :: content");
 	}
+
+    @RequestMapping(value = "/ajax_delete_khmh", method = RequestMethod.GET)
+    public @ResponseBody
+    ModelAndView removeKhoaHocMonHoc(Model model, @RequestParam(value = "id") Long id,  Locale locale) {
+        KhoaHocModel bean = new KhoaHocModel();
+        KhoaHocMonHoc entity = khoaHocMonHocService.findOne(id);
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
+        try {
+            khoaHocMonHocService.delete(id);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
+        } catch (Exception e) {
+            messageLst.setStatus(Message.ERROR);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+        }
+
+        List<KhoaHocMonHoc> khoaHocMonHocList = khoaHocMonHocService.findByKhoaHocId(entity.getKhoaHoc().getKhoaHocId());
+        bean.setListKhmh(khoaHocMonHocList);
+
+        KhoaHocMonHoc khmh = new KhoaHocMonHoc();
+        khmh.setKhoaHoc(entity.getKhoaHoc());
+        bean.setKhmh(khmh);
+
+        model.addAttribute("lstMonHoc", monHocService.findAll());
+        model.addAttribute("khoaHocModel", bean);
+        messageLst.add(msgInfo);
+        model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        return new ModelAndView("/portal/khoahoc/khoahoc_monhoc :: content");
+    }
 
     /**
      * EDIT - POST
@@ -178,25 +215,9 @@ public class KhoaHocController {
 		khmh.setKhoaHoc(entity);
 		bean.setKhmh(khmh);
 		model.addAttribute("khoaHocModel", bean);
+        model.addAttribute("lstMonHoc", monHocService.findAll());
         return "portal/khoahoc/khoahoc_edit";
     }
-
-
-
-//    @RequestMapping(value = "/ajax_delete_khmh", method = RequestMethod.GET)
-//    public @ResponseBody
-//    ModelAndView removeKhoaHocMonHoc(Model model, @RequestParam(value = "id") Long id) {
-//        KhoaBean bean = new HocVienBean();
-//        KinhNghiemLamViec entity = kinhNghiemLamViecService.findOneKnlv(id);
-//        Long maLienKet = entity.getMaLienKet();
-//        kinhNghiemLamViecService.deleteKnlvById(id);
-//        List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(maLienKet, Constants.HOC_VIEN);
-//        bean.setLstKnlv(lstKnlv);
-//        bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
-//        model.addAttribute("bean", bean);
-//        model.addAttribute(CoreConstant.MSG_LST, "");
-//        return new ModelAndView("/portal/khoahoc/khoahoc_khmh :: content");
-//    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)

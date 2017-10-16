@@ -1,170 +1,164 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head th:replace="portal/fragments/head :: head">
-</head>
+<head th:replace="portal/fragments/head :: head"></head>
 
 <body class="nav-md skin-brown">
 <div class="container body">
-    <div class="main_container">
-        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
-        </div>
-        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
-        </div>
+	<div class="main_container">
+		<div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
+		<div class="top_nav" th:replace="portal/fragments/header :: topNav"></div>
 
-        <!-- Main-->
-        <div class="main_content" role="main">
-            <div class="container-fluid top-heading">
-                <h1 class="">Tìm kiếm khóa học </h1>
+		<!-- Main-->
+		<div class="main_content" role="main">
+			<div class="container-fluid top-heading">
+				<h1 class="">Tìm kiếm khóa học </h1>
 
-                <div class="pull-right hidden-xs">
-                    <div class="btn-group">
-                        <a th:href="@{/portal/khoahoc/create}">
-                            <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-                        <a th:href="@{/portal/khoahoc/import}">
-                            <button type="button" class="btn btn-default">Import</button>
-                        </a>
-                        <a th:href="@{/portal/khoahoc/export}">
-                            <button type="button" class="btn btn-default">Export PDF</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+				<div class="pull-right hidden-xs">
+					<div class="btn-group">
+						<a th:href="@{/portal/khoahoc/create}">
+							<button type="button" class="btn btn-default">Tạo mới</button>
+						</a>
+						<a th:href="@{/portal/khoahoc/import}">
+							<button type="button" class="btn btn-default">Import</button>
+						</a>
+						<a th:href="@{/portal/khoahoc/export}">
+							<button type="button" class="btn btn-default">Export PDF</button>
+						</a>
+					</div>
+				</div>
+			</div>
 
-            <div class="container-fluid">
+			<div class="container-fluid">
 
-                <section class="section bgTrans">
-                    <div class="section-content">
-                        <form th:object="${bean}" method="post" th:action="@{/portal/khoahoc/list}">
-                            <!-- Content here -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-12 ">
-                                        <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
-                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
-                                                   type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+				<section class="section bgTrans">
+					<div class="section-content">
+						<form th:object="${bean}" method="post" th:action="@{/portal/khoahoc/list}">
+							<!-- Content here -->
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-12 ">
+										<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+											<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
+												type="text">
+										</div>
+									</div>
+								</div>
+							</div>
 
-                            <section class="section"> <!-- Start section table -->
+							<section class="section"> <!-- Start section table -->
 
-                                <div class="section-header">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h2 class="heading">Danh sách khóa học </h2>
-                                            <h3 class="sub-heading">Danh sách khóa học tìm thấy theo từ khóa </h3>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="section-header">
+									<div class="row">
+										<div class="col-sm-12">
+											<h2 class="heading">Danh sách khóa học </h2>
+											<h3 class="sub-heading">Danh sách khóa học tìm thấy theo từ khóa </h3>
+										</div>
+									</div>
+								</div>
 
-                                <div class="section-content">
-                                    <!-- Content here -->
-                                    <div class="table-shp">
-                                        <table class="table table1 bulk_action">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div class="checkbox checkbox-success">
-                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
-                                                </th>
-                                                <th>Mã khóa học</th>
-                                                <th>Tên khóa học</th>
-                                                <th>CT đào tạo</th>
-                                                <th>Chuyên ngành</th>
-                                                <th>Bậc đào tạo</th>
-                                                <th>Bắt đầu</th>
-                                                <th>Kết thúc</th>
-                                                <th>Thao Tác</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="khoaHoc,i : ${bean.data}">
-                                                <td>
-                                                    <div class="checkbox checkbox-success">
-                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}"
-                                                       th:title="${khoaHoc.khoaHocCode}"
-                                                       th:text="${khoaHoc.khoaHocCode}">HV0001</a></td>
-                                                <td th:text="${khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Ẩm thực châu Á</td>
-                                                <td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuyenNganhName}">Ẩm thực châu Á</td>
-                                                <td th:text="${khoaHoc.bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
-                                                <td th:text="${#dates.format(khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
-                                                <td th:text="${#dates.format(khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
-                                                <td>
-                                                    <a th:href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}">
-                                                        <button class="btn btn-default btn-sm" type="button"
-                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EDIT')">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
-                                                        th:href="@{/portal/khoahoc/delete/{id}(id=${khoaHoc.khoaHocId})}">
-                                                        <button class="btn btn-default btn-sm" type="button"
-                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
-                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')">
-                                                            <i class="fa fa-trash-o"></i>
-                                                        </button>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+								<div class="section-content">
+									<!-- Content here -->
+									<div class="table-shp">
+										<table class="table table1 bulk_action">
+											<thead>
+											<tr>
+												<th>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</th>
+												<th>Mã khóa học</th>
+												<th>Tên khóa học</th>
+												<th>CT đào tạo</th>
+												<th>Chuyên ngành</th>
+												<th>Bậc đào tạo</th>
+												<th>Bắt đầu</th>
+												<th>Kết thúc</th>
+												<th>Thao Tác</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="khoaHoc,i : ${bean.data}">
+												<td>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</td>
+												<td><a th:href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}"
+													th:title="${khoaHoc.khoaHocCode}" th:text="${khoaHoc.khoaHocCode}">HV0001</a></td>
+												<td th:text="${khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
+												<td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}">Ẩm
+													thực châu Á
+												</td>
+												<td th:text="${khoaHoc.bacDaoTao.chuyenNganh.chuyenNganhName}">Ẩm thực châu Á</td>
+												<td th:text="${khoaHoc.bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
+												<td th:text="${#dates.format(khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
+												<td th:text="${#dates.format(khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
+												<td>
+													<a th:href="@{/portal/khoahoc/edit/{id}(id=${khoaHoc.khoaHocId})}">
+														<button class="btn btn-default btn-sm" type="button"
+															sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EDIT')">
+															<i class="fa fa-edit"></i>
+														</button>
+													</a>
+													<a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+														th:href="@{/portal/khoahoc/delete/{id}(id=${khoaHoc.khoaHocId})}">
+														<button class="btn btn-default btn-sm" type="button"
+															th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+															sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')">
+															<i class="fa fa-trash-o"></i>
+														</button>
+													</a>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
 
-                                    <div class="paginations">
-                                        <ul class="pagination">
-                                            <li><a href="#">Previous</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- End Content here -->
-                                </div>
+									<div class="paginations">
+										<ul class="pagination">
+											<li><a href="#">Previous</a></li>
+											<li><a href="#">...</a></li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">...</a></li>
+											<li><a href="#">Next</a></li>
+										</ul>
+									</div>
+									<!-- End Content here -->
+								</div>
 
-                            </section> <!-- End section table -->
+							</section> <!-- End section table -->
 
-                            <!-- End Content here -->
-                        </form>
-                    </div>
+							<!-- End Content here -->
+						</form>
+					</div>
 
-                    <div class="section-footer">
-                        <div class="btn-group">
-                            <a th:href="@{/portal/khoahoc/list}">
-                                <button type="button" class="btn btn-default">Đóng</button>
-                            </a>
-                        </div>
-                    </div>
-                </section> <!-- End section -->
+					<div class="section-footer">
+						<div class="btn-group">
+							<a th:href="@{/portal/khoahoc/list}">
+								<button type="button" class="btn btn-default">Đóng</button>
+							</a>
+						</div>
+					</div>
+				</section> <!-- End section -->
 
-
-            </div>
-        </div>
-        <!-- /Main -->
-        <footer th:replace="portal/fragments/footer :: footer">
-        </footer>
-    </div>
+			</div>
+		</div>
+		<!-- /Main -->
+		<footer th:replace="portal/fragments/footer :: footer"></footer>
+	</div>
 </div>
-
 
 <!-- .Popup detail view Task list -->
 <!--<div class="control-sidebar-bg"></div>-->
 <!---->
 <!-- Config template -->
-
 
 </body>
 </html>

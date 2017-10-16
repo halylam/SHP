@@ -85,7 +85,7 @@
                                                     <label for="checkbox1"></label>
                                                 </div>
                                             </td>
-                                            <td><a href="@{/portal/bomon/edit/{id}(id=${boMon.boMonId})}" th:title="${boMon.boMonCode}"
+                                            <td><a th:href="@{/portal/bomon/edit/{id}(id=${boMon.boMonId})}" th:title="${boMon.boMonCode}"
                                                    th:text="${boMon.boMonCode}">HV0001</a></td>
                                             <td th:text="${boMon.boMonName}">Ẩm thực châu Á</td>
                                             <td>

@@ -17,12 +17,12 @@ public class KhoaHocMonHoc implements Serializable {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_khoahoc", columnDefinition = "INT(10) UNSIGNED")
     private KhoaHoc khoaHoc;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_monhoc", columnDefinition = "INT(10) UNSIGNED")
     private MonHoc monHoc;
     

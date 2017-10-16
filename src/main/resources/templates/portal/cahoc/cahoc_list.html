@@ -89,7 +89,7 @@
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="@{/portal/cahoc/edit/{id}(id=${caHoc.caHocId})}"
+                                                <td><a th:href="@{/portal/cahoc/edit/{id}(id=${caHoc.caHocId})}"
                                                        th:title="${caHoc.caHocCode}"
                                                        th:text="${caHoc.caHocCode}">HV0001</a></td>
                                                 <td th:text="${caHoc.caHocName}">Ẩm thực châu Á</td>

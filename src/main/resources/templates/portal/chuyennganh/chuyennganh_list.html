@@ -85,7 +85,7 @@
 														<label for="checkbox1"></label>
 													</div>
 												</td>
-												<td><a href="@{/portal/chuyennganh/edit/{id}(id=${chuyenNganh.chuyenNganhId})}"
+												<td><a th:href="@{/portal/chuyennganh/edit/{id}(id=${chuyenNganh.chuyenNganhId})}"
 													th:title="${chuyenNganh.chuyenNganhCode}" th:text="${chuyenNganh.chuyenNganhCode}">HV0001</a>
 												</td>
 												<td th:text="${chuyenNganh.chuyenNganhName}">Ẩm thực châu Á</td>

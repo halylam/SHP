@@ -46,7 +46,6 @@ public class KhoaHocMonHocServiceImpl implements KhoaHocMonHocService {
 
 	@Override
 	public List<KhoaHocMonHoc> findByKhoaHocId(Long khoaHocId) {
-		//return khoaHocMonHocRepo.findBy(khoaHocId);
 		return khoaHocMonHocDao.searchByKhoaHocId(khoaHocId);
 	}
 

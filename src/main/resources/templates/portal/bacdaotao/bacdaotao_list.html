@@ -87,7 +87,7 @@
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="@{/portal/bacdaotao/edit/{id}(id=${bacDaoTao.bacDaoTaoId})}" th:title="${bacDaoTao.bacDaoTaoCode}"
+                                                <td><a th:href="@{/portal/bacdaotao/edit/{id}(id=${bacDaoTao.bacDaoTaoId})}" th:title="${bacDaoTao.bacDaoTaoCode}"
                                                        th:text="${bacDaoTao.bacDaoTaoCode}">HV0001</a></td>
                                                 <td th:text="${bacDaoTao.bacDaoTaoName}">Ẩm thực châu Á</td>
                                                 <td th:text="${bacDaoTao.chuyenNganh.chuyenNganhName}">Chương trình chủ đề</td>

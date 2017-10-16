@@ -88,7 +88,7 @@
                                                         <label for="checkbox1"></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="@{/portal/monhoc/edit/{id}(id=${monHoc.monHocId})}" th:title="${monHoc.monHocCode}"
+                                                <td><a th:href="@{/portal/monhoc/edit/{id}(id=${monHoc.monHocId})}" th:title="${monHoc.monHocCode}"
                                                        th:text="${monHoc.monHocCode}">HV0001</a></td>
                                                 <td th:text="${monHoc.monHocName}">Ẩm thực châu Á</td>
                                                 <td th:text="${monHoc.boMon.boMonName}">Ẩm thực châu Á</td>
