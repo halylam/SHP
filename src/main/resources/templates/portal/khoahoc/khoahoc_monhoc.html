@@ -4,11 +4,14 @@
 <body th:fragment="content">
 <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 <form method="POST" id="formNewKhmh" th:object="${khoaHocModel}" onsubmit="return false;">
+	<div class="item form-group col-sm-12 col-xs-12">
+		<h5> Thêm môn học cho khóa học  </h5>
+	</div>
 	<input type="hidden" th:field="*{khmh.khoaHoc.khoaHocId}">
 	<div class="item form-group col-xs-12">
 		<label class="control-label col-md-2 col-sm-2 col-xs-12">Môn Học
 		</label>
-		<div class="col-md-3 col-sm-3 col-xs-12">
+		<div class="col-md-10 col-sm-10 col-xs-12">
 			<select class="input-sm col-sm-12 col-xs-12" th:field="*{khmh.monHoc.monHocId}" required id="selMonHoc">
 				<option value=""></option>
 				<option th:each="item : ${lstMonHoc}" th:value="${item.monHocId}"
