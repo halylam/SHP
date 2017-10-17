@@ -150,8 +150,10 @@
                                         <div class="item form-group col-xs-12">
                                             <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-2 col-md-offset-2">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-default mgL0" style="display: none;"
-                                                            data-toggle="modal" data-target="#add-khoahoc-khoa" id="btnPopupChonKhoaHoc">Chọn
+                                                    <button type="button" class="btn btn-default mgL0"
+                                                            style="display: none;"
+                                                            data-toggle="modal" data-target="#add-khoahoc-khoa"
+                                                            id="btnPopupChonKhoaHoc">Chọn
                                                         khóa học
                                                     </button>
                                                 </div>
@@ -170,7 +172,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h2 class="heading">Danh sách khóa học </h2>
-                                            <h3 class="sub-heading">Danh sách khóa học học viên này theo học  </h3>
+                                            <h3 class="sub-heading">Danh sách khóa học học viên này theo học </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -178,43 +180,22 @@
                                 <div class="section-content">
                                     <!-- Content here -->
                                     <div class="table-shp">
-                                        <table class="table table1 bulk_action">
+                                        <table class="table table1 bulk_action" id="tblKhoaHocDk">
                                             <thead>
                                             <tr>
 
-                                                <th>Mã khóa học </th>
-                                                <th>Tên khóa học </th>
-                                                <th>CT đào tạo </th>
+                                                <th>Mã khóa học</th>
+                                                <th>Tên khóa học</th>
+                                                <th>CT đào tạo</th>
                                                 <th>Chuyên ngành</th>
-                                                <th>Bậc đào tạo </th>
-                                                <th>Bắt đầu </th>
-                                                <th>Kết thúc </th>
-
+                                                <th>Bậc đào tạo</th>
+                                                <th>Bắt đầu</th>
+                                                <th>Kết thúc</th>
+                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
 
-                                                <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                                <td> 3 tháng </td>
-                                                <td> Ngắn hạn </td>
-                                                <td> Ẩm thực châu á  </td>
-                                                <td> Sơ cấp  </td>
-                                                <td> 01/09/2017 </td>
-                                                <td> 01/11/2017  </td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td><a href="shp-new-khoahoc.html">Ma-007</a></td>
-                                                <td> 9 tháng </td>
-                                                <td> Dài hạn </td>
-                                                <td> Ẩm thực châu Âu  </td>
-                                                <td> Sơ cấp  </td>
-                                                <td> 01/09/2017 </td>
-                                                <td> 01/11/2017  </td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -267,6 +248,7 @@
                                                                         <th>Bậc đào tạo</th>
                                                                         <th>Bắt đầu</th>
                                                                         <th>Kết thúc</th>
+                                                                        <th></th>
 
                                                                     </tr>
                                                                     </thead>
@@ -278,9 +260,19 @@
                                                                         <td th:text="${item.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}"></td>
                                                                         <td th:text="${item.bacDaoTao.chuyenNganh.chuyenNganhName}"></td>
                                                                         <td th:text="${item.bacDaoTao.bacDaoTaoName}"></td>
-                                                                        <td th:text="${#dates.format(item.timeFrom, 'dd/MM/yyyy')}"> 01/09/2017</td>
-                                                                        <td th:text="${#dates.format(item.timeTo, 'dd/MM/yyyy')}"> 01/11/2017</td>
+                                                                        <td th:text="${#dates.format(item.timeFrom, 'dd/MM/yyyy')}">
+                                                                            01/09/2017
+                                                                        </td>
+                                                                        <td th:text="${#dates.format(item.timeTo, 'dd/MM/yyyy')}">
+                                                                            01/11/2017
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="hidden" name="lstMaKhoaHocDangKy" th:value="${item.khoaHocCode}" disabled/>
+                                                                            <input type="button" class="btn btn-info" id="btnAdd"
+                                                                                   value="Đăng Ký"
+                                                                                   onclick="addKhoaHoc(this);"/>
 
+                                                                        </td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
@@ -295,7 +287,8 @@
                                         </div>
                                         <div class="modal-footer">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-default mgL0" >Chọn khóa học</button>
+                                                <button type="button" class="btn btn-default mgL0">Chọn khóa học
+                                                </button>
                                             </div>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default">Đóng</button>
@@ -387,6 +380,18 @@
                 }
             }
         });
+    }
+
+    function addKhoaHoc(btn) {
+        var tr = $(btn).parent().parent();
+        var newRow = tr.clone(true);
+        newRow.find('#btnAdd').val("Huỷ");
+        newRow.find('#btnAdd').attr("onClick","removeTr(this);");
+        $('#tblKhoaHocDk tbody').append(newRow);
+    }
+
+    function removeTr(btn){
+        $(btn).parent().parent().remove();
     }
 
 </script>

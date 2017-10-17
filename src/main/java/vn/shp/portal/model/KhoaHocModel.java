@@ -20,6 +20,8 @@ public class KhoaHocModel extends AbstractModel<KhoaHoc> {
 
 	private List<KhoaHoc> lstKhoaHocDangKy;
 
+	private String lstMaKhoaHocDangKy;
+
 //	List<PortalGroup> groupLeftLst;
 //
 //	List<PortalGroup> groupRightLst;
