@@ -147,12 +147,21 @@ public class LopHocController {
         MessageList messageLst = new MessageList(Message.SUCCESS);
         String msgInfo = "";
         try {
-            lopHocHocVienService.save(bean.getLhhv());
-            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+            LopHoc lopHoc = lopHocService.findOne(bean.getLhhv().getLopHoc().getLopHocId());
+            if(lopHoc != null && lopHoc.getSoLuongHV() < lopHoc.getSucChua()) {
+                lopHocHocVienService.save(bean.getLhhv());
+                lopHoc.setSoLuongHV(lopHoc.getSoLuongHV()+1);
+                lopHocService.save(lopHoc);
+                msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+            } else {
+                messageLst.setStatus(Message.ERROR);
+                msgInfo = "Đã đủ sức chứa lớp học";
+            }
         } catch (Exception e) {
             messageLst.setStatus(Message.ERROR);
             msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
         }
+
         List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(bean.getLhhv().getLopHoc().getLopHocId());
         bean.setListLhhv(lopHocHocVienList);
         LopHocHocVien lhhv = new LopHocHocVien();
@@ -174,6 +183,8 @@ public class LopHocController {
         String msgInfo = "";
         try {
             lopHocHocVienService.delete(id);
+            entity.getLopHoc().setSoLuongHV(entity.getLopHoc().getSoLuongHV()-1);
+            lopHocService.save(entity.getLopHoc());
             msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
         } catch (Exception e) {
             messageLst.setStatus(Message.ERROR);

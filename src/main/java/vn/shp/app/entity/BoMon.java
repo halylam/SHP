@@ -43,9 +43,4 @@ public class BoMon implements Serializable {
 	@NotNull
 	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
 	private boolean trangThai;
-	
-	@OneToMany(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "id_bomon", updatable = false, insertable = true)
-	private List<MonHoc> monHocList;
-
 }
