@@ -31,6 +31,7 @@
                     <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
                     <form th:action="@{/portal/lophoc/edit}" th:object="${lopHocModel}" method="post" role="form" id="lophoc-form">
                         <input type="hidden" th:field="*{entity.lopHocId}" />
+                        <input type="hidden" th:field="*{entity.soLuongHV}" />
                         <div class="section-content">
                             <!-- Content here -->
                             <div class="row">
