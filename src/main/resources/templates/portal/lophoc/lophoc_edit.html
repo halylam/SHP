@@ -112,6 +112,14 @@
                             </div>
                         </div>
                     </form>
+                    <div class="section-content">
+                        <!-- Content here -->
+                        <div class="row">
+                            <div class="item form-group col-xs-12" id="divLhhv">
+                                <th:block th:replace="/portal/lophoc/lophoc_hocvien :: content"></th:block>
+                            </div>
+                        </div>
+                    </div>
                 </section> <!-- End section -->
 
             </div>
@@ -128,7 +136,42 @@
 <!--<div class="control-sidebar-bg"></div>-->
 <!---->
 <!-- Config template -->
+<script>
+    function submitNewLhhv() {
+        var checkReduceFrom = $('#formNewLhhv')[0].checkValidity();
+        if (!checkReduceFrom) {
+            return;
+        }
 
+        var str = $("#formNewLhhv").serialize();
+        $.ajax({
+            type: "GET",
+            async: false,
+            data: str,
+            url: BASE_URL + 'portal/lophoc/ajax_new_lhhv',
+
+            success: function (data) {
+                $('#divLhhv').html(data);
+
+            }
+        });
+    }
+
+    function deleteLhhv(id) {
+        bootbox.confirm("Bạn có muốn xoá học viên này không?", function (result) {
+            if (result) {
+                $.ajax({
+                    type: "GET",
+                    url: BASE_URL + 'portal/lophoc/ajax_delete_lhhv',
+                    data: "id=" + id,
+                    success: function (response) {
+                        $('#divLhhv').html(response);
+                    }
+                });
+            }
+        })
+    }
+</script>
 
 </body>
 </html>

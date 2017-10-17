@@ -11,17 +11,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.shp.app.entity.LopHocHocVien;
+import vn.shp.app.entity.LopHocHocVien;
 import vn.shp.app.entity.LopHoc;
 import vn.shp.app.entity.LopHoc;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
+import vn.shp.portal.model.KhoaHocModel;
 import vn.shp.portal.model.LopHocModel;
 import vn.shp.portal.model.LopHocModel;
+import vn.shp.portal.service.HocVienService;
 import vn.shp.portal.service.KhoaHocService;
 import vn.shp.portal.service.LoaiLopHocService;
+import vn.shp.portal.service.LopHocHocVienService;
 import vn.shp.portal.service.LopHocService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +57,12 @@ public class LopHocController {
 
     @Autowired
     KhoaHocService khoaHocService;
+
+    @Autowired
+    HocVienService hocVienService;
+
+    @Autowired
+    LopHocHocVienService lopHocHocVienService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
@@ -115,8 +130,68 @@ public class LopHocController {
         bean.setEntity(lopHoc);
         model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
         model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
+        model.addAttribute("lstHocVien", hocVienService.findAll());
+        List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(lopHoc.getLopHocId());
+        bean.setListLhhv(lopHocHocVienList);
+        LopHocHocVien lhhv = new LopHocHocVien();
+        lhhv.setLopHoc(lopHoc);
+        bean.setLhhv(lhhv);
+        model.addAttribute("lopHocModel", bean);
         bean.setPageMode(PageMode.EDIT);
         return "portal/lophoc/lophoc_edit";
+    }
+
+    @RequestMapping(value = "/ajax_new_lhhv", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView addLopHocHocVien(Model model, LopHocModel bean, Locale locale) {
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
+        try {
+            lopHocHocVienService.save(bean.getLhhv());
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+        } catch (Exception e) {
+            messageLst.setStatus(Message.ERROR);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_CREATE, null, locale);
+        }
+        List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(bean.getLhhv().getLopHoc().getLopHocId());
+        bean.setListLhhv(lopHocHocVienList);
+        LopHocHocVien lhhv = new LopHocHocVien();
+        lhhv.setLopHoc(lopHocService.findOne(bean.getLhhv().getLopHoc().getLopHocId()));
+        bean.setLhhv(lhhv);
+        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lopHocModel", bean);
+        messageLst.add(msgInfo);
+        model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        return new ModelAndView("/portal/lophoc/lophoc_hocvien :: content");
+    }
+
+    @RequestMapping(value = "/ajax_delete_lhhv", method = RequestMethod.GET)
+    public @ResponseBody
+    ModelAndView removeLopHocHocVien(Model model, @RequestParam(value = "id") Long id, Locale locale) {
+        LopHocModel bean = new LopHocModel();
+        LopHocHocVien entity = lopHocHocVienService.findOne(id);
+        MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
+        try {
+            lopHocHocVienService.delete(id);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
+        } catch (Exception e) {
+            messageLst.setStatus(Message.ERROR);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+        }
+
+        List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(entity.getLopHoc().getLopHocId());
+        bean.setListLhhv(lopHocHocVienList);
+
+        LopHocHocVien lhhv = new LopHocHocVien();
+        lhhv.setLopHoc(entity.getLopHoc());
+        bean.setLhhv(lhhv);
+
+        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lopHocModel", bean);
+        messageLst.add(msgInfo);
+        model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        return new ModelAndView("/portal/lophoc/lophoc_hocvien :: content");
     }
 
     /**
@@ -142,6 +217,14 @@ public class LopHocController {
         }
         model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
         model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
+
+        List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(entity.getLopHocId());
+        bean.setListLhhv(lopHocHocVienList);
+        LopHocHocVien lhhv = new LopHocHocVien();
+        lhhv.setLopHoc(entity);
+        bean.setLhhv(lhhv);
+        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("khoaHocModel", bean);
         return "portal/lophoc/lophoc_edit";
     }
 
