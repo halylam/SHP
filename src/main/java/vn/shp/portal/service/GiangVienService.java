@@ -16,4 +16,6 @@ public interface GiangVienService {
 	
 	void delete(GiangVien entity);
 
+	List<GiangVien> findByThuAndCaHoc(String thu, String caHocCode);
+
 }

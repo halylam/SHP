@@ -8,6 +8,8 @@ import vn.shp.portal.repository.GiangVienRepository;
 import vn.shp.portal.repository.KinhNghiemLamViecRepository;
 import vn.shp.portal.service.GiangVienService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service("giangVienService")
@@ -53,5 +55,63 @@ public class GiangVienServiceImpl implements GiangVienService {
 		return giangVienRepository.findOne(id);
 	}
 
+	@Override
+	public List<GiangVien> findByThuAndCaHoc(String thu, String caHocCode) {
+		List<GiangVien> result = new ArrayList<GiangVien>();
+		List<GiangVien> alls = findAll();
+		for(GiangVien each : alls) {
+			if("2".equals(thu)){
+				if (each.getCaHocT2() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT2().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else if("3".equals(thu)){
+				if (each.getCaHocT3() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT3().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else if("4".equals(thu)){
+				if (each.getCaHocT4() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT4().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else if("5".equals(thu)){
+				if (each.getCaHocT5() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT5().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else if("6".equals(thu)){
+				if (each.getCaHocT6() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT6().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else if("7".equals(thu)){
+				if (each.getCaHocT7() != null) {
+					List<String> list = Arrays.asList(each.getCaHocT7().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			} else {
+				if (each.getCaHocCn() != null) {
+					List<String> list = Arrays.asList(each.getCaHocCn().split(","));
+					if(list.contains(caHocCode)) {
+						result.add(each);
+					}
+				}
+			}
+		}
 
+		return result;
+	}
 }
