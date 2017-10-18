@@ -96,8 +96,13 @@ public class KhoaHocController {
             KhoaHoc khoaHoc = bean.getEntity();
             khoaHoc.setKhoaHocCode(khoaHoc.getKhoaHocCode().toUpperCase());
             khoaHoc.setKhoaHocName(khoaHoc.getKhoaHocName().toUpperCase());
-            khoaHocService.save(khoaHoc);
-            msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+            if (khoaHoc.getTimeFrom().after(khoaHoc.getTimeTo())) {
+                messageLst.setStatus(Message.ERROR);
+                msgInfo = "Khóa học bắt đầu phải nhỏ hơn kết thúc";
+            } else {
+                khoaHocService.save(khoaHoc);
+                msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_CREATE, null, locale);
+            }
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
 
@@ -191,17 +196,23 @@ public class KhoaHocController {
     public String postEdit(KhoaHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
         KhoaHoc entity = bean.getEntity();
         MessageList messageLst = new MessageList(Message.SUCCESS);
+        String msgInfo = "";
         try {
             entity.setKhoaHocCode(entity.getKhoaHocCode().toUpperCase());
             entity.setKhoaHocName(entity.getKhoaHocName().toUpperCase());
-            khoaHocService.save(entity);
-            String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
+            if (entity.getTimeFrom().after(entity.getTimeTo())) {
+                messageLst.setStatus(Message.ERROR);
+                msgInfo = "Khóa học bắt đầu phải nhỏ hơn kết thúc";
+            } else {
+                khoaHocService.save(entity);
+                msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
+            }
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         } catch (Exception e) {
             e.printStackTrace();
             messageLst.setStatus(Message.ERROR);
-            String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+            msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
             messageLst.add(msgInfo);
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
