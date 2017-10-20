@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.KhoaHoc;
 import vn.shp.app.entity.KhoaHocMonHoc;
 
@@ -21,6 +22,8 @@ public class KhoaHocModel extends AbstractModel<KhoaHoc> {
 	private List<KhoaHoc> lstKhoaHocDangKy;
 
 	private String lstMaKhoaHocDangKy;
+
+	private HocVien hocVien;
 
 //	List<PortalGroup> groupLeftLst;
 //

@@ -49,7 +49,7 @@
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12"> Mã học viên <span
                                                     class="">*</span></label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="txtMaHocVien" class="form-control col-md-7 col-xs-12"
+                                                <input id="txtMaHocVien" class="form-control col-md-7 col-xs-12" th:field="*{hocVien.maHocVien}"
                                                        required
                                                        type="text">
                                             </div>
@@ -267,7 +267,7 @@
                                                                             01/11/2017
                                                                         </td>
                                                                         <td>
-                                                                            <input type="hidden" name="lstMaKhoaHocDangKy" th:value="${item.khoaHocCode}" disabled/>
+                                                                            <input type="hidden" name="lstMaKhoaHocDangKy" th:value="${item.khoaHocCode}" disabled id="txtHidMaKhoaHocDangKy"/>
                                                                             <input type="button" class="btn btn-info" id="btnAdd"
                                                                                    value="Đăng Ký"
                                                                                    onclick="addKhoaHoc(this);"/>
@@ -298,16 +298,17 @@
 
                                 </div>
                             </div>
+                            <div class="section-footer">
+                                <div class="btn-group">
+                                    <a th:href="@{/portal/khoahoc/dangky}">
+                                        <button type="submit" class="btn btn-default"> Lưu</button>
+                                    </a>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
-                    <div class="section-footer">
-                        <div class="btn-group">
-                            <a th:href="@{/portal/khoahoc/dangky}">
-                                <button type="button" class="btn btn-default"> Lưu</button>
-                            </a>
-                        </div>
-                    </div>
+
                 </section> <!-- End section -->
 
 
@@ -387,7 +388,10 @@
         var newRow = tr.clone(true);
         newRow.find('#btnAdd').val("Huỷ");
         newRow.find('#btnAdd').attr("onClick","removeTr(this);");
+        newRow.find('#txtHidMaKhoaHocDangKy').removeAttr("disabled");
+        newRow.find('#txtHidMaKhoaHocDangKy').removeAttr("id");
         $('#tblKhoaHocDk tbody').append(newRow);
+        $('#txtMaHocVien').attr('readonly','readonly');
     }
 
     function removeTr(btn){

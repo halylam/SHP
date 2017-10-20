@@ -18,10 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.shp.app.bean.HocVienBean;
 import vn.shp.app.config.Constants;
+import vn.shp.app.entity.*;
 import vn.shp.app.entity.KhoaHoc;
-import vn.shp.app.entity.KhoaHoc;
-import vn.shp.app.entity.KhoaHocMonHoc;
-import vn.shp.app.entity.KinhNghiemLamViec;
+import vn.shp.app.utils.Utils;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
@@ -33,8 +32,7 @@ import vn.shp.portal.service.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -57,6 +55,9 @@ public class KhoaHocController {
 
     @Autowired
     KhoaHocMonHocService khoaHocMonHocService;
+
+    @Autowired
+    HocVienService hocVienService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
@@ -254,6 +255,39 @@ public class KhoaHocController {
     @RequestMapping(value = "/dangky", method = GET)
     public String getDangKy(Model model, KhoaHocModel bean) {
         bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
+        model.addAttribute("bean",bean);
+        return "/portal/khoahoc/khoahoc_dangkykhoahoc";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
+    @RequestMapping(value = "/dangky", method = POST)
+    public String postDangKy(Model model, KhoaHocModel bean) {
+        bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
+HocVien hocVien = hocVienService.findByMaHocVien(bean.getHocVien().getMaHocVien());
+        String lstMaKhoaHocDangKy = bean.getLstMaKhoaHocDangKy();
+        if(Utils.isNotNullOrEmpty(lstMaKhoaHocDangKy)){
+            List<String> lstMaKhoaHoc = new ArrayList<>(Arrays.asList(lstMaKhoaHocDangKy.split(",")));
+            if(!CollectionUtils.isEmpty(lstMaKhoaHoc)){
+                Set<String> hs = new HashSet<>();
+                hs.addAll(lstMaKhoaHoc);
+                lstMaKhoaHoc.clear();
+                lstMaKhoaHoc.addAll(hs);
+                for (String maKhoaHoc : lstMaKhoaHoc) {
+                    KhoaHoc khoaHoc = khoaHocService.findByKhoaHocCode(maKhoaHoc);
+                    HocVienDk hocVienDk = new HocVienDk();
+                    hocVienDk.setHocVien(hocVien);
+                    hocVienDk.setKhoaHoc(khoaHoc);
+                    hocVienDk.setNgayTao(new Date());
+                    hocVienDk.setTrangThai("Y");
+                    hocVienDkService.save(hocVienDk);
+                }
+            }else{
+                MessageList messageList = new MessageList(Message.ERROR,"Không có khoá học nào được chọn");
+                model.addAttribute(CoreConstant.MSG_LST,messageList);
+            }
+
+        }
+
         model.addAttribute("bean",bean);
         return "/portal/khoahoc/khoahoc_dangkykhoahoc";
     }
