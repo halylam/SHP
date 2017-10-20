@@ -21,6 +21,8 @@ public class KhoaHocModel extends AbstractModel<KhoaHoc> {
 
 	private List<KhoaHoc> lstKhoaHocDangKy;
 
+	private List<KhoaHoc> lstKhoaHocSv;
+
 	private String lstMaKhoaHocDangKy;
 
 	private HocVien hocVien;

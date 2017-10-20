@@ -94,21 +94,10 @@
                                                 <div class="btn-group">
                                                     <a></a>
                                                     <a th:href="@{/portal/giangvien/info/{id}(id=${item.id})}" class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-paperclip" title="Bổ sung hồ sơ và thông tin."></i></a>
-                                                    <a class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="fa fa-align-center" title="Đăng ký khoá học."></i></a>
-                                                    <a class="btn btn-danger" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-edit" title="Chỉnh sửa học viên"></i></a>
+                                                    <a th:href="@{/portal/giangvien/edit/{id}(id=${item.id})}" class="btn btn-danger" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-edit" title="Chỉnh sửa giảng viên"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
-
-
-
-
-
-
-
-
-
-
 
                                         </tbody>
                                     </table>

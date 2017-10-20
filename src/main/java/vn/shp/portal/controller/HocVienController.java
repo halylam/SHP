@@ -141,6 +141,22 @@ public class HocVienController {
         return "portal/hocvien/hocvien_create_step2";
     }
 
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @RequestMapping(value = "/edit/{id}", method = GET)
+    public String getEditInfo(Model model, HocVienBean bean, @PathVariable(value = "id") Long id) {
+        bean.setSystemConfig(systemConfig);
+        HocVien entity = hocVienService.findOne(id);
+        bean.setEntity(entity);
+        if (entity != null) {
+
+        } else {
+            MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin học viên.");
+        }
+        model.addAttribute("bean", bean);
+        return "portal/hocvien/hocvien_edit";
+    }
+
     @RequestMapping(value = "/ajax_new_knlv", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView getCustDetail(Model model, @ModelAttribute(value = "bean") HocVienBean bean, Locale locale) {
@@ -175,9 +191,28 @@ public class HocVienController {
 
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
-    @RequestMapping(value = "/edit", method = GET)
-    public String getEdit() {
-        return "portal/hocvien/hocvien_edit";
+    @RequestMapping(value = "/edit", method = POST)
+    public String postEdit(Model model, HocVienBean bean) {
+        HocVien entity = bean.getEntity();
+        HocVien dbEntity = hocVienService.findOne(entity.getId());
+        dbEntity.update(entity);
+        dbEntity.setNgayCapNhat(new Date());
+        dbEntity.setNgayCapNhat(new Date());
+        hocVienService.save(dbEntity);
+
+        if (entity.getId() != null) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Lưu thông tin học viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        bean.setEntity(entity);
+        KinhNghiemLamViec knlv = new KinhNghiemLamViec(entity.getId());
+        bean.setKnlv(knlv);
+        List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.HOC_VIEN, entity.getId());
+        bean.setLstAlfFiles(lstFile);
+        model.addAttribute("bean", bean);
+        return "portal/hocvien/hocvien_create_step2";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
@@ -254,11 +289,11 @@ public class HocVienController {
     JsonReturn deleteFile(@RequestParam(value = "maHocVien") String maHocVien) {
         JsonReturn jsonReturn = new JsonReturn();
         jsonReturn.setStatus(Constants.FAIL);
-       HocVien entity = hocVienService.findByMaHocVien(maHocVien);
-       if(entity != null){
-           jsonReturn.setStatus(Constants.SUCCESS);
-           jsonReturn.setResult(entity);
-       }
+        HocVien entity = hocVienService.findByMaHocVien(maHocVien);
+        if (entity != null) {
+            jsonReturn.setStatus(Constants.SUCCESS);
+            jsonReturn.setResult(entity);
+        }
 
         return jsonReturn;
     }

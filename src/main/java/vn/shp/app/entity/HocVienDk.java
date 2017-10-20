@@ -3,11 +3,12 @@ package vn.shp.app.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "HV_KH")
+@Table(name = "HV_KH", uniqueConstraints=@UniqueConstraint(columnNames={"MA_HOC_VIEN", "MA_KHOA_HOC"}))
 @Data
 public class HocVienDk implements Serializable {
 
@@ -18,18 +19,21 @@ public class HocVienDk implements Serializable {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "MA_HV_KH", referencedColumnName = "MA_HOC_VIEN", insertable = false, updatable = false)
+    @NotNull
+    @JoinColumn(name = "MA_HOC_VIEN", referencedColumnName = "MA_HOC_VIEN")
     private HocVien hocVien;
 
     @ManyToOne
-    @JoinColumn(name = "MA_KHOA_HOC", referencedColumnName = "makhoahoc", insertable = false, updatable = false)
+    @NotNull
+    @JoinColumn(name = "MA_KHOA_HOC", referencedColumnName = "makhoahoc")
     private KhoaHoc khoaHoc;
 
     @ManyToOne
-    @JoinColumn(name = "MA_LOP_HOC", referencedColumnName = "malophoc", insertable = false, updatable = false)
+    @JoinColumn(name = "MA_LOP_HOC", referencedColumnName = "malophoc")
     private LopHoc lopHoc;
 
     @Column(name = "TRANG_THAI")
+    @NotNull
     private String trangThai;
 
     @Column(name = "NGAY_TAO")

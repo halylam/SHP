@@ -13,13 +13,657 @@
         </div>
 
         <!-- Main-->
-        
+        <div class="main_content" role="main">
+            <div class="container-fluid top-heading">
+                <h1 class="">Chỉnh sửa học viên </h1>
+                <div class="pull-right hidden-xs">
+                    <div class="btn-group">
+                        <a th:href="@{/portal/hocvien/create}">
+                            <button type="button" class="btn btn-default">Tạo mới</button>
+                        </a>
+                        <button type="button" class="btn btn-default">Lưu</button>
+
+                        <a th:href="@{/portal/hocvien/list}">
+                            <button type="button" class="btn btn-default"> Danh sách học viên</button>
+                        </a>
+                        <button type="button" class="btn btn-default">Export PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
+                <form method="POST" th:action="@{/portal/hocvien/edit}" th:object="${bean}" id="formNewHocVien">
+                    <input type="hidden" th:field="*{entity.id}">
+                    <section class="section bgTrans">
+                        <div class="section-content">
+                            <!-- Content here -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Thông tin Sinh viên </h5>
+                                        <i> Thông tin cá nhân </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã
+                                            học viên
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12 disabled" th:field="*{entity.maHocVien}"
+                                                   readonly required type="text" >
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTen}"
+                                                   required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Giới
+                                            tính <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M" required>
+                                                <label style="margin-right: 25px;" for="radio1">Nam</label>
+                                                <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F"  required>
+                                                <label for="radio2">Nữ </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.soDienThoai}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày
+                                            sinh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
+                                                           placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
+                                            SHP<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailShp}"
+                                                    required type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Email <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.email}"
+                                                    required type="email">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">CMND/Passport
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.cmnd}"
+                                                    required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Ngày cấp
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
+                                                           placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Tại <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.noiCapCmnd}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input  -->
+
+                                        <div class="radio checkbox-inline">
+                                            <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DH" required>
+                                            <label for="radDiHoc">
+                                                Đi học
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+
+                                        <!-- Input option -->
+                                        <div class="radio checkbox-inline">
+                                            <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DL" required>
+                                            <label for="radDiLam">
+                                                Đi làm
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+                                        <!-- Input option -->
+                                        <div class="radio checkbox-inline">
+                                            <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="TD" required>
+                                            <label for="radTuDo">
+                                                Tự do
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tình trạng cá nhân <span class="required">*</span>
+                                        </label>
+
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Trình độ
+                                            tiếng anh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.trinhDoTiengAnh}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ thường trú </i>
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhThuongTru}" required
+                                                    onchange="loadDist('selTinhThuongTru','selQuanThuongTru','selXaThuongTru')"
+                                                    id="selTinhThuongTru">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selQuanThuongTru" th:field="*{entity.quanThuongTru}" required
+                                                    onchange="loadDetail('selQuanThuongTru','selXaThuongTru')">
+                                                <option th:if="${bean.entity.tinhThuongTru != null}" th:each="item : ${bean.locationByParentCode(bean.entity.tinhThuongTru)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selXaThuongTru" th:field="*{entity.xaThuongTru}" required>
+                                                <option th:if="${bean.entity.quanThuongTru != null}" th:each="item : ${bean.locationByParentCode(bean.entity.quanThuongTru)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
+                                            đường<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.diaChiThuongTru}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ tạm trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhTamTru}" required
+                                                    onchange="loadDist('selTinhTamTru','selQuanTamTru','selXaTamTru')"
+                                                    id="selTinhTamTru">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selQuanTamTru"tinhTamTru th:field="*{entity.quanTamTru}" required
+                                                    onchange="loadDetail('selQuanTamTru','selXaTamTru')">
+                                                <option th:if="${bean.entity.tinhTamTru != null}" th:each="item : ${bean.locationByParentCode(bean.entity.tinhTamTru)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selXaTamTru"quanTamTru th:field="*{entity.xaTamTru}" required>
+                                                <option th:if="${bean.entity.quanTamTru != null}" th:each="item : ${bean.locationByParentCode(bean.entity.quanTamTru)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
+                                            đường<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.diaChiTamTru}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Thông tin phụ huynh ( Bắt buộc đối với người dưới 25 tuổi )</i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên Cha<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                                    required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email<span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailCha}"
+                                                    required type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtCha}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên Mẹ
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenMe}"
+                                                    type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailMe}"
+                                                    type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtMe}"
+                                                    type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Quá trình học tập </h5>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Trình
+                                            độ văn hóa <span class="required">*</span></label>
+
+
+                                        <!-- /Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường THCS <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThcs}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+
+
+                                        <!-- /Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường THPT <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThpt}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+
+
+                                        <!-- /Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường khác
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.truongKhac}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+
+                                        <h5> Thông tin tài chính </h5>
+                                        <i> Thông tin người phụ trách nhiệm đóng học phí </i>
+                                    </div>
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-2 col-md-offset-2">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radNdhpHV" type="radio" th:field="*{entity.ndhp}" value="HV" >
+                                                <label style="margin-right: 25px;" for="radNdhpHV">Học viên</label>
+                                                <input  id="radNdhpKhac" type="radio" th:field="*{entity.ndhp}" value="KH">
+                                                <label for="radNdhpKhac">Khác </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpHoTen}" id="txtNdhpHoTen" disabled
+                                                    required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số điện
+                                            thoại<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpSdt}" id="txtNdhpSdt" disabled
+                                                    required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >Email <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpEmail}" id="txtNdhpEmail" disabled
+                                                    required type="text">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <i> Địa chỉ tạm trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.ndhpTinh}"
+                                                    th:attrappend="${bean.entity.ndhp == 'HV'}?disabled='disabled'"
+                                                    onchange="loadDist('selNdhpTinh','selNdhpQuan','selNdhpXa')"
+                                                    id="selNdhpTinh">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selNdhpQuan"tinhTamTru th:field="*{entity.ndhpQuan}" disabled
+                                                    onchange="loadDetail('selNdhpQuan','selNdhpXa')">
+                                                <option th:if="${bean.entity.ndhpTinh != null}" th:each="item : ${bean.locationByParentCode(bean.entity.ndhpTinh)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selNdhpXa"quanTamTru th:field="*{entity.ndhpXa}" disabled>
+                                                <option th:if="${bean.entity.ndhpQuan != null}" th:each="item : ${bean.locationByParentCode(bean.entity.ndhpQuan)}" th:value="${item.locCode}" th:text="${item.locName}"></option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
+                                            đường<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpDiaChi}" id="txtNdhpDiaChi" disabled
+                                                    required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Hình thức đóng học phí </i>
+                                        <p> 1. Đối với khóa Topic & Short Coutses, Tiếng Anh </p>
+                                    </div>
+
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radHp1ChuaDong" type="radio" th:field="*{entity.hp1}" VALUE="CHUA_DONG">
+                                                <label style="margin-right: 25px;" for="radHp1ChuaDong"> Chưa đóng </label>
+                                                <input id="radHp1TronKhoa" type="radio" th:field="*{entity.hp1}" VALUE="TRON_KHOA">
+                                                <label style="margin-right: 25px;" for="radHp1TronKhoa"> Đóng trọn khóa </label>
+                                                <input  id="radHp1NhieuDot" type="radio" th:field="*{entity.hp1}" value="NHIEU_DOT">
+                                                <label for="radHp1NhieuDot"> Chia thành nhiều đợt  </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <p> 2. Đối với khóa học 2 năm </p>
+                                    </div>
+
+                                    <!-- Option -->
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radHp2ChuaDong" type="radio" th:field="*{entity.hp2}" VALUE="CHUA_DONG">
+                                                <label style="margin-right: 25px;" for="radHp2ChuaDong"> Chưa đóng </label>
+
+                                                <input id="radHp2TronKhoa" type="radio" th:field="*{entity.hp2}" VALUE="TRON_KHOA">
+                                                <label style="margin-right: 25px;" for="radHp2TronKhoa"> Đóng trọn khóa </label>
+
+                                                <input  id="radHp2NhieuDot" type="radio" th:field="*{entity.hp2}" value="NHIEU_DOT">
+                                                <label style="margin-right: 25px;" for="radHp2NhieuDot"> Chia thành nhiều đợt  </label>
+
+                                                <input  id="radHp2HocKy" type="radio" th:field="*{entity.hp2}" value="HOC_KY">
+                                                <label for="radHp2HocKy"> Đóng theo học kỳ  </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Content here -->
+                        </div>
+
+                        <div class="section-footer">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-default mgL0">Lưu</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"> Đóng</button>
+                            </div>
+                        </div>
+
+                    </section> <!-- End section -->
+                </form>
+
+            </div>
+        </div>
         <!-- /Main -->
         <footer th:replace="portal/fragments/footer :: footer">
         </footer>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
 
+        $('#txtNgaySinh').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            endDate: "today",
+            todayHighlight: true, language: "vi"
+        });
+
+        $('#txtNgayCapCmnd').datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            endDate: "today",
+            todayHighlight: true, language: "vi"
+        });
+
+        $('#radNdhpHV').change(function() {
+            $('div[id^="divNdhp"]').each(function () {
+                $(this).hide();
+            });
+
+            $('input[id^="txtNdhp"]').each(function () {
+                $(this).attr("disabled","disabled");
+            });
+
+            $('select[id^="selNdhp"]').each(function () {
+                $(this).attr("disabled","disabled");
+            });
+        });
+
+        $('#radNdhpKhac').change(function() {
+            $('div[id^="divNdhp"]').each(function () {
+                $(this).show();
+            });
+            $('input[id^="txtNdhp"]').each(function () {
+                $(this).removeAttr("disabled");
+            });
+            $('select[id^="selNdhp"]').each(function () {
+                $(this).removeAttr("disabled");
+            });
+        });
+
+    });
+
+    function loadDist(source, dist, detail) {
+        $('#' + dist).find('option').remove().end();
+        $('#' + detail).find('option').remove().end();
+        $('#i' + source).attr('class', 'fa fa-refresh fa-spin');
+
+        var locCode = $('#' + source).val();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + 'common/ajax_loadLocationDet',
+            data: "parentCode=" + locCode,
+            success: function (response) {
+                $('#i' + source).attr('class', 'fa fa-search');
+                $('#' + dist).append($("<option></option>").attr("value", "").text(""));
+                $.each(response, function (key, value) {
+                    $('#' + dist).append($("<option></option>").attr("value", key).text(value));
+                });
+                $('#' + dist).focus();
+            }
+        });
+    }
+
+    function loadDetail(source, dist) {
+        $('#' + dist).find('option').remove().end();
+        var locCode = $('#' + source).val();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + 'common/ajax_loadLocationDet',
+            data: "parentCode=" + locCode,
+            success: function (response) {
+                $('#' + dist).append($("<option></option>").attr("value", "").text(""));
+                $.each(response, function (key, value) {
+                    $('#' + dist).append($("<option></option>").attr("value", key).text(value));
+                });
+                $('#' + dist).focus();
+            }
+        });
+    }
+
+</script>
 
 
 <!-- .Popup detail view Task list -->

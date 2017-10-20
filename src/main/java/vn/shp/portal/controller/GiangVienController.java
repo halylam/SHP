@@ -228,10 +228,44 @@ public class GiangVienController {
         return "portal/giangvien/giangvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_EDIT')")
-    @RequestMapping(value = "/edit", method = GET)
-    public String getEdit() {
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @RequestMapping(value = "/edit/{id}", method = GET)
+    public String getEditInfo(Model model, GiangVienBean bean, @PathVariable(value = "id") Long id) {
+        bean.setSystemConfig(systemConfig);
+        GiangVien entity = giangVienService.findOne(id);
+        bean.setEntity(entity);
+        if (entity != null) {
+
+        } else {
+            MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin giảng viên.");
+        }
+        model.addAttribute("bean", bean);
         return "portal/giangvien/giangvien_edit";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @RequestMapping(value = "/edit", method = POST)
+    public String postEdit(Model model, GiangVienBean bean) {
+        GiangVien entity = bean.getEntity();
+        GiangVien dbEntity = giangVienService.findOne(entity.getId());
+        dbEntity.update(entity);
+        dbEntity.setNgayCapNhat(new Date());
+        dbEntity.setNgayCapNhat(new Date());
+        giangVienService.save(dbEntity);
+
+        if (entity.getId() != null) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Lưu thông tin giảng viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        bean.setEntity(entity);
+        KinhNghiemLamViec knlv = new KinhNghiemLamViec(entity.getId());
+        bean.setKnlv(knlv);
+        List<AlfFile> lstFile = alfFileService.findBySourceAndSourceId(Constants.GIANG_VIEN, entity.getId());
+        bean.setLstAlfFiles(lstFile);
+        model.addAttribute("bean", bean);
+        return "portal/giangvien/giangvien_create_step2";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_DELETE')")

@@ -252,10 +252,27 @@ public class KhoaHocController {
     HocVienDkService hocVienDkService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
+    @RequestMapping(value = "/dangky/{id}", method = GET)
+    public String getLstDangKy(Model model, KhoaHocModel bean,@PathVariable("id") Long id) {
+        HocVien hocVien = hocVienService.findOne(id);
+        bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
+        bean.setHocVien(hocVien);
+        List<HocVienDk> lstHvdk = hocVienDkService.findByMaHocVien(hocVien.getMaHocVien());
+        List<KhoaHoc> lstKhoaHoc = new ArrayList<>();
+        for (HocVienDk hocVienDk : lstHvdk) {
+            lstKhoaHoc.add(hocVienDk.getKhoaHoc());
+        }
+        bean.setLstKhoaHocSv(lstKhoaHoc);
+        model.addAttribute("bean", bean);
+        return "/portal/khoahoc/khoahoc_dangkykhoahoc";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
     @RequestMapping(value = "/dangky", method = GET)
     public String getDangKy(Model model, KhoaHocModel bean) {
         bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
-        model.addAttribute("bean",bean);
+        bean.setHocVien(new HocVien());
+        model.addAttribute("bean", bean);
         return "/portal/khoahoc/khoahoc_dangkykhoahoc";
     }
 
@@ -263,32 +280,48 @@ public class KhoaHocController {
     @RequestMapping(value = "/dangky", method = POST)
     public String postDangKy(Model model, KhoaHocModel bean) {
         bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
-HocVien hocVien = hocVienService.findByMaHocVien(bean.getHocVien().getMaHocVien());
+        HocVien hocVien = hocVienService.findByMaHocVien(bean.getHocVien().getMaHocVien());
         String lstMaKhoaHocDangKy = bean.getLstMaKhoaHocDangKy();
-        if(Utils.isNotNullOrEmpty(lstMaKhoaHocDangKy)){
-            List<String> lstMaKhoaHoc = new ArrayList<>(Arrays.asList(lstMaKhoaHocDangKy.split(",")));
-            if(!CollectionUtils.isEmpty(lstMaKhoaHoc)){
-                Set<String> hs = new HashSet<>();
-                hs.addAll(lstMaKhoaHoc);
-                lstMaKhoaHoc.clear();
-                lstMaKhoaHoc.addAll(hs);
-                for (String maKhoaHoc : lstMaKhoaHoc) {
-                    KhoaHoc khoaHoc = khoaHocService.findByKhoaHocCode(maKhoaHoc);
-                    HocVienDk hocVienDk = new HocVienDk();
-                    hocVienDk.setHocVien(hocVien);
-                    hocVienDk.setKhoaHoc(khoaHoc);
-                    hocVienDk.setNgayTao(new Date());
-                    hocVienDk.setTrangThai("Y");
-                    hocVienDkService.save(hocVienDk);
+        try{
+            if (Utils.isNotNullOrEmpty(lstMaKhoaHocDangKy)) {
+                List<String> lstMaKhoaHoc = new ArrayList<>(Arrays.asList(lstMaKhoaHocDangKy.split(",")));
+                if (!CollectionUtils.isEmpty(lstMaKhoaHoc)) {
+                    Set<String> hs = new HashSet<>();
+                    hs.addAll(lstMaKhoaHoc);
+                    lstMaKhoaHoc.clear();
+                    lstMaKhoaHoc.addAll(hs);
+                    for (String maKhoaHoc : lstMaKhoaHoc) {
+                        KhoaHoc khoaHoc = khoaHocService.findByKhoaHocCode(maKhoaHoc);
+                        HocVienDk hocVienDk = new HocVienDk();
+                        hocVienDk.setHocVien(hocVien);
+                        hocVienDk.setKhoaHoc(khoaHoc);
+                        hocVienDk.setNgayTao(new Date());
+                        hocVienDk.setTrangThai("Y");
+                        hocVienDkService.save(hocVienDk);
+                    }
+                } else {
+                    MessageList messageList = new MessageList(Message.ERROR, "Không có khoá học nào được chọn");
+                    model.addAttribute(CoreConstant.MSG_LST, messageList);
                 }
-            }else{
-                MessageList messageList = new MessageList(Message.ERROR,"Không có khoá học nào được chọn");
-                model.addAttribute(CoreConstant.MSG_LST,messageList);
-            }
 
+            }
+        }catch(DataIntegrityViolationException e){
+            MessageList messageList = new MessageList(Message.ERROR, "Trùng khoá học.");
+            model.addAttribute(CoreConstant.MSG_LST, messageList);
+        } catch (Exception e){
+
+            e.getMessage();
         }
 
-        model.addAttribute("bean",bean);
+        bean.setHocVien(hocVien);
+        List<HocVienDk> lstHvdk = hocVienDkService.findByMaHocVien(hocVien.getMaHocVien());
+        List<KhoaHoc> lstKhoaHoc = new ArrayList<>();
+        for (HocVienDk hocVienDk : lstHvdk) {
+            lstKhoaHoc.add(hocVienDk.getKhoaHoc());
+        }
+        bean.setLstKhoaHocSv(lstKhoaHoc);
+
+        model.addAttribute("bean", bean);
         return "/portal/khoahoc/khoahoc_dangkykhoahoc";
     }
 }

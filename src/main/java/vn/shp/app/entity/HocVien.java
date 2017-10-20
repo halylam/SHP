@@ -189,4 +189,47 @@ public class HocVien implements Serializable {
     @Column(name = "NGUOI_CAP_NHAP",length = 50)
     private String nguoiCapNhat;
 
+    public void update(HocVien hv){
+        this.loaiHocVien = hv.loaiHocVien;
+        this.hoTen = hv.hoTen;
+        this.gioiTinh = hv.gioiTinh;
+        this.soDienThoai = hv.soDienThoai;
+        this.ngaySinh = hv.ngaySinh;
+        this.emailShp = hv.emailShp;
+        this.email = hv.email;
+        this.cmnd = hv.getCmnd();
+        this.ngayCapCmnd = hv.ngayCapCmnd;
+        this.noiCapCmnd = hv.noiCapCmnd;
+        this.tinhTrangCaNhan = hv.tinhTrangCaNhan;
+        this.trinhDoTiengAnh = hv.trinhDoTiengAnh;
+        this.tinhThuongTru = hv.tinhThuongTru;
+        this.quanThuongTru=hv.quanThuongTru;
+        this.xaThuongTru = hv.xaThuongTru;
+        this.diaChiThuongTru = hv.diaChiThuongTru;
+        this.tinhTamTru = hv.tinhTamTru;
+        this.quanTamTru = hv.quanTamTru;
+        this.xaTamTru = hv.xaTamTru;
+        this.diaChiTamTru = hv.diaChiTamTru;
+        this.hoTenCha = hv.hoTenCha;
+        this.emailCha = hv.emailCha;
+        this.sdtCha = hv.sdtCha;
+        this.hoTenMe = hv.hoTenMe;
+        this.emailMe = hv.emailMe;
+        this.sdtMe = hv.sdtMe;
+        this.truongThpt = hv.truongThpt;
+        this.truongThcs = hv.truongThcs;
+        this.truongKhac = hv.truongKhac;
+        this.ndhp = hv.ndhp;
+        this.ndhpHoTen = hv.ndhpHoTen;
+        this.ndhpSdt = hv.ndhpSdt;
+        this.ndhpEmail = hv.ndhpEmail;
+        this.ndhpTinh = hv.ndhpTinh;
+        this.ndhpQuan = hv.ndhpQuan;
+        this.ndhpXa = hv.ndhpXa;
+        this.ndhpDiaChi = hv.ndhpDiaChi;
+        this.hp1  = hv.hp1;
+        this.hp2= hv.hp2;
+
+    }
+
 }

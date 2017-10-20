@@ -57,42 +57,42 @@ public class GiangVien implements Serializable {
     private String maTonGiao;
 
     @OneToOne
-    @JoinColumn(name = "MA_TON_GIAO",referencedColumnName = "ma", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_TON_GIAO", referencedColumnName = "ma", updatable = false, insertable = false)
     private TonGiao tonGiao;
 
     @Column(name = "MA_DAN_TOC", length = 10)
     private String maDanToc;
 
     @OneToOne
-    @JoinColumn(name = "MA_DAN_TOC",referencedColumnName = "ma", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_DAN_TOC", referencedColumnName = "ma", updatable = false, insertable = false)
     private DanToc danToc;
 
     @Column(name = "MA_BO_MON")
     private String maBoMon;
 
     @OneToOne
-    @JoinColumn(name = "MA_BO_MON",referencedColumnName = "mabomon", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_BO_MON", referencedColumnName = "mabomon", updatable = false, insertable = false)
     private BoMon boMon;
 
     @Column(name = "MA_PHAN_HE")
     private String maPhanHe;
 
     @OneToOne
-    @JoinColumn(name = "MA_PHAN_HE",referencedColumnName = "ma", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_PHAN_HE", referencedColumnName = "ma", updatable = false, insertable = false)
     private PhanHe phanHe;
 
     @Column(name = "MA_HOC_VI")
     private String maHocVi;
 
     @OneToOne
-    @JoinColumn(name = "MA_HOC_VI",referencedColumnName = "ma", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_HOC_VI", referencedColumnName = "ma", updatable = false, insertable = false)
     private HocVi hocVi;
 
     @Column(name = "MA_CHUYEN_NGANH")
     private String maChuyenNganh;
 
     @OneToOne
-    @JoinColumn(name = "MA_CHUYEN_NGANH",referencedColumnName = "machuyennganh", updatable = false, insertable = false)
+    @JoinColumn(name = "MA_CHUYEN_NGANH", referencedColumnName = "machuyennganh", updatable = false, insertable = false)
     private ChuyenNganh chuyenNganh;
 
     @Column(name = "CHUYEN_MGANH_KHAC", length = 255)
@@ -155,13 +155,51 @@ public class GiangVien implements Serializable {
     @Column(name = "NGAY_TAO")
     private Date ngayTao;
 
-    @Column(name = "NGUOI_TAO",length = 50)
+    @Column(name = "NGUOI_TAO", length = 50)
     private String nguoiTao;
 
     @Column(name = "NGAY_CAP_NHAT")
     private Date ngayCapNhat;
 
-    @Column(name = "NGUOI_CAP_NHAP",length = 50)
+    @Column(name = "NGUOI_CAP_NHAP", length = 50)
     private String nguoiCapNhat;
+
+    public void update(GiangVien gv) {
+        this.hoTen = gv.hoTen;
+        this.gioiTinh = gv.gioiTinh;
+        this.soDienThoai = gv.soDienThoai;
+        this.ngaySinh = gv.ngaySinh;
+        this.emailShp = gv.emailShp;
+        this.email = gv.email;
+        this.cmnd = gv.getCmnd();
+        this.ngayCapCmnd = gv.ngayCapCmnd;
+        this.noiCapCmnd = gv.noiCapCmnd;
+        this.boMon = gv.boMon;
+        this.phanHe = gv.phanHe;
+        this.hocVi = gv.hocVi;
+        this.chuyenNganh = gv.chuyenNganh;
+        this.chuyenNganhKhac = gv.chuyenNganhKhac;
+        this.ngoaiNgu1 = gv.ngoaiNgu1;
+        this.ngoaiNgu2 = gv.ngoaiNgu2;
+        this.trangThaiDay = gv.trangThaiDay;
+
+        this.tinhThuongTru = gv.tinhThuongTru;
+        this.quanThuongTru = gv.quanThuongTru;
+        this.xaThuongTru = gv.xaThuongTru;
+        this.diaChiThuongTru = gv.diaChiThuongTru;
+        this.tinhTamTru = gv.tinhTamTru;
+        this.quanTamTru = gv.quanTamTru;
+        this.xaTamTru = gv.xaTamTru;
+        this.diaChiTamTru = gv.diaChiTamTru;
+
+        this.caHocT2 = gv.caHocT2;
+        this.caHocT3 = gv.caHocT3;
+        this.caHocT4 = gv.caHocT4;
+        this.caHocT5 = gv.caHocT5;
+        this.caHocT6 = gv.caHocT6;
+        this.caHocT7 = gv.caHocT7;
+        this.caHocCn = gv.caHocCn;
+
+    }
 
 }

@@ -31,7 +31,7 @@ public class GiangVienServiceImpl implements GiangVienService {
 	@Transactional
 	public void save(GiangVien entity) {
 		giangVienRepository.save(entity);
-		if(entity.getId() != null){
+		if(entity.getId() != null && !entity.getMaGiangVien().startsWith("GV")){
 			String maHV = "GV" + String.format("%05d", entity.getId());
 			entity.setMaGiangVien(maHV);
 			giangVienRepository.save(entity);

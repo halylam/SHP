@@ -26,6 +26,7 @@ public class MessageList {
     }
 
     public MessageList(String status, String content) {
+        this.messages = new ArrayList<Message>();
         Message message = new Message(status, content);
         messages.add(message);
     }

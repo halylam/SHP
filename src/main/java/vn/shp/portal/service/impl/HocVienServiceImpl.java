@@ -30,7 +30,7 @@ public class HocVienServiceImpl implements HocVienService {
 	@Transactional
 	public void save(HocVien entity) {
 		hocVienRepository.save(entity);
-		if(entity.getId() != null){
+		if(entity.getId() != null && !entity.getMaHocVien().startsWith("HV")){
 			String maHV = "HV" + String.format("%05d", entity.getId());
 			entity.setMaHocVien(maHV);
 			hocVienRepository.save(entity);

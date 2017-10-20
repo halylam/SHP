@@ -39,6 +39,7 @@
 
                 <section class="section bgTrans">
                     <div class="section-content">
+                        <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
                         <form th:object="${bean}" method="post" th:action="@{/portal/khoahoc/dangky}">
                             <!-- Content here -->
                             <div class="row">
@@ -64,7 +65,7 @@
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="txtHoTen" class="form-control col-md-7 col-xs-12 input-lable"
-                                                       readonly type="text">
+                                                       readonly type="text" th:field="*{hocVien.hoTen}">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Giới tính <span
@@ -74,7 +75,7 @@
                                                 <!-- Input radio -->
                                                 <input id="txtGioiTinh"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.TenGioiTinh}">
                                                 <!-- /Input radio -->
                                             </div>
 
@@ -84,7 +85,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="txtSoDienThoai"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.soDienThoai}">
                                             </div>
                                         </div>
 
@@ -95,7 +96,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="txtNgaySinh"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:value="*{hocVien.strNgaySinh}">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Email SHP<span
@@ -104,7 +105,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="txtEmailShp"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.emailShp}">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12">Email <span
@@ -112,7 +113,7 @@
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="txtEmail" class="form-control col-md-7 col-xs-12 input-lable"
-                                                       readonly type="text">
+                                                       readonly type="text" th:field="*{hocVien.email}">
                                             </div>
 
                                         </div>
@@ -124,7 +125,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="txtSoCMND"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.cmnd}">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Ngày cấp <span
@@ -133,7 +134,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="txtNgayCap"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.strNgayCapCmnd}">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12">Tại <span class="">*</span>
@@ -141,7 +142,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="txtNoiCap"
                                                        class="form-control col-md-7 col-xs-12 input-lable" readonly
-                                                       type="text">
+                                                       type="text" th:field="*{hocVien.noiCapCmnd}">
                                             </div>
                                         </div>
 
@@ -151,7 +152,6 @@
                                             <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-2 col-md-offset-2">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default mgL0"
-                                                            style="display: none;"
                                                             data-toggle="modal" data-target="#add-khoahoc-khoa"
                                                             id="btnPopupChonKhoaHoc">Chọn
                                                         khóa học
@@ -195,23 +195,32 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <tr th:each="item,i : ${bean.lstKhoaHocSv}">
 
+                                                <td th:text="${item.khoaHocCode}"></td>
+                                                <td th:text="${item.khoaHocName}"> 3 tháng</td>
+                                                <td th:text="${item.bacDaoTao.chuyenNganh.chuongTrinhDaoTao.chuongTrinhDaoTaoName}"></td>
+                                                <td th:text="${item.bacDaoTao.chuyenNganh.chuyenNganhName}"></td>
+                                                <td th:text="${item.bacDaoTao.bacDaoTaoName}"></td>
+                                                <td th:text="${#dates.format(item.timeFrom, 'dd/MM/yyyy')}">
+                                                    01/09/2017
+                                                </td>
+                                                <td th:text="${#dates.format(item.timeTo, 'dd/MM/yyyy')}">
+                                                    01/11/2017
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="lstMaKhoaHocDangKy" th:value="${item.khoaHocCode}" disabled id="txtHidMaKhoaHocDangKy"/>
+                                                    <input type="button" class="btn btn-info" id="btnAdd"
+                                                           value="Huỷ"
+                                                           />
+
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
 
-                                    <div class="paginations">
-                                        <ul class="pagination">
-                                            <li><a href="#">Previous</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>
-                                    </div>
+
                                     <!-- End Content here -->
                                 </div>
 

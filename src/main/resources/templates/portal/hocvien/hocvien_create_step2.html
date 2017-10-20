@@ -21,8 +21,9 @@
                         <a th:href="@{/portal/hocvien/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
                         </a>
-                        <button type="button" class="btn btn-default">Lưu</button>
-
+                        <a th:href="@{/portal/khoahoc/dangky/{id}(id=${bean.entity.id}) }">
+                        <button type="button" class="btn btn-default">ĐK Khoá học</button>
+                        </a>
                         <a th:href="@{/portal/hocvien/list}">
                             <button type="button" class="btn btn-default"> Danh sách học viên</button>
                         </a>

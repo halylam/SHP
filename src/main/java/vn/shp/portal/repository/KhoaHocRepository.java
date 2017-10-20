@@ -22,4 +22,6 @@ public interface KhoaHocRepository extends JpaRepository<KhoaHoc, Long> {
                         @Param("khoaHocCode") String khoaHocCode);
 
 	KhoaHoc findByKhoaHocCode(String khoaHocCode);
+
+
 }
