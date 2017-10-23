@@ -47,7 +47,7 @@ public class BacDaoTao implements Serializable {
 
 	@NotNull
 	@Column(name = "trangthai", columnDefinition="TINYINT(1) DEFAULT 1")
-	private boolean trangThai;
+	private boolean trangThai = true;
 	
 	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_bacdaotao", updatable = false, insertable = true)

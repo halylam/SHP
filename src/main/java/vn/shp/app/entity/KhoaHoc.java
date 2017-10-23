@@ -60,6 +60,6 @@ public class KhoaHoc implements Serializable {
 
 	@NotNull
 	@Column(name = "trangthai", columnDefinition="TINYINT(1) DEFAULT 1")
-	private boolean trangThai;
+	private boolean trangThai = true;
 
 }

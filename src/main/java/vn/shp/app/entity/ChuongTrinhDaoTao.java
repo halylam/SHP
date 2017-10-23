@@ -38,7 +38,7 @@ public class ChuongTrinhDaoTao implements Serializable {
 
 	@NotNull
 	@Column(name = "trangthai", columnDefinition="TINYINT(1) DEFAULT 1")
-	private boolean trangThai;
+	private boolean trangThai = true;
 	
 	@NotEmpty
 	@Column(name = "machuongtrinh")
