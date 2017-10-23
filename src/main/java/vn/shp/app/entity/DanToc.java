@@ -25,7 +25,7 @@ public class DanToc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "dantoc_ID_SEQ")
 	@SequenceGenerator(name = "dantoc_ID_SEQ", sequenceName = "dantoc_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long danTocId;
 	
 	@NotEmpty

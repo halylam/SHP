@@ -15,7 +15,7 @@ public class GiangVien implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "GIANG_VIEN_ID_SEQ")
     @SequenceGenerator(name = "GIANG_VIEN_ID_SEQ", sequenceName = "GIANG_VIEN_SEQ", allocationSize = 1)
-    @Column(name = "id")
+    @Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
     private Long id;
 
     @NotEmpty

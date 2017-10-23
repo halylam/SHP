@@ -27,7 +27,7 @@ public class MonHoc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "monhoc_ID_SEQ")
 	@SequenceGenerator(name = "monhoc_ID_SEQ", sequenceName = "monhoc_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long monHocId;
 	
 	@NotEmpty

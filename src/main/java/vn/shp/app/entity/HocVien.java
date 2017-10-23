@@ -19,7 +19,7 @@ public class HocVien implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HOC_VIEN_ID_SEQ")
     @SequenceGenerator(name = "HOC_VIEN_ID_SEQ", sequenceName = "HOC_VIEN_SEQ", allocationSize = 1)
-    @Column(name = "id")
+    @Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
     private Long id;
 
     @NotEmpty

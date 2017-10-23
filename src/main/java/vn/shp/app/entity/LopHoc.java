@@ -27,7 +27,7 @@ public class LopHoc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "lophoc_ID_SEQ")
 	@SequenceGenerator(name = "lophoc_ID_SEQ", sequenceName = "lophoc_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long lopHocId;
 	
 	@NotEmpty

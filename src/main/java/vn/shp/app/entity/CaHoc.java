@@ -17,7 +17,7 @@ public class CaHoc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "cahoc_ID_SEQ")
 	@SequenceGenerator(name = "cahoc_ID_SEQ", sequenceName = "cahoc_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long caHocId;
 	
 	@NotEmpty

@@ -25,7 +25,7 @@ public class HocVi implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "hocvi_ID_SEQ")
 	@SequenceGenerator(name = "hocvi_ID_SEQ", sequenceName = "hocvi_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long hocViId;
 
 	@NotEmpty

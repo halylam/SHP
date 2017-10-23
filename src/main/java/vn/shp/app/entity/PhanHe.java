@@ -17,7 +17,7 @@ public class PhanHe implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "phanhe_ID_SEQ")
 	@SequenceGenerator(name = "phanhe_ID_SEQ", sequenceName = "phanhe_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long phanHeId;
 	
 	@NotEmpty

@@ -30,7 +30,7 @@ public class ChuyenNganh implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "chuyennganh_ID_SEQ")
 	@SequenceGenerator(name = "chuyennganh_ID_SEQ", sequenceName = "chuyennganh_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long chuyenNganhId;
 	
 	@NotEmpty

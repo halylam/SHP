@@ -29,7 +29,7 @@ public class BoMon implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "bomon_ID_SEQ")
 	@SequenceGenerator(name = "bomon_ID_SEQ", sequenceName = "bomon_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long boMonId;
 	
 	@NotEmpty

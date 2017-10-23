@@ -17,7 +17,7 @@ public class TonGiao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "tongiao_ID_SEQ")
 	@SequenceGenerator(name = "tongiao_ID_SEQ", sequenceName = "tongiao_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long tonGiaoId;
 	
 	@NotEmpty

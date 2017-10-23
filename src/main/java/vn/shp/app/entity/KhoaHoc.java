@@ -32,7 +32,7 @@ public class KhoaHoc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "khoahoc_ID_SEQ")
 	@SequenceGenerator(name = "khoahoc_ID_SEQ", sequenceName = "khoahoc_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long khoaHocId;
 	
 	@NotEmpty

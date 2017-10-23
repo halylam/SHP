@@ -17,7 +17,7 @@ public class TrangThai implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "trangthai_ID_SEQ")
 	@SequenceGenerator(name = "trangthai_ID_SEQ", sequenceName = "trangthai_SEQ", allocationSize = 1)
-	@Column(name = "id")
+	@Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
 	private Long trangThaiId;
 	
 	@NotEmpty
