@@ -15,7 +15,7 @@ public class HocVienDk implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HV_KH_ID_SEQ")
     @SequenceGenerator(name = "HV_KH_ID_SEQ", sequenceName = "HV_KH_SEQ", allocationSize = 1)
-    @Column(name = "id", columnDefinition = "INT(10) UNSIGNED")
+    @Column(name = "id")
     private Long id;
     
     @ManyToOne

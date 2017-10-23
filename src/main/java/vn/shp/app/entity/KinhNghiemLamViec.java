@@ -29,7 +29,7 @@ public class KinhNghiemLamViec implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "KN_LAM_VIEC_ID_SEQ")
     @SequenceGenerator(name = "KN_LAM_VIEC_ID_SEQ", sequenceName = "KN_LAM_VIEC_SEQ", allocationSize = 1)
-    @Column(name = "ID", columnDefinition = "INT(10) UNSIGNED")
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "VI_TRI", length = 250)
