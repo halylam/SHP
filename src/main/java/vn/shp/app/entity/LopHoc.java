@@ -42,8 +42,9 @@ public class LopHoc implements Serializable {
 	@Column(name = "succhua")
 	private int sucChua;
 
-	@Column(name = "soluonghv")
-	private int soLuongHV;
+	@NotNull
+	@Column(name = "soluonghv", columnDefinition="INT(10) DEFAULT 0")
+	private int soLuongHV = 0;
 
 	@ManyToOne
 	@JoinColumn(name = "id_loailophoc")

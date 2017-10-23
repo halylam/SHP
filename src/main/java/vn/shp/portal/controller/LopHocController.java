@@ -27,6 +27,7 @@ import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.KhoaHocModel;
 import vn.shp.portal.model.LopHocModel;
 import vn.shp.portal.model.LopHocModel;
+import vn.shp.portal.service.HocVienDkService;
 import vn.shp.portal.service.HocVienService;
 import vn.shp.portal.service.KhoaHocService;
 import vn.shp.portal.service.LoaiLopHocService;
@@ -63,6 +64,9 @@ public class LopHocController {
 
     @Autowired
     LopHocHocVienService lopHocHocVienService;
+
+    @Autowired
+    HocVienDkService hocVienDkService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
@@ -130,7 +134,9 @@ public class LopHocController {
         bean.setEntity(lopHoc);
         model.addAttribute("lstLoaiLopHoc", loaiLopHocService.findAll());
         model.addAttribute("lstKhoaHoc", khoaHocService.findAll());
-        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lstHocVien", hocVienDkService.findByMaKhoaHoc(lopHoc.getKhoaHoc().getKhoaHocId()));
+
+
         List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(lopHoc.getLopHocId());
         bean.setListLhhv(lopHocHocVienList);
         LopHocHocVien lhhv = new LopHocHocVien();
@@ -146,8 +152,9 @@ public class LopHocController {
     public ModelAndView addLopHocHocVien(Model model, LopHocModel bean, Locale locale) {
         MessageList messageLst = new MessageList(Message.SUCCESS);
         String msgInfo = "";
+        LopHoc lopHoc = null;
         try {
-            LopHoc lopHoc = lopHocService.findOne(bean.getLhhv().getLopHoc().getLopHocId());
+            lopHoc = lopHocService.findOne(bean.getLhhv().getLopHoc().getLopHocId());
             if(lopHoc != null && lopHoc.getSoLuongHV() < lopHoc.getSucChua()) {
                 lopHocHocVienService.save(bean.getLhhv());
                 lopHoc.setSoLuongHV(lopHoc.getSoLuongHV()+1);
@@ -165,9 +172,9 @@ public class LopHocController {
         List<LopHocHocVien> lopHocHocVienList = lopHocHocVienService.findByLopHocId(bean.getLhhv().getLopHoc().getLopHocId());
         bean.setListLhhv(lopHocHocVienList);
         LopHocHocVien lhhv = new LopHocHocVien();
-        lhhv.setLopHoc(lopHocService.findOne(bean.getLhhv().getLopHoc().getLopHocId()));
+        lhhv.setLopHoc(lopHoc);
         bean.setLhhv(lhhv);
-        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lstHocVien", hocVienDkService.findByMaKhoaHoc(lopHoc.getKhoaHoc().getKhoaHocId()));
         model.addAttribute("lopHocModel", bean);
         messageLst.add(msgInfo);
         model.addAttribute(CoreConstant.MSG_LST, messageLst);
@@ -198,7 +205,7 @@ public class LopHocController {
         lhhv.setLopHoc(entity.getLopHoc());
         bean.setLhhv(lhhv);
 
-        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lstHocVien", hocVienDkService.findByMaKhoaHoc(entity.getLopHoc().getKhoaHoc().getKhoaHocId()));
         model.addAttribute("lopHocModel", bean);
         messageLst.add(msgInfo);
         model.addAttribute(CoreConstant.MSG_LST, messageLst);
@@ -234,7 +241,7 @@ public class LopHocController {
         LopHocHocVien lhhv = new LopHocHocVien();
         lhhv.setLopHoc(entity);
         bean.setLhhv(lhhv);
-        model.addAttribute("lstHocVien", hocVienService.findAll());
+        model.addAttribute("lstHocVien", hocVienDkService.findByMaKhoaHoc(entity.getKhoaHoc().getKhoaHocId()));
         model.addAttribute("khoaHocModel", bean);
         return "portal/lophoc/lophoc_edit";
     }
