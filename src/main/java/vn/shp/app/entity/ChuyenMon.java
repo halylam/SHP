@@ -37,7 +37,7 @@ public class ChuyenMon implements Serializable {
 	private String chuyenMonName;
 
 	@NotNull
-	@Column(name = "trangthai", columnDefinition="BIT DEFAULT 1", length = 1)
+	@Column(name = "trangthai", columnDefinition="TINYINT(1) DEFAULT 1")
 	private boolean trangThai;
 
 }
