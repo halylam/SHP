@@ -48,5 +48,10 @@ public class LopHocServiceImpl implements LopHocService {
 	public LopHoc findByLopHocCode(String lopHocCode) {
 		return lopHocRepo.findByLopHocCode(lopHocCode);
 	}
+
+	@Override
+	public List<LopHoc> searchByFilters(String lopHocName, String lopHocCode) {
+		return lopHocRepo.findBy(lopHocName, lopHocCode);
+	}
 	
 }

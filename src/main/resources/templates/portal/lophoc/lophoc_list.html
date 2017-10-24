@@ -1,171 +1,165 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head th:replace="portal/fragments/head :: head">
-</head>
+<head th:replace="portal/fragments/head :: head"></head>
 
 <body class="nav-md skin-brown">
 <div class="container body">
-    <div class="main_container">
-        <div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar">
-        </div>
-        <div class="top_nav" th:replace="portal/fragments/header :: topNav">
-        </div>
+	<div class="main_container">
+		<div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
+		<div class="top_nav" th:replace="portal/fragments/header :: topNav"></div>
 
-        <!-- Main-->
-        <div class="main_content" role="main">
-            <div class="container-fluid top-heading">
-                <h1 class="">Tìm kiếm lớp học </h1>
+		<!-- Main-->
+		<div class="main_content" role="main">
+			<div class="container-fluid top-heading">
+				<h1 class="">Tìm kiếm lớp học </h1>
 
-                <div class="pull-right hidden-xs">
-                    <div class="btn-group">
-                        <a th:href="@{/portal/lophoc/create}">
-                            <button type="button" class="btn btn-default">Tạo mới</button>
-                        </a>
-                        <a th:href="@{/portal/lophoc/import}">
-                            <button type="button" class="btn btn-default">Import</button>
-                        </a>
-                        <a th:href="@{/portal/lophoc/export}">
-                            <button type="button" class="btn btn-default">Export PDF</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+				<div class="pull-right hidden-xs">
+					<div class="btn-group">
+						<a th:href="@{/portal/lophoc/create}">
+							<button type="button" class="btn btn-default">Tạo mới</button>
+						</a>
+						<a th:href="@{/portal/lophoc/import}">
+							<button type="button" class="btn btn-default">Import</button>
+						</a>
+						<a th:href="@{/portal/lophoc/export}">
+							<button type="button" class="btn btn-default">Export PDF</button>
+						</a>
+					</div>
+				</div>
+			</div>
 
-            <div class="container-fluid">
+			<div class="container-fluid">
 
-                <section class="section bgTrans">
-                    <div class="section-content">
-                        <form th:object="${bean}" method="post" th:action="@{/portal/lophoc/list}">
-                            <!-- Content here -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-12 ">
-                                        <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
-                                            <input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
-                                                   type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+				<section class="section bgTrans">
+					<div class="section-content">
+						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
+						<form th:action="@{/portal/lophoc/list}" th:object="${lopHocModel}" method="post" role="form" id="lophoc-form">
+							<!-- Content here -->
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-12 ">
+										<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocCode">Mã lớp học</label>
+											<input id="lopHocCode" class="form-control col-md-7 col-xs-12"
+												th:field="${lopHocModel.entity.lopHocCode}" placeholder="" type="text">
+											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocName">Tên lớp học</label>
+											<div class="col-md-5 col-sm-5 col-xs-12">
+												<input id="lopHocName" class="form-control col-md-7 col-xs-12"
+													th:field="${lopHocModel.entity.lopHocName}" placeholder="" type="text">
+											</div>
+										</div>
+										<div class="btn-group">
+											<button class="btn btn-primary" id="btn-submit">Tìm Kiếm</button>
+										</div>
+									</div>
+								</div>
+							</div>
 
-                            <section class="section"> <!-- Start section table -->
+							<section class="section"> <!-- Start section table -->
 
-                                <div class="section-header">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h2 class="heading">Danh sách lớp học </h2>
-                                            <h3 class="sub-heading">Danh sách lớp học tìm thấy theo từ khóa  </h3>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="section-header">
+									<div class="row">
+										<div class="col-sm-12">
+											<h2 class="heading">Danh sách lớp học </h2>
+											<h3 class="sub-heading">Danh sách lớp học tìm thấy theo từ khóa </h3>
+										</div>
+									</div>
+								</div>
 
-                                <div class="section-content">
-                                    <!-- Content here -->
-                                    <div class="table-shp">
-                                        <table class="table table1 bulk_action">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div class="checkbox checkbox-success">
-                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
-                                                </th>
-                                                <th>Mã lớp học </th>
-                                                <th>Tên lớp học </th>
-                                                <th>Loại lớp học </th>
-                                                <th>Số hv đang học</th>
-                                                <th>Sức chứa (người) </th>
-                                                <th>Khóa học </th>
-                                                <th>Bắt đầu </th>
-                                                <th>Kết thúc </th>
-                                                <th>Thao tác </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="lopHoc,i : ${bean.data}">
-                                                <td>
-                                                    <div class="checkbox checkbox-success">
-                                                        <input id="checkbox1" type="checkbox" class="flat check-all">
-                                                        <label for="checkbox1"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}" th:title="${lopHoc.lopHocCode}"
-                                                    th:text="${lopHoc.lopHocCode}">HV0001</a></td>
-                                                <td th:text="${lopHoc.lopHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${lopHoc.loaiLopHoc.loaiLopHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${lopHoc.soLuongHV}">Ẩm thực châu Á</td>
-                                                <td th:text="${lopHoc.sucChua}">Ẩm thực châu Á</td>
-                                                <td th:text="${lopHoc.khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
-                                                <td th:text="${#dates.format(lopHoc.khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
-                                                <td th:text="${#dates.format(lopHoc.khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
-                                                <td>
-                                                    <a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}">
-                                                        <button class="btn btn-default btn-sm" type="button"
-                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
-                                                        th:href="@{/portal/lophoc/delete/{id}(id=${lopHoc.lopHocId})}">
-                                                        <button class="btn btn-default btn-sm" type="button"
-                                                            th:attr="data-msg-confirm=#{message.confirm.delete.content}"
-                                                            sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_DELETE')">
-                                                            <i class="fa fa-trash-o"></i>
-                                                        </button>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+								<div class="section-content">
+									<!-- Content here -->
+									<div class="table-shp">
+										<table class="table table1 bulk_action" id="myTable">
+											<thead>
+											<tr>
+												<th>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</th>
+												<th>Mã lớp học</th>
+												<th>Tên lớp học</th>
+												<th>Loại lớp học</th>
+												<th>Số hv đang học</th>
+												<th>Sức chứa (người)</th>
+												<th>Khóa học</th>
+												<th>Bắt đầu</th>
+												<th>Kết thúc</th>
+												<th>Thao tác</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="lopHoc,i : ${lopHocModel.data}">
+												<td>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</td>
+												<td><a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}"
+													th:title="${lopHoc.lopHocCode}" th:text="${lopHoc.lopHocCode}">HV0001</a></td>
+												<td th:text="${lopHoc.lopHocName}">Ẩm thực châu Á</td>
+												<td th:text="${lopHoc.loaiLopHoc.loaiLopHocName}">Ẩm thực châu Á</td>
+												<td th:text="${lopHoc.soLuongHV}">Ẩm thực châu Á</td>
+												<td th:text="${lopHoc.sucChua}">Ẩm thực châu Á</td>
+												<td th:text="${lopHoc.khoaHoc.khoaHocName}">Ẩm thực châu Á</td>
+												<td th:text="${#dates.format(lopHoc.khoaHoc.timeFrom, 'dd/MM/yyyy')}"></td>
+												<td th:text="${#dates.format(lopHoc.khoaHoc.timeTo, 'dd/MM/yyyy')}"></td>
+												<td>
+													<a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}">
+														<button class="btn btn-default btn-sm" type="button"
+															sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')">
+															<i class="fa fa-edit"></i>
+														</button>
+													</a>
+													<a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này không?');"
+														th:href="@{/portal/lophoc/delete/{id}(id=${lopHoc.lopHocId})}">
+														<button class="btn btn-default btn-sm" type="button"
+															th:attr="data-msg-confirm=#{message.confirm.delete.content}"
+															sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_DELETE')">
+															<i class="fa fa-trash-o"></i>
+														</button>
+													</a>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<!-- End Content here -->
+								</div>
 
-                                    <div class="paginations">
-                                        <ul class="pagination">
-                                            <li><a href="#">Previous</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">Next</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- End Content here -->
-                                </div>
+							</section> <!-- End section table -->
 
-                            </section> <!-- End section table -->
+							<!-- End Content here -->
+						</form>
+					</div>
 
-                            <!-- End Content here -->
-                        </form>
-                    </div>
+					<div class="section-footer">
+						<div class="btn-group">
+							<a th:href="@{/portal/lophoc/list}">
+								<button type="button" class="btn btn-default">Đóng</button>
+							</a>
+						</div>
+					</div>
+				</section> <!-- End section -->
 
-                    <div class="section-footer">
-                        <div class="btn-group">
-                            <a th:href="@{/portal/lophoc/list}">
-                                <button type="button" class="btn btn-default">Đóng</button>
-                            </a>
-                        </div>
-                    </div>
-                </section> <!-- End section -->
-
-
-            </div>
-        </div>
-        <!-- /Main -->
-        <footer th:replace="portal/fragments/footer :: footer">
-        </footer>
-    </div>
+			</div>
+		</div>
+		<!-- /Main -->
+		<footer th:replace="portal/fragments/footer :: footer"></footer>
+	</div>
 </div>
-
 
 <!-- .Popup detail view Task list -->
 <!--<div class="control-sidebar-bg"></div>-->
 <!---->
 <!-- Config template -->
-
-
+<script>
+	$(document).ready(function () {
+		$('#myTable').DataTable();
+	});
+</script>
 </body>
 </html>
 

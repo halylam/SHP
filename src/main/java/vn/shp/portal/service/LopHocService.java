@@ -17,4 +17,6 @@ public interface LopHocService {
 	void delete(LopHoc entity);
 
 	LopHoc findByLopHocCode(String lopHocCode);
+
+	List<LopHoc> searchByFilters(String lopHocName, String lopHocCode);
 }
