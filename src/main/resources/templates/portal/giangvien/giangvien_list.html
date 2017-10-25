@@ -55,7 +55,7 @@
                             <div class="section-content">
                                 <!-- Content here -->
                                 <div class="table-shp">
-                                    <table class="table table1 bulk_action">
+                                    <table class="table table1 bulk_action" id="myTable">
                                         <thead>
                                         <tr>
                                             <th>
@@ -103,18 +103,6 @@
                                     </table>
                                 </div>
 
-                                <div class="paginations">
-                                    <ul class="pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>
                                 <!-- End Content here -->
                             </div>
 
@@ -145,7 +133,11 @@
 <!--<div class="control-sidebar-bg"></div>-->
 <!---->
 <!-- Config template -->
-
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
 
 </body>
 </html>
