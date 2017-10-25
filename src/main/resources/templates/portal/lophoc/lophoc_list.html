@@ -36,23 +36,22 @@
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 						<form th:action="@{/portal/lophoc/list}" th:object="${lopHocModel}" method="post" role="form" id="lophoc-form">
 							<!-- Content here -->
+
+
 							<div class="row">
-								<div class="col-sm-12">
-									<div class="col-sm-12 ">
-										<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocCode">Mã lớp học</label>
-											<input id="lopHocCode" class="form-control col-md-7 col-xs-12"
-												th:field="${lopHocModel.entity.lopHocCode}" placeholder="" type="text">
-											<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocName">Tên lớp học</label>
-											<div class="col-md-5 col-sm-5 col-xs-12">
-												<input id="lopHocName" class="form-control col-md-7 col-xs-12"
-													th:field="${lopHocModel.entity.lopHocName}" placeholder="" type="text">
-											</div>
-										</div>
-										<div class="btn-group">
-											<button class="btn btn-primary" id="btn-submit">Tìm Kiếm</button>
-										</div>
+								<div class="item form-group col-xs-12">
+
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocCode">Mã lớp học</label>
+									<div class="col-md-3 col-sm-3  col-xs-12">
+										<input id="lopHocCode" class="form-control col-md-3 col-xs-4" th:field="${lopHocModel.entity.lopHocCode}" placeholder="" type="text">
 									</div>
+								</div>
+								<div class="item form-group col-xs-12">
+									<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocName">Tên lớp học</label>
+									<div class="col-md-7 col-sm-7 col-xs-12">
+										<input id="lopHocName" class="form-control col-md-7 col-xs-12" th:field="${lopHocModel.entity.lopHocName}" placeholder="" type="text">
+									</div>
+									<button class="btn btn-primary pull-left" id="btn-submit">Tìm Kiếm</button>
 								</div>
 							</div>
 
@@ -73,12 +72,6 @@
 										<table class="table table1 bulk_action" id="myTable">
 											<thead>
 											<tr>
-												<th>
-													<div class="checkbox checkbox-success">
-														<input id="checkbox1" type="checkbox" class="flat check-all">
-														<label for="checkbox1"></label>
-													</div>
-												</th>
 												<th>Mã lớp học</th>
 												<th>Tên lớp học</th>
 												<th>Loại lớp học</th>
@@ -92,12 +85,7 @@
 											</thead>
 											<tbody>
 											<tr th:each="lopHoc,i : ${lopHocModel.data}">
-												<td>
-													<div class="checkbox checkbox-success">
-														<input id="checkbox1" type="checkbox" class="flat check-all">
-														<label for="checkbox1"></label>
-													</div>
-												</td>
+
 												<td><a th:href="@{/portal/lophoc/edit/{id}(id=${lopHoc.lopHocId})}"
 													th:title="${lopHoc.lopHocCode}" th:text="${lopHoc.lopHocCode}">HV0001</a></td>
 												<td th:text="${lopHoc.lopHocName}">Ẩm thực châu Á</td>
@@ -153,13 +141,14 @@
 
 <!-- .Popup detail view Task list -->
 <!--<div class="control-sidebar-bg"></div>-->
-<!---->
+
 <!-- Config template -->
 <script>
 	$(document).ready(function () {
 		$('#myTable').DataTable();
 	});
 </script>
+
 </body>
 </html>
 
