@@ -7,7 +7,7 @@ public class CoreConstant {
 	public static final String MSG_LST = "messageLst";
 	public static final String CONST_PAGE = "page";
 
-	public static final Integer DATA_TABLE_LIMIT = 20;
+	public static final Integer DATA_TABLE_LIMIT = 300;
 	
 	public static final String MSG_ERROR_CREATE = "message.error.create.label";
     public static final String MSG_ERROR_UPDATE = "message.error.update.label";

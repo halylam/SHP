@@ -3,9 +3,12 @@ package vn.shp.portal.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.ChuyenNganh;
+import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.repository.ChuyenNganhRepository;
 import vn.shp.portal.service.ChuyenNganhService;
 
@@ -17,7 +20,8 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
 
 	@Override
 	public List<ChuyenNganh> findAll() {
-		List<ChuyenNganh> chuyenNganhLst = chuyenNganhRepo.findAll();
+		Pageable pageable = new PageRequest(0, CoreConstant.DATA_TABLE_LIMIT);
+		List<ChuyenNganh> chuyenNganhLst = chuyenNganhRepo.findAll(pageable).getContent();
 		return chuyenNganhLst;
 	}
 

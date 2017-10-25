@@ -1,9 +1,12 @@
 package vn.shp.portal.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.GiangVien;
+import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.repository.GiangVienRepository;
 import vn.shp.portal.repository.KinhNghiemLamViecRepository;
 import vn.shp.portal.service.GiangVienService;
@@ -23,7 +26,8 @@ public class GiangVienServiceImpl implements GiangVienService {
 
 	@Override
 	public List<GiangVien> findAll() {
-		List<GiangVien> entityLst = giangVienRepository.findAll();
+		Pageable pageable = new PageRequest(0, CoreConstant.DATA_TABLE_LIMIT);
+		List<GiangVien> entityLst = giangVienRepository.findAll(pageable).getContent();
 		return entityLst;
 	}
 

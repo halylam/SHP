@@ -1,13 +1,16 @@
 package vn.shp.portal.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.BacDaoTao;
+import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.repository.BacDaoTaoRepository;
 import vn.shp.portal.service.BacDaoTaoService;
-
-import java.util.List;
 
 @Service("BacDaoTaoService")
 public class BacDaoTaoServiceImpl implements BacDaoTaoService {
@@ -17,7 +20,8 @@ public class BacDaoTaoServiceImpl implements BacDaoTaoService {
 
 	@Override
 	public List<BacDaoTao> findAll() {
-		List<BacDaoTao> bacDaoTaoLst = bacDaoTaoRepo.findAll();
+		Pageable pageable = new PageRequest(0, CoreConstant.DATA_TABLE_LIMIT);
+		List<BacDaoTao> bacDaoTaoLst = bacDaoTaoRepo.findAll(pageable).getContent();
 		return bacDaoTaoLst;
 	}
 

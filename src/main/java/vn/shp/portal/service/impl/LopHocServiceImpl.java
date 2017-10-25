@@ -3,9 +3,12 @@ package vn.shp.portal.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.LopHoc;
+import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.repository.LopHocRepository;
 import vn.shp.portal.service.LopHocService;
 
@@ -17,7 +20,8 @@ public class LopHocServiceImpl implements LopHocService {
 
 	@Override
 	public List<LopHoc> findAll() {
-		List<LopHoc> lopHocLst = lopHocRepo.findAll();
+		Pageable pageable = new PageRequest(0, CoreConstant.DATA_TABLE_LIMIT);
+		List<LopHoc> lopHocLst = lopHocRepo.findAll(pageable).getContent();
 		return lopHocLst;
 	}
 

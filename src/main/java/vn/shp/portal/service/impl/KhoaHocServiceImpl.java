@@ -1,9 +1,12 @@
 package vn.shp.portal.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.KhoaHoc;
+import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.dao.KhoaHocDao;
 import vn.shp.portal.repository.KhoaHocRepository;
 import vn.shp.portal.service.KhoaHocService;
@@ -22,7 +25,8 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 
 	@Override
 	public List<KhoaHoc> findAll() {
-		List<KhoaHoc> khoaHocLst = khoaHocRepo.findAll();
+		Pageable pageable = new PageRequest(0, CoreConstant.DATA_TABLE_LIMIT);
+		List<KhoaHoc> khoaHocLst = khoaHocRepo.findAll(pageable).getContent();
 		return khoaHocLst;
 	}
 
