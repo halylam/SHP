@@ -1,5 +1,7 @@
 package vn.shp.portal.constant;
 
+import vn.shp.app.config.SystemConfig;
+
 public class CoreConstant {
 	
 	// Config
@@ -7,8 +9,8 @@ public class CoreConstant {
 	public static final String MSG_LST = "messageLst";
 	public static final String CONST_PAGE = "page";
 
-	public static final Integer DATA_TABLE_LIMIT = 300;
-	
+	public static final Integer DATA_TABLE_LIMIT = SystemConfig.DATA_TABLE_LIMIT;
+
 	public static final String MSG_ERROR_CREATE = "message.error.create.label";
     public static final String MSG_ERROR_UPDATE = "message.error.update.label";
     public static final String MSG_ERROR_SAVE = "message.error.save.label";

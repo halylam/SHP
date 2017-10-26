@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vn.shp.app.entity.Location;
 import vn.shp.app.service.LocationService;
+import vn.shp.portal.entity.PortalConfig;
+import vn.shp.portal.service.PortalConfigService;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ public class SystemConfig {
     @Autowired
     LocationService locationService;
 
+    @Autowired
+    PortalConfigService portalConfigService;
 
     Map<String, String> lstCardType = new LinkedHashMap<>();
 
@@ -38,11 +42,14 @@ public class SystemConfig {
 
     List<Location> lstDebLoc = new ArrayList<>();
 
-
+    List<PortalConfig> lstConfig = new ArrayList<PortalConfig>();
 
     Map<String, String> mapDebLoc = new LinkedHashMap<>();
 
     Map<String, String> lstRelationship = new LinkedHashMap<>();
+
+    public static Integer DATA_TABLE_LIMIT = 300;
+
 
     @PostConstruct
     public void init() {
@@ -83,6 +90,12 @@ public class SystemConfig {
         for (Location loc : lstDebLoc) {
             mapDebLoc.put(loc.getLocCode(), loc.getLocName());
         }
+
+        PortalConfig portalConfig = portalConfigService.find("SHP", "DATA_TABLE_LIMIT");
+        if (portalConfig != null) {
+            DATA_TABLE_LIMIT = Integer.parseInt(portalConfigService.find("SHP", "DATA_TABLE_LIMIT").getConfigValue());
+        }
+
 //
 //        log.info("Init value name: " + String.format("%30s", "lstRelationship") + "\t - With value: bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_BWT_RELATIONSHIP)");
 //        lstRelationship = bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_BWT_RELATIONSHIP);
