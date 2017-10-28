@@ -69,9 +69,9 @@ public class PortalUser implements Serializable {
 	@JoinColumn(name = "DEPARTMENT_ID")
 	private PortalDepartment department;
 
-	@ManyToOne	
-	@JoinColumn(name = "TITLE_ID")
-	private PortalTitle title;
+//	@ManyToOne
+//	@JoinColumn(name = "TITLE_ID")
+//	private PortalTitle title;
 
 	@ManyToOne
 	@JoinColumn(name = "BRANCH_ID")

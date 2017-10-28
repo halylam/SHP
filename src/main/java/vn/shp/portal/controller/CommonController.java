@@ -20,7 +20,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("common")
-public class CommonController {
+public class CommonController extends AbstractController{
 
     @Autowired
     SystemConfig systemConfig;
@@ -28,13 +28,9 @@ public class CommonController {
     @Autowired
     AlfFileService alfFileService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
 
     @RequestMapping(value = "/ajax_loadLocationDet", method = RequestMethod.GET)
     public @ResponseBody

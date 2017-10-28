@@ -17,9 +17,6 @@ public class PortalGroup {
 	@Column(name = "GROUP_ID")
 	private Long groupId;
 
-	@Column(name = "GROUP_KEYCLOAK_ID")
-	private String groupKeycloakId;
-	
 	@NotEmpty
 	@Column(name = "GROUP_NAME")
 	private String groupName;

@@ -54,8 +54,8 @@ public class PortalUserController {
 	@Autowired
 	PortalDepartmentService portalDepartmentService;
 
-	@Autowired
-	PortalTitleService portalTitleService;
+//	@Autowired
+//	PortalTitleService portalTitleService;
 
 
 	@ModelAttribute("portalUserModel")
@@ -65,7 +65,7 @@ public class PortalUserController {
 		PortalUser portalUser = new PortalUser();
 		portalUser.setBranch(new PortalBranch());
 		portalUser.setDepartment(new PortalDepartment());
-		portalUser.setTitle(new PortalTitle());
+//		portalUser.setTitle(new PortalTitle());
 		portalUserModel.setEntity(portalUser);
 		
 		return portalUserModel;
@@ -134,8 +134,8 @@ public class PortalUserController {
 		portalUserModel.setDepartmentLst(departmentLst);
 
 		// List title
-		List<PortalTitle> titleLst = portalTitleService.findAll();
-		portalUserModel.setTitleLst(titleLst);
+//		List<PortalTitle> titleLst = portalTitleService.findAll();
+//		portalUserModel.setTitleLst(titleLst);
 
 		// User keycloak
 		try {
@@ -175,7 +175,7 @@ public class PortalUserController {
 
 			branchId = portalUserModel.getEntity().getBranch().getBranchId();
 			departmentId = portalUserModel.getEntity().getDepartment().getDepartmentId();
-			titleId = portalUserModel.getEntity().getTitle().getTitleId();
+//			titleId = portalUserModel.getEntity().getTitle().getTitleId();
 			if (bindingResult.hasErrors() || branchId == null || departmentId == null) {
 				if (departmentId == null) {
 					bindingResult.rejectValue("entity.department.departmentId", "user.field.department.error.empty", null,
@@ -203,13 +203,7 @@ public class PortalUserController {
 			List<PortalGroup> groupLst = portalUserModel.getGroupRightLst();
 			user.setGroups(groupLst);
 
-			// save user to keycloak
-			List<String> groupKeyCloakIdStr = new ArrayList<String>();
-			if (!CollectionUtils.isEmpty(groupLst)) {
-				for (PortalGroup group : groupLst) {
-					groupKeyCloakIdStr.add(group.getGroupKeycloakId());
-				}
-			}
+
 
 
 			// save user
@@ -264,8 +258,8 @@ public class PortalUserController {
 			portalUserModel.setBranchLst(branchLst);
 			List<PortalDepartment> departmentLst = portalDepartmentService.findAll();
 			portalUserModel.setDepartmentLst(departmentLst);
-			List<PortalTitle> titleLst = portalTitleService.findAll();
-			portalUserModel.setTitleLst(titleLst);
+//			List<PortalTitle> titleLst = portalTitleService.findAll();
+//			portalUserModel.setTitleLst(titleLst);
 
 			mav.addObject("groupLeftLst", groupNotLst);
 			mav.addObject("groupRightLst", groupLst);
@@ -295,7 +289,7 @@ public class PortalUserController {
 		try {
 			branchId = portalUserModel.getEntity().getBranch().getBranchId();
 			departmentId = portalUserModel.getEntity().getDepartment().getDepartmentId();
-			titleId = portalUserModel.getEntity().getTitle().getTitleId();
+//			titleId = portalUserModel.getEntity().getTitle().getTitleId();
 			if (bindingResult.hasErrors() || branchId == null || departmentId == null || titleId == null) {
 				if (new Exception() instanceof DataIntegrityViolationException) {
 					bindingResult.rejectValue("entity.username", "Exists.error.code", null, "");
@@ -339,14 +333,14 @@ public class PortalUserController {
 					
 					// set danh sach group cần thêm
 					if (CollectionUtils.isEmpty(groupLstOld) || !groupLstOld.contains(group)) {
-						groupLstSave.add(group.getGroupKeycloakId());
+//						groupLstSave.add(group.getGroupKeycloakId());
 					}
 				}
 			}
 			if (!CollectionUtils.isEmpty(groupLstOld)) {
 				for (PortalGroup group : groupLstOld) {
 					if (CollectionUtils.isEmpty(groupLstNew) || !groupLstNew.contains(group)) {
-						groupLstDel.add(group.getGroupKeycloakId());
+//						groupLstDel.add(group.getGroupKeycloakId());
 					}
 				}
 			}

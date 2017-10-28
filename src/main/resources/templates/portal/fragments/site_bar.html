@@ -14,25 +14,33 @@
             <div class="menu_section">
                 <ul class="nav side-menu">
                     <li>
-                        <a><i class="fa fa-home"></i> <span class="text-main">Học Viên</span> <span class="fa fa-chevron-down"></span></a>
+                        <a><i class="fa fa-home"></i> <span class="text-main">Học Viên</span> <span
+                                class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a th:href="@{/portal/hocvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới </a></li>
+                            <li><a th:href="@{/portal/hocvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới </a>
+                            </li>
                             <li><a th:href="@{/portal/hocvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span
+                            class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a th:href="@{/portal/giangvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới</a></li>
+                            <li><a th:href="@{/portal/giangvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới</a>
+                            </li>
                             <li><a th:href="@{/portal/giangvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-table"></i> <span class="text-main">Đào tạo</span> <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-table"></i> <span class="text-main">Đào tạo</span> <span
+                            class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a th:href="@{/portal/thoikhoabieu/list}"><i class="fa fa-star-o"></i> Thời khóa biểu</a></li>
-                            <li><a th:href="@{/portal/chuongtrinhdaotao/list}"><i class="fa fa-star-o"></i> CT Đào tạo</a></li>
-                            <li><a th:href="@{/portal/chuyennganh/list}"><i class="fa fa-star-o"></i> Chuyên ngành</a></li>
+                            <li><a th:href="@{/portal/thoikhoabieu/list}"><i class="fa fa-star-o"></i> Thời khóa
+                                biểu</a></li>
+                            <li><a th:href="@{/portal/chuongtrinhdaotao/list}"><i class="fa fa-star-o"></i> CT Đào
+                                tạo</a></li>
+                            <li><a th:href="@{/portal/chuyennganh/list}"><i class="fa fa-star-o"></i> Chuyên ngành</a>
+                            </li>
                             <li><a th:href="@{/portal/bacdaotao/list}"><i class="fa fa-star-o"></i> Bậc Đào tạo</a></li>
                             <li><a th:href="@{/portal/bomon/list}"><i class="fa fa-star-o"></i> Bộ môn </a></li>
                             <li><a th:href="@{/portal/monhoc/list}"><i class="fa fa-star-o"></i> Môn học </a></li>
@@ -41,14 +49,19 @@
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-table"></i> <span class="text-main">Khóa học </span> <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-table"></i> <span class="text-main">Khóa học </span> <span
+                            class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a th:href="@{/portal/khoahoc/create}"><i class="fa fa-star-o"></i> Tạo mới khóa học  </a></li>
-                            <li><a th:href="@{/portal/khoahoc/dangky}"><i class="fa fa-star-o"></i> Đăng ký khóa học  </a></li>
-                            <li><a th:href="@{/portal/khoahoc/list}"><i class="fa fa-star-o"></i> Danh sách khóa học </a></li>
+                            <li><a th:href="@{/portal/khoahoc/create}"><i class="fa fa-star-o"></i> Tạo mới khóa học
+                            </a></li>
+                            <li><a th:href="@{/portal/khoahoc/dangky}"><i class="fa fa-star-o"></i> Đăng ký khóa học
+                            </a></li>
+                            <li><a th:href="@{/portal/khoahoc/list}"><i class="fa fa-star-o"></i> Danh sách khóa học
+                            </a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-tags"></i> <span class="text-main">Quản lý</span> <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-tags"></i> <span class="text-main">Quản lý</span> <span
+                            class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li>
                                 <a th:href="@{/portal/quanly/hocvien}"><i class="fa fa-star-o"></i> Học viên </a>
@@ -59,6 +72,19 @@
                             </li>
                             <li><a th:href="@{/portal/quanly/giaovien}"><i class="fa fa-star-o"></i> Giáo viên</a></li>
                             <li><a th:href="@{/portal/quanly/hocvu}"><i class="fa fa-star-o"></i> Học vụ</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-tags"></i> <span class="text-main">Admin</span> <span
+                            class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li>
+                                <a th:href="@{/portal/admin/user}"><i class="fa fa-id-card-o"></i> Quản lý user</a>
+                            </li>
+                            <li><a th:href="@{/portal/admin/role}"><i class="fa fa-user-circle"></i> Quyền hệ thống</a></li>
+                            <li><a th:href="@{/portal/admin/grouprole}"><i class="fa fa-tags"></i> Nhóm quyền hệ thống</a></li>
+                            <li><a th:href="@{/portal/admin/param}"><i class="fa fa-list-ul"></i> Tham số hệ thống</a>
+                            </li>
 
                         </ul>
                     </li>

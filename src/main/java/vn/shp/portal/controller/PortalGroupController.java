@@ -68,8 +68,8 @@ public class PortalGroupController {
 	@Autowired
 	PortalDepartmentService portalDepartmentService;
 
-	@Autowired
-	PortalTitleService portalTitleService;
+//	@Autowired
+//	PortalTitleService portalTitleService;
 
 	/*@Autowired
 	KeycloakClientConfig kcClientConfig;*/

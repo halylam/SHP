@@ -20,7 +20,7 @@ public class PortalUserModel extends AbstractModel<PortalUser> {
 	
 	List<PortalDepartment> departmentLst;
 
-	List<PortalTitle> titleLst;
+//	List<PortalTitle> titleLst;
 	
 	String email;
 	
