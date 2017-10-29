@@ -36,30 +36,115 @@
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
 						<form th:action="@{/portal/user/create}" th:object="${portalUserModel}" method="post" role="form" id="user-form">
 							<div class="box box-info">
-								<div class="box-header with-border">
-									<h3 class="box-title">Thông Tin Người Dùng</h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+								<div class="border-bottom">
+									<div class="row">
+										<div class="col-sm-8">
+											<h5> Thông tin tạo mới người dùng</h5>
+										</div>
+										<div class="col-sm-4">
+											<div class="box-tools pull-right">
+												<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+												</button>
+												<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="box-body">
-									<div class="item form-group col-xs-12">
-										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="caHocCode">Username <span
-												class="required">*</span>
-										</label>
-										<div class="col-md-3 col-sm-3 col-xs-12">
-											<input id="caHocCode" class="form-control col-md-7 col-xs-12" th:field="*{entity.username}"
-												   placeholder="" required type="text">
-										</div>
+									<!-- Content here -->
+									<div class="row">
+										<div class="col-sm-12">
+											<form class="form-muted" novalidate>
 
-										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="caHocCode">Họ tên <span
-												class="required">*</span>
-										</label>
-										<div class="col-md-3 col-sm-3 col-xs-12">
-											<input id="caHocCode" class="form-control col-md-7 col-xs-12" th:field="*{entity.fullName}"
-												   placeholder="" required type="text">
+
+
+												<div class="item form-group col-xs-12">
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã User <span class="required">*</span>
+													</label>
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+												</div>
+
+												<div class="item form-group col-xs-12">
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên User  <span class="required">*</span>
+													</label>
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Email  <span class="required">*</span>
+													</label>
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+
+												</div>
+												<div class="item form-group col-xs-12">
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên đầy đủ  <span class="required">*</span>
+													</label>
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Điện thoại  <span class="required">*</span>
+													</label>
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+
+												</div>
+												<div class="item form-group col-xs-12">
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày sinh  <span class="required">*</span>
+													</label>
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+
+
+
+												</div>
+
+												<div class="item form-group col-xs-12">
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname"> Mật khẩu  <span class="required">*</span>
+													</label>
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Nhập lại mật khẩu <span class="required">*</span>
+													</label>
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													</div>
+												</div>
+
+												<div class="item form-group col-xs-12">
+													<h5> Quyền User   </h5>
+													<i> Phân quyền User  </i>
+												</div>
+
+												<div class="col-sm-12 col-xs-12">
+													<div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2 col-md-offset-2 user-border">
+														<p>Tạo mới </p>
+														<p>Chỉnh sửa </p>
+													</div>
+													<div class="col-md-2 col-sm-2 col-xs-12 text-align-center">
+														<p><button type="button" class="btn btn-default mgL0"> >> </button></p>
+														<p><button type="button" class="btn btn-default mgL0"> > </button></p>
+														<p><button type="button" class="btn btn-default mgL0"> < </button></p>
+														<button type="button" class="btn btn-default mgL0"> << </button>
+
+													</div>
+													<div class="col-md-3 col-sm-3 col-xs-12 user-border">
+														<p>Tạo mới </p> </br>
+														<p>Chỉnh sửa </p>
+													</div>
+												</div>
+
+
+
+											</form>
+
 										</div>
 									</div>
 
