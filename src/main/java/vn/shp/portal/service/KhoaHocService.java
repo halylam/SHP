@@ -19,4 +19,6 @@ public interface KhoaHocService {
 	KhoaHoc findByKhoaHocCode(String khoaHocCode);
 
     List<KhoaHoc>  findKhoaHocDangKy();
+
+	List<KhoaHoc> searchByFilters(String khoaHocName, String khoaHocCode);
 }

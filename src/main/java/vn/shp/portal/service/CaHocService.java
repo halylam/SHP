@@ -17,4 +17,6 @@ public interface CaHocService {
 	void delete(CaHoc entity);
 
 	CaHoc findByCaHocCode(String caHocCode);
+
+	List<CaHoc> searchByFilters(String caHocName, String caHocCode);
 }

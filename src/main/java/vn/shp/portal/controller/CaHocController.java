@@ -22,6 +22,8 @@ import vn.shp.portal.service.CaHocService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,6 +45,27 @@ public class CaHocController {
     public String getList(Model model, HttpServletRequest request) {
         CaHocModel bean = new CaHocModel();
         List<CaHoc> lstData = caHocService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/cahoc/cahoc_list";
+    }
+
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid CaHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<CaHoc> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(caHocService.searchByFilters(bean.getEntity().getCaHocName(), bean.getEntity().getCaHocCode()));
+        } else {
+            lstData.addAll(caHocService.findAll());
+        }
+
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

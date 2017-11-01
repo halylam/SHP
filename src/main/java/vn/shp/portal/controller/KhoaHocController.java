@@ -74,6 +74,27 @@ public class KhoaHocController {
         return "portal/khoahoc/khoahoc_list";
     }
 
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid KhoaHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<KhoaHoc> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(khoaHocService.searchByFilters(bean.getEntity().getKhoaHocName(), bean.getEntity().getKhoaHocCode()));
+        } else {
+            lstData.addAll(khoaHocService.findAll());
+        }
+
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/khoahoc/khoahoc_list";
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {

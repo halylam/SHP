@@ -52,5 +52,10 @@ public class ChuyenNganhServiceImpl implements ChuyenNganhService {
 	public ChuyenNganh findByChuyenNganhCode(String chuyenNganhCode) {
 		return chuyenNganhRepo.findByChuyenNganhCode(chuyenNganhCode);
 	}
+
+	@Override
+	public List<ChuyenNganh> searchByFilters(String chuyenNganhName, String chuyenNganhCode) {
+		return chuyenNganhRepo.findBy(chuyenNganhName, chuyenNganhCode);
+	}
 	
 }

@@ -16,6 +16,7 @@ public interface ChuongTrinhDaoTaoService {
 	
 	void delete(ChuongTrinhDaoTao entity);
 
-
 	ChuongTrinhDaoTao findByChuongTrinhDaoTaoCode(String chuongTrinhDaoTaoCode);
+
+	List<ChuongTrinhDaoTao> searchByFilters(String chuongTrinhDaoTaoName, String chuongTrinhDaoTaoCode);
 }

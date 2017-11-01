@@ -62,5 +62,10 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 	public List<KhoaHoc>  findKhoaHocDangKy(){
 		return khoaHocDao.findKhoaHocDangKy();
 	}
+
+	@Override
+	public List<KhoaHoc> searchByFilters(String khoaHocName, String khoaHocCode) {
+		return khoaHocRepo.findBy(khoaHocName, khoaHocCode);
+	}
 	
 }

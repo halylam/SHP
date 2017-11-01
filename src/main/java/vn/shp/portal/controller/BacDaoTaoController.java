@@ -1,5 +1,6 @@
 package vn.shp.portal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,6 +49,27 @@ public class BacDaoTaoController {
     public String getList(Model model, HttpServletRequest request) {
         BacDaoTaoModel bean = new BacDaoTaoModel();
         List<BacDaoTao> lstData = bacDaoTaoService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/bacdaotao/bacdaotao_list";
+    }
+
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid BacDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<BacDaoTao> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(bacDaoTaoService.searchByFilters(bean.getEntity().getBacDaoTaoName(), bean.getEntity().getBacDaoTaoCode()));
+        } else {
+            lstData.addAll(bacDaoTaoService.findAll());
+        }
+
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

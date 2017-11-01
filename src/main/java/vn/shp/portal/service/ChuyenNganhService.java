@@ -17,4 +17,6 @@ public interface ChuyenNganhService {
 	void delete(ChuyenNganh entity);
 
 	ChuyenNganh findByChuyenNganhCode(String chuyenNganhCode);
+
+	List<ChuyenNganh> searchByFilters(String chuyenNganhName, String chuyenNganhCode);
 }

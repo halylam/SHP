@@ -34,15 +34,30 @@
 							<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 							<!-- Content here -->
 
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="col-sm-12 ">
-										<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
-											<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required
-												type="text">
+							<a class="btn" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+								Tìm kiếm nâng cao <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+
+							</a>
+
+							<div class="collapse" id="collapseExample">
+
+								<div class="row">
+									<div class="item form-group col-xs-12">
+
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocCode">Mã chương trình đào tạo</label>
+										<div class="col-md-3 col-sm-3  col-xs-12">
+											<input id="lopHocCode" class="form-control col-md-3 col-xs-4" th:field="${bean.entity.chuongTrinhDaoTaoCode}" placeholder="" type="text">
 										</div>
 									</div>
+									<div class="item form-group col-xs-12">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="lopHocName">Tên chương trình đào tạo</label>
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<input id="lopHocName" class="form-control col-md-7 col-xs-12" th:field="${bean.entity.chuongTrinhDaoTaoName}" placeholder="" type="text">
+										</div>
+										<button class="btn btn-primary pull-left" id="btn-submit">Tìm Kiếm</button>
+									</div>
 								</div>
+
 							</div>
 
 							<section class="section"> <!-- Start section table -->

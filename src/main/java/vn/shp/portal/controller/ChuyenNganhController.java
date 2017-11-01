@@ -1,5 +1,6 @@
 package vn.shp.portal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,6 +50,27 @@ public class ChuyenNganhController {
     public String getList(Model model, HttpServletRequest request) {
         ChuyenNganhModel bean = new ChuyenNganhModel();
         List<ChuyenNganh> lstData = chuyenNganhService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/chuyennganh/chuyennganh_list";
+    }
+
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid ChuyenNganhModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<ChuyenNganh> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(chuyenNganhService.searchByFilters(bean.getEntity().getChuyenNganhName(), bean.getEntity().getChuyenNganhCode()));
+        } else {
+            lstData.addAll(chuyenNganhService.findAll());
+        }
+
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

@@ -52,5 +52,10 @@ public class MonHocServiceImpl implements MonHocService {
 	public MonHoc findByMonHocCode(String monHocCode) {
 		return monHocRepo.findByMonHocCode(monHocCode);
 	}
+
+	@Override
+	public List<MonHoc> searchByFilters(String monHocName, String monHocCode) {
+		return monHocRepo.findBy(monHocName, monHocCode);
+	}
 	
 }

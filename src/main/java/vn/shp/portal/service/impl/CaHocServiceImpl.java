@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.shp.app.entity.CaHoc;
+import vn.shp.app.entity.KhoaHoc;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.repository.CaHocRepository;
 import vn.shp.portal.service.CaHocService;
@@ -51,6 +52,11 @@ public class CaHocServiceImpl implements CaHocService {
 	@Override
 	public CaHoc findByCaHocCode(String caHocCode) {
 		return caHocRepo.findByCaHocCode(caHocCode);
+	}
+
+	@Override
+	public List<CaHoc> searchByFilters(String caHocName, String caHocCode) {
+		return caHocRepo.findBy(caHocName, caHocCode);
 	}
 	
 }

@@ -17,4 +17,6 @@ public interface BacDaoTaoService {
 	void delete(BacDaoTao entity);
 
 	BacDaoTao findByBacDaoTaoCode(String bacDaoTaoCode);
+
+	List<BacDaoTao> searchByFilters(String bacDaoTaoName, String bacDaoTaoCode);
 }

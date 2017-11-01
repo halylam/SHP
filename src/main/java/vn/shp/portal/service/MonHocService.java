@@ -17,4 +17,6 @@ public interface MonHocService {
 	void delete(MonHoc entity);
 
 	MonHoc findByMonHocCode(String monHocCode);
+
+	List<MonHoc> searchByFilters(String monHocName, String monHocCode);
 }

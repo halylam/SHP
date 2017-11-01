@@ -24,6 +24,8 @@ import vn.shp.portal.service.ChuongTrinhDaoTaoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,6 +47,27 @@ public class ChuongTrinhDaoTaoController {
     public String getList(Model model, HttpServletRequest request) {
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
         List<ChuongTrinhDaoTao> lstData = chuongTrinhDaoTaoService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
+    }
+
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid ChuongTrinhDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<ChuongTrinhDaoTao> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(chuongTrinhDaoTaoService.searchByFilters(bean.getEntity().getChuongTrinhDaoTaoName(), bean.getEntity().getChuongTrinhDaoTaoCode()));
+        } else {
+            lstData.addAll(chuongTrinhDaoTaoService.findAll());
+        }
+
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

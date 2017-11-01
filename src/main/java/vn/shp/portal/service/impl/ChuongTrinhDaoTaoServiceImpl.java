@@ -53,5 +53,10 @@ public class ChuongTrinhDaoTaoServiceImpl implements ChuongTrinhDaoTaoService {
 	public ChuongTrinhDaoTao findByChuongTrinhDaoTaoCode(String chuongTrinhDaoTaoCode) {
 		return chuongTrinhDaoTaoRepo.findByChuongTrinhDaoTaoCode(chuongTrinhDaoTaoCode);
 	}
+
+	@Override
+	public List<ChuongTrinhDaoTao> searchByFilters(String chuongTrinhDaoTaoName, String chuongTrinhDaoTaoCode) {
+		return chuongTrinhDaoTaoRepo.findBy(chuongTrinhDaoTaoName, chuongTrinhDaoTaoCode);
+	}
 	
 }

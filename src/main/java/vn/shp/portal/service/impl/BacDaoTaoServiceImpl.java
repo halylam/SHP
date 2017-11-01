@@ -52,5 +52,10 @@ public class BacDaoTaoServiceImpl implements BacDaoTaoService {
 	public BacDaoTao findByBacDaoTaoCode(String bacDaoTaoCode) {
 		return bacDaoTaoRepo.findByBacDaoTaoCode(bacDaoTaoCode);
 	}
+
+	@Override
+	public List<BacDaoTao> searchByFilters(String bacDaoTaoName, String bacDaoTaoCode) {
+		return bacDaoTaoRepo.findBy(bacDaoTaoName, bacDaoTaoCode);
+	}
 	
 }

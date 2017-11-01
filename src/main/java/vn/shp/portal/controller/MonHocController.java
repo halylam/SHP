@@ -26,6 +26,7 @@ import vn.shp.portal.service.MonHocService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -50,6 +51,27 @@ public class MonHocController {
     public String getList(Model model, HttpServletRequest request) {
         MonHocModel bean = new MonHocModel();
         List<MonHoc> lstData = monHocService.findAll();
+        bean.setData(lstData);
+        if (CollectionUtils.isEmpty(lstData)) {
+            MessageList messageLst = new MessageList(Message.INFO);
+            messageLst.add("Không tìm thấy thông tin");
+            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+        }
+        model.addAttribute("bean", bean);
+        return "portal/monhoc/monhoc_list";
+    }
+
+    @RequestMapping(value = "/list", method = POST)
+    public String postList(@ModelAttribute(value = "bean") @Valid MonHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
+                           RedirectAttributes redirectAttributes)
+    {
+        List<MonHoc> lstData = new ArrayList<>();
+        if (bean != null) {
+            lstData.addAll(monHocService.searchByFilters(bean.getEntity().getMonHocName(), bean.getEntity().getMonHocCode()));
+        } else {
+            lstData.addAll(monHocService.findAll());
+        }
+
         bean.setData(lstData);
         if (CollectionUtils.isEmpty(lstData)) {
             MessageList messageLst = new MessageList(Message.INFO);

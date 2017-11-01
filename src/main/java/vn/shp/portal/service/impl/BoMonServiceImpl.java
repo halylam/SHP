@@ -52,5 +52,10 @@ public class BoMonServiceImpl implements BoMonService {
 	public BoMon findByBoMonCode(String boMonCode) {
 		return boMonRepo.findByBoMonCode(boMonCode);
 	}
+
+	@Override
+	public List<BoMon> searchByFilters(String boMonName, String boMonCode) {
+		return boMonRepo.findBy(boMonName, boMonCode);
+	}
 	
 }

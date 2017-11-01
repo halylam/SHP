@@ -17,4 +17,6 @@ public interface BoMonService {
 	void delete(BoMon entity);
 
 	BoMon findByBoMonCode(String boMonCode);
+
+	List<BoMon> searchByFilters(String boMonName, String boMonCode);
 }
