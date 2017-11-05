@@ -41,9 +41,10 @@
                             <!-- Content here -->
                             <div class="row">
                                 <div class="item form-group col-xs-12">
-                                    <h5> Cập nhật hông tin học viên </h5>
+
                                     <div class="item form-group col-xs-12">
-                                        <h5> Thông tin Sinh viên </h5>
+                                        <h5> Cập nhật hông tin học viên </h5>
+                                        <i> Thông tin Sinh viên </i>
                                     </div>
 
                                     <div class="item form-group col-xs-12">
@@ -171,138 +172,143 @@
                                                    readonly type="text">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item form-group col-xs-12">
-                                    <h5> Kinh nghiệm làm việc </h5>
-                                </div>
-                                <div class="item form-group col-xs-12" id="divKnlv">
-                                    <th:block th:replace="/portal/hocvien/hocvien_knlv :: content">
-                                    </th:block>
-                                </div>
-                                <div class="item form-group col-xs-12">
-                                    <h5> Hồ sơ cá nhân </h5>
-                                </div>
-                                <form method="POST" id="formNewFile" th:action="@{/portal/hocvien/upload}"
-                                      enctype="multipart/form-data" th:object="${bean}">
-                                    <input type="hidden" th:field="*{entity.id}">
-                                    <input type="hidden" th:field="*{entity.maHocVien}">
+
                                     <div class="item form-group col-xs-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 lable-form"> File</label>
-                                            <div class="col-sm-8">
-                                                <input type="file" name="txtFile" id="txtFile"
-                                                       class="form-control col-sm-10" data-html="true"
-                                                       required multiple>
+                                        <i> Kinh nghiệm làm việc </i>
+                                    </div>
+                                    <div class="item form-group col-xs-12" id="divKnlv">
+                                        <th:block th:replace="/portal/hocvien/hocvien_knlv :: content">
+                                        </th:block>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <i> Hồ sơ cá nhân </i>
+                                    </div>
+                                    <form method="POST" id="formNewFile" th:action="@{/portal/hocvien/upload}"
+                                          enctype="multipart/form-data" th:object="${bean}">
+                                        <input type="hidden" th:field="*{entity.id}">
+                                        <input type="hidden" th:field="*{entity.maHocVien}">
+                                        <div class="item form-group col-xs-12">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 lable-form"> File</label>
+                                                <div class="col-sm-8">
+                                                    <input type="file" name="txtFile" id="txtFile"
+                                                           class="form-control col-sm-10" data-html="true"
+                                                           required multiple>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
-                                        <div class="col-md-10 col-sm-10 col-xs-12">
-                                            <table id="tbTableFile" cellspacing="0" width="100%"
-                                                   class="table table-striped" style="color: black;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width: 40px" class="text-center vhide">#</th>
-                                                    <th class="vhide">Tên File</th>
-                                                    <th>Loại Hồ Sơ</th>
-                                                    <th>Ngày Upload</th>
-                                                    <th class="vhide">Ghi Chú</th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="item,i : ${bean.lstAlfFiles}" th:id="'trFile' + ${item.id}">
-                                                    <td class="text-center">
-                                                        <span th:text="${i.count}"></span>
+                                        <div class="item form-group col-xs-12">
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+                                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                                <table id="tbTableFile" cellspacing="0" width="100%"
+                                                       class="table table-striped" style="color: black;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 40px" class="text-center vhide">#</th>
+                                                        <th class="vhide">Tên File</th>
+                                                        <th>Loại Hồ Sơ</th>
+                                                        <th>Ngày Upload</th>
+                                                        <th class="vhide">Ghi Chú</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="item,i : ${bean.lstAlfFiles}" th:id="'trFile' + ${item.id}">
+                                                        <td class="text-center">
+                                                            <span th:text="${i.count}"></span>
 
-                                                    </td>
-                                                    <td id="tdFileName" th:text="${item.name}">
+                                                        </td>
+                                                        <td id="tdFileName" th:text="${item.name}">
 
-                                                    </td>
-                                                    <td id="tdFileType">
-                                                        <span th:if="${item.type == 'CM'}">CMND</span>
-                                                        <span th:if="${item.type == 'BC'}">Bằng Cấp</span>
-                                                        <span th:if="${item.type == 'HI'}">Hình</span>
-                                                        <span th:if="${item.type == 'HK'}">Hộ Khẩu</span>
-                                                        <span th:if="${item.type == 'HB'}">Học Bạ</span>
-                                                        <span th:if="${item.type == 'SK'}">Giấy KSK</span>
-                                                    </td>
-                                                    <td>
+                                                        </td>
+                                                        <td id="tdFileType">
+                                                            <span th:if="${item.type == 'CM'}">CMND</span>
+                                                            <span th:if="${item.type == 'BC'}">Bằng Cấp</span>
+                                                            <span th:if="${item.type == 'HI'}">Hình</span>
+                                                            <span th:if="${item.type == 'HK'}">Hộ Khẩu</span>
+                                                            <span th:if="${item.type == 'HB'}">Học Bạ</span>
+                                                            <span th:if="${item.type == 'SK'}">Giấy KSK</span>
+                                                        </td>
+                                                        <td>
                                                         <span th:if="${item.dateUpload != null}"
                                                               th:text="${#dates.format(item.dateUpload, 'dd/MM/yyyy hhm:ss')}"> </span>
-                                                    </td>
-                                                    <td id="tdNote" class="text-center" th:text="${item.note}">
+                                                        </td>
+                                                        <td id="tdNote" class="text-center" th:text="${item.note}">
 
-                                                    </td>
-                                                    <td>
-                                                        <a th:onclick="'deleteFile('+ ${item.id} +');'"
-                                                           class="btn btn-danger" style="min-width: 20px;"><i
-                                                                style="color: white;"
-                                                                class="fa fa-times"
-                                                                title="Xoá kinh nghiệm làm việc."></i></a>
-                                                        <a th:href="@{/document/files/{fileid}(fileid=${item.url})}"
-                                                           target="_blank"
-                                                           class="btn btn-primary" style="min-width: 20px;"><i
-                                                                style="color: white;"
-                                                                class="glyphicon glyphicon-paperclip"
-                                                                title="Xem nội dung."></i></a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                                <tfoot style="display: none;">
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <span id="tdIndex"></span>
+                                                        </td>
+                                                        <td>
+                                                            <a th:onclick="'deleteFile('+ ${item.id} +');'"
+                                                               class="btn btn-danger" style="min-width: 20px;"><i
+                                                                    style="color: white;"
+                                                                    class="fa fa-times"
+                                                                    title="Xoá kinh nghiệm làm việc."></i></a>
+                                                            <a th:href="@{/document/files/{fileid}(fileid=${item.url})}"
+                                                               target="_blank"
+                                                               class="btn btn-primary" style="min-width: 20px;"><i
+                                                                    style="color: white;"
+                                                                    class="glyphicon glyphicon-paperclip"
+                                                                    title="Xem nội dung."></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                    <tfoot style="display: none;">
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <span id="tdIndex"></span>
 
-                                                    </td>
-                                                    <td id="tdFileName">
-                                                        <input id="txtFileName"
-                                                               class="form-control col-md-7 col-xs-12 input-lable"
-                                                               readonly type="text"
-                                                               style="width: 100%; border-bottom: none;">
-                                                    </td>
-                                                    <td id="tdFileType">
-                                                        <select id="selFileType" style="width: 100%;"
-                                                                class="form-control col-md-7 col-xs-12" required
-                                                                disabled>
-                                                            <option value=""></option>
-                                                            <option value="HI">Hình</option>
-                                                            <option value="CM">CMND</option>
-                                                            <option value="BC">Bằng Cấp</option>
-                                                            <option value="HK">Hộ Khẩu</option>
-                                                            <option value="HB">Học Bạ</option>
-                                                            <option value="SK">Giấy KSK</option>
+                                                        </td>
+                                                        <td id="tdFileName">
+                                                            <input id="txtFileName"
+                                                                   class="form-control col-md-7 col-xs-12 input-lable"
+                                                                   readonly type="text"
+                                                                   style="width: 100%; border-bottom: none;">
+                                                        </td>
+                                                        <td id="tdFileType">
+                                                            <select id="selFileType" style="width: 100%;"
+                                                                    class="form-control col-md-7 col-xs-12" required
+                                                                    disabled>
+                                                                <option value=""></option>
+                                                                <option value="HI">Hình</option>
+                                                                <option value="CM">CMND</option>
+                                                                <option value="BC">Bằng Cấp</option>
+                                                                <option value="HK">Hộ Khẩu</option>
+                                                                <option value="HB">Học Bạ</option>
+                                                                <option value="SK">Giấy KSK</option>
 
-                                                        </select>
-                                                    </td>
-<td></td>
-                                                    <td id="tdNote" class="text-center">
-                                                        <input class="form-control col-md-7 col-xs-12" type="text"
-                                                               id="txtNote"
-                                                               style="width: 100%;">
-                                                    </td>
-                                                    <td>
-                                                        <a th:onclick="'deleteFile();'"
-                                                           class="btn btn-danger" style="min-width: 20px;"><i
-                                                                style="color: white;"
-                                                                class="glyphicon glyphicon-remove-circle"
-                                                                title="Xoá kinh nghiệm làm việc."></i></a>
+                                                            </select>
+                                                        </td>
+                                                        <td></td>
+                                                        <td id="tdNote" class="text-center">
+                                                            <input class="form-control col-md-7 col-xs-12" type="text"
+                                                                   id="txtNote"
+                                                                   style="width: 100%;">
+                                                        </td>
+                                                        <td>
+                                                            <a th:onclick="'deleteFile();'"
+                                                               class="btn btn-danger" style="min-width: 20px;"><i
+                                                                    style="color: white;"
+                                                                    class="glyphicon glyphicon-remove-circle"
+                                                                    title="Xoá kinh nghiệm làm việc."></i></a>
 
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
 
-                                                </tfoot>
+                                                    </tfoot>
 
-                                            </table>
+                                                </table>
+                                            </div>
+
                                         </div>
+                                        <div class="item form-group col-xs-12">
+                                            <input type="submit" class="btn btn-primary" value="Upload File">
+                                        </div>
+                                    </form>
 
-                                    </div>
-                                    <div class="item form-group col-xs-12">
-                                        <input type="submit" class="btn btn-primary" value="Upload File">
-                                    </div>
-                                </form>
+
+                                </div>
+
+
                             </div>
                             <!-- End Content here -->
                         </div>
