@@ -331,15 +331,14 @@
 
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                            tên Cha<span class="required">*</span>
+                                            tên người giám hộ 1<span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
                                             <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
                                                     required type="text">
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email<span
-                                                class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailCha}"
@@ -355,8 +354,17 @@
                                         </div>
                                     </div>
                                     <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">
+                                            Quan hệ <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                                    required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                            tên Mẹ
+                                            tên người giám hộ 1
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
                                             <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenMe}"
@@ -375,6 +383,15 @@
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtMe}"
                                                     type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">
+                                            Quan hệ
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                                    required type="text">
                                         </div>
                                     </div>
 
@@ -406,7 +423,7 @@
                                         <!-- /Input check -->
 
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                            trường THPT <span class="required">*</span>
+                                            trường THPT
                                         </label>
                                         <div class="col-md-8 col-sm-8 col-xs-12">
                                             <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThpt}"
