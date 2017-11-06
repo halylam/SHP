@@ -59,6 +59,9 @@ public class KhoaHocController {
     @Autowired
     HocVienService hocVienService;
 
+    @Autowired
+    HocVienDkService hocVienDkService;
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
@@ -269,8 +272,7 @@ public class KhoaHocController {
         return "redirect:/portal/khoahoc/list";
     }
 
-    @Autowired
-    HocVienDkService hocVienDkService;
+
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
     @RequestMapping(value = "/dangky/{id}", method = GET)

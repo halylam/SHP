@@ -26,7 +26,7 @@
                         <a th:href="@{/portal/hocvien/list}">
                             <button type="button" class="btn btn-default"> Danh sách học viên</button>
                         </a>
-                        <button type="button" class="btn btn-default">Export PDF</button>
+
                     </div>
                 </div>
             </div>
@@ -156,21 +156,25 @@
                                             </div>
                                         </div>
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname"> Tôn giáo <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tôn giáo<span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maTonGiao}" required ="required">
                                                 <option value=""></option>
-
+                                                <option th:each="item : ${lstTonGiao}"
+                                                        th:value="${item.tonGiaoCode}"
+                                                        th:text="${item.tonGiaoName}"></option>
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" > Dân tộc <span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Dân tộc<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12" >
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maDanToc}" required ="required" >
                                                 <option value=""> </option>
-
+                                                <option th:each="item : ${lstDanToc}"
+                                                        th:value="${item.danTocCode}"
+                                                        th:text="${item.danTocName}"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -331,14 +335,14 @@
                                                 tên người giám hộ 1<span class="required">*</span>
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh1}"
                                                         required type="text">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailCha}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh1}"
                                                         required type="email">
                                             </div>
 
@@ -346,7 +350,7 @@
                                                     class="required">*</span>
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtCha}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh1}"
                                                         required type="text">
                                             </div>
                                         </div>
@@ -355,7 +359,7 @@
                                             Quan hệ <span class="required">*</span>
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh1}"
                                                     required type="text">
                                         </div>
                                     </div>
@@ -364,21 +368,21 @@
                                                 tên người giám hộ 2
                                             </label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenMe}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh2}"
                                                          type="text">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailMe}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh2}"
                                                          type="email">
                                             </div>
 
                                             <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT
                                             </label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtMe}"
+                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh2}"
                                                          type="text">
                                             </div>
                                         </div>
@@ -387,7 +391,7 @@
                                             Quan hệ
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenCha}"
+                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh2}"
                                                     required type="text">
                                         </div>
                                     </div>

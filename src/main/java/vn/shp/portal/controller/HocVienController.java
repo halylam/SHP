@@ -18,20 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.shp.app.bean.HocVienBean;
 import vn.shp.app.config.Constants;
 import vn.shp.app.config.SystemConfig;
-import vn.shp.app.entity.HocVien;
-import vn.shp.app.entity.KinhNghiemLamViec;
-import vn.shp.app.entity.Location;
+import vn.shp.app.entity.*;
 import vn.shp.app.utils.Utils;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.entity.AlfFile;
 import vn.shp.portal.entity.JsonReturn;
-import vn.shp.portal.service.AlfFileService;
-import vn.shp.portal.service.HocVienService;
-import vn.shp.portal.service.KinhNghiemLamViecService;
+import vn.shp.portal.service.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -67,6 +66,15 @@ public class HocVienController {
 
     @Autowired
     private EcmPropertyMapper propertyMapper;
+
+    @Autowired
+    HocVienDkService hocVienDkService;
+
+    @Autowired
+    TonGiaoService tonGiaoService;
+
+    @Autowired
+    DanTocService danTocService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
@@ -298,6 +306,171 @@ public class HocVienController {
         return jsonReturn;
     }
 
+    @RequestMapping(value = "/donnhaphoc/{id}", method = RequestMethod.GET)
+    public void template3Download(@PathVariable("id") Long id, HttpServletResponse response, Model model,
+                                  Locale locale) throws Exception {
+
+        HocVien entity = hocVienService.findOne(id);
+
+        if (entity != null) {
+
+
+             String maHocVien = entity.getMaHocVien();
+             String fileName = maHocVien + "_DON_DANG_KY_NHAP_HOC_" + System.currentTimeMillis() + ".xml";
+            InputStream is = getClass().getResourceAsStream("/print/DON_NHAP_HOC.xml");
+
+            String content = Utils.readFile(is);
+
+            List<HocVienDk> lstHvdk = hocVienDkService.findByMaHocVien(entity.getMaHocVien());
+            if(!CollectionUtils.isEmpty(lstHvdk)){
+                if(lstHvdk.size() > 0){
+                    content = content.replaceAll(Constants.PRI_KHOA_HOC_1, lstHvdk.get(0).getKhoaHoc().getKhoaHocName());
+                }
+                String xmlKhoaHocContent = "";
+                for (int i = 1; i < lstHvdk.size() ; i++) {
+                    xmlKhoaHocContent += Constants.PRI_KHOA_HOC_XML_CONTENT.replaceAll("KHOA_HOC", Utils.nullCheck(lstHvdk.get(i).getKhoaHoc().getKhoaHocName()));
+                }
+                content = content.replaceAll(Constants.PRI_KHOA_HOC_XML, xmlKhoaHocContent);
+            }
+
+            content = content.replaceAll(Constants.PRI_KHOA_HOC_1, "");
+            content = content.replaceAll(Constants.PRI_KHOA_HOC_XML, "");
+
+            if(entity.getGioiTinh().equals("M")){
+                content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_UNCHECK);
+            }else{
+                content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_UNCHECK);
+            }
+
+            if(entity.getTinhTrangCaNhan().equals("DH")){
+                content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_UNCHECK);
+            }else if(entity.getTinhTrangCaNhan().equals("DL")){
+                content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_UNCHECK);
+            }else{
+                content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_CHECKED);
+            }
+
+            if(entity.getHp1().equals(Constants.HP_TRON_KHOA)){
+                content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_UNCHECK);
+            }else if(entity.getHp1().equals(Constants.HP_NHIEU_DOT)){
+                content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_CHECKED);
+            }else{
+                content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_UNCHECK);
+            }
+
+            if(entity.getHp2().equals(Constants.HP_TRON_KHOA)){
+                content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
+            }else if(entity.getHp2().equals(Constants.HP_NHIEU_DOT)){
+                content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
+            }else if(entity.getHp2().equals(Constants.HP_HOC_KY)){
+                content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_CHECKED);
+            }else{
+                content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
+                content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
+            }
+
+            content = content.replaceAll(Constants.PRI_LLKC_HO_TEN, Utils.nullCheck(entity.getHoTenQh1()));
+            content = content.replaceAll(Constants.PRI_LLKC_QUAN_HE, Utils.nullCheck(entity.getLoaiQh1()));
+            content = content.replaceAll(Constants.PRI_LLKC_EMAIL, Utils.nullCheck(entity.getEmailQh1()));
+            content = content.replaceAll(Constants.PRI_LLKC_SO_DT, Utils.nullCheck(entity.getSdtQh1()));
+
+
+
+
+            content = content.replaceAll(Constants.PRI_PTHP_HO_TEN, Utils.nullCheck(entity.getNdhpHoTen()));
+            content = content.replaceAll(Constants.PRI_PTHP_DIACHI, Utils.nullCheck(entity.getNdhpDiaChi()));
+            content = content.replaceAll(Constants.PRI_PTHP_EMAIL, Utils.nullCheck(entity.getNdhpEmail()));
+            content = content.replaceAll(Constants.PRI_PTHP_SDT, Utils.nullCheck(entity.getNdhpSdt()));
+
+            content = content.replaceAll(Constants.PRI_HO_TEN_GH1, Utils.nullCheck(entity.getHoTenQh1()));
+            content = content.replaceAll(Constants.PRI_HO_TEN_GH2, Utils.nullCheck(entity.getHoTenQh2()));
+
+            content = content.replaceAll(Constants.PRI_SO_DT1, Utils.nullCheck(entity.getSdtQh1()));
+            content = content.replaceAll(Constants.PRI_SO_DT2, Utils.nullCheck(entity.getSdtQh2()));
+
+            content = content.replaceAll(Constants.PRI_EMAIL_GH1, Utils.nullCheck(entity.getEmailQh1()));
+            content = content.replaceAll(Constants.PRI_EMAIL_GH2, Utils.nullCheck(entity.getEmailQh2()));
+
+            content = content.replaceAll(Constants.PRI_QUAN_HE_1, Utils.nullCheck(entity.getLoaiQh1()));
+            content = content.replaceAll(Constants.PRI_QUAN_HE_2, Utils.nullCheck(entity.getLoaiQh2()));
+
+            content = content.replaceAll(Constants.PRI_EMAIL_SHP, Utils.nullCheck(entity.getEmailShp()));
+            content = content.replaceAll(Constants.PRI_EMAIL, Utils.nullCheck(entity.getEmail()));
+            content = content.replaceAll(Constants.PRI_SO_CMND, Utils.nullCheck(entity.getCmnd()));
+            content = content.replaceAll(Constants.PRI_MA_HOC_VIEN, Utils.nullCheck(entity.getMaHocVien()));
+            content = content.replaceAll(Constants.PRI_HO_TEN, Utils.nullCheck(entity.getHoTen()));
+            content = content.replaceAll(Constants.PRI_NGAY_SINH, Utils.nullCheck(entity.getStrNgaySinh()));
+            content = content.replaceAll(Constants.PRI_SO_DIEN_THOAI, Utils.nullCheck(entity.getSoDienThoai()));
+            content = content.replaceAll(Constants.PRI_NGAY_CAP_CMND, Utils.nullCheck(entity.getStrNgayCapCmnd()));
+            content = content.replaceAll(Constants.PRI_NOI_CAP_CMND, Utils.nullCheck(entity.getNoiCapCmnd()));
+            content = content.replaceAll(Constants.PRI_TDTA, Utils.nullCheck(entity.getTrinhDoTiengAnh()));
+
+            content = content.replaceAll(Constants.PRI_DC_THUONG_TRU, Utils.nullCheck(entity.getDiaChiThuongTru()) + ", " + entity.getXaThuongTruLoc().getLocName() + ", " + entity.getQuanThuongTruLoc().getLocName() + ", " + entity.getTinhThuongTruLoc().getLocName());
+            content = content.replaceAll(Constants.PRI_DC_TAM_TRU, Utils.nullCheck(entity.getDiaChiTamTru()) + ", " + entity.getXaTamTruLoc().getLocName() + ", " + entity.getQuanTamTruLoc().getLocName() + ", " + entity.getTinhTamTruLoc().getLocName());
+
+            String xmlKnlv = "";
+            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getId(),Constants.HOC_VIEN);
+            if(!CollectionUtils.isEmpty(lstKnlv)){
+                InputStream isKnlv = getClass().getResourceAsStream("/print/KINH_NGHIEM_LAM_VIEC.xml");
+                String contentKnlv = Utils.readFile(isKnlv);
+                for (KinhNghiemLamViec kinhNghiemLamViec : lstKnlv) {
+                   String tmp = contentKnlv;
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_TU, kinhNghiemLamViec.getStrTuNgay());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_DEN, kinhNghiemLamViec.getStrDenNgay());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_VI_TRI, kinhNghiemLamViec.getViTri());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_DIA_CHI, kinhNghiemLamViec.getDiaChi());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_TEN_CTY, kinhNghiemLamViec.getTenCongTy());
+                    xmlKnlv+=tmp;
+                }
+
+
+            }
+            content = content.replaceAll(Constants.PRI_KNLVIEC, xmlKnlv);
+            // --------BEGIN TABLE ACC ----------
+
+//            String lstAccString = entity.getLstAccount();
+//            String finalTrContent1 = fillTable(maHocVien, lstAccString, "MB03_SUB_1.xml", entity);
+//            content = content.replaceAll(Constants.AP_MB03_SUB_1, finalTrContent1);
+//
+//            finalTrContent1 = fillTable(maHocVien, lstAccString, "MB03_SUB_2.xml", entity);
+//            content = content.replaceAll(Constants.AP_MB03_SUB_2, finalTrContent1);
+
+
+            // --------END TABLE ACC ----------
+            byte[] bFile = content.getBytes();
+
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            try {
+                response.getOutputStream().write(bFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                bos.close();
+            }
+        }
+
+    }
+
     //------ModelAttribute-----
     @ModelAttribute(value = "locationCatalog")
     public List<Location> getListLocation() {
@@ -309,5 +482,15 @@ public class HocVienController {
             }
         }
         return result;
+    }
+
+    @ModelAttribute("lstTonGiao")
+    public List<TonGiao> getLstTonGiao(){
+        return tonGiaoService.findAll();
+    }
+
+    @ModelAttribute("lstDanToc")
+    public List<DanToc> getLstDanToc(){
+        return danTocService.findAll();
     }
 }

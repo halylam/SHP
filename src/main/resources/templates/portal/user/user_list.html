@@ -12,17 +12,17 @@
 		<!-- Main-->
 		<div class="main_content" role="main">
 			<div class="container-fluid top-heading">
-				<h1 class="">Tìm kiếm khóa học </h1>
+				<h1 class="">Tạo mới người dùng </h1>
 
 				<div class="pull-right hidden-xs">
 					<div class="btn-group">
-						<a th:href="@{/portal/khoahoc/create}">
+						<a th:href="@{/portal/user/create}">
 							<button type="button" class="btn btn-default">Tạo mới</button>
 						</a>
-						<a th:href="@{/portal/khoahoc/import}">
+						<a th:href="@{/portal/user/import}">
 							<button type="button" class="btn btn-default">Import</button>
 						</a>
-						<a th:href="@{/portal/khoahoc/export}">
+						<a th:href="@{/portal/user/export}">
 							<button type="button" class="btn btn-default">Export PDF</button>
 						</a>
 					</div>
@@ -34,53 +34,43 @@
 				<section class="section bgTrans">
 					<div class="section-content">
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-						<div class="box">
-							<form th:action="@{/portal/user/list}" th:object="${portalUserModel}" method="post" role="form">
+						<form th:action="@{/portal/user/create}" th:object="${portalUserModel}" method="post" role="form" id="user-form">
+							<div class="box box-info">
 								<div class="box-header with-border">
-									<h3 class="box-title" th:text="#{user.search.title}"></h3>
+									<h3 class="box-title">Thông Tin Người Dùng</h3>
 									<div class="box-tools pull-right">
-										<button data-widget="collapse" class="btn btn-box-tool" type="button">
-											<i class="fa fa-minus"></i>
+										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 										</button>
+										<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 									</div>
 								</div>
 								<div class="box-body">
+									<div class="item form-group col-xs-12">
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="caHocCode">Username <span
+												class="required">*</span>
+										</label>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input id="caHocCode" class="form-control col-md-7 col-xs-12" th:field="*{entity.username}"
+												   placeholder="" required type="text">
+										</div>
 
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label th:text="#{user.field.username}"></label>
-												<input type="text" class="form-control" th:field="*{entity.username}" id="user_username"/>
-											</div>
+										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="caHocCode">Họ tên <span
+												class="required">*</span>
+										</label>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<input id="caHocCode" class="form-control col-md-7 col-xs-12" th:field="*{entity.fullName}"
+												   placeholder="" required type="text">
 										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label th:text="#{user.field.fullname}"></label>
-												<input type="text" class="form-control" th:field="*{entity.fullName}" id="user_fullName"/>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label th:text="#{user.field.email}"></label>
-												<input type="text" class="form-control" th:field="*{entity.email}" id="user_email"/>
-											</div>
-										</div>
+									</div>
+									<div class="item form-group col-xs-12">
+										<input type="button" value="Search" class="btn btn-primary" >
 									</div>
 
 								</div>
-								<div class="box-footer">
-									<div class="row">
-										<div class="col-md-12 text-center">
-											<button type="submit" class="btn btn-primary" th:text="#{search.button}"></button>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
 
-						<div class="box box-table">
-							<th:block th:replace="portal/user/user_table :: content"/>
-						</div>
+							</div>
+
+						</form>
 					</div>
 
 					<div class="section-footer">
@@ -104,9 +94,9 @@
 <!---->
 <!-- Config template -->
 <script>
-	$(document).ready(function () {
-		$('#myTable').DataTable();
-	});
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
 </script>
 </body>
 </html>

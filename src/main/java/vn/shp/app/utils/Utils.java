@@ -558,4 +558,13 @@ public class Utils {
             return true;
         return false;
     }
+
+    public static String readFile(InputStream is) throws IOException {
+        Reader in = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(in);
+        String mess = org.apache.commons.io.IOUtils.toString(br);
+        in.close();
+        is.close();
+        return mess;
+    }
 }

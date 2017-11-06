@@ -28,7 +28,7 @@
                         <a th:href="@{/portal/khoahoc/import}">
                             <button type="button" class="btn btn-default">Import</button>
                         </a>
-                        <a th:href="@{/portal/khoahoc/export}">
+                        <a th:href="@{/portal/hocvien/donnhaphoc/{id} (id=${bean.hocVien.id})}">
                             <button type="button" class="btn btn-default">Export PDF</button>
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                                                     class="">*</span></label>
                                             <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="txtMaHocVien" class="form-control col-md-7 col-xs-12" th:field="*{hocVien.maHocVien}"
-                                                       required
+                                                       required readonly
                                                        type="text">
                                             </div>
                                             <div class="col-md-7 col-sm-7 col-xs-12" id="divMess">

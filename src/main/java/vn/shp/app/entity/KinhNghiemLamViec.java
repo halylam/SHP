@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -60,5 +61,21 @@ public class KinhNghiemLamViec implements Serializable {
 
     @Column(name = "NGUOI_TAO",length = 50)
     private String nguoiTao;
+
+    public String getStrTuNgay(){
+        if(tuNgay != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(tuNgay);
+        }
+        return "";
+    }
+
+    public String getStrDenNgay(){
+        if(denNgay != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(denNgay);
+        }
+        return "";
+    }
     
 }

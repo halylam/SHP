@@ -99,11 +99,24 @@ public class HocVien implements Serializable {
     @Column(name = "TINH_THUONG_TRU", length = 10)
     private String tinhThuongTru;
 
+    @OneToOne
+    @JoinColumn(name = "TINH_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location tinhThuongTruLoc;
+
+
     @Column(name = "QUAN_THUONG_TRU", length = 10)
     private String quanThuongTru;
 
+    @OneToOne
+    @JoinColumn(name = "QUAN_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location quanThuongTruLoc;
+
     @Column(name = "XA_THUONG_TRU", length = 10)
     private String xaThuongTru;
+
+    @OneToOne
+    @JoinColumn(name = "XA_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location xaThuongTruLoc;
 
     @Column(name = "DIA_CHI_THUONG_TRU", length = 250)
     private String diaChiThuongTru;
@@ -111,32 +124,50 @@ public class HocVien implements Serializable {
     @Column(name = "TINH_TAM_TRU", length = 10)
     private String tinhTamTru;
 
+    @OneToOne
+    @JoinColumn(name = "TINH_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location tinhTamTruLoc;
+
     @Column(name = "QUAN_TAM_TRU", length = 10)
     private String quanTamTru;
+
+    @OneToOne
+    @JoinColumn(name = "QUAN_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location quanTamTruLoc;
 
     @Column(name = "XA_TAM_TRU", length = 10)
     private String xaTamTru;
 
+    @OneToOne
+    @JoinColumn(name = "XA_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location xaTamTruLoc;
+
     @Column(name = "DIA_CHI_TAM_TRU", length = 250)
     private String diaChiTamTru;
 
-    @Column(name = "HO_TEN_CHA", length = 50)
-    private String hoTenCha;
+    @Column(name = "HO_TEN_QH1", length = 50)
+    private String hoTenQh1;
 
-    @Column(name = "EMAIL_CHA", length = 50)
-    private String emailCha;
+    @Column(name = "EMAIL_QH1", length = 50)
+    private String emailQh1;
 
-    @Column(name = "SDT_CHA", length = 15)
-    private String sdtCha;
+    @Column(name = "SDT_QH1", length = 15)
+    private String sdtQh1;
 
-    @Column(name = "HO_TEN_ME", length = 50)
-    private String hoTenMe;
+    @Column(name = "LOAI_QH1", length = 15)
+    private String loaiQh1;
 
-    @Column(name = "EMIAL_ME", length = 50)
-    private String emailMe;
+    @Column(name = "HO_TEN_QH2", length = 50)
+    private String hoTenQh2;
 
-    @Column(name = "SDT_ME", length = 15)
-    private String sdtMe;
+    @Column(name = "EMAIL_QH2", length = 50)
+    private String emailQh2;
+
+    @Column(name = "SDT_QH2", length = 15)
+    private String sdtQh2;
+
+    @Column(name = "LOAI_QH2", length = 15)
+    private String loaiQh2;
 
     @Column(name = "TRUONG_THCS", length = 250)
     private String truongThcs;
@@ -189,6 +220,20 @@ public class HocVien implements Serializable {
     @Column(name = "NGUOI_CAP_NHAP",length = 50)
     private String nguoiCapNhat;
 
+    @Column(name = "MA_TON_GIAO", length = 10)
+    private String maTonGiao;
+
+    @OneToOne
+    @JoinColumn(name = "MA_TON_GIAO", referencedColumnName = "ma", updatable = false, insertable = false)
+    private TonGiao tonGiao;
+
+    @Column(name = "MA_DAN_TOC", length = 10)
+    private String maDanToc;
+
+    @OneToOne
+    @JoinColumn(name = "MA_DAN_TOC", referencedColumnName = "ma", updatable = false, insertable = false)
+    private DanToc danToc;
+
     public void update(HocVien hv){
         this.loaiHocVien = hv.loaiHocVien;
         this.hoTen = hv.hoTen;
@@ -210,12 +255,14 @@ public class HocVien implements Serializable {
         this.quanTamTru = hv.quanTamTru;
         this.xaTamTru = hv.xaTamTru;
         this.diaChiTamTru = hv.diaChiTamTru;
-        this.hoTenCha = hv.hoTenCha;
-        this.emailCha = hv.emailCha;
-        this.sdtCha = hv.sdtCha;
-        this.hoTenMe = hv.hoTenMe;
-        this.emailMe = hv.emailMe;
-        this.sdtMe = hv.sdtMe;
+        this.hoTenQh1 = hv.hoTenQh1;
+        this.emailQh1 = hv.emailQh1;
+        this.sdtQh1 = hv.sdtQh1;
+        this.loaiQh1 = hv.loaiQh1;
+        this.hoTenQh2 = hv.hoTenQh2;
+        this.emailQh2 = hv.emailQh2;
+        this.sdtQh2 = hv.sdtQh2;
+        this.loaiQh2    = hv.loaiQh2;
         this.truongThpt = hv.truongThpt;
         this.truongThcs = hv.truongThcs;
         this.truongKhac = hv.truongKhac;
@@ -229,6 +276,8 @@ public class HocVien implements Serializable {
         this.ndhpDiaChi = hv.ndhpDiaChi;
         this.hp1  = hv.hp1;
         this.hp2= hv.hp2;
+        this.maDanToc = hv.maDanToc;
+        this.maTonGiao = hv.maTonGiao;
 
     }
 
