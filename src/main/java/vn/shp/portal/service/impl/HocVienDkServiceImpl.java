@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.HocVienDk;
+import vn.shp.portal.dao.HocVienDkDao;
+import vn.shp.portal.filter.HocVienDkFilter;
 import vn.shp.portal.repository.HocVienDkRepository;
 import vn.shp.portal.service.HocVienDkService;
 
@@ -17,6 +19,9 @@ public class HocVienDkServiceImpl implements HocVienDkService {
 
 	@Autowired
 	private HocVienDkRepository hocVienDkRepository;
+
+	@Autowired
+	private HocVienDkDao hocVienDkDao;
 
 	@Override
 	public List<HocVienDk> findAll() {
@@ -76,6 +81,11 @@ public class HocVienDkServiceImpl implements HocVienDkService {
 			return  lstHocVien;
 		}
 		return null;
+	}
+
+	@Override
+	public List<HocVienDk> searchByFilters(HocVienDkFilter filter) {
+		return hocVienDkDao.searchByFilters(filter);
 	}
 
 }

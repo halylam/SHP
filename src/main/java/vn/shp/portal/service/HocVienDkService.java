@@ -2,6 +2,7 @@ package vn.shp.portal.service;
 
 import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.HocVienDk;
+import vn.shp.portal.filter.HocVienDkFilter;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface HocVienDkService {
 	List<HocVien> findByMaKhoaHoc(String maKhoaHoc);
 
 	List<HocVien> findByMaKhoaHoc(Long khoaHocId);
+
+	List<HocVienDk> searchByFilters(HocVienDkFilter filter);
 }

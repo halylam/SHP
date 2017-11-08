@@ -22,6 +22,7 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.10" level="project" />
@@ -164,5 +165,6 @@
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-ws-policy:3.0.10" level="project" />
     <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.neethi:neethi:3.0.3" level="project" />
+    <orderEntry type="library" name="excel-mcr35-lib" level="project" />
   </component>
 </module>
