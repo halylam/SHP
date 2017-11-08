@@ -1,5 +1,6 @@
 package vn.shp.portal.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
@@ -41,6 +42,7 @@ import javax.validation.Valid;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -88,6 +90,11 @@ public class KhoaHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
+		String listExport = "";
+		for (KhoaHoc each : lstData) {
+			listExport += each.getKhoaHocId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
 		return "portal/khoahoc/khoahoc_list";
 	}
 
@@ -110,6 +117,11 @@ public class KhoaHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
+		String listExport = "";
+		for (KhoaHoc each : lstData) {
+			listExport += each.getKhoaHocId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
 		return "portal/khoahoc/khoahoc_list";
 	}
 
@@ -363,34 +375,32 @@ public class KhoaHocController {
 	}
 
 	@Transactional(readOnly = true)
-	@RequestMapping(value = "/exportXls", method = GET)
-	public void postReportGeneral(@ModelAttribute(value = "bean") @Valid KhoaHocModel bean, BindingResult bindingResult, Model model,
-								  RedirectAttributes redirectAttributes, Locale locale, HttpServletResponse response)
-	{
+	@RequestMapping(value = "/exportXls/{list}", method = GET)
+	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
 		List<KhoaHocXls> lstResGen = new ArrayList<>();
 		try {
-			int seq = 0;
-			for (KhoaHoc each : khoaHocService.findAll()) {
-				KhoaHocXls item = new KhoaHocXls();
-				item.setKhoaHocCode(each.getKhoaHocCode());
-				item.setKhoaHocName(each.getKhoaHocName());
-				item.setCtdtName(each.getBacDaoTao().getChuyenNganh().getChuongTrinhDaoTao().getChuongTrinhDaoTaoName());
-				item.setChuyenNganhName(each.getBacDaoTao().getChuyenNganh().getChuyenNganhName());
-				item.setBacDaoTaoName(each.getBacDaoTao().getBacDaoTaoName());
-				item.setBatDau(dateFormat.format(each.getTimeFrom()));
-				item.setKetThuc(dateFormat.format(each.getTimeTo()));
-				seq++;
-				item.setSeq(seq);
-				lstResGen.add(item);
+			if (StringUtils.isNotEmpty(list)) {
+				String[] arr = list.split("-");
+				for (int i = 0; i < arr.length; i++) {
+					if (StringUtils.isNotEmpty(arr[i])) {
+						KhoaHoc each = khoaHocService.findOne(Long.parseLong(arr[i]));
+						KhoaHocXls item = new KhoaHocXls();
+						item.setKhoaHocCode(each.getKhoaHocCode());
+						item.setKhoaHocName(each.getKhoaHocName());
+						item.setCtdtName(each.getBacDaoTao().getChuyenNganh().getChuongTrinhDaoTao().getChuongTrinhDaoTaoName());
+						item.setChuyenNganhName(each.getBacDaoTao().getChuyenNganh().getChuyenNganhName());
+						item.setBacDaoTaoName(each.getBacDaoTao().getBacDaoTaoName());
+						item.setBatDau(dateFormat.format(each.getTimeFrom()));
+						item.setKetThuc(dateFormat.format(each.getTimeTo()));
+						item.setSeq(i + 1);
+						lstResGen.add(item);
+					}
+				}
 			}
-			if (lstResGen.size() == 0) {
-				lstResGen.add(new KhoaHocXls());
-			}
-			InputStream file = getClass().getResourceAsStream("/print/KHOAHOC.xls");
+			InputStream file = getClass().getResourceAsStream("/print/TEMPLATE.xls");
 			List<ECell> lstECells = new ArrayList<ECell>();
 			ExcelCreator<KhoaHocXls> excelCreator = new ExcelCreator<KhoaHocXls>();
-			byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 2, lstECells);
-
+			byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 0, lstECells);
 			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 			response.addHeader("Content-Disposition", "attachment; filename=\"" + "DanhSachKhoaHoc.xls" + "\"");
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -401,11 +411,7 @@ public class KhoaHocController {
 			} finally {
 				bos.close();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

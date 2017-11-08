@@ -19,11 +19,7 @@
 						<a th:href="@{/portal/khoahoc/create}">
 							<button type="button" class="btn btn-default">Tạo mới</button>
 						</a>
-						<a th:href="@{/portal/khoahoc/import}">
-							<button type="button" class="btn btn-default">Import</button>
-						</a>
-
-						<a th:href="@{/portal/khoahoc/exportXls}">
+						<a th:href="@{/portal/khoahoc/exportXls/{list}(list=${listExport})}">
 							<button type="button" class="btn btn-default">Export Excel</button>
 						</a>
 					</div>
