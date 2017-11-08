@@ -1,10 +1,23 @@
 package vn.shp.portal.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,10 +35,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.hcm.mcr35.excel.ExcelCreator;
 import vn.hcm.mcr35.excel.entity.ECell;
-import vn.shp.app.bean.HocVienBean;
-import vn.shp.app.config.Constants;
-import vn.shp.app.entity.*;
+import vn.shp.app.entity.HocVien;
+import vn.shp.app.entity.HocVienDk;
 import vn.shp.app.entity.KhoaHoc;
+import vn.shp.app.entity.KhoaHocMonHoc;
 import vn.shp.app.utils.Utils;
 import vn.shp.app.xlsEntity.KhoaHocXls;
 import vn.shp.portal.common.PageMode;
@@ -33,20 +46,12 @@ import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.model.KhoaHocModel;
-import vn.shp.portal.model.KhoaHocModel;
-import vn.shp.portal.service.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import vn.shp.portal.service.BacDaoTaoService;
+import vn.shp.portal.service.HocVienDkService;
+import vn.shp.portal.service.HocVienService;
+import vn.shp.portal.service.KhoaHocMonHocService;
+import vn.shp.portal.service.KhoaHocService;
+import vn.shp.portal.service.MonHocService;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

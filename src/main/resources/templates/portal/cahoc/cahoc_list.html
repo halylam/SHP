@@ -22,11 +22,8 @@
                         <a th:href="@{/portal/cahoc/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
                         </a>
-                        <a th:href="@{/portal/cahoc/import}">
-                            <button type="button" class="btn btn-default">Import</button>
-                        </a>
-                        <a th:href="@{/portal/cahoc/export}">
-                            <button type="button" class="btn btn-default">Export PDF</button>
+                        <a th:href="@{/portal/cahoc/exportXls/{list}(list=${listExport})}">
+                            <button type="button" class="btn btn-default">Export Excel</button>
                         </a>
                     </div>
                 </div>

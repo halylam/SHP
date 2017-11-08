@@ -22,11 +22,8 @@
                         <a th:href="@{/portal/bomon/create}">
                             <button type="button" class="btn btn-default">Tạo mới</button>
                         </a>
-                        <a th:href="@{/portal/bomon/import}">
-                            <button type="button" class="btn btn-default">Import</button>
-                        </a>
-                        <a th:href="@{/portal/bomon/export}">
-                            <button type="button" class="btn btn-default">Export PDF</button>
+                        <a th:href="@{/portal/bomon/exportXls/{list}(list=${listExport})}">
+                            <button type="button" class="btn btn-default">Export Excel</button>
                         </a>
                     </div>
                 </div>

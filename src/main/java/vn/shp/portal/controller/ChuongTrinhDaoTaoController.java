@@ -1,10 +1,12 @@
 package vn.shp.portal.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
@@ -14,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.hcm.mcr35.excel.ExcelCreator;
+import vn.hcm.mcr35.excel.entity.ECell;
 import vn.shp.app.entity.ChuongTrinhDaoTao;
+import vn.shp.app.entity.ChuyenNganh;
+import vn.shp.app.xlsEntity.ChuongTrinhDaoTaoXls;
+import vn.shp.app.xlsEntity.ChuyenNganhXls;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
@@ -23,8 +30,11 @@ import vn.shp.portal.model.ChuongTrinhDaoTaoModel;
 import vn.shp.portal.service.ChuongTrinhDaoTaoService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -54,6 +64,11 @@ public class ChuongTrinhDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
+        String listExport = "";
+        for (ChuongTrinhDaoTao each : lstData) {
+            listExport += each.getChuongTrinhDaoTaoId() + "-";
+        }
+        model.addAttribute("listExport", listExport);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
@@ -75,6 +90,11 @@ public class ChuongTrinhDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
+        String listExport = "";
+        for (ChuongTrinhDaoTao each : lstData) {
+            listExport += each.getChuongTrinhDaoTaoId() + "-";
+        }
+        model.addAttribute("listExport", listExport);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
@@ -170,5 +190,42 @@ public class ChuongTrinhDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         return "redirect:/portal/chuongtrinhdaotao/list";
+    }
+
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/exportXls/{list}", method = GET)
+    public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
+        List<ChuongTrinhDaoTaoXls> lstResGen = new ArrayList<>();
+        try {
+            if (StringUtils.isNotEmpty(list)) {
+                String[] arr = list.split("-");
+                for (int i = 0; i < arr.length; i++) {
+                    if (StringUtils.isNotEmpty(arr[i])) {
+                        ChuongTrinhDaoTao each = chuongTrinhDaoTaoService.findOne(Long.parseLong(arr[i]));
+                        ChuongTrinhDaoTaoXls item = new ChuongTrinhDaoTaoXls();
+                        item.setChuongTrinhDaoTaoCode(each.getChuongTrinhDaoTaoCode());
+                        item.setChuongTrinhDaoTaoName(each.getChuongTrinhDaoTaoName());
+                        item.setSeq(i + 1);
+                        lstResGen.add(item);
+                    }
+                }
+            }
+            InputStream file = getClass().getResourceAsStream("/print/TEMPLATE.xls");
+            List<ECell> lstECells = new ArrayList<ECell>();
+            ExcelCreator<ChuongTrinhDaoTaoXls> excelCreator = new ExcelCreator<ChuongTrinhDaoTaoXls>();
+            byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 0, lstECells);
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.addHeader("Content-Disposition", "attachment; filename=\"" + "DanhSachChuongTrinhDaoTao.xls" + "\"");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            try {
+                response.getOutputStream().write(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                bos.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

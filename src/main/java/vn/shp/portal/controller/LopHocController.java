@@ -1,11 +1,23 @@
 package vn.shp.portal.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
@@ -17,16 +29,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import vn.shp.app.entity.LopHocHocVien;
-import vn.shp.app.entity.LopHocHocVien;
+import vn.hcm.mcr35.excel.ExcelCreator;
+import vn.hcm.mcr35.excel.entity.ECell;
 import vn.shp.app.entity.LopHoc;
-import vn.shp.app.entity.LopHoc;
+import vn.shp.app.entity.LopHocHocVien;
+import vn.shp.app.xlsEntity.LopHocXls;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
-import vn.shp.portal.model.KhoaHocModel;
-import vn.shp.portal.model.LopHocModel;
 import vn.shp.portal.model.LopHocModel;
 import vn.shp.portal.service.HocVienDkService;
 import vn.shp.portal.service.HocVienService;
@@ -34,13 +45,6 @@ import vn.shp.portal.service.KhoaHocService;
 import vn.shp.portal.service.LoaiLopHocService;
 import vn.shp.portal.service.LopHocHocVienService;
 import vn.shp.portal.service.LopHocService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -70,6 +74,8 @@ public class LopHocController {
 	@Autowired
 	HocVienDkService hocVienDkService;
 
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(Model model, HttpServletRequest request) {
@@ -83,6 +89,11 @@ public class LopHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("lopHocModel", bean);
+		String listExport = "";
+		for (LopHoc each : lstData) {
+			listExport += each.getLopHocId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
 		return "portal/lophoc/lophoc_list";
 	}
 
@@ -104,6 +115,11 @@ public class LopHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("lopHocModel", bean);
+		String listExport = "";
+		for (LopHoc each : lstData) {
+			listExport += each.getLopHocId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
 		return "portal/lophoc/lophoc_list";
 	}
 
@@ -290,5 +306,48 @@ public class LopHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		return "redirect:/portal/lophoc/list";
+	}
+
+	@Transactional(readOnly = true)
+	@RequestMapping(value = "/exportXls/{list}", method = GET)
+	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
+		List<LopHocXls> lstResGen = new ArrayList<>();
+		try {
+			if (StringUtils.isNotEmpty(list)) {
+				String[] arr = list.split("-");
+				for (int i = 0; i < arr.length; i++) {
+					if (StringUtils.isNotEmpty(arr[i])) {
+						LopHoc each = lopHocService.findOne(Long.parseLong(arr[i]));
+						LopHocXls item = new LopHocXls();
+						item.setLopHocCode(each.getLopHocCode());
+						item.setLopHocName(each.getLopHocName());
+						item.setLoaiLopHoc(each.getLoaiLopHoc().getLoaiLopHocName());
+						item.setSoHv(each.getSoLuongHV()+"");
+						item.setSucChua(each.getSucChua()+"");
+						item.setKhoaHocName(each.getKhoaHoc().getKhoaHocName());
+						item.setBatDau(dateFormat.format(each.getKhoaHoc().getTimeFrom()));
+						item.setKetThuc(dateFormat.format(each.getKhoaHoc().getTimeTo()));
+						item.setSeq(i + 1);
+						lstResGen.add(item);
+					}
+				}
+			}
+			InputStream file = getClass().getResourceAsStream("/print/TEMPLATE.xls");
+			List<ECell> lstECells = new ArrayList<ECell>();
+			ExcelCreator<LopHocXls> excelCreator = new ExcelCreator<LopHocXls>();
+			byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 0, lstECells);
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.addHeader("Content-Disposition", "attachment; filename=\"" + "DanhSachLopHoc.xls" + "\"");
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			try {
+				response.getOutputStream().write(bytes);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				bos.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

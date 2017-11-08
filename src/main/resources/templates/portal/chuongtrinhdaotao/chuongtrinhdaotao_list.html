@@ -19,8 +19,9 @@
 						<a th:href="@{/portal/chuongtrinhdaotao/create}">
 							<button type="button" class="btn btn-default">Tạo mới</button>
 						</a>
-						<button type="button" class="btn btn-default">Import</button>
-						<button type="button" class="btn btn-default">Export PDF</button>
+						<a th:href="@{/portal/chuongtrinhdaotao/exportXls/{list}(list=${listExport})}">
+							<button type="button" class="btn btn-default">Export Excel</button>
+						</a>
 					</div>
 				</div>
 			</div>

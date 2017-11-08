@@ -1,14 +1,18 @@
 package vn.shp.portal.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
@@ -20,12 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.hcm.mcr35.excel.ExcelCreator;
+import vn.hcm.mcr35.excel.entity.ECell;
 import vn.shp.app.entity.CaHoc;
 import vn.shp.app.entity.GiangVien;
 import vn.shp.app.entity.KhoaHoc;
 import vn.shp.app.entity.KhoaHocMonHoc;
 import vn.shp.app.entity.MonHoc;
 import vn.shp.app.entity.ThoiKhoaBieu;
+import vn.shp.app.xlsEntity.KhoaHocXls;
+import vn.shp.app.xlsEntity.ThoiKhoaBieuXls;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
@@ -42,6 +50,7 @@ import vn.shp.portal.service.MonHocService;
 import vn.shp.portal.service.ThoiKhoaBieuService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -87,6 +96,11 @@ public class ThoiKhoaBieuController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
+		String listExport = "";
+		for (ThoiKhoaBieu each : lstData) {
+			listExport += each.getId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
 		return "portal/thoikhoabieu/thoikhoabieu_list";
 	}
 
@@ -291,5 +305,48 @@ public class ThoiKhoaBieuController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		return "redirect:/portal/thoikhoabieu/list";
+	}
+
+	@Transactional(readOnly = true)
+	@RequestMapping(value = "/exportXls/{list}", method = GET)
+	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
+		List<ThoiKhoaBieuXls> lstResGen = new ArrayList<>();
+		try {
+			if (StringUtils.isNotEmpty(list)) {
+				String[] arr = list.split("-");
+				for (int i = 0; i < arr.length; i++) {
+					if (StringUtils.isNotEmpty(arr[i])) {
+						ThoiKhoaBieu each = thoiKhoaBieuService.findOne(Long.parseLong(arr[i]));
+						ThoiKhoaBieuXls item = new ThoiKhoaBieuXls();
+						item.setMonHocCode(each.getMonHoc().getMonHocCode());
+						item.setMonHocName(each.getMonHoc().getMonHocName());
+						item.setTongGioHoc(each.getMonHoc().getTongGioDay()+"");
+						item.setCa(each.getCaHoc().getCaHocName());
+						item.setThu(each.getThu());
+						item.setGiangVien(each.getGiangVien().getMaGiangVien());
+						item.setLap(each.getLapLai());
+						item.setLop(each.getLopHoc().getLopHocName());
+						item.setSeq(i + 1);
+						lstResGen.add(item);
+					}
+				}
+			}
+			InputStream file = getClass().getResourceAsStream("/print/TEMPLATE.xls");
+			List<ECell> lstECells = new ArrayList<ECell>();
+			ExcelCreator<ThoiKhoaBieuXls> excelCreator = new ExcelCreator<ThoiKhoaBieuXls>();
+			byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 0, lstECells);
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.addHeader("Content-Disposition", "attachment; filename=\"" + "DanhSachThoiKhoaBieu.xls" + "\"");
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			try {
+				response.getOutputStream().write(bytes);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				bos.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
