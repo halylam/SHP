@@ -95,6 +95,9 @@
                                                     <a></a>
                                                     <a th:href="@{/portal/giangvien/info/{id}(id=${item.id})}" class="btn btn-primary" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-paperclip" title="Bổ sung hồ sơ và thông tin."></i></a>
                                                     <a th:href="@{/portal/giangvien/edit/{id}(id=${item.id})}" class="btn btn-danger" style="min-width: 20px;"><i style="color: white;" class="glyphicon glyphicon-edit" title="Chỉnh sửa giảng viên"></i></a>
+                                                    <a th:href="@{/portal/giangvien/hoso/{id}(id=${item.id})}" class="btn btn-info" style="min-width: 20px;" title="Download hồ sơ">
+                                                    <i class="fa fa-download" aria-hidden="true" style="color: white;"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

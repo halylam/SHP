@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -38,6 +39,17 @@ public class GiangVien implements Serializable {
     @Column(name = "NGAY_SINH")
     private Date ngaySinh;
 
+    @Transient
+    private String strNgaySinh;
+
+    public String getStrNgaySinh(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if(ngaySinh != null){
+            strNgaySinh = sdf.format(ngaySinh);
+        }
+        return strNgaySinh;
+    }
+
     @Column(name = "EMAIL_SHP", length = 30)
     private String emailShp;
 
@@ -49,6 +61,17 @@ public class GiangVien implements Serializable {
 
     @Column(name = "NGAY_CAP_CMND")
     private Date ngayCapCmnd;
+
+    @Transient
+    private String strNgayCapCmnd;
+
+    public String getStrNgayCapCmnd(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if(ngayCapCmnd != null){
+            strNgayCapCmnd = sdf.format(ngayCapCmnd);
+        }
+        return strNgayCapCmnd;
+    }
 
     @Column(name = "NOI_CAP_CMND", length = 50)
     private String noiCapCmnd;
@@ -110,11 +133,23 @@ public class GiangVien implements Serializable {
     @Column(name = "TINH_THUONG_TRU", length = 10)
     private String tinhThuongTru;
 
+    @OneToOne
+    @JoinColumn(name = "TINH_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location tinhThuongTruLoc;
+
     @Column(name = "QUAN_THUONG_TRU", length = 10)
     private String quanThuongTru;
 
+    @OneToOne
+    @JoinColumn(name = "QUAN_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location quanThuongTruLoc;
+
     @Column(name = "XA_THUONG_TRU", length = 10)
     private String xaThuongTru;
+
+    @OneToOne
+    @JoinColumn(name = "XA_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location xaThuongTruLoc;
 
     @Column(name = "DIA_CHI_THUONG_TRU", length = 250)
     private String diaChiThuongTru;
@@ -122,11 +157,23 @@ public class GiangVien implements Serializable {
     @Column(name = "TINH_TAM_TRU", length = 10)
     private String tinhTamTru;
 
+    @OneToOne
+    @JoinColumn(name = "TINH_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location tinhTamTruLoc;
+
     @Column(name = "QUAN_TAM_TRU", length = 10)
     private String quanTamTru;
 
+    @OneToOne
+    @JoinColumn(name = "QUAN_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location quanTamTruLoc;
+
     @Column(name = "XA_TAM_TRU", length = 10)
     private String xaTamTru;
+
+    @OneToOne
+    @JoinColumn(name = "XA_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    private Location xaTamTruLoc;
 
     @Column(name = "DIA_CHI_TAM_TRU", length = 250)
     private String diaChiTamTru;

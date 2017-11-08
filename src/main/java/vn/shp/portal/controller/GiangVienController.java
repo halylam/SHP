@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,10 @@ import vn.shp.portal.entity.AlfFile;
 import vn.shp.portal.service.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -272,6 +276,99 @@ public class GiangVienController {
     @RequestMapping(value = "/delete", method = GET)
     public String getDelete() {
         return "redirect:/portal/giangvien/list";
+    }
+
+
+    @RequestMapping(value = "/hoso/{id}", method = RequestMethod.GET)
+    public void template3Download(@PathVariable("id") Long id, HttpServletResponse response, Model model,
+                                  Locale locale) throws Exception {
+
+        GiangVien entity = giangVienService.findOne(id);
+
+        if (entity != null) {
+
+            String maGiangVien = entity.getMaGiangVien();
+            String fileName = maGiangVien + "_HO_SO_" + System.currentTimeMillis() + ".xml";
+            InputStream is = getClass().getResourceAsStream("/print/THONG_TIN_GV.xml");
+
+            String content = Utils.readFile(is);
+
+
+
+
+            if(entity.getGioiTinh().equals("M")){
+                content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_UNCHECK);
+            }else{
+                content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_CHECKED);
+                content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_UNCHECK);
+            }
+
+            content = content.replaceAll(Constants.PRI_DAN_TOC, Utils.nullCheck(entity.getDanToc().getDanTocName()));
+            content = content.replaceAll(Constants.PRI_TON_GIAO, Utils.nullCheck(entity.getTonGiao().getTonGiaoName()));
+
+            content = content.replaceAll(Constants.PRI_EMAIL_SHP, Utils.nullCheck(entity.getEmailShp()));
+            content = content.replaceAll(Constants.PRI_EMAIL, Utils.nullCheck(entity.getEmail()));
+            content = content.replaceAll(Constants.PRI_SO_CMND, Utils.nullCheck(entity.getCmnd()));
+            content = content.replaceAll(Constants.PRI_MA_GIANG_VIEN, Utils.nullCheck(entity.getMaGiangVien()));
+            content = content.replaceAll(Constants.PRI_HO_TEN, Utils.nullCheck(entity.getHoTen()));
+            content = content.replaceAll(Constants.PRI_NGAY_SINH, Utils.nullCheck(entity.getStrNgaySinh()));
+            content = content.replaceAll(Constants.PRI_SO_DIEN_THOAI, Utils.nullCheck(entity.getSoDienThoai()));
+            content = content.replaceAll(Constants.PRI_NGAY_CAP_CMND, Utils.nullCheck(entity.getStrNgayCapCmnd()));
+            content = content.replaceAll(Constants.PRI_NOI_CAP_CMND, Utils.nullCheck(entity.getNoiCapCmnd()));
+
+            content = content.replaceAll(Constants.PRI_HOC_VI, Utils.nullCheck(entity.getHocVi().getHocViName()));
+            content = content.replaceAll(Constants.PRI_CHUYEN_NGANH, Utils.nullCheck(entity.getChuyenNganh().getChuyenNganhName()));
+
+            content = content.replaceAll(Constants.PRI_NGOAI_NGU_1, Utils.nullCheck(entity.getNgoaiNgu1()));
+            content = content.replaceAll(Constants.PRI_NGOAI_NGU_2, Utils.nullCheck(entity.getNgoaiNgu2()));
+
+            content = content.replaceAll(Constants.PRI_DC_THUONG_TRU, Utils.nullCheck(entity.getDiaChiThuongTru()) + ", " + entity.getXaThuongTruLoc().getLocName() + ", " + entity.getQuanThuongTruLoc().getLocName() + ", " + entity.getTinhThuongTruLoc().getLocName());
+            content = content.replaceAll(Constants.PRI_DC_TAM_TRU, Utils.nullCheck(entity.getDiaChiTamTru()) + ", " + entity.getXaTamTruLoc().getLocName() + ", " + entity.getQuanTamTruLoc().getLocName() + ", " + entity.getTinhTamTruLoc().getLocName());
+
+            String xmlKnlv = "";
+            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getId(),Constants.GIANG_VIEN);
+            if(!CollectionUtils.isEmpty(lstKnlv)){
+                InputStream isKnlv = getClass().getResourceAsStream("/print/KINH_NGHIEM_LAM_VIEC_GV.xml");
+                String contentKnlv = Utils.readFile(isKnlv);
+                for (KinhNghiemLamViec kinhNghiemLamViec : lstKnlv) {
+                    String tmp = contentKnlv;
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_TU, kinhNghiemLamViec.getStrTuNgay());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_DEN, kinhNghiemLamViec.getStrDenNgay());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_VI_TRI, kinhNghiemLamViec.getViTri());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_DIA_CHI, kinhNghiemLamViec.getDiaChi());
+                    tmp = tmp.replaceAll(Constants.PRI_KNLV_TEN_CTY, kinhNghiemLamViec.getTenCongTy());
+                    xmlKnlv+=tmp;
+                }
+
+
+            }
+            content = content.replaceAll(Constants.PRI_KNLVIEC, xmlKnlv);
+            // --------BEGIN TABLE ACC ----------
+
+//            String lstAccString = entity.getLstAccount();
+//            String finalTrContent1 = fillTable(maHocVien, lstAccString, "MB03_SUB_1.xml", entity);
+//            content = content.replaceAll(Constants.AP_MB03_SUB_1, finalTrContent1);
+//
+//            finalTrContent1 = fillTable(maHocVien, lstAccString, "MB03_SUB_2.xml", entity);
+//            content = content.replaceAll(Constants.AP_MB03_SUB_2, finalTrContent1);
+
+
+            // --------END TABLE ACC ----------
+            byte[] bFile = content.getBytes();
+
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            try {
+                response.getOutputStream().write(bFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                bos.close();
+            }
+        }
+
     }
 
     //------ModelAttribute-----

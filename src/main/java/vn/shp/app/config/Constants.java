@@ -48,6 +48,7 @@ public class Constants {
     public static final String HOSO_HOKHAU = "HK";
 
     public static final String PRI_MA_HOC_VIEN = "MA_HOC_VIEN";
+    public static final String PRI_MA_GIANG_VIEN = "MA_GIANG_VIEN";
     public static final String PRI_KHOA_HOC_1 = "KHOA_HOC_1";
     public static final String PRI_KHOA_HOC_2 = "KHOA_HOC_2";
     public static final String PRI_KHOA_HOC_3 = "KHOA_HOC_3";
@@ -68,7 +69,6 @@ public class Constants {
 
     public static final String PRI_HO_TEN_GH1 = "HO_TEN_GH1";
     public static final String PRI_HO_TEN_GH2 = "HO_TEN_GH2";
-
 
 
     public static final String PRI_SO_DT1 = "SO_DT1";
@@ -103,19 +103,19 @@ public class Constants {
     public static final String PRI_TTCN_DILAM = "TTCN_DILAM";
     public static final String PRI_TTCN_TUDO = "TTCN_TUDO";
 
-    public static final String PRI_HP1_TRON_KHOA ="HP1_TRON_KHOA";
-    public static final String PRI_HP1_NHIEU_DOT="HP1_NHIEU_DOT";
+    public static final String PRI_HP1_TRON_KHOA = "HP1_TRON_KHOA";
+    public static final String PRI_HP1_NHIEU_DOT = "HP1_NHIEU_DOT";
 
-    public static final String PRI_HP2_TRON_KHOA ="HP2_TRON_KHOA";
-    public static final String PRI_HP2_HOC_KY ="HP2_HOC_KY";
-    public static final String PRI_HP2_NHIEU_DOT="HP2_NHIEU_DOT";
+    public static final String PRI_HP2_TRON_KHOA = "HP2_TRON_KHOA";
+    public static final String PRI_HP2_HOC_KY = "HP2_HOC_KY";
+    public static final String PRI_HP2_NHIEU_DOT = "HP2_NHIEU_DOT";
 
-    public static final String PRI_LLKC_HO_TEN="LLKC_HO_TEN";
-    public static final String PRI_LLKC_QUAN_HE ="LLKC_QUAN_HE";
-    public static final String PRI_LLKC_SO_DT ="LLKC_SO_DT";
-    public static final String PRI_LLKC_EMAIL ="LLKC_EMAIL";
+    public static final String PRI_LLKC_HO_TEN = "LLKC_HO_TEN";
+    public static final String PRI_LLKC_QUAN_HE = "LLKC_QUAN_HE";
+    public static final String PRI_LLKC_SO_DT = "LLKC_SO_DT";
+    public static final String PRI_LLKC_EMAIL = "LLKC_EMAIL";
 
-    public static final String PRI_KHOA_HOC_XML ="KHOA_HOC_XML";
+    public static final String PRI_KHOA_HOC_XML = "KHOA_HOC_XML";
 
     public static final String PRI_KHOA_HOC_XML_CONTENT = "<w:p w14:paraId=\"39E42B17\" w14:textId=\"7D65FE77\" w:rsidR=\"00190529\" w:rsidRDefault=\"00BD32A3\"\n" +
             "                         w:rsidP=\"00437F93\">\n" +
@@ -141,6 +141,12 @@ public class Constants {
             "                            <w:tab/>\n" +
             "                        </w:r>\n" +
             "                    </w:p>";
+    public static final String PRI_HOC_VI = "HOC_VI";
+    public static final String PRI_CHUYEN_NGANH = "CHUYEN_NGANH";
+    public static final String PRI_NGOAI_NGU_1 = "NGOAI_NGU_1";
+    public static final String PRI_NGOAI_NGU_2 = "NGOAI_NGU_2";
+    public static final String PRI_DAN_TOC = "DAN_TOC";
+    public static final String PRI_TON_GIAO = "TON_GIAO";
 
 
 //    public static final String PRI_PTHP_HO_TEN = "PTHP_HO_TEN";
