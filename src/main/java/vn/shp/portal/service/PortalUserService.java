@@ -2,7 +2,7 @@ package vn.shp.portal.service;
 
 import org.springframework.web.servlet.ModelAndView;
 import vn.shp.portal.entity.PortalUser;
-import vn.shp.portal.model.PortalUserModel;
+import vn.shp.portal.model.PortalUserBean;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,6 +21,6 @@ public interface PortalUserService {
 	
 	void delete(PortalUser entity);
 
-	ModelAndView initSearch(PortalUserModel condition, HttpServletRequest request);
+	ModelAndView initSearch(PortalUserBean condition, HttpServletRequest request);
 
 }

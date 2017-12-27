@@ -6,7 +6,7 @@
 <body class="nav-md skin-brown">
 <div class="container body">
 	<div class="main_container">
-		<div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
+		<div class="col-md-4 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
 		<div class="top_nav" th:replace="portal/fragments/header :: topNav"></div>
 
 		<!-- Main-->
@@ -21,9 +21,6 @@
 						</a>
 						<a th:href="@{/portal/user/import}">
 							<button type="button" class="btn btn-default">Import</button>
-						</a>
-						<a th:href="@{/portal/user/export}">
-							<button type="button" class="btn btn-default">Export PDF</button>
 						</a>
 					</div>
 				</div>
@@ -55,50 +52,39 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<form class="form-muted" novalidate>
-
-
-
 												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã User <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Username  <span class="required">*</span>
 													</label>
-													<div class="col-md-3 col-sm-3 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
-													</div>
-												</div>
-
-												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên User  <span class="required">*</span>
-													</label>
-													<div class="col-md-5 col-sm-5 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input th:field="*{entity.username}" id="txtUserName"  class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Email  <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Email  <span class="required">*</span>
 													</label>
-													<div class="col-md-3 col-sm-3 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input id="txtEmail" th:field="*{entity.email}" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 
 												</div>
 												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tên đầy đủ  <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Tên đầy đủ  <span class="required">*</span>
 													</label>
-													<div class="col-md-5 col-sm-5 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input id="txtFullname" th:field="*{entity.fullName}" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Điện thoại  <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Điện thoại  <span class="required">*</span>
 													</label>
-													<div class="col-md-3 col-sm-3 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input id="txtMobilePhone" th:field="*{entity.mobile}" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 
 												</div>
 												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày sinh  <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Ngày sinh  <span class="required">*</span>
 													</label>
-													<div class="col-md-5 col-sm-5 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input id="txtDateOfBirth" th:field="*{entity.birthday}" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 
 
@@ -106,15 +92,15 @@
 												</div>
 
 												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname"> Mật khẩu  <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" > Mật khẩu  <span class="required">*</span>
 													</label>
-													<div class="col-md-5 col-sm-5 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input th:field="*{entity.password1}" id="txtPassword1" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
-													<label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Nhập lại mật khẩu <span class="required">*</span>
+													<label class="control-label col-md-2 col-sm-2 col-xs-12" >Nhập lại mật khẩu <span class="required">*</span>
 													</label>
-													<div class="col-md-3 col-sm-3 col-xs-12">
-														<input id="firstname" class="form-control col-md-7 col-xs-12" name="" placeholder="" required type="text">
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input th:field="*{entity.password2}" id="txtPassword2" class="form-control col-md-7 col-xs-12"  placeholder="" required type="text">
 													</div>
 												</div>
 
@@ -124,7 +110,7 @@
 												</div>
 
 												<div class="col-sm-12 col-xs-12">
-													<div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2 col-md-offset-2 user-border">
+													<div class="col-md-4 col-sm-4 col-xs-12 col-sm-offset-2 col-md-offset-2 user-border">
 														<p>Tạo mới </p>
 														<p>Chỉnh sửa </p>
 													</div>
@@ -135,7 +121,7 @@
 														<button type="button" class="btn btn-default mgL0"> << </button>
 
 													</div>
-													<div class="col-md-3 col-sm-3 col-xs-12 user-border">
+													<div class="col-md-4 col-sm-4 col-xs-12 user-border">
 														<p>Tạo mới </p> </br>
 														<p>Chỉnh sửa </p>
 													</div>
@@ -148,6 +134,11 @@
 										</div>
 									</div>
 
+								</div>
+								<div class="box-footer">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<button class="btn btn-primary">Lưu</button>
+									</div>
 								</div>
 
 							</div>

@@ -62,18 +62,6 @@ public class PortalGroupController {
 	@Autowired
 	PortalUserService portalUserService;
 
-	@Autowired
-	PortalBranchService portalBranchService;
-
-	@Autowired
-	PortalDepartmentService portalDepartmentService;
-
-//	@Autowired
-//	PortalTitleService portalTitleService;
-
-	/*@Autowired
-	KeycloakClientConfig kcClientConfig;*/
-
 	@Value("${code.nodefine}")
 	String codeNoDefine;
 

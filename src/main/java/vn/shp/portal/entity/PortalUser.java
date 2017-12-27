@@ -42,6 +42,7 @@ public class PortalUser implements Serializable {
 	@Column(name = "USERNAME")
 	private String username;
 
+
 	@Column(name = "MOBILE", length = 255)
 	private String mobile;
 
@@ -58,25 +59,18 @@ public class PortalUser implements Serializable {
 	@Column(name = "LAST_LOGIN_DATE")
 	private Date lastLoginDate;
 
+	@Transient
+	private String password1;
+
+	@Transient
+	private String password2;
+
 	@Autowired
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "PORTAL_USER_GROUP", joinColumns = {
 			@JoinColumn(name = "USERNAME", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "GROUP_ID", nullable = false, updatable = false) })
 	private List<PortalGroup> groups;
-	
-	@ManyToOne	
-	@JoinColumn(name = "DEPARTMENT_ID")
-	private PortalDepartment department;
-
-//	@ManyToOne
-//	@JoinColumn(name = "TITLE_ID")
-//	private PortalTitle title;
-
-	@ManyToOne
-	@JoinColumn(name = "BRANCH_ID")
-	private PortalBranch branch;
-	
 
 	@Transient
 	private boolean currentActive;

@@ -14,13 +14,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import vn.shp.app.utils.Utils;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.entity.*;
-import vn.shp.portal.model.PortalUserModel;
+import vn.shp.portal.model.PortalUserBean;
 import vn.shp.portal.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,23 +47,15 @@ public class PortalUserController {
 	@Autowired
 	PortalGroupService portalGroupService;
 
-	@Autowired
-	PortalBranchService portalBranchService;
-
-	@Autowired
-	PortalDepartmentService portalDepartmentService;
-
 //	@Autowired
 //	PortalTitleService portalTitleService;
 
 
 	@ModelAttribute("portalUserModel")
-	public PortalUserModel portalUserModel() {
+	public PortalUserBean portalUserModel() {
 		
-		PortalUserModel portalUserModel = new PortalUserModel();
+		PortalUserBean portalUserModel = new PortalUserBean();
 		PortalUser portalUser = new PortalUser();
-		portalUser.setBranch(new PortalBranch());
-		portalUser.setDepartment(new PortalDepartment());
 //		portalUser.setTitle(new PortalTitle());
 		portalUserModel.setEntity(portalUser);
 		
@@ -87,7 +78,7 @@ public class PortalUserController {
 	@RequestMapping(value = "/list", method = GET)
 	public ModelAndView getList(Model model, HttpServletRequest request) {
 		
-		PortalUserModel portalUserModel = new PortalUserModel();
+		PortalUserBean portalUserModel = new PortalUserBean();
 		portalUserModel.setPageMode(PageMode.LIST);
 
 		ModelAndView mav = portalUserService.initSearch(portalUserModel, request);
@@ -98,69 +89,39 @@ public class PortalUserController {
 
 	@RequestMapping(value = "/ajaxList", method = GET)
 	@ResponseBody
-	public ModelAndView ajaxList(@ModelAttribute(value = "portalUserModel") PortalUserModel portalUserModel,
+	public ModelAndView ajaxList(@ModelAttribute(value = "bean") PortalUserBean bean,
 			HttpServletRequest request) {
 
-		ModelAndView mav = portalUserService.initSearch(portalUserModel, request);
+		ModelAndView mav = portalUserService.initSearch(bean, request);
 		mav.setViewName("portal/user/user_table");
 		return mav;
 	}
 
 	@RequestMapping(value = "/list", method = POST)
-	public ModelAndView postList(@ModelAttribute(value = "portalUserModel") PortalUserModel portalUserModel,
+	public ModelAndView postList(@ModelAttribute(value = "bean") PortalUserBean bean,
 			Model model, HttpServletRequest request) {
 		
-		ModelAndView mav = portalUserService.initSearch(portalUserModel, request);
+		ModelAndView mav = portalUserService.initSearch(bean, request);
 		mav.setViewName("portal/user/user_list");
 		return mav;
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
-	public ModelAndView getCreate(@ModelAttribute(value = "portalUserModel") PortalUserModel portalUserModel,
+	public ModelAndView getCreate(@ModelAttribute(value = "portalUserModel") PortalUserBean bean,
 			Model model, ModelMap modelMap) {
 		
 		ModelAndView mav = new ModelAndView("portal/user/user_create");
-		portalUserModel.setPageMode(PageMode.CREATE);
+		bean.setPageMode(PageMode.CREATE);
 		modelMap.put(BindingResult.MODEL_KEY_PREFIX + "portalUserModel", modelMap.get(CoreConstant.ERRORS));
-		
-		// List Branch
-		List<PortalBranch> branchLst = portalBranchService.findAll();
-		portalUserModel.setBranchLst(branchLst);
-		portalUserModel.getEntity().getBranch().setBranchId(null);
-
-		// List Department
-		List<PortalDepartment> departmentLst = portalDepartmentService.findAll();
-		portalUserModel.setDepartmentLst(departmentLst);
-
-		// List title
-//		List<PortalTitle> titleLst = portalTitleService.findAll();
-//		portalUserModel.setTitleLst(titleLst);
-
-		// User keycloak
-		try {
-			// List user contain keycloakId
-			
-			List<PortalUser> portalUserLstInSys = portalUserService.findAll();
-			List<String> keycloakIdInSys = new ArrayList<String>();
-			if (!CollectionUtils.isEmpty(portalUserLstInSys)) {
-				for (PortalUser user : portalUserLstInSys) {
-					if (Utils.isNotNullOrEmpty(user.getUsername())) {
-						keycloakIdInSys.add(user.getUsername());
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		mav.addObject("groupLeftLst", portalGroupService.findAll());
-		mav.addObject("portalUserModel", portalUserModel);
+		mav.addObject("bean", bean);
 		return mav;
 	}
 
 	@RequestMapping(value = "/create", method = POST)
-	public ModelAndView postCreate(@ModelAttribute(value = "portalUserModel") @Valid PortalUserModel portalUserModel,
+	public ModelAndView postCreate(@ModelAttribute(value = "bean") @Valid PortalUserBean bean,
 			BindingResult bindingResult, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes,
 			Locale locale) throws Exception {
 		
@@ -168,39 +129,14 @@ public class PortalUserController {
 
 		MessageList messageLst = new MessageList(Message.SUCCESS);
 		String msgInfo = "";
-		Long branchId = null;
-		Long departmentId = null;
-		Long titleId = null;
 		try {
-
-			branchId = portalUserModel.getEntity().getBranch().getBranchId();
-			departmentId = portalUserModel.getEntity().getDepartment().getDepartmentId();
-//			titleId = portalUserModel.getEntity().getTitle().getTitleId();
-			if (bindingResult.hasErrors() || branchId == null || departmentId == null) {
-				if (departmentId == null) {
-					bindingResult.rejectValue("entity.department.departmentId", "user.field.department.error.empty", null,
-							"");
-				}
-				if (titleId == null) {
-					bindingResult.rejectValue("entity.title.titleId", "user.field.title.error.empty", null,
-							"");
-				}
-				if (branchId == null) {
-					bindingResult.rejectValue("entity.branch.branchId", "user.field.branch.error.empty", null, "");
-				}
-				redirectAttributes.addFlashAttribute(CoreConstant.ERRORS, bindingResult);
-				redirectAttributes.addFlashAttribute("portalUserModel", portalUserModel);
-				mav.setViewName("redirect:/portal/user/create");
-				return mav;
-			}
-
 			String[] chkgroupRight = request.getParameterValues("checkRoleRight");
 			if (chkgroupRight != null) {
-				this.creategroupList(chkgroupRight, portalUserModel);
+				this.creategroupList(chkgroupRight, bean);
 			}
 			// create user
-			PortalUser user = portalUserModel.getEntity();
-			List<PortalGroup> groupLst = portalUserModel.getGroupRightLst();
+			PortalUser user = bean.getEntity();
+			List<PortalGroup> groupLst = bean.getGroupRightLst();
 			user.setGroups(groupLst);
 
 
@@ -219,7 +155,7 @@ public class PortalUserController {
 			messageLst.add(msgInfo);
 			redirectAttributes.addFlashAttribute(CoreConstant.ERRORS, bindingResult);
 			redirectAttributes.addFlashAttribute(CoreConstant.MSG_LST, messageLst);
-			redirectAttributes.addFlashAttribute("portalUserModel", portalUserModel);
+			redirectAttributes.addFlashAttribute("bean", bean);
 			mav.setViewName("redirect:/portal/user/create");
 			return mav;
 		}
@@ -229,18 +165,18 @@ public class PortalUserController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_EDIT')")
 	@RequestMapping(value = "/edit", method = GET)
 	public ModelAndView getEdit(@RequestParam(value = "userId") Long userId,
-			@ModelAttribute(value = "portalUserModel") PortalUserModel portalUserModel, Model model,
-			ModelMap modelMap) {
+								@ModelAttribute(value = "bean") PortalUserBean bean, Model model,
+								ModelMap modelMap) {
 
 		
 		ModelAndView mav = new ModelAndView("portal/user/user_edit");
-		portalUserModel.setPageMode(PageMode.EDIT);
-		modelMap.put(BindingResult.MODEL_KEY_PREFIX + "portalUserModel", modelMap.get(CoreConstant.ERRORS));
+		bean.setPageMode(PageMode.EDIT);
+		modelMap.put(BindingResult.MODEL_KEY_PREFIX + "bean", modelMap.get(CoreConstant.ERRORS));
 
 		try {
 
 			PortalUser portalUser = portalUserService.findOne(userId);
-			portalUserModel.setEntity(portalUser);
+			bean.setEntity(portalUser);
 
 			List<PortalGroup> groupNotLst = new ArrayList<PortalGroup>();
 			List<PortalGroup> groupAll = portalGroupService.findAll();
@@ -251,19 +187,12 @@ public class PortalUserController {
 					groupNotLst.add(group);
 				}
 			}
-			portalUserModel.setGroupRightLst(groupLst);
-			portalUserModel.setGroupLeftLst(groupNotLst);
+			bean.setGroupRightLst(groupLst);
+			bean.setGroupLeftLst(groupNotLst);
 			
-			List<PortalBranch> branchLst = portalBranchService.findAll();
-			portalUserModel.setBranchLst(branchLst);
-			List<PortalDepartment> departmentLst = portalDepartmentService.findAll();
-			portalUserModel.setDepartmentLst(departmentLst);
-//			List<PortalTitle> titleLst = portalTitleService.findAll();
-//			portalUserModel.setTitleLst(titleLst);
-
 			mav.addObject("groupLeftLst", groupNotLst);
 			mav.addObject("groupRightLst", groupLst);
-			mav.addObject("portalUserModel", portalUserModel);
+			mav.addObject("bean", bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -275,7 +204,7 @@ public class PortalUserController {
 	 * EDIT - POST
 	 */
 	@RequestMapping(value = "/edit", method = POST)
-	public ModelAndView postEdit(@ModelAttribute(value = "portalUserModel") @Valid PortalUserModel portalUserModel,
+	public ModelAndView postEdit(@ModelAttribute(value = "bean") @Valid PortalUserBean bean,
 			Model model, Locale locale, HttpServletRequest request, RedirectAttributes redirectAttributes,
 			BindingResult bindingResult) {
 
@@ -287,9 +216,6 @@ public class PortalUserController {
 		Long departmentId = null;
 		Long titleId = null;
 		try {
-			branchId = portalUserModel.getEntity().getBranch().getBranchId();
-			departmentId = portalUserModel.getEntity().getDepartment().getDepartmentId();
-//			titleId = portalUserModel.getEntity().getTitle().getTitleId();
 			if (bindingResult.hasErrors() || branchId == null || departmentId == null || titleId == null) {
 				if (new Exception() instanceof DataIntegrityViolationException) {
 					bindingResult.rejectValue("entity.username", "Exists.error.code", null, "");
@@ -306,21 +232,21 @@ public class PortalUserController {
 				}
 
 				redirectAttributes.addFlashAttribute(CoreConstant.ERRORS, bindingResult);
-				redirectAttributes.addFlashAttribute("portalUserModel", portalUserModel);
-				redirectAttributes.addAttribute("userId", portalUserModel.getEntity().getUserId());
+				redirectAttributes.addFlashAttribute("bean", bean);
+				redirectAttributes.addAttribute("userId", bean.getEntity().getUserId());
 				return mav;
 			}
 
 			String[] checkgroupRight = request.getParameterValues("checkRoleRight");
 			if (checkgroupRight != null) {
-				this.creategroupList(checkgroupRight, portalUserModel);
+				this.creategroupList(checkgroupRight, bean);
 			}
 
 			// Update group for user to keycloak
-			PortalUser user = portalUserModel.getEntity();
-			PortalUser portalUser = portalUserService.findOne(portalUserModel.getEntity().getUserId());
+			PortalUser user = bean.getEntity();
+			PortalUser portalUser = portalUserService.findOne(bean.getEntity().getUserId());
 			List<PortalGroup> groupLstOld = portalUser.getGroups(); 
-			List<PortalGroup> groupLstNew = portalUserModel.getGroupRightLst();
+			List<PortalGroup> groupLstNew = bean.getGroupRightLst();
 			List<String> groupLstDel = new ArrayList<String>();
 			List<String> groupLstSave = new ArrayList<String>();
 			if (!CollectionUtils.isEmpty(groupLstNew)) {
@@ -347,7 +273,6 @@ public class PortalUserController {
 
 						// update user
 			user.setGroups(groupLstNew);
-			user.setDepartment(portalUserModel.getEntity().getDepartment());
 			portalUserService.save(user);
 
 			String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
@@ -360,7 +285,7 @@ public class PortalUserController {
 			mav.addObject(CoreConstant.MSG_LST, messageLst);
 		}
 
-		redirectAttributes.addAttribute("userId", portalUserModel.getEntity().getUserId());
+		redirectAttributes.addAttribute("userId", bean.getEntity().getUserId());
 		return mav;
 	}
 
@@ -371,7 +296,7 @@ public class PortalUserController {
 		return "redirect:/portal/user/list";
 	}
 
-	public void creategroupList(String[] checkgroup, PortalUserModel portalUserModel) {
+	public void creategroupList(String[] checkgroup, PortalUserBean portalUserModel) {
 		// Get listAll group
 		List<PortalGroup> groupAll = portalGroupService.findAll();
 

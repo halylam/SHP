@@ -20,7 +20,6 @@ import vn.shp.portal.core.MessageList;
 import vn.shp.portal.entity.PortalRole;
 import vn.shp.portal.entity.PortalSystem;
 import vn.shp.portal.model.PortalRoleModel;
-import vn.shp.portal.service.PortalBranchService;
 import vn.shp.portal.service.PortalRoleService;
 import vn.shp.portal.service.PortalSystemService;
 
@@ -47,11 +46,6 @@ public class PortalRoleController {
 	@Autowired
 	PortalSystemService portalSystemService;
 
-	@Autowired
-	PortalBranchService portalBranchService;
-	
-
-	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ROLE_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public ModelAndView getList(Model model, HttpServletRequest request) {

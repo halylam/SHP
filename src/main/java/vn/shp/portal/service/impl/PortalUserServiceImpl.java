@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.PageWrapper;
 import vn.shp.portal.entity.PortalUser;
-import vn.shp.portal.model.PortalUserModel;
+import vn.shp.portal.model.PortalUserBean;
 import vn.shp.portal.repository.PortalUserRepository;
 import vn.shp.portal.service.PortalUserService;
 
@@ -59,7 +59,7 @@ public class PortalUserServiceImpl implements PortalUserService {
 	}
 
 	@Override
-	public ModelAndView initSearch(PortalUserModel model, HttpServletRequest request) {
+	public ModelAndView initSearch(PortalUserBean model, HttpServletRequest request) {
 		
 		String pageParam = request.getParameter(CoreConstant.CONST_PAGE);
 		int page = 0;
@@ -70,7 +70,7 @@ public class PortalUserServiceImpl implements PortalUserService {
 		Pageable pageable = new PageRequest(page, sizeOfPage);
 		
 		if (model == null) {
-			model = new PortalUserModel();
+			model = new PortalUserBean();
 		}
 		
 		PortalUser entity = model.getEntity();
