@@ -1,11 +1,13 @@
 package vn.shp.portal.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -14,16 +16,26 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.hcm.mcr35.excel.ExcelCreator;
+import vn.hcm.mcr35.excel.entity.ECell;
+import vn.shp.app.entity.ChuyenNganh;
+import vn.shp.app.xlsEntity.ChuyenNganhXls;
+import vn.shp.app.xlsEntity.PortalUserXls;
 import vn.shp.portal.common.PageMode;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.Message;
 import vn.shp.portal.core.MessageList;
 import vn.shp.portal.entity.*;
 import vn.shp.portal.model.PortalUserBean;
+import vn.shp.portal.model.PortalUserModel;
 import vn.shp.portal.service.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +62,8 @@ public class PortalUserController {
 //	@Autowired
 //	PortalTitleService portalTitleService;
 
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
 
 	@ModelAttribute("portalUserModel")
 	public PortalUserBean portalUserModel() {
@@ -73,37 +87,93 @@ public class PortalUserController {
 		binder.registerCustomEditor(Date.class, editor);
 	}
 
-
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_LIST')")
 	@RequestMapping(value = "/list", method = GET)
-	public ModelAndView getList(Model model, HttpServletRequest request) {
-		
-		PortalUserBean portalUserModel = new PortalUserBean();
-		portalUserModel.setPageMode(PageMode.LIST);
-
-		ModelAndView mav = portalUserService.initSearch(portalUserModel, request);
-		mav.addObject("portalUserModel", portalUserModel);
-		mav.setViewName("portal/user/user_list");
-		return mav;
-	}
-
-	@RequestMapping(value = "/ajaxList", method = GET)
-	@ResponseBody
-	public ModelAndView ajaxList(@ModelAttribute(value = "bean") PortalUserBean bean,
-			HttpServletRequest request) {
-
-		ModelAndView mav = portalUserService.initSearch(bean, request);
-		mav.setViewName("portal/user/user_table");
-		return mav;
+	public String getList(Model model, HttpServletRequest request) {
+		PortalUserBean bean = new PortalUserBean();
+		portalUserService.findAll();
+		List<PortalUser> lstData = portalUserService.findAll();
+		bean.setData(lstData);
+		if (CollectionUtils.isEmpty(lstData)) {
+			MessageList messageLst = new MessageList(Message.INFO);
+			messageLst.add("Không tìm thấy thông tin");
+			model.addAttribute(CoreConstant.MSG_LST, messageLst);
+		}
+		model.addAttribute("bean", bean);
+		String listExport = "-";
+		for (PortalUser each : lstData) {
+			listExport += each.getUserId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
+		return "portal/user/user_list";
 	}
 
 	@RequestMapping(value = "/list", method = POST)
-	public ModelAndView postList(@ModelAttribute(value = "bean") PortalUserBean bean,
-			Model model, HttpServletRequest request) {
-		
-		ModelAndView mav = portalUserService.initSearch(bean, request);
-		mav.setViewName("portal/user/user_list");
-		return mav;
+	public String postList(@ModelAttribute(value = "bean") @Valid PortalUserModel bean, BindingResult bindingResult, Model model,
+						   HttpServletRequest request,
+						   RedirectAttributes redirectAttributes)
+	{
+		List<PortalUser> lstData = new ArrayList<>();
+		if (bean != null) {
+			lstData.addAll(portalUserService
+					.searchByFilters(bean.getEntity().getUsername(), bean.getEntity().getEmail(), bean.getEntity().getFullName()));
+		} else {
+			lstData.addAll(portalUserService.findAll());
+		}
+
+		bean.setData(lstData);
+		if (CollectionUtils.isEmpty(lstData)) {
+			MessageList messageLst = new MessageList(Message.INFO);
+			messageLst.add("Không tìm thấy thông tin");
+			model.addAttribute(CoreConstant.MSG_LST, messageLst);
+		}
+		model.addAttribute("bean", bean);
+		String listExport = "-";
+		for (PortalUser each : lstData) {
+			listExport += each.getUserId() + "-";
+		}
+		model.addAttribute("listExport", listExport);
+		return "portal/user/user_list";
+	}
+
+	@Transactional(readOnly = true)
+	@RequestMapping(value = "/exportXls/{list}", method = GET)
+	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
+		List<PortalUserXls> lstResGen = new ArrayList<>();
+		try {
+			if (StringUtils.isNotEmpty(list)) {
+				String[] arr = list.split("-");
+				for (int i = 0; i < arr.length; i++) {
+					if (StringUtils.isNotEmpty(arr[i])) {
+						PortalUser each = portalUserService.findOne(Long.parseLong(arr[i]));
+						PortalUserXls item = new PortalUserXls();
+						item.setUsername(each.getUsername());
+						item.setFullName(each.getFullName());
+						item.setEmail(each.getEmail());
+						item.setBirthday(dateFormat.format(each.getBirthday()));
+						item.setMobile(each.getMobile());
+						item.setSeq(i + 1);
+						lstResGen.add(item);
+					}
+				}
+			}
+			InputStream file = getClass().getResourceAsStream("/print/TEMPLATE.xls");
+			List<ECell> lstECells = new ArrayList<ECell>();
+			ExcelCreator<PortalUserXls> excelCreator = new ExcelCreator<PortalUserXls>();
+			byte[] bytes = excelCreator.exportExcel(lstResGen, file, true, false, false, 0, lstECells);
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.addHeader("Content-Disposition", "attachment; filename=\"" + "DanhSachUser.xls" + "\"");
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			try {
+				response.getOutputStream().write(bytes);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				bos.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_CREATE')")

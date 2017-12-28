@@ -93,5 +93,8 @@ public class PortalUserServiceImpl implements PortalUserService {
 		
 	}
 
-
+	@Override
+	public List<PortalUser> searchByFilters(String username, String email, String fullName) {
+		return portalUserRepo.findBy(username, email, fullName);
+	}
 }

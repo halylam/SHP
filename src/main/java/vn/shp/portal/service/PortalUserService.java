@@ -23,4 +23,6 @@ public interface PortalUserService {
 
 	ModelAndView initSearch(PortalUserBean condition, HttpServletRequest request);
 
+	List<PortalUser> searchByFilters(String username, String email, String fullName);
+
 }
