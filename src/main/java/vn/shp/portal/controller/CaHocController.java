@@ -61,7 +61,7 @@ public class CaHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (CaHoc each : lstData) {
             listExport += each.getCaHocId() + "-";
         }
@@ -87,7 +87,7 @@ public class CaHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (CaHoc each : lstData) {
             listExport += each.getCaHocId() + "-";
         }

@@ -68,7 +68,7 @@ public class MonHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (MonHoc each : lstData) {
             listExport += each.getMonHocId() + "-";
         }
@@ -94,7 +94,7 @@ public class MonHocController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (MonHoc each : lstData) {
             listExport += each.getMonHocId() + "-";
         }

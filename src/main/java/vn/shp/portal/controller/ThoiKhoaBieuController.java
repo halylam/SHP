@@ -96,7 +96,7 @@ public class ThoiKhoaBieuController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
-		String listExport = "";
+		String listExport = "-";
 		for (ThoiKhoaBieu each : lstData) {
 			listExport += each.getId() + "-";
 		}

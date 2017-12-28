@@ -89,7 +89,7 @@ public class LopHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("lopHocModel", bean);
-		String listExport = "";
+		String listExport = "-";
 		for (LopHoc each : lstData) {
 			listExport += each.getLopHocId() + "-";
 		}
@@ -115,7 +115,7 @@ public class LopHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("lopHocModel", bean);
-		String listExport = "";
+		String listExport = "-";
 		for (LopHoc each : lstData) {
 			listExport += each.getLopHocId() + "-";
 		}

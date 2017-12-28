@@ -95,7 +95,7 @@ public class KhoaHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
-		String listExport = "";
+		String listExport = "-";
 		for (KhoaHoc each : lstData) {
 			listExport += each.getKhoaHocId() + "-";
 		}
@@ -122,7 +122,7 @@ public class KhoaHocController {
 			model.addAttribute(CoreConstant.MSG_LST, messageLst);
 		}
 		model.addAttribute("bean", bean);
-		String listExport = "";
+		String listExport = "-";
 		for (KhoaHoc each : lstData) {
 			listExport += each.getKhoaHocId() + "-";
 		}

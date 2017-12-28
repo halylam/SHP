@@ -64,7 +64,7 @@ public class ChuongTrinhDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (ChuongTrinhDaoTao each : lstData) {
             listExport += each.getChuongTrinhDaoTaoId() + "-";
         }
@@ -90,7 +90,7 @@ public class ChuongTrinhDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (ChuongTrinhDaoTao each : lstData) {
             listExport += each.getChuongTrinhDaoTaoId() + "-";
         }

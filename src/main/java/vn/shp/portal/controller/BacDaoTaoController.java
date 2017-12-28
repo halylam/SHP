@@ -66,7 +66,7 @@ public class BacDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (BacDaoTao each : lstData) {
             listExport += each.getBacDaoTaoId() + "-";
         }
@@ -92,7 +92,7 @@ public class BacDaoTaoController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (BacDaoTao each : lstData) {
             listExport += each.getBacDaoTaoId() + "-";
         }

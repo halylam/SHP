@@ -62,7 +62,7 @@ public class BoMonController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (BoMon each : lstData) {
             listExport += each.getBoMonId() + "-";
         }
@@ -88,7 +88,7 @@ public class BoMonController {
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         model.addAttribute("bean", bean);
-        String listExport = "";
+        String listExport = "-";
         for (BoMon each : lstData) {
             listExport += each.getBoMonId() + "-";
         }
