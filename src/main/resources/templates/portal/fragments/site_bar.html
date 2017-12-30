@@ -78,9 +78,14 @@
                     <li><a><i class="fa fa-tags"></i> <span class="text-main">Admin</span> <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a th:href="@{/portal/user/list}"><i class="fa fa-id-card-o"></i> Quản lý user</a></li>
-                            <li><a href="#"><i class="fa fa-star-o"></i> Danh sách User</a></li>
-                            <li><a href="#"><i class="fa fa-star-o"></i> Tạo mới User</a></li>
+                            <li><a href="#"><i class="fa fa-id-card-o"></i> Quản lý user</a>
+                                <ul class="nav child_menu">
+                                    <li><a href="#"><i class="fa fa-star-o"></i> Danh sách User</a></li>
+                                    <li><a href="#"><i class="fa fa-star-o"></i> Tạo mới User</a></li>
+                                </ul>
+
+                            </li>
+
                             <li><a th:href="@{/portal/admin/role}"><i class="fa fa-user-circle"></i> Quyền hệ thống</a></li>
                             <li><a th:href="@{/portal/admin/grouprole}"><i class="fa fa-tags"></i> Nhóm quyền hệ thống</a></li>
                             <li><a th:href="@{/portal/admin/param}"><i class="fa fa-list-ul"></i> Tham số hệ thống</a>
