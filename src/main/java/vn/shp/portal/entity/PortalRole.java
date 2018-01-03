@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,9 +21,6 @@ public class PortalRole {
 	@Column(name = "STATUS", length = 1)
 	private String status;
 
-	@Column(name = "ROLE_KEYCLOAK_ID")
-	private String roleKeycloakId;
-	
 	@NotEmpty
 	@Column(name = "ROLE_CODE", length = 255)
 	private String roleCode;
@@ -33,11 +31,13 @@ public class PortalRole {
 	@Column(name = "REMARK", length = 255)
 	private String remark;
 
-	@ManyToOne
-	@JoinColumn(name = "SYSTEM_ID")
-	private PortalSystem system;
-	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleGroupLst")
 	private List<PortalGroup> groups;
+
+	@Column(name = "USER_CREATED", length = 100)
+	private String userCreated;
+
+	@Column(name = "TIME_CREATED")
+	private Date timeCreated;
 	
 }

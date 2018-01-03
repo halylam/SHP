@@ -80,22 +80,22 @@
                         <ul class="nav child_menu">
                             <li><a href="#"><i class="fa fa-id-card-o"></i> Quản lý user</a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Danh sách User</a></li>
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Tạo mới User</a></li>
+                                    <li><a th:href="@{/portal/user/list}"><i class="fa fa-star-o"></i> Danh sách User</a></li>
+                                    <li><a th:href="@{/portal/user/create}"><i class="fa fa-star-o"></i> Tạo mới User</a></li>
                                 </ul>
 
                             </li>
                             <li><a href="#"><i class="fa fa-id-card-o"></i> Quyền hệ </a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Danh sách </a></li>
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Tạo mới quyền </a></li>
+                                    <li><a th:href="@{/portal/role/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
+                                    <li><a th:href="@{/portal/role/create}"><i class="fa fa-star-o"></i> Tạo mới quyền </a></li>
                                 </ul>
 
                             </li>
                             <li><a href="#"><i class="fa fa-id-card-o"></i> Nhóm quyền </a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Danh sách nhóm </a></li>
-                                    <li><a href="#"><i class="fa fa-star-o"></i> Tạo mới nhóm </a></li>
+                                    <li><a th:href="@{/portal/rolegroup/list}"><i class="fa fa-star-o"></i> Danh sách nhóm </a></li>
+                                    <li><a th:href="@{/portal/rolegroup/create}"><i class="fa fa-star-o"></i> Tạo mới nhóm </a></li>
                                 </ul>
 
                             </li>

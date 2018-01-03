@@ -109,21 +109,80 @@
 													<i> Phân quyền User  </i>
 												</div>
 
-												<div class="col-sm-12 col-xs-12">
-													<div class="col-md-4 col-sm-4 col-xs-12 col-sm-offset-2 col-md-offset-2 user-border">
-														<p>Tạo mới </p>
-														<p>Chỉnh sửa </p>
+												<div class="row">
+													<div class="col-md-5">
+														<div class="text-center">
+															<label th:text="#{user.label.not.belong}"></label>
+														</div>
+														<table class="dataTable table table-bordered table-hover"
+															   id="tableLeftRole">
+															<thead>
+															<tr>
+																<th class="col-md-1" style="width: 4%"></th>
+																<th class="col-md-11" th:text="#{group.field.name}"></th>
+															</tr>
+															</thead>
+															<tbody>
+															<th:block th:each="group : ${groupLeftLst}">
+																<tr>
+																	<td>
+																		<input type="checkbox" name="checkRoleLeft" th:value="${group.groupId}" id="checkRoleLeft"/>
+																	</td>
+																	<td th:text="${group.groupName}"></td>
+																</tr>
+															</th:block>
+															</tbody>
+														</table>
 													</div>
-													<div class="col-md-2 col-sm-2 col-xs-12 text-align-center">
-														<p><button type="button" class="btn btn-default mgL0"> >> </button></p>
-														<p><button type="button" class="btn btn-default mgL0"> > </button></p>
-														<p><button type="button" class="btn btn-default mgL0"> < </button></p>
-														<button type="button" class="btn btn-default mgL0"> << </button>
+													<div class="col-md-2" style="padding-top: 40px;">
+
+														<button class="btn btn-default btn-block" id="addAllRole"
+																type="button">
+															<i class="glyphicon glyphicon-forward"></i>
+														</button>
+
+														<button class="btn btn-default btn-block" id="addRole"
+																type="button">
+															<i class="glyphicon glyphicon-chevron-right"></i>
+														</button>
+
+														<button class="btn btn-default btn-block" id="removeRole"
+																type="button">
+															<i class="glyphicon glyphicon-chevron-left"></i>
+														</button>
+
+
+														<button class="btn btn-default btn-block" id="removeAllRole"
+																type="button">
+															<i class="glyphicon glyphicon-backward"></i>
+														</button>
+
+														<button type="button" class="btn btn-primary btn-block" th:text="#{edit.button}" id="btn-submit"></button>
 
 													</div>
-													<div class="col-md-4 col-sm-4 col-xs-12 user-border">
-														<p>Tạo mới </p> </br>
-														<p>Chỉnh sửa </p>
+													<div class="col-md-5">
+														<div class="text-center">
+															<label th:text="#{user.label.belong}"></label>
+														</div>
+														<table class="dataTable table table-bordered table-hover"
+															   id="tableRightRole">
+															<thead>
+															<tr>
+																<th class="col-md-1" style="width: 4%"></th>
+																<th class="col-md-11" th:text="#{group.field.name}"></th>
+															</tr>
+															</thead>
+															<tbody>
+															<th:block th:each="group : ${groupRightLst}">
+																<tr>
+																	<td>
+																		<input type="checkbox" name="checkRoleRight" th:value="${group.groupId}" id="checkRoleRight"/>
+																	</td>
+																	<td th:text="${group.groupName}"></td>
+																</tr>
+															</th:block>
+															</tbody>
+														</table>
 													</div>
 												</div>
 
@@ -159,6 +218,7 @@
 		</div>
 		<!-- /Main -->
 		<footer th:replace="portal/fragments/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/main/portal/user/user_userForm.js}"></script>
 	</div>
 </div>
 

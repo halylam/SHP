@@ -18,12 +18,12 @@ import vn.shp.portal.service.PortalRoleService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@Service("PortalRoleService")
+@Service("portalRoleService")
 public class PortalRoleServiceImpl implements PortalRoleService {
 
 	@Autowired
 	private PortalRoleRepository portalRoleRepo;
-	
+
 	@Override
 	public List<PortalRole> findAll() {
 		return portalRoleRepo.findAll();
@@ -48,7 +48,7 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 	
 	@Override
 	public ModelAndView initSearch(PortalRoleModel model, HttpServletRequest request) {
-		
+
 		String pageParam = request.getParameter(CoreConstant.CONST_PAGE);
 		int page = 0;
 		if(!StringUtils.isEmpty(pageParam) && !pageParam.equals("0")) {
@@ -56,11 +56,11 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 		}
 		int sizeOfPage = CoreConstant.DATA_TABLE_LIMIT;
 		Pageable pageable = new PageRequest(page, sizeOfPage);
-		
+
 		if (model == null) {
 			model = new PortalRoleModel();
 		}
-		
+
 		PortalRole entity = model.getEntity();
 		Page<PortalRole> result;
 		int count;
@@ -71,13 +71,13 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 			result = portalRoleRepo.findAll(pageable);
 			count = portalRoleRepo.findAll().size();
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		PageWrapper<PortalRole> pageWrapper = new PageWrapper<PortalRole>(page + 1, sizeOfPage);
-		
+
 		pageWrapper.setDataAndCount(result.getContent(), count);
 		mav.addObject("pageWrapper", pageWrapper);
 		return mav;
-		
+
 	}
 }

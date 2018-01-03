@@ -66,7 +66,7 @@ public class PortalUser implements Serializable {
 	private String password2;
 
 	@Autowired
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "PORTAL_USER_GROUP", joinColumns = {
 			@JoinColumn(name = "USERNAME", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "GROUP_ID", nullable = false, updatable = false) })
@@ -80,6 +80,12 @@ public class PortalUser implements Serializable {
 
 	@Transient
 	private Date lastAction;
+
+	@Column(name = "USER_CREATED", length = 100)
+	private String userCreated;
+
+	@Column(name = "TIME_CREATED")
+	private Date timeCreated;
 
 
 }

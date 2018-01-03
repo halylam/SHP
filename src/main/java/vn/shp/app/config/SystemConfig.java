@@ -96,15 +96,6 @@ public class SystemConfig {
             DATA_TABLE_LIMIT = Integer.parseInt(portalConfigService.find("SHP", "DATA_TABLE_LIMIT").getConfigValue());
         }
 
-//
-//        log.info("Init value name: " + String.format("%30s", "lstRelationship") + "\t - With value: bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_BWT_RELATIONSHIP)");
-//        lstRelationship = bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_BWT_RELATIONSHIP);
-//
-//        log.info("Init value name: " + String.format("%30s", "lstDebBranch") + "\t - With value: bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_APPLICATION_SOURCE)");
-//        lstDebBranch = bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_APPLICATION_SOURCE);
-//
-//        log.info("Init value name: " + String.format("%30s", "lstBwCountry") + "\t - With value: bwCatalogService.findCatalog(Constants.BW_TABLE.VCCB_AIM_BWT_COUNTRY)");
-//        lstBwCountry = bwCatalogService.findBwCountry(Constants.BW_TABLE.VCCB_AIM_BWT_COUNTRY);
 
         log.info("__________ Finish PostConstruct to init value __________");
     }

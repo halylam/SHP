@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import vn.shp.portal.entity.PortalGroup;
-import vn.shp.portal.model.PortalGroupModel;
 import vn.shp.portal.repository.PortalGroupRepository;
 import vn.shp.portal.service.PortalGroupService;
 
@@ -27,21 +26,7 @@ public class PortalGroupServiceImpl implements PortalGroupService {
 	public void save(PortalGroup entity) {
 		repo.save(entity);
 	}
-	
-	@Override
-	public PortalGroupModel findByData(PortalGroupModel portalGroupModel) {
-		PortalGroup entity = portalGroupModel.getEntity();
-		List<PortalGroup> result = null;
-		
-		if (entity != null && (!StringUtils.isEmpty(entity.getGroupName()) || !StringUtils.isEmpty(entity.getStatus()))) {
-			result = repo.findByGroupNameContainingOrStatusContainingOrderByGroupIdDesc(portalGroupModel.getEntity().getGroupName(), portalGroupModel.getEntity().getStatus());
-		} else {
-			result = repo.findByOrderByGroupIdDesc();
-		}
 
-		portalGroupModel.setData(result);
-		return portalGroupModel;
-	}
 	
 	@Override
 	public PortalGroup findOne(Long id) {

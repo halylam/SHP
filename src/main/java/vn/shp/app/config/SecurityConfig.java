@@ -1,5 +1,6 @@
 package vn.shp.app.config;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.util.CollectionUtils;
+import vn.shp.app.service.LoginSecurityService;
+import vn.shp.portal.entity.PortalGroup;
+import vn.shp.portal.entity.PortalRole;
 import vn.shp.portal.entity.PortalUser;
 import vn.shp.portal.service.PortalUserService;
 
@@ -23,6 +28,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
+@Log4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements AuthenticationProvider{
 
 	@Autowired
@@ -33,12 +39,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 	UserProfile userProfile;
 
 	@Autowired
+	LoginSecurityService loginSecurityService;
+
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.userDetailsService(loginSecurityService);
 		auth.authenticationProvider(this);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		log.info("protected void configure(HttpSecurity http) throws Exception");
 		http
 				.authorizeRequests()
 				.antMatchers("/mcr/**").permitAll()
@@ -59,15 +70,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 
 		List<GrantedAuthority> authoritiesRs = new ArrayList<GrantedAuthority>();
 		PortalUser portalUser = portalUserService.findByUsername(username);
-//		if (!CollectionUtils.isEmpty(portalUser.getGroups())) {
-//			for (PortalGroup group : portalUser.getGroups()) {
-//				for (PortalRole role : group.getRoleGroupLst()) {
-//					GrantedAuthority grantedAuthorityImpl = new SimpleGrantedAuthority(role.getRoleCode());
-//					authoritiesRs.add(grantedAuthorityImpl);
-//				}
-//			}
-//		}
-
+		if (!CollectionUtils.isEmpty(portalUser.getGroups())) {
+			for (PortalGroup group : portalUser.getGroups()) {
+				for (PortalRole role : group.getRoleGroupLst()) {
+					GrantedAuthority grantedAuthorityImpl = new SimpleGrantedAuthority(role.getRoleCode());
+					authoritiesRs.add(grantedAuthorityImpl);
+				}
+			}
+		}
 
 		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
