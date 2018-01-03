@@ -106,7 +106,7 @@ public class PortalGroupController {
 
         }
         model.addAttribute("bean", bean);
-        return "portal/group/rolegroup_create";
+        return "portal/rolegroup/rolegroup_create";
     }
 
 
