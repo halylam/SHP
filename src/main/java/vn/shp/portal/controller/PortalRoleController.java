@@ -107,21 +107,22 @@ public class PortalRoleController {
 	 */
 	@RequestMapping(value = "/edit", method = POST)
 	public String postEdit(PortalRoleModel bean, Model model, Locale locale, BindingResult bindingResult) {
-		PortalRole entity = bean.getEntity();
-		MessageList messageLst = new MessageList(Message.SUCCESS);
-		try {
-			entity.setStatus(Constants.RECORD_STATUS_OPEN);
-			entity.setTimeCreated(new Date());
-			portalRoleService.save(entity);
-			String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_UPDATE, null, locale);
-			messageLst.add(msgInfo);
-			model.addAttribute(CoreConstant.MSG_LST, messageLst);
-		} catch (Exception e) {
-			e.printStackTrace();
-			messageLst.setStatus(Message.ERROR);
-			String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
-			messageLst.add(msgInfo);
-			model.addAttribute(CoreConstant.MSG_LST, messageLst);
+		PortalRole role = bean.getEntity();
+		if (role != null && Utils.isAllNotNullOrEmpty(role.getRoleName(), role.getRoleCode())) {
+			try {
+				role.setRoleCode(role.getRoleCode().toUpperCase());
+				role.setRoleName(role.getRoleName().toUpperCase());
+				role.setStatus(Constants.RECORD_STATUS_OPEN);
+				role.setTimeCreated(new Date());
+				//role.setUserCreated();
+				portalRoleService.save(role);
+				MessageList messageList = new MessageList(Message.SUCCESS, "Thêm mới quyền thành công.");
+				model.addAttribute(CoreConstant.MSG_LST, messageList);
+			} catch (Exception e) {
+				e.printStackTrace();
+				MessageList messageList = new MessageList(Message.ERROR, "Quyền đã tồn tại trong hệ thống");
+				model.addAttribute(CoreConstant.MSG_LST, messageList);
+			}
 		}
 		return "portal/role/role_edit";
 	}

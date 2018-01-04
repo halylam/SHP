@@ -12,18 +12,7 @@
 		<!-- Main-->
 		<div class="main_content" role="main">
 			<div class="container-fluid top-heading">
-				<h1 class="">Tạo mới nhóm quyền hệ thống </h1>
-
-				<div class="pull-right hidden-xs">
-					<div class="btn-group">
-						<a th:href="@{/portal/rolegroup/create}">
-							<button type="button" class="btn btn-default">Tạo mới</button>
-						</a>
-						<a th:href="@{/portal/rolegroup/import}">
-							<button type="button" class="btn btn-default">Import</button>
-						</a>
-					</div>
-				</div>
+				<h1 class="">Chỉnh sửa nhóm quyền hệ thống </h1>
 			</div>
 
 			<div class="container-fluid">
@@ -31,7 +20,8 @@
 				<section class="section bgTrans">
 					<div class="section-content">
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-						<form th:action="@{/portal/rolegroup/create}" th:object="${bean}" method="post" role="form" id="user-form">
+						<form th:action="@{/portal/rolegroup/edit}" th:object="${bean}" method="post" role="form" id="user-form">
+							<input type="hidden" th:field="*{entity.groupId}" />
 							<div class="box box-info">
 								<div class="border-bottom">
 									<div class="row">
@@ -153,7 +143,6 @@
 									</div>
 								</div>
 							</div>
-
 						</form>
 					</div>
 

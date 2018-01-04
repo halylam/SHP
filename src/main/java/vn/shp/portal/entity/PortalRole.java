@@ -1,6 +1,7 @@
 package vn.shp.portal.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "PORTAL_ROLE", uniqueConstraints=@UniqueConstraint(columnNames="ROLE_CODE"))
 @Data
+@EqualsAndHashCode(exclude={"STATUS", "ROLE_NAME", "REMARK", "USER_CREATED", "TIME_CREATED"})
 public class PortalRole {
 
 	@Id
@@ -39,5 +41,5 @@ public class PortalRole {
 
 	@Column(name = "TIME_CREATED")
 	private Date timeCreated;
-	
+
 }

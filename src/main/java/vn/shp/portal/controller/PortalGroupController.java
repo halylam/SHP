@@ -119,6 +119,59 @@ public class PortalGroupController {
 		return "portal/rolegroup/rolegroup_create";
 	}
 
+	@RequestMapping(value = "/edit/{id}", method = GET)
+	public String getEdit(@PathVariable(value = "") Long id,
+						  PortalGroupBean bean, Model model)
+	{
+		PortalGroup portalGroup = portalGroupService.findOne(id);
+		bean.setEntity(portalGroup);
+		bean.setRoleRightLst(portalGroup.getRoleGroupLst());
+		List<PortalRole> roleLeftLst = new ArrayList<PortalRole>();
+		for (PortalRole each : portalRoleService.findAll()) {
+			if (!portalGroup.getRoleGroupLst().contains(each)) {
+				roleLeftLst.add(each);
+			}
+		}
+		bean.setRoleLeftLst(roleLeftLst);
+		bean.setPageMode(PageMode.EDIT);
+		model.addAttribute("bean", bean);
+		return "portal/rolegroup/rolegroup_edit";
+	}
+
+	/**
+	 * EDIT - POST
+	 */
+	@RequestMapping(value = "/edit", method = POST)
+	public String postEdit(PortalGroupBean bean, Model model, Locale locale, BindingResult bindingResult, HttpServletRequest request) {
+		PortalGroup group = bean.getEntity();
+		if (group != null && Utils.isAllNotNullOrEmpty(group.getGroupName(), group.getGroupCode())) {
+			try {
+				group.setGroupCode(group.getGroupCode().toUpperCase());
+				group.setGroupName(group.getGroupName().toUpperCase());
+				group.setStatus(Constants.RECORD_STATUS_OPEN);
+				group.setTimeCreated(new Date());
+				//group.setUserCreated();
+
+				String[] chkRoleRight = request.getParameterValues("checkRoleRight");
+				this.createRoleList(chkRoleRight, bean);
+
+				List<PortalRole> roleLst = bean.getRoleRightLst();
+				group.setRoleGroupLst(roleLst);
+
+				portalGroupService.save(group);
+
+				MessageList messageList = new MessageList(Message.SUCCESS, "Thêm mới nhóm quyền thành công.");
+				model.addAttribute(CoreConstant.MSG_LST, messageList);
+			} catch (Exception e) {
+				e.printStackTrace();
+				MessageList messageList = new MessageList(Message.ERROR, "Nhóm quyền đã tồn tại trong hệ thống");
+				model.addAttribute(CoreConstant.MSG_LST, messageList);
+			}
+		}
+		model.addAttribute("bean", bean);
+		return "portal/rolegroup/rolegroup_edit";
+	}
+
 	//	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GROUP_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(@ModelAttribute(value = "bean") PortalGroupBean bean, Model model,
