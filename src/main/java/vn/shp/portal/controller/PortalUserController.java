@@ -240,8 +240,6 @@ public class PortalUserController {
 						  PortalUserBean bean, Model model)
 	{
 		PortalUser portalUser = portalUserService.findOne(id);
-		portalUser.setPassword1(portalUser.getPassword());
-		portalUser.setPassword2(portalUser.getPassword());
 		bean.setEntity(portalUser);
 		bean.setGroupRightLst(portalUser.getGroups());
 		List<PortalGroup> groupLeftLst = new ArrayList<PortalGroup>();
@@ -269,7 +267,7 @@ public class PortalUserController {
 			}
 			// create user
 			PortalUser user = bean.getEntity();
-			if (user.getPassword1().equals(user.getPassword2())) {
+			if (StringUtils.isNotEmpty(user.getPassword1()) && user.getPassword1().equals(user.getPassword2())) {
 				user.setPassword(user.getPassword1());
 			}
 			List<PortalGroup> groupLst = bean.getGroupRightLst();

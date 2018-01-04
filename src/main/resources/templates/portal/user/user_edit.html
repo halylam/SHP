@@ -22,6 +22,7 @@
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
 						<form th:action="@{/portal/user/edit}" th:object="${bean}" method="post" role="form" id="user-form">
 							<input type="hidden" th:field="*{entity.userId}" />
+							<input type="hidden" th:field="*{entity.password}" />
 							<div class="box box-info">
 								<div class="border-bottom">
 									<div class="row">
@@ -90,19 +91,15 @@
 											</div>
 
 											<div class="item form-group col-xs-12">
-												<label class="control-label col-md-2 col-sm-2 col-xs-12"> Mật khẩu <span
-													class="required">*</span>
-												</label>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12"> Mật khẩu </label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<input th:field="*{entity.password1}" id="txtPassword1"
-														class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
+														class="form-control col-md-7 col-xs-12" placeholder=""  type="password">
 												</div>
-												<label class="control-label col-md-2 col-sm-2 col-xs-12">Nhập lại mật khẩu <span
-													class="required">*</span>
-												</label>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Nhập lại mật khẩu </label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<input th:field="*{entity.password2}" id="txtPassword2"
-														class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
+														class="form-control col-md-7 col-xs-12" placeholder=""  type="password">
 													<span id='message'></span>
 												</div>
 											</div>
