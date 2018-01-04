@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "PORTAL_ROLE", uniqueConstraints=@UniqueConstraint(columnNames="ROLE_CODE"))
 @Data
-@EqualsAndHashCode(exclude={"STATUS", "ROLE_NAME", "REMARK", "USER_CREATED", "TIME_CREATED"})
 public class PortalRole {
 
 	@Id

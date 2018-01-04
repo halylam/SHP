@@ -65,8 +65,12 @@ $("#addAllRole").click(function() {
 	});
 });
 
-$("#btn-submit").click(function(){
-	$("input[name=checkRoleRight]").each(function() {
+$("#btn-submit").click(function () {
+	if ($('#txtPassword1').val() != $('#txtPassword2').val()) {
+		$('#message').html('Mật khẩu không giống nhau').css('color', 'red');
+		return false;
+	}
+	$("input[name=checkRoleRight]").each(function () {
 		this.checked = true;
 	});
 	$('#user-form').submit();
