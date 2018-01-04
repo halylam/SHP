@@ -17,7 +17,6 @@ import vn.shp.portal.repository.PortalRoleRepository;
 import vn.shp.portal.service.PortalRoleService;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 @Service("portalRoleService")
@@ -53,7 +52,7 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 
 		String pageParam = request.getParameter(CoreConstant.CONST_PAGE);
 		int page = 0;
-		if (!StringUtils.isEmpty(pageParam) && !pageParam.equals("0")) {
+		if(!StringUtils.isEmpty(pageParam) && !pageParam.equals("0")) {
 			page = Integer.parseInt(pageParam) - 1;
 		}
 		int sizeOfPage = CoreConstant.DATA_TABLE_LIMIT;
@@ -80,6 +79,7 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 		pageWrapper.setDataAndCount(result.getContent(), count);
 		mav.addObject("pageWrapper", pageWrapper);
 		return mav;
+
 	}
 
 	public List<PortalRole> searchByFilters(String roleName, String roleCode) {

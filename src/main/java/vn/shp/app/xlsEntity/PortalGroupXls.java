@@ -13,18 +13,18 @@ import vn.hcm.mcr35.excel.annotation.EColumn;
 import vn.hcm.mcr35.excel.annotation.Excel;
 
 @Data
-@Excel(name = "Danh Sach Role", autowidth = true, sortByIndex = true, selExport = true)
+@Excel(name = "Danh Sach Group Role", autowidth = true, sortByIndex = true, selExport = true)
 @Setter
 @Getter
-public class PortalRoleXls implements Serializable {
+public class PortalGroupXls implements Serializable {
 	@EColumn(name = "STT", export = true, index = 0)
 	private int seq;
 
-	@EColumn(name = "Mã Role", export = true, index = 1)
-	private String roleCode;
+	@EColumn(name = "Mã Group", export = true, index = 1)
+	private String groupCode;
 
-	@EColumn(name = "Tên Role", export = true, index = 2)
-	private String roleName;
+	@EColumn(name = "Tên Group", export = true, index = 2)
+	private String groupName;
 
 	@EColumn(name = "Trạng thái", export = true, index = 3)
 	private String status;

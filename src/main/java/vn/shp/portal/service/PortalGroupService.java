@@ -15,5 +15,7 @@ public interface PortalGroupService {
 	void delete(Long GroupId);
 
 	PortalGroup findByGroupName(String groupName);
+
+	List<PortalGroup> searchByFilters(String groupName, String groupCode);
 	
 }
