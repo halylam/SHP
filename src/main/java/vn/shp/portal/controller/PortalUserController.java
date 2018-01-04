@@ -235,6 +235,7 @@ public class PortalUserController {
 		return mav;
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_EDIT')")
 	@RequestMapping(value = "/edit/{id}", method = GET)
 	public String getEdit(@PathVariable(value = "") Long id,
 						  PortalUserBean bean, Model model)
@@ -291,14 +292,6 @@ public class PortalUserController {
 		return "portal/user/user_edit";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_DELETE')")
-	@RequestMapping(value = "/delete", method = GET)
-	public String getDelete(@RequestParam(value = "userId") Long userId, Model model, HttpServletRequest request,
-							Locale locale, RedirectAttributes redirectAttributes)
-	{
-		return "redirect:/portal/user/list";
-	}
-
 	public void creategroupList(String[] checkgroup, PortalUserBean portalUserModel) {
 		// Get listAll group
 		List<PortalGroup> groupAll = portalGroupService.findAll();
@@ -327,5 +320,26 @@ public class PortalUserController {
 			portalUserModel.setGroupRightLst(groupAll);
 			// List of team's group is empty (default value)
 		}
+	}
+
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_DELETE')")
+	@RequestMapping(value = "/delete/{id}", method = GET)
+	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
+							Locale locale, RedirectAttributes redirectAttributes)
+	{
+		MessageList messageLst = new MessageList(Message.SUCCESS);
+		try {
+			portalUserService.delete(id);
+			String msgInfo = messageSource.getMessage(CoreConstant.MSG_SUCCESS_DELETE, null, locale);
+			messageLst.add(msgInfo);
+			model.addAttribute(CoreConstant.MSG_LST, messageLst);
+		} catch (Exception e) {
+			e.printStackTrace();
+			messageLst.setStatus(Message.ERROR);
+			String msgInfo = messageSource.getMessage(CoreConstant.MSG_ERROR_UPDATE, null, locale);
+			messageLst.add(msgInfo);
+			model.addAttribute(CoreConstant.MSG_LST, messageLst);
+		}
+		return "redirect:/portal/user/list";
 	}
 }
