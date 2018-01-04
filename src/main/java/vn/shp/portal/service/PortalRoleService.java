@@ -5,6 +5,7 @@ import vn.shp.portal.entity.PortalRole;
 import vn.shp.portal.model.PortalRoleModel;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 public interface PortalRoleService {
@@ -18,5 +19,6 @@ public interface PortalRoleService {
 	ModelAndView initSearch(PortalRoleModel portalRoleModel, HttpServletRequest request);
 
 	void delete(Long roleId);
-	
+
+	List<PortalRole> searchByFilters(String roleName, String roleCode);
 }

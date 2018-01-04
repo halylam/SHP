@@ -12,7 +12,15 @@
 		<!-- Main-->
 		<div class="main_content" role="main">
 			<div class="container-fluid top-heading">
-				<h1 class="">Tạo mới quyền hệ thống </h1>
+				<h1 class="">Chỉnh sửa quyền hệ thống </h1>
+
+				<div class="pull-right hidden-xs">
+					<div class="btn-group">
+						<a th:href="@{/portal/role/list}">
+							<button type="button" class="btn btn-default">Danh Sách</button>
+						</a>
+					</div>
+				</div>
 			</div>
 
 			<div class="container-fluid">
@@ -20,12 +28,22 @@
 				<section class="section bgTrans">
 					<div class="section-content">
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-						<form th:action="@{/portal/role/create}" th:object="${bean}" method="post" role="form" id="user-form">
+						<form th:action="@{/portal/role/edit}" th:object="${portalRoleModel}" method="post" role="form" id="role-form">
+							<input type="hidden" th:field="*{entity.roleId}" />
 							<div class="box box-info">
 								<div class="border-bottom">
 									<div class="row">
 										<div class="col-sm-8">
 											<h5> Thông tin quyền hệ thống</h5>
+										</div>
+										<div class="col-sm-4">
+											<div class="box-tools pull-right">
+												<button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+													class="fa fa-minus"></i>
+												</button>
+												<button type="button" class="btn btn-box-tool" data-widget="remove"><i
+													class="fa fa-times"></i></button>
+											</div>
 										</div>
 									</div>
 								</div>

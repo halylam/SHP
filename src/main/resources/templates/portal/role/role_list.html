@@ -32,7 +32,8 @@
 					<div class="section-content">
 						<form th:object="${bean}" method="post" th:action="@{/portal/role/list}">
 							<!-- Content here -->
-							<a class="btn" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							<a class="btn" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+								aria-controls="collapseExample">
 								Tìm kiếm nâng cao <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 
 							</a>
@@ -44,14 +45,17 @@
 
 										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="username">Mã quyền</label>
 										<div class="col-md-3 col-sm-3  col-xs-12">
-											<input id="username" class="form-control col-md-3 col-xs-4" th:field="${bean.entity.roleCode}" placeholder="" type="text">
+											<input id="username" class="form-control col-md-3 col-xs-4" th:field="${bean.entity.roleCode}"
+												placeholder="" type="text">
 										</div>
 									</div>
 									<div class="item form-group col-xs-12">
 										<label class="control-label col-md-2 col-sm-2 col-xs-12" for="email">Tên quyền</label>
 										<div class="col-md-7 col-sm-7 col-xs-12">
-											<input id="email" class="form-control col-md-7 col-xs-12" th:field="${bean.entity.roleName}" placeholder="" type="text">
+											<input id="email" class="form-control col-md-7 col-xs-12" th:field="${bean.entity.roleName}"
+												placeholder="" type="text">
 										</div>
+										<button class="btn btn-primary pull-left" id="btn-submit">Tìm Kiếm</button>
 									</div>
 
 								</div>
@@ -97,11 +101,11 @@
 														<label for="checkbox1"></label>
 													</div>
 												</td>
-												<td><a th:href="@{/portal/role/edit/{id}(id=${item.roleId})}"
-													th:title="${item.roleCode}" th:text="${item.roleCode}">HV0001</a>
+												<td><a th:href="@{/portal/role/edit/{id}(id=${item.roleId})}" th:title="${item.roleCode}"
+													th:text="${item.roleCode}">HV0001</a>
 												</td>
 												<td th:text="${item.roleName}">Họ Tên</td>
-												<td >
+												<td>
 													<span th:if="${item.status == 'O'}">Mở</span>
 													<span th:if="${item.status == 'C'}">Đóng</span>
 
@@ -158,9 +162,9 @@
 <!---->
 <!-- Config template -->
 <script>
-    $(document).ready(function () {
-        $('#myTable').DataTable();
-    });
+	$(document).ready(function () {
+		$('#myTable').DataTable();
+	});
 </script>
 </body>
 </html>

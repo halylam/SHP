@@ -11,11 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.shp.portal.constant.CoreConstant;
 import vn.shp.portal.core.PageWrapper;
 import vn.shp.portal.entity.PortalRole;
+import vn.shp.portal.entity.PortalUser;
 import vn.shp.portal.model.PortalRoleModel;
 import vn.shp.portal.repository.PortalRoleRepository;
 import vn.shp.portal.service.PortalRoleService;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 @Service("portalRoleService")
@@ -34,24 +36,24 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 	public void save(PortalRole entity) {
 		portalRoleRepo.save(entity);
 	}
-	
+
 	@Override
 	@Transactional
 	public void delete(Long id) {
 		portalRoleRepo.delete(id);
 	}
-	
+
 	@Override
 	public PortalRole findOne(Long id) {
 		return portalRoleRepo.findOne(id);
 	}
-	
+
 	@Override
 	public ModelAndView initSearch(PortalRoleModel model, HttpServletRequest request) {
 
 		String pageParam = request.getParameter(CoreConstant.CONST_PAGE);
 		int page = 0;
-		if(!StringUtils.isEmpty(pageParam) && !pageParam.equals("0")) {
+		if (!StringUtils.isEmpty(pageParam) && !pageParam.equals("0")) {
 			page = Integer.parseInt(pageParam) - 1;
 		}
 		int sizeOfPage = CoreConstant.DATA_TABLE_LIMIT;
@@ -78,6 +80,9 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 		pageWrapper.setDataAndCount(result.getContent(), count);
 		mav.addObject("pageWrapper", pageWrapper);
 		return mav;
+	}
 
+	public List<PortalRole> searchByFilters(String roleName, String roleCode) {
+		return portalRoleRepo.findBy(roleName, roleCode, "O");
 	}
 }
