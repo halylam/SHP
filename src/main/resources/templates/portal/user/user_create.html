@@ -50,149 +50,147 @@
 									<!-- Content here -->
 									<div class="row">
 										<div class="col-sm-12">
-											<form class="form-muted" novalidate>
-												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Username <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input th:field="*{entity.username}" id="txtUserName"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
-													</div>
-
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Email <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input id="txtEmail" th:field="*{entity.email}"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
-													</div>
-
-												</div>
-												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên đầy đủ <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input id="txtFullname" th:field="*{entity.fullName}"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
-													</div>
-
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Điện thoại <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input id="txtMobilePhone" th:field="*{entity.mobile}"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
-													</div>
-
-												</div>
-												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Ngày sinh <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input id="txtDateOfBirth" th:field="*{entity.birthday}"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
-													</div>
-
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Username <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input th:field="*{entity.username}" id="txtUserName"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
 												</div>
 
-												<div class="item form-group col-xs-12">
-													<label class="control-label col-md-2 col-sm-2 col-xs-12"> Mật khẩu <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input th:field="*{entity.password1}" id="txtPassword1"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
-													</div>
-													<label class="control-label col-md-2 col-sm-2 col-xs-12">Nhập lại mật khẩu <span
-														class="required">*</span>
-													</label>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<input th:field="*{entity.password2}" id="txtPassword2"
-															class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
-													</div>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Email <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input id="txtEmail" th:field="*{entity.email}" class="form-control col-md-7 col-xs-12"
+														placeholder="" required type="text">
 												</div>
 
-												<div class="item form-group col-xs-12">
-													<h5> Quyền User </h5>
-													<i> Phân quyền User </i>
+											</div>
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên đầy đủ <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input id="txtFullname" th:field="*{entity.fullName}"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
 												</div>
 
-												<div class="row">
-													<div class="col-md-5">
-														<div class="text-center">
-															<label th:text="#{user.label.not.belong}"></label>
-														</div>
-														<table class="dataTable table table-bordered table-hover" id="tableLeftRole">
-															<thead>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Điện thoại <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input id="txtMobilePhone" th:field="*{entity.mobile}"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
+												</div>
+
+											</div>
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Ngày sinh <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input id="txtDateOfBirth" th:field="*{entity.birthday}"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
+												</div>
+
+											</div>
+
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12"> Mật khẩu <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input th:field="*{entity.password1}" id="txtPassword1"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
+												</div>
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Nhập lại mật khẩu <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input th:field="*{entity.password2}" id="txtPassword2"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="password">
+													<span id='message'></span>
+												</div>
+											</div>
+
+											<div class="item form-group col-xs-12">
+												<h5> Quyền User </h5>
+												<i> Phân quyền User </i>
+											</div>
+
+											<div class="row">
+												<div class="col-md-5">
+													<div class="text-center">
+														<label th:text="#{user.label.not.belong}"></label>
+													</div>
+													<table class="dataTable table table-bordered table-hover" id="tableLeftRole">
+														<thead>
+														<tr>
+															<th class="col-md-1" style="width: 4%"></th>
+															<th class="col-md-11" th:text="#{group.field.name}"></th>
+														</tr>
+														</thead>
+														<tbody>
+														<th:block th:each="group : ${groupLeftLst}">
 															<tr>
-																<th class="col-md-1" style="width: 4%"></th>
-																<th class="col-md-11" th:text="#{group.field.name}"></th>
+																<td>
+																	<input type="checkbox" name="checkRoleLeft" th:value="${group.groupId}"
+																		id="checkRoleLeft" />
+																</td>
+																<td th:text="${group.groupName}"></td>
 															</tr>
-															</thead>
-															<tbody>
-															<th:block th:each="group : ${groupLeftLst}">
-																<tr>
-																	<td>
-																		<input type="checkbox" name="checkRoleLeft"
-																			th:value="${group.groupId}" id="checkRoleLeft" />
-																	</td>
-																	<td th:text="${group.groupName}"></td>
-																</tr>
-															</th:block>
-															</tbody>
-														</table>
-													</div>
-													<div class="col-md-2" style="padding-top: 40px;">
-
-														<button class="btn btn-default btn-block" id="addAllRole" type="button">
-															<i class="glyphicon glyphicon-forward"></i>
-														</button>
-
-														<button class="btn btn-default btn-block" id="addRole" type="button">
-															<i class="glyphicon glyphicon-chevron-right"></i>
-														</button>
-
-														<button class="btn btn-default btn-block" id="removeRole" type="button">
-															<i class="glyphicon glyphicon-chevron-left"></i>
-														</button>
-
-														<button class="btn btn-default btn-block" id="removeAllRole" type="button">
-															<i class="glyphicon glyphicon-backward"></i>
-														</button>
-
-														<button type="button" class="btn btn-primary btn-block" th:text="#{edit.button}"
-															id="btn-submit"></button>
-
-													</div>
-													<div class="col-md-5">
-														<div class="text-center">
-															<label th:text="#{user.label.belong}"></label>
-														</div>
-														<table class="dataTable table table-bordered table-hover" id="tableRightRole">
-															<thead>
-															<tr>
-																<th class="col-md-1" style="width: 4%"></th>
-																<th class="col-md-11" th:text="#{group.field.name}"></th>
-															</tr>
-															</thead>
-															<tbody>
-															<th:block th:each="group : ${groupRightLst}">
-																<tr>
-																	<td>
-																		<input type="checkbox" name="checkRoleRight"
-																			th:value="${group.groupId}" id="checkRoleRight" />
-																	</td>
-																	<td th:text="${group.groupName}"></td>
-																</tr>
-															</th:block>
-															</tbody>
-														</table>
-													</div>
+														</th:block>
+														</tbody>
+													</table>
 												</div>
-											</form>
+												<div class="col-md-2" style="padding-top: 40px;">
+
+													<button class="btn btn-default btn-block" id="addAllRole" type="button">
+														<i class="glyphicon glyphicon-forward"></i>
+													</button>
+
+													<button class="btn btn-default btn-block" id="addRole" type="button">
+														<i class="glyphicon glyphicon-chevron-right"></i>
+													</button>
+
+													<button class="btn btn-default btn-block" id="removeRole" type="button">
+														<i class="glyphicon glyphicon-chevron-left"></i>
+													</button>
+
+													<button class="btn btn-default btn-block" id="removeAllRole" type="button">
+														<i class="glyphicon glyphicon-backward"></i>
+													</button>
+
+													<button class="btn btn-primary btn-block" id="btn-submit">Lưu</button>
+
+												</div>
+												<div class="col-md-5">
+													<div class="text-center">
+														<label th:text="#{user.label.belong}"></label>
+													</div>
+													<table class="dataTable table table-bordered table-hover" id="tableRightRole">
+														<thead>
+														<tr>
+															<th class="col-md-1" style="width: 4%"></th>
+															<th class="col-md-11" th:text="#{group.field.name}"></th>
+														</tr>
+														</thead>
+														<tbody>
+														<th:block th:each="group : ${groupRightLst}">
+															<tr>
+																<td>
+																	<input type="checkbox" name="checkRoleRight" th:value="${group.groupId}"
+																		id="checkRoleRight" />
+																</td>
+																<td th:text="${group.groupName}"></td>
+															</tr>
+														</th:block>
+														</tbody>
+													</table>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

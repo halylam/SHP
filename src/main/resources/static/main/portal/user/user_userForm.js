@@ -73,7 +73,6 @@ $("#btn-submit").click(function () {
 	$("input[name=checkRoleRight]").each(function () {
 		this.checked = true;
 	});
-	$('#user-form').submit();
 });
 
 $(document).ready(function(){

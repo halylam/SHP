@@ -69,6 +69,5 @@ $("#btn-submit").click(function(){
 	$("input[name=checkRoleRight]").each(function() {
 		this.checked = true;
 	});
-	$('#idForm').submit();
 });
 
