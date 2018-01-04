@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="portal/fragments/head :: head"></head>
 
@@ -20,7 +20,8 @@
 				<section class="section bgTrans">
 					<div class="section-content">
 						<th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-						<form th:action="@{/portal/user/edit}" th:object="${bean}" method="post" role="form" id="user-form">
+						<form th:action="@{/portal/user/edit}" th:object="${bean}" method="post" role="form"
+							  id="user-form" onsubmit="return false;">
 							<input type="hidden" th:field="*{entity.userId}" />
 							<div class="box box-info">
 								<div class="border-bottom">
