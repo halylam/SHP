@@ -6,6 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -57,6 +58,9 @@ public class PortalUserController {
 
 	@Autowired
 	PortalGroupService portalGroupService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 //	@Autowired
 //	PortalTitleService portalTitleService;
@@ -209,7 +213,7 @@ public class PortalUserController {
 			// create user
 			PortalUser user = bean.getEntity();
 			if (user.getPassword1().equals(user.getPassword2())) {
-				user.setPassword(user.getPassword1());
+				user.setPassword(passwordEncoder.encode(user.getPassword1()));
 			}
 			List<PortalGroup> groupLst = bean.getGroupRightLst();
 			user.setGroups(groupLst);
@@ -269,7 +273,7 @@ public class PortalUserController {
 			// create user
 			PortalUser user = bean.getEntity();
 			if (StringUtils.isNotEmpty(user.getPassword1()) && user.getPassword1().equals(user.getPassword2())) {
-				user.setPassword(user.getPassword1());
+				user.setPassword(passwordEncoder.encode(user.getPassword1()));
 			}
 			List<PortalGroup> groupLst = bean.getGroupRightLst();
 			user.setGroups(groupLst);

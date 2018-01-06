@@ -9,6 +9,9 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.WebApplicationContext;
 
 @Configuration
@@ -48,4 +51,6 @@ public class ApplicationConfig {
 	public EcmPropertyMapper ecmPropertyMapper() {
 		return new AlfrescoPropertyServiceImpl();
 	}
+
+
 }

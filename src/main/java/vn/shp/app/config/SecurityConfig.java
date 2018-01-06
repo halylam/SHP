@@ -3,9 +3,11 @@ package vn.shp.app.config;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
 import vn.shp.app.service.LoginSecurityService;
 import vn.shp.portal.entity.PortalGroup;
@@ -27,9 +32,8 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
 @Log4j
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements AuthenticationProvider{
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	PortalUserService portalUserService;
@@ -39,12 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 	UserProfile userProfile;
 
 	@Autowired
-	LoginSecurityService loginSecurityService;
+	@Qualifier("loginSecurityService")
+	UserDetailsService userDetailsService;
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.userDetailsService(loginSecurityService);
-		auth.authenticationProvider(this);
+	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		//auth.authenticationProvider(authenticationProvider());
 	}
 
 	@Override
@@ -57,37 +62,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Auth
 				.and()
 				.formLogin()
 				.loginPage("/login")
+				.usernameParameter("username").passwordParameter("password")
 				.permitAll()
 				.and()
+				//.csrf().and()
 				.logout()
 				.permitAll();
+		//passwordEncoder.
 	}
 
-	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String username = authentication.getName();
-		String password = (String) authentication.getCredentials();
-
-		List<GrantedAuthority> authoritiesRs = new ArrayList<GrantedAuthority>();
-		PortalUser portalUser = portalUserService.findByUsername(username);
-		if (!CollectionUtils.isEmpty(portalUser.getGroups())) {
-			for (PortalGroup group : portalUser.getGroups()) {
-				for (PortalRole role : group.getRoleGroupLst()) {
-					GrantedAuthority grantedAuthorityImpl = new SimpleGrantedAuthority(role.getRoleCode());
-					authoritiesRs.add(grantedAuthorityImpl);
-				}
-			}
-		}
-
-		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
+//	@Override
+//	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//		String username = authentication.getName();
+//		String password = (String) authentication.getCredentials();
+//
+//		List<GrantedAuthority> authoritiesRs = new ArrayList<GrantedAuthority>();
+//		PortalUser portalUser = portalUserService.findByUsername(username);
+//		if (!CollectionUtils.isEmpty(portalUser.getGroups())) {
+//			for (PortalGroup group : portalUser.getGroups()) {
+//				for (PortalRole role : group.getRoleGroupLst()) {
+//					GrantedAuthority grantedAuthorityImpl = new SimpleGrantedAuthority(role.getRoleCode());
+//					authoritiesRs.add(grantedAuthorityImpl);
+//				}
+//			}
+//		}
+//
+//		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 //		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
+////		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
+//	}
+
+//	@Override
+//	public boolean supports(Class<?> authentication) {
+//		return true;
+//	}
+
+	@Bean(name="passwordEncoder")
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		return true;
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService);
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		return authenticationProvider;
 	}
-
-
 }
