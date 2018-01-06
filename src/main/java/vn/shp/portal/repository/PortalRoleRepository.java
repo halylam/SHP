@@ -19,4 +19,5 @@ public interface PortalRoleRepository extends JpaRepository<PortalRole, Long> {
 	@Query("select u from PortalRole u where u.roleCode like UPPER(CONCAT('%',:roleCode,'%')) and u.roleName like UPPER(CONCAT('%',:roleName,'%')) and u.status like UPPER(CONCAT('%',:status,'%'))")
 	List<PortalRole> findBy(@Param("roleCode") String roleCode, @Param("roleName") String roleName, @Param("status") String status);
 
+	PortalRole findByRoleCode(String roleCode);
 }

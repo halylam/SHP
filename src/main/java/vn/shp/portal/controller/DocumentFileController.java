@@ -29,7 +29,7 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping("/document/files")
-public class DocumentFileController{
+public class DocumentFileController  extends AbstractController{
 
 
 

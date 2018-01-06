@@ -39,7 +39,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/hocvien")
-public class HocVienController {
+public class HocVienController extends AbstractController{
 
     @Value("${dm.toDirectory.hososv}")
     private String toDirectory;
@@ -76,11 +76,7 @@ public class HocVienController {
     @Autowired
     DanTocService danTocService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)

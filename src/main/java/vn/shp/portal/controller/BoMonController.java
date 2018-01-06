@@ -42,7 +42,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/bomon")
-public class BoMonController {
+public class BoMonController  extends AbstractController{
 
     @Autowired
     private MessageSource messageSource;

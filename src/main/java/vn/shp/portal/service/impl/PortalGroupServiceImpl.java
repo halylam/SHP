@@ -45,6 +45,11 @@ public class PortalGroupServiceImpl implements PortalGroupService {
 	}
 
 	@Override
+	public PortalGroup findByGroupCode(String groupCode) {
+		return repo.findByGroupCode(groupCode);
+	}
+
+	@Override
 	public List<PortalGroup> searchByFilters(String groupCode, String groupName) {
 		return repo.findBy(groupCode, groupName, "O");
 	}

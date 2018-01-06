@@ -4,17 +4,21 @@ import lombok.Data;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import vn.shp.app.entity.Location;
 import vn.shp.app.service.LocationService;
 import vn.shp.portal.entity.PortalConfig;
+import vn.shp.portal.entity.PortalGroup;
+import vn.shp.portal.entity.PortalRole;
+import vn.shp.portal.entity.PortalUser;
 import vn.shp.portal.service.PortalConfigService;
+import vn.shp.portal.service.PortalGroupService;
+import vn.shp.portal.service.PortalRoleService;
+import vn.shp.portal.service.PortalUserService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hant1 on 03/10/2017.
@@ -31,6 +35,18 @@ public class SystemConfig {
 
     @Autowired
     PortalConfigService portalConfigService;
+
+    @Autowired
+    PortalUserService portalUserService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    PortalRoleService portalRoleService;
+
+    @Autowired
+    PortalGroupService portalGroupService;
 
     Map<String, String> lstCardType = new LinkedHashMap<>();
 
@@ -53,7 +69,7 @@ public class SystemConfig {
 
     @PostConstruct
     public void init() {
-
+        initData();
         log.info("__________ Run PostConstruct to init value __________");
 
 
@@ -98,6 +114,52 @@ public class SystemConfig {
 
 
         log.info("__________ Finish PostConstruct to init value __________");
+    }
+
+    private void initData(){
+        log.info("__________ Check data for system __________");
+        log.info("Check Admin role........");
+        PortalRole role = portalRoleService.findByRoleCode(Constants.ROLE_ADMIN);
+        if(role == null){
+            log.info("Create Admin role........");
+            role = new PortalRole();
+            role.setRoleCode(Constants.ROLE_ADMIN);
+            role.setRoleName("QUAN TRI HE THONG");
+            role.setUserCreated("SYSTEM");
+            role.setTimeCreated(new Date());
+            role.setStatus(Constants.RECORD_STATUS_OPEN);
+            portalRoleService.save(role);
+        }
+        log.info("Check Admin group role........");
+        PortalGroup group = portalGroupService.findByGroupCode(Constants.GROUP_SYSTEM_ADMIN);
+        if(group == null){
+            log.info("Create Admin group role........");
+            group = new PortalGroup();
+            group.setGroupCode(Constants.GROUP_SYSTEM_ADMIN);
+            group.setGroupName("QUAN TRI HE THONG");
+            group.setUserCreated("SYSTEM");
+            group.setTimeCreated(new Date());
+            group.setStatus(Constants.RECORD_STATUS_OPEN);
+            group.setRoleGroupLst(Arrays.asList(role));
+            portalGroupService.save(group);
+        }
+        log.info("Check Admin user........");
+        PortalUser user = portalUserService.findByUsername("admin");
+        if(user == null){
+            log.info("Create Admin user........");
+            user = new PortalUser();
+            user.setUsername("admin");
+            user.setPassword(passwordEncoder.encode("nguyenha"));
+            user.setTimeCreated(new Date());
+            user.setEnabled(true);
+            user.setBirthday(new Date());
+            user.setEmail("admin@shp.com");
+            user.setFullName("Admin Shp");
+            user.setMobile("0908990558");
+            user.setGroups(Arrays.asList(group));
+            portalUserService.save(user);
+        }
+        log.info("__________ Check completed __________");
     }
 
 }

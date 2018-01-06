@@ -39,7 +39,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/giangvien")
-public class GiangVienController {
+public class GiangVienController  extends AbstractController {
     
     @Value("${dm.toDirectory.hososv}")
     private String toDirectory;
@@ -66,12 +66,6 @@ public class GiangVienController {
     private EcmPropertyMapper propertyMapper;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)

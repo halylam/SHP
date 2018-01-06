@@ -20,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @RequestMapping("portal")
 @PreAuthorize("isAuthenticated()")
-public class PortalHomeController {
+public class PortalHomeController  extends AbstractController {
 
 
 	@Autowired

@@ -1,10 +1,14 @@
 package vn.shp.app.config;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import vn.shp.portal.entity.PortalUser;
+import vn.shp.portal.service.PortalUserService;
 
 import java.util.List;
 
@@ -12,6 +16,9 @@ import java.util.List;
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class UserProfile {
+
+    @Autowired
+    private PortalUserService portalUserService;
 
     private PortalUser user;
     private String defaultLang;
@@ -35,4 +42,18 @@ public class UserProfile {
     }
 
 
+    public PortalUser getUser() {
+        if(user == null){
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName(); //get logged in username
+            user = portalUserService.findByUsername(name);
+
+        }
+        return user;
+    }
+
+    public void setUser(PortalUser user) {
+
+        this.user = user;
+    }
 }

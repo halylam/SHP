@@ -59,7 +59,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/rolegroup")
-public class PortalGroupController {
+public class PortalGroupController  extends AbstractController{
 
 	@Autowired
 	private MessageSource messageSource;

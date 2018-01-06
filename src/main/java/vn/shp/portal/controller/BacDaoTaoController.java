@@ -43,7 +43,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/bacdaotao")
-public class BacDaoTaoController {
+public class BacDaoTaoController extends AbstractController {
 
     @Autowired
     private MessageSource messageSource;

@@ -2,12 +2,15 @@ package vn.shp.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import vn.shp.app.config.UserProfile;
 import vn.shp.portal.entity.PortalGroup;
 import vn.shp.portal.entity.PortalRole;
 import vn.shp.portal.entity.PortalUser;
@@ -26,13 +29,20 @@ public class LoginSecurityService implements UserDetailsService {
     @Autowired
     private PortalUserRepository userDao;
 
+    @Autowired
+    UserProfile userProfile;
+
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
         PortalUser user =  userDao.findByUsername(userId);
 
+
+
+
         if(user == null){
-            throw new UsernameNotFoundException("Invalid username or password1111.");
+            throw new UsernameNotFoundException("Invalid username or password.");
         }
+        userProfile.setUser(user);
         //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getEnabled(), true, true, true, getAuthority(user));
@@ -55,9 +65,5 @@ public class LoginSecurityService implements UserDetailsService {
         }
 
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_AUTH"));
-    }
-
-    public List getUsers() {
-        return userDao.findAll();
     }
 }

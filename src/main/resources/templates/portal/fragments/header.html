@@ -37,7 +37,7 @@
 				<div class="nav-profiles">
 					<div class="nav-wrap">
 						<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<img th:src="@{/mcr/images/img.jpg}" alt=""> <span class="hidden-xs">Admin</span>
+							<img th:src="@{/mcr/images/img.jpg}" alt=""> <span class="hidden-xs" th:text="${userProfile !=null? userProfile.user.fullName : ''}">Admin</span>
 							<span class=" fa fa-angle-down"></span>
 						</a>
 						<ul class="dropdown-menu dropdown-usermenu pull-right">

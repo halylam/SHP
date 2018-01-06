@@ -85,4 +85,9 @@ public class PortalRoleServiceImpl implements PortalRoleService {
 	public List<PortalRole> searchByFilters(String roleName, String roleCode) {
 		return portalRoleRepo.findBy(roleName, roleCode, "O");
 	}
+
+	@Override
+	public PortalRole findByRoleCode(String roleCode) {
+		return portalRoleRepo.findByRoleCode(roleCode);
+	}
 }

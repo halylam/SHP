@@ -16,6 +16,8 @@ public interface PortalGroupService {
 
 	PortalGroup findByGroupName(String groupName);
 
+	PortalGroup findByGroupCode(String groupCode);
+
 	List<PortalGroup> searchByFilters(String groupName, String groupCode);
 	
 }

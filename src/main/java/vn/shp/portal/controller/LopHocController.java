@@ -51,7 +51,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/lophoc")
-public class LopHocController {
+public class LopHocController  extends AbstractController{
 
 	@Autowired
 	private MessageSource messageSource;

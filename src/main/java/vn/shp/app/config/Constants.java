@@ -5,6 +5,8 @@ package vn.shp.app.config;
  */
 public class Constants {
 
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String GROUP_SYSTEM_ADMIN = "GROUP_SYSTEM_ADMIN";
 
     public static final String RECORD_STATUS_OPEN = "O";
     public static final String RECORD_STATUS_CLOSE = "C";

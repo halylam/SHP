@@ -44,7 +44,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/chuyennganh")
-public class ChuyenNganhController {
+public class ChuyenNganhController extends AbstractController{
 
     @Autowired
     private MessageSource messageSource;

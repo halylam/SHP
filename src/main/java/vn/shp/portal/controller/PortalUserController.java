@@ -48,7 +48,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/user")
-public class PortalUserController {
+public class PortalUserController  extends AbstractController {
 
 	@Autowired
 	private MessageSource messageSource;
@@ -65,8 +65,6 @@ public class PortalUserController {
 //	@Autowired
 //	PortalTitleService portalTitleService;
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
 	@ModelAttribute("portalUserModel")
 	public PortalUserBean portalUserModel() {
 
@@ -78,16 +76,7 @@ public class PortalUserController {
 		return portalUserModel;
 	}
 
-	@InitBinder
-	public void dateBinder(WebDataBinder binder, HttpServletRequest request, Locale locale) {
-		// The date format to parse or output your dates
-		// String patternDate = (String) request.getSession().getAttribute();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		// Create a new CustomDateEditor
-		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-		// Register it as custom editor for the Date type
-		binder.registerCustomEditor(Date.class, editor);
-	}
+
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_LIST')")
 	@RequestMapping(value = "/list", method = GET)

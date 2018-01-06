@@ -21,4 +21,6 @@ public interface PortalRoleService {
 	void delete(Long roleId);
 
 	List<PortalRole> searchByFilters(String roleName, String roleCode);
+
+    PortalRole findByRoleCode(String roleCode);
 }
