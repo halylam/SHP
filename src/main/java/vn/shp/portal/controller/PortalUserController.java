@@ -78,7 +78,7 @@ public class PortalUserController  extends AbstractController {
 
 
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_USER_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(Model model, HttpServletRequest request) {
 		PortalUserBean bean = new PortalUserBean();
@@ -167,7 +167,7 @@ public class PortalUserController  extends AbstractController {
 		}
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_USER_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
 	public ModelAndView getCreate(@ModelAttribute(value = "portalUserModel") PortalUserBean bean,
 								  Model model, ModelMap modelMap)
@@ -228,7 +228,7 @@ public class PortalUserController  extends AbstractController {
 		return mav;
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_USER_EDIT')")
 	@RequestMapping(value = "/edit/{id}", method = GET)
 	public String getEdit(@PathVariable(value = "") Long id,
 						  PortalUserBean bean, Model model)
@@ -315,7 +315,7 @@ public class PortalUserController  extends AbstractController {
 		}
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_USER_DELETE')")
 	@RequestMapping(value = "/delete/{id}", method = GET)
 	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
 							Locale locale, RedirectAttributes redirectAttributes)

@@ -49,7 +49,7 @@ public class CaHocController  extends AbstractController{
     @Autowired
     CaHocService caHocService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         CaHocModel bean = new CaHocModel();
@@ -68,7 +68,7 @@ public class CaHocController  extends AbstractController{
         model.addAttribute("listExport", listExport);
         return "portal/cahoc/cahoc_list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid CaHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -95,7 +95,7 @@ public class CaHocController  extends AbstractController{
         return "portal/cahoc/cahoc_list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         CaHocModel bean = new CaHocModel();
@@ -103,7 +103,7 @@ public class CaHocController  extends AbstractController{
         model.addAttribute("caHocModel", bean);
         return "portal/cahoc/cahoc_create";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "caHocModel") @Valid CaHocModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -135,7 +135,7 @@ public class CaHocController  extends AbstractController{
         return "portal/cahoc/cahoc_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
                           CaHocModel bean, Model model) {
@@ -148,7 +148,7 @@ public class CaHocController  extends AbstractController{
     /**
      * EDIT - POST
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(CaHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
         CaHoc entity = bean.getEntity();
@@ -170,7 +170,7 @@ public class CaHocController  extends AbstractController{
         return "portal/cahoc/cahoc_edit";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
@@ -189,7 +189,7 @@ public class CaHocController  extends AbstractController{
         }
         return "redirect:/portal/cahoc/list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EXPORT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CAHOC_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

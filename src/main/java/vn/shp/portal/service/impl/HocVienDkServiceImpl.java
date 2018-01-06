@@ -14,7 +14,7 @@ import vn.shp.portal.service.HocVienDkService;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("HocVienDkService")
+@Service("hocVienDkService")
 public class HocVienDkServiceImpl implements HocVienDkService {
 
 	@Autowired

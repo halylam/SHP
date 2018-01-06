@@ -84,7 +84,7 @@ public class ThoiKhoaBieuController  extends AbstractController{
 	@Autowired
 	MonHocService monHocService;
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_THOIKHOABIEU_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(Model model, HttpServletRequest request) {
 		ThoiKhoaBieuModel bean = new ThoiKhoaBieuModel();
@@ -104,7 +104,7 @@ public class ThoiKhoaBieuController  extends AbstractController{
 		return "portal/thoikhoabieu/thoikhoabieu_list";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_THOIKHOABIEU_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
 	public String getCreate(Model model, HttpServletRequest request) {
 		ThoiKhoaBieuModel bean = new ThoiKhoaBieuModel();
@@ -205,7 +205,7 @@ public class ThoiKhoaBieuController  extends AbstractController{
 		return result;
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_THOIKHOABIEU_EDIT')")
 	@RequestMapping(value = "/edit/{id}", method = GET)
 	public String getEdit(@PathVariable(value = "") Long id,
 						  ThoiKhoaBieuModel bean, Model model)
@@ -286,7 +286,7 @@ public class ThoiKhoaBieuController  extends AbstractController{
 		return "portal/thoikhoabieu/thoikhoabieu_edit";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_THOIKHOABIEU_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_THOIKHOABIEU_DELETE')")
 	@RequestMapping(value = "/delete/{id}", method = GET)
 	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
 							Locale locale, RedirectAttributes redirectAttributes)

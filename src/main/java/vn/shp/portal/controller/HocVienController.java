@@ -39,12 +39,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping("portal/hocvien")
-public class HocVienController extends AbstractController{
+public class HocVienController extends AbstractController {
 
     @Value("${dm.toDirectory.hososv}")
     private String toDirectory;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Autowired
     HocVienService hocVienService;
@@ -77,8 +75,7 @@ public class HocVienController extends AbstractController{
     DanTocService danTocService;
 
 
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         HocVienBean bean = new HocVienBean();
@@ -88,7 +85,7 @@ public class HocVienController extends AbstractController{
         return "portal/hocvien/hocvien_list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         HocVienBean bean = new HocVienBean();
@@ -101,7 +98,7 @@ public class HocVienController extends AbstractController{
         return "portal/hocvien/hocvien_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(Model model, HocVienBean bean) {
         HocVien entity = bean.getEntity();
@@ -113,9 +110,7 @@ public class HocVienController extends AbstractController{
         }
 
         if (entity.getId() != null) {
-            MessageList messageLst = new MessageList(Message.INFO);
-            messageLst.add("Lưu thông tin học viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
-            model.addAttribute(CoreConstant.MSG_LST, messageLst);
+            MessageList messageLst = new MessageList(Message.INFO, "Lưu thông tin học viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         bean.setEntity(entity);
@@ -125,7 +120,7 @@ public class HocVienController extends AbstractController{
         return "portal/hocvien/hocvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/info/{id}", method = GET)
     public String getAddInfo(Model model, HocVienBean bean, @PathVariable(value = "id") Long id) {
         HocVien entity = hocVienService.findOne(id);
@@ -141,12 +136,13 @@ public class HocVienController extends AbstractController{
             model.addAttribute("bean", bean);
         } else {
             MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin học viên.");
+            model.addAttribute(CoreConstant.MSG_LST, messageList);
         }
         return "portal/hocvien/hocvien_create_step2";
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEditInfo(Model model, HocVienBean bean, @PathVariable(value = "id") Long id) {
         bean.setSystemConfig(systemConfig);
@@ -156,6 +152,7 @@ public class HocVienController extends AbstractController{
 
         } else {
             MessageList messageList = new MessageList(Message.ERROR, "Không tìm thấy thông tin học viên.");
+            model.addAttribute(CoreConstant.MSG_LST, messageList);
         }
         model.addAttribute("bean", bean);
         return "portal/hocvien/hocvien_edit";
@@ -189,12 +186,11 @@ public class HocVienController extends AbstractController{
         bean.setLstKnlv(lstKnlv);
         bean.setKnlv(new KinhNghiemLamViec(entity.getMaLienKet()));
         model.addAttribute("bean", bean);
-        model.addAttribute(CoreConstant.MSG_LST, "");
         return new ModelAndView("/portal/hocvien/hocvien_knlv :: content");
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(Model model, HocVienBean bean) {
         HocVien entity = bean.getEntity();
@@ -208,7 +204,6 @@ public class HocVienController extends AbstractController{
             MessageList messageLst = new MessageList(Message.INFO);
             messageLst.add("Lưu thông tin học viên thành công, vui lòng bổ sung thêm thông tin nếu cần.");
             model.addAttribute(CoreConstant.MSG_LST, messageLst);
-            model.addAttribute(CoreConstant.MSG_LST, messageLst);
         }
         bean.setEntity(entity);
         KinhNghiemLamViec knlv = new KinhNghiemLamViec(entity.getId());
@@ -219,13 +214,13 @@ public class HocVienController extends AbstractController{
         return "portal/hocvien/hocvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_DELETE')")
     @RequestMapping(value = "/delete", method = GET)
     public String getDelete() {
         return "redirect:/portal/hocvien/list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_UPLOAD')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_UPLOAD')")
     @RequestMapping(value = "/upload", method = POST)
     public String postUploadList(Model model, Locale locale, @ModelAttribute(value = "bean") HocVienBean bean, @RequestParam List<MultipartFile> txtFile) {
         List<AlfFile> lstDocResult = bean.getLstAlfFiles();
@@ -311,19 +306,19 @@ public class HocVienController extends AbstractController{
         if (entity != null) {
 
 
-             String maHocVien = entity.getMaHocVien();
-             String fileName = maHocVien + "_DON_DANG_KY_NHAP_HOC_" + System.currentTimeMillis() + ".xml";
+            String maHocVien = entity.getMaHocVien();
+            String fileName = maHocVien + "_DON_DANG_KY_NHAP_HOC_" + System.currentTimeMillis() + ".xml";
             InputStream is = getClass().getResourceAsStream("/print/DON_NHAP_HOC.xml");
 
             String content = Utils.readFile(is);
 
             List<HocVienDk> lstHvdk = hocVienDkService.findByMaHocVien(entity.getMaHocVien());
-            if(!CollectionUtils.isEmpty(lstHvdk)){
-                if(lstHvdk.size() > 0){
+            if (!CollectionUtils.isEmpty(lstHvdk)) {
+                if (lstHvdk.size() > 0) {
                     content = content.replaceAll(Constants.PRI_KHOA_HOC_1, lstHvdk.get(0).getKhoaHoc().getKhoaHocName());
                 }
                 String xmlKhoaHocContent = "";
-                for (int i = 1; i < lstHvdk.size() ; i++) {
+                for (int i = 1; i < lstHvdk.size(); i++) {
                     xmlKhoaHocContent += Constants.PRI_KHOA_HOC_XML_CONTENT.replaceAll("KHOA_HOC", Utils.nullCheck(lstHvdk.get(i).getKhoaHoc().getKhoaHocName()));
                 }
                 content = content.replaceAll(Constants.PRI_KHOA_HOC_XML, xmlKhoaHocContent);
@@ -332,52 +327,52 @@ public class HocVienController extends AbstractController{
             content = content.replaceAll(Constants.PRI_KHOA_HOC_1, "");
             content = content.replaceAll(Constants.PRI_KHOA_HOC_XML, "");
 
-            if(entity.getGioiTinh().equals("M")){
+            if (entity.getGioiTinh().equals("M")) {
                 content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_UNCHECK);
-            }else{
+            } else {
                 content = content.replaceAll(Constants.PRI_GT_NU, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_GT_NAM, Constants.PRI_UNCHECK);
             }
 
-            if(entity.getTinhTrangCaNhan().equals("DH")){
+            if (entity.getTinhTrangCaNhan().equals("DH")) {
                 content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_UNCHECK);
-            }else if(entity.getTinhTrangCaNhan().equals("DL")){
+            } else if (entity.getTinhTrangCaNhan().equals("DL")) {
                 content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_UNCHECK);
-            }else{
+            } else {
                 content = content.replaceAll(Constants.PRI_TTCN_DIHOC, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_TTCN_DILAM, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_TTCN_TUDO, Constants.PRI_CHECKED);
             }
 
-            if(entity.getHp1().equals(Constants.HP_TRON_KHOA)){
+            if (entity.getHp1().equals(Constants.HP_TRON_KHOA)) {
                 content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_UNCHECK);
-            }else if(entity.getHp1().equals(Constants.HP_NHIEU_DOT)){
+            } else if (entity.getHp1().equals(Constants.HP_NHIEU_DOT)) {
                 content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_CHECKED);
-            }else{
+            } else {
                 content = content.replaceAll(Constants.PRI_HP1_TRON_KHOA, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP1_NHIEU_DOT, Constants.PRI_UNCHECK);
             }
 
-            if(entity.getHp2().equals(Constants.HP_TRON_KHOA)){
+            if (entity.getHp2().equals(Constants.HP_TRON_KHOA)) {
                 content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
-            }else if(entity.getHp2().equals(Constants.HP_NHIEU_DOT)){
+            } else if (entity.getHp2().equals(Constants.HP_NHIEU_DOT)) {
                 content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_CHECKED);
                 content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
-            }else if(entity.getHp2().equals(Constants.HP_HOC_KY)){
+            } else if (entity.getHp2().equals(Constants.HP_HOC_KY)) {
                 content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_CHECKED);
-            }else{
+            } else {
                 content = content.replaceAll(Constants.PRI_HP2_TRON_KHOA, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_NHIEU_DOT, Constants.PRI_UNCHECK);
                 content = content.replaceAll(Constants.PRI_HP2_HOC_KY, Constants.PRI_UNCHECK);
@@ -387,8 +382,6 @@ public class HocVienController extends AbstractController{
             content = content.replaceAll(Constants.PRI_LLKC_QUAN_HE, Utils.nullCheck(entity.getLoaiQh1()));
             content = content.replaceAll(Constants.PRI_LLKC_EMAIL, Utils.nullCheck(entity.getEmailQh1()));
             content = content.replaceAll(Constants.PRI_LLKC_SO_DT, Utils.nullCheck(entity.getSdtQh1()));
-
-
 
 
             content = content.replaceAll(Constants.PRI_PTHP_HO_TEN, Utils.nullCheck(entity.getNdhpHoTen()));
@@ -423,18 +416,18 @@ public class HocVienController extends AbstractController{
             content = content.replaceAll(Constants.PRI_DC_TAM_TRU, Utils.nullCheck(entity.getDiaChiTamTru()) + ", " + entity.getXaTamTruLoc().getLocName() + ", " + entity.getQuanTamTruLoc().getLocName() + ", " + entity.getTinhTamTruLoc().getLocName());
 
             String xmlKnlv = "";
-            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getId(),Constants.HOC_VIEN);
-            if(!CollectionUtils.isEmpty(lstKnlv)){
+            List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getId(), Constants.HOC_VIEN);
+            if (!CollectionUtils.isEmpty(lstKnlv)) {
                 InputStream isKnlv = getClass().getResourceAsStream("/print/KINH_NGHIEM_LAM_VIEC.xml");
                 String contentKnlv = Utils.readFile(isKnlv);
                 for (KinhNghiemLamViec kinhNghiemLamViec : lstKnlv) {
-                   String tmp = contentKnlv;
+                    String tmp = contentKnlv;
                     tmp = tmp.replaceAll(Constants.PRI_KNLV_TU, kinhNghiemLamViec.getStrTuNgay());
                     tmp = tmp.replaceAll(Constants.PRI_KNLV_DEN, kinhNghiemLamViec.getStrDenNgay());
                     tmp = tmp.replaceAll(Constants.PRI_KNLV_VI_TRI, kinhNghiemLamViec.getViTri());
                     tmp = tmp.replaceAll(Constants.PRI_KNLV_DIA_CHI, kinhNghiemLamViec.getDiaChi());
                     tmp = tmp.replaceAll(Constants.PRI_KNLV_TEN_CTY, kinhNghiemLamViec.getTenCongTy());
-                    xmlKnlv+=tmp;
+                    xmlKnlv += tmp;
                 }
 
 
@@ -481,12 +474,12 @@ public class HocVienController extends AbstractController{
     }
 
     @ModelAttribute("lstTonGiao")
-    public List<TonGiao> getLstTonGiao(){
+    public List<TonGiao> getLstTonGiao() {
         return tonGiaoService.findAll();
     }
 
     @ModelAttribute("lstDanToc")
-    public List<DanToc> getLstDanToc(){
+    public List<DanToc> getLstDanToc() {
         return danTocService.findAll();
     }
 }

@@ -76,7 +76,7 @@ public class LopHocController  extends AbstractController{
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(Model model, HttpServletRequest request) {
 		LopHocModel bean = new LopHocModel();
@@ -96,7 +96,7 @@ public class LopHocController  extends AbstractController{
 		model.addAttribute("listExport", listExport);
 		return "portal/lophoc/lophoc_list";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_LIST')")
 	@RequestMapping(value = "/list", method = POST)
 	public String postList(@ModelAttribute(value = "lopHocModel") @Valid LopHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
 						   RedirectAttributes redirectAttributes)
@@ -123,7 +123,7 @@ public class LopHocController  extends AbstractController{
 		return "portal/lophoc/lophoc_list";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
 	public String getCreate(Model model, HttpServletRequest request) {
 		LopHocModel bean = new LopHocModel();
@@ -133,7 +133,7 @@ public class LopHocController  extends AbstractController{
 		model.addAttribute("lopHocModel", bean);
 		return "portal/lophoc/lophoc_create";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_CREATE')")
 	@RequestMapping(value = "/create", method = POST)
 	public String postCreate(@ModelAttribute(value = "lopHocModel") @Valid LopHocModel bean,
 							 BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -166,7 +166,7 @@ public class LopHocController  extends AbstractController{
 		return "portal/lophoc/lophoc_create";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_EDIT')")
 	@RequestMapping(value = "/edit/{id}", method = GET)
 	public String getEdit(@PathVariable(value = "") Long id,
 						  LopHocModel bean, Model model)
@@ -256,7 +256,7 @@ public class LopHocController  extends AbstractController{
 	/**
 	 * EDIT - POST
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_EDIT')")
 	@RequestMapping(value = "/edit", method = POST)
 	public String postEdit(LopHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
 		LopHoc entity = bean.getEntity();
@@ -288,7 +288,7 @@ public class LopHocController  extends AbstractController{
 		return "portal/lophoc/lophoc_edit";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_DELETE')")
 	@RequestMapping(value = "/delete/{id}", method = GET)
 	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
 							Locale locale, RedirectAttributes redirectAttributes)
@@ -308,7 +308,7 @@ public class LopHocController  extends AbstractController{
 		}
 		return "redirect:/portal/lophoc/list";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_LOPHOC_EXPORT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_LOPHOC_EXPORT')")
 	@Transactional(readOnly = true)
 	@RequestMapping(value = "/exportXls/{list}", method = GET)
 	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

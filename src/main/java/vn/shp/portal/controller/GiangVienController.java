@@ -67,7 +67,7 @@ public class GiangVienController  extends AbstractController {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         GiangVienBean bean = new GiangVienBean();
@@ -77,7 +77,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_list";
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model) {
         GiangVienBean bean = new GiangVienBean();
@@ -87,7 +87,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(Model model, GiangVienBean bean) {
         GiangVien entity = bean.getEntity();
@@ -111,7 +111,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_EDIT')")
     @RequestMapping(value = "/info/{id}", method = GET)
     public String getAddInfo(Model model, GiangVienBean bean, @PathVariable(value = "id") Long id) {
         GiangVien entity = giangVienService.findOne(id);
@@ -163,7 +163,7 @@ public class GiangVienController  extends AbstractController {
         return new ModelAndView("/portal/giangvien/giangvien_knlv :: content");
     }
     
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_UPLOAD')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_UPLOAD')")
     @RequestMapping(value = "/upload", method = POST)
     public String postUploadList(Model model, Locale locale, @ModelAttribute(value = "bean") GiangVienBean bean, @RequestParam List<MultipartFile> txtFile) {
         List<AlfFile> lstDocResult = bean.getLstAlfFiles();
@@ -226,7 +226,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEditInfo(Model model, GiangVienBean bean, @PathVariable(value = "id") Long id) {
         bean.setSystemConfig(systemConfig);
@@ -241,7 +241,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_edit";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(Model model, GiangVienBean bean) {
         GiangVien entity = bean.getEntity();
@@ -266,7 +266,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_create_step2";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GIANGVIEN_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_DELETE')")
     @RequestMapping(value = "/delete", method = GET)
     public String getDelete() {
         return "redirect:/portal/giangvien/list";

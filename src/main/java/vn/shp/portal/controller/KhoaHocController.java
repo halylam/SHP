@@ -83,7 +83,7 @@ public class KhoaHocController  extends AbstractController{
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE__LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE__LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(Model model, HttpServletRequest request) {
 		KhoaHocModel bean = new KhoaHocModel();
@@ -102,7 +102,7 @@ public class KhoaHocController  extends AbstractController{
 		model.addAttribute("listExport", listExport);
 		return "portal/khoahoc/khoahoc_list";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE__LIST')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE__LIST')")
 	@RequestMapping(value = "/list", method = POST)
 	public String postList(@ModelAttribute(value = "bean") @Valid KhoaHocModel bean, BindingResult bindingResult, Model model,
 						   HttpServletRequest request,
@@ -130,7 +130,7 @@ public class KhoaHocController  extends AbstractController{
 		return "portal/khoahoc/khoahoc_list";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHAOHOC_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHAOHOC_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
 	public String getCreate(Model model, HttpServletRequest request) {
 		KhoaHocModel bean = new KhoaHocModel();
@@ -139,7 +139,7 @@ public class KhoaHocController  extends AbstractController{
 		model.addAttribute("khoaHocModel", bean);
 		return "portal/khoahoc/khoahoc_create";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_CREATE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_CREATE')")
 	@RequestMapping(value = "/create", method = POST)
 	public String postCreate(@ModelAttribute(value = "khoaHocModel") @Valid KhoaHocModel bean,
 							 BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -176,7 +176,7 @@ public class KhoaHocController  extends AbstractController{
 		return "portal/khoahoc/khoahoc_create";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_EDIT')")
 	@RequestMapping(value = "/edit/{id}", method = GET)
 	public String getEdit(@PathVariable(value = "") Long id, KhoaHocModel bean, Model model) {
 		KhoaHoc khoaHoc = khoaHocService.findOne(id);
@@ -250,7 +250,7 @@ public class KhoaHocController  extends AbstractController{
 	/**
 	 * EDIT - POST
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EDIT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_EDIT')")
 	@RequestMapping(value = "/edit", method = POST)
 	public String postEdit(KhoaHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
 		KhoaHoc entity = bean.getEntity();
@@ -286,7 +286,7 @@ public class KhoaHocController  extends AbstractController{
 		return "portal/khoahoc/khoahoc_edit";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_DELETE')")
 	@RequestMapping(value = "/delete/{id}", method = GET)
 	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
 							Locale locale, RedirectAttributes redirectAttributes)
@@ -307,7 +307,7 @@ public class KhoaHocController  extends AbstractController{
 		return "redirect:/portal/khoahoc/list";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_DELETE')")
 	@RequestMapping(value = "/dangky/{id}", method = GET)
 	public String getLstDangKy(Model model, KhoaHocModel bean, @PathVariable("id") Long id) {
 		HocVien hocVien = hocVienService.findOne(id);
@@ -323,7 +323,7 @@ public class KhoaHocController  extends AbstractController{
 		return "/portal/khoahoc/khoahoc_dangkykhoahoc";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_DELETE')")
 	@RequestMapping(value = "/dangky", method = GET)
 	public String getDangKy(Model model, KhoaHocModel bean) {
 		bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
@@ -332,7 +332,7 @@ public class KhoaHocController  extends AbstractController{
 		return "/portal/khoahoc/khoahoc_dangkykhoahoc";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_DELETE')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_DELETE')")
 	@RequestMapping(value = "/dangky", method = POST)
 	public String postDangKy(Model model, KhoaHocModel bean) {
 		bean.setLstKhoaHocDangKy(khoaHocService.findKhoaHocDangKy());
@@ -379,7 +379,7 @@ public class KhoaHocController  extends AbstractController{
 		model.addAttribute("bean", bean);
 		return "/portal/khoahoc/khoahoc_dangkykhoahoc";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_KHOAHOC_EXPORT')")
+	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_KHOAHOC_EXPORT')")
 	@Transactional(readOnly = true)
 	@RequestMapping(value = "/exportXls/{list}", method = GET)
 	public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

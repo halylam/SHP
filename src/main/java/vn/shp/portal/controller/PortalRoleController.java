@@ -59,7 +59,7 @@ public class PortalRoleController  extends AbstractController {
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-	//@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+	//@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
 	@RequestMapping(value = "/create", method = GET)
 	public String getCreate(Model model, HttpServletRequest request) {
 		RoleBean bean = new RoleBean();
@@ -67,7 +67,7 @@ public class PortalRoleController  extends AbstractController {
 		return "portal/role/role_create";
 	}
 
-	//@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+	//@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
 	@RequestMapping(value = "/create", method = POST)
 	public String postCreate(Model model, RoleBean bean, HttpServletRequest request) {
 		PortalRole role = bean.getEntity();
@@ -144,7 +144,7 @@ public class PortalRoleController  extends AbstractController {
 		return "portal/role/role_list";
 	}
 
-	//@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+	//@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
 	@RequestMapping(value = "/list", method = POST)
 	public String postList(@ModelAttribute(value = "bean") @Valid RoleBean bean, BindingResult bindingResult, Model model,
 						   HttpServletRequest request,
@@ -172,7 +172,7 @@ public class PortalRoleController  extends AbstractController {
 		return "portal/role/role_list";
 	}
 
-	//	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_DELETE')")
+	//	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_DELETE')")
 	@RequestMapping(value = "/delete/{id}", method = GET)
 	public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
 							Locale locale, RedirectAttributes redirectAttributes)

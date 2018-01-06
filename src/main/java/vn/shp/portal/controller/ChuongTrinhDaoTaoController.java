@@ -52,7 +52,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
     @Autowired
     ChuongTrinhDaoTaoService chuongTrinhDaoTaoService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
@@ -71,7 +71,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         model.addAttribute("listExport", listExport);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid ChuongTrinhDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -98,7 +98,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         ChuongTrinhDaoTaoModel bean = new ChuongTrinhDaoTaoModel();
@@ -106,7 +106,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         model.addAttribute("chuongTrinhDaoTaoModel", bean);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_create";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -138,7 +138,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
                           ChuongTrinhDaoTaoModel bean, Model model) {
@@ -151,7 +151,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
     /**
      * EDIT - POST
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(ChuongTrinhDaoTaoModel bean, Model model, Locale locale, BindingResult bindingResult) {
         ChuongTrinhDaoTao entity = bean.getEntity();
@@ -173,7 +173,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         return "portal/chuongtrinhdaotao/ctdt_edit";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
@@ -192,7 +192,7 @@ public class ChuongTrinhDaoTaoController  extends AbstractController{
         }
         return "redirect:/portal/chuongtrinhdaotao/list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EXPORT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_CHUONGTRINHDAOTAO_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

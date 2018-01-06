@@ -7,7 +7,7 @@
 1. Chỉnh sửa phần user: validate email, ngày sinh dạng datepicker
 2. Xây dựng trang tham số hệ thống.
 3. Cho phép disable 1 user (set enable = false là được, trong phần login mình đã check trạng thái rồi)
-
+4. Bổ sung thông tin user thao tác vào entity (user created - Sử dung UserProfile)
 
 @A.Luyện
 1. Chỉnh sửa css

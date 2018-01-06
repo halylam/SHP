@@ -48,6 +48,7 @@ public class UserProfile {
             String name = auth.getName(); //get logged in username
             user = portalUserService.findByUsername(name);
 
+
         }
         return user;
     }

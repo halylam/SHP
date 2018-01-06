@@ -56,7 +56,7 @@ public class MonHocController  extends AbstractController{
     @Autowired
     BoMonService boMonService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         MonHocModel bean = new MonHocModel();
@@ -75,7 +75,7 @@ public class MonHocController  extends AbstractController{
         model.addAttribute("listExport", listExport);
         return "portal/monhoc/monhoc_list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid MonHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -102,7 +102,7 @@ public class MonHocController  extends AbstractController{
         return "portal/monhoc/monhoc_list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         MonHocModel bean = new MonHocModel();
@@ -111,7 +111,7 @@ public class MonHocController  extends AbstractController{
         model.addAttribute("monHocModel", bean);
         return "portal/monhoc/monhoc_create";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "monHocModel") @Valid MonHocModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -144,7 +144,7 @@ public class MonHocController  extends AbstractController{
         return "portal/monhoc/monhoc_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
                           MonHocModel bean, Model model) {
@@ -158,7 +158,7 @@ public class MonHocController  extends AbstractController{
     /**
      * EDIT - POST
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(MonHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
         MonHoc entity = bean.getEntity();
@@ -181,7 +181,7 @@ public class MonHocController  extends AbstractController{
         return "portal/monhoc/monhoc_edit";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
@@ -200,7 +200,7 @@ public class MonHocController  extends AbstractController{
         }
         return "redirect:/portal/monhoc/list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MONHOC_EXPORT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_MONHOC_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

@@ -54,7 +54,7 @@ public class BacDaoTaoController extends AbstractController {
     @Autowired
     ChuyenNganhService chuyenNganhService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         BacDaoTaoModel bean = new BacDaoTaoModel();
@@ -73,7 +73,7 @@ public class BacDaoTaoController extends AbstractController {
         model.addAttribute("listExport", listExport);
         return "portal/bacdaotao/bacdaotao_list";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid BacDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -100,7 +100,7 @@ public class BacDaoTaoController extends AbstractController {
         return "portal/bacdaotao/bacdaotao_list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model, HttpServletRequest request) {
         BacDaoTaoModel bean = new BacDaoTaoModel();
@@ -109,7 +109,7 @@ public class BacDaoTaoController extends AbstractController {
         model.addAttribute("bacDaoTaoModel", bean);
         return "portal/bacdaotao/bacdaotao_create";
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "bacDaoTaoModel") @Valid BacDaoTaoModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -142,7 +142,7 @@ public class BacDaoTaoController extends AbstractController {
         return "portal/bacdaotao/bacdaotao_create";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_EDIT')")
     @RequestMapping(value = "/edit/{id}", method = GET)
     public String getEdit(@PathVariable(value = "") Long id,
                           BacDaoTaoModel bean, Model model) {
@@ -156,7 +156,7 @@ public class BacDaoTaoController extends AbstractController {
     /**
      * EDIT - POST
      */
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(BacDaoTaoModel bean, Model model, Locale locale, BindingResult bindingResult) {
         BacDaoTao entity = bean.getEntity();
@@ -179,7 +179,7 @@ public class BacDaoTaoController extends AbstractController {
         return "portal/bacdaotao/bacdaotao_edit";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_DELETE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_DELETE')")
     @RequestMapping(value = "/delete/{id}", method = GET)
     public String getDelete(@PathVariable(value = "") Long id, Model model, HttpServletRequest request,
                             Locale locale, RedirectAttributes redirectAttributes) {
@@ -199,7 +199,7 @@ public class BacDaoTaoController extends AbstractController {
         return "redirect:/portal/bacdaotao/list";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EXPORT')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_BACDAOTAO_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

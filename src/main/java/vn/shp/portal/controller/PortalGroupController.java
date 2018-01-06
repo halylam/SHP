@@ -86,7 +86,7 @@ public class PortalGroupController  extends AbstractController{
 		return "portal/rolegroup/rolegroup_create";
 	}
 
-	//@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_CREATE')")
+	//@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
 	@RequestMapping(value = "/create", method = POST)
 	public String postCreate(Model model, PortalGroupBean bean, HttpServletRequest request) {
 		PortalGroup group = bean.getEntity();
@@ -172,7 +172,7 @@ public class PortalGroupController  extends AbstractController{
 		return "portal/rolegroup/rolegroup_edit";
 	}
 
-	//	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_GROUP_LIST')")
+	//	@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GROUP_LIST')")
 	@RequestMapping(value = "/list", method = GET)
 	public String getList(@ModelAttribute(value = "bean") PortalGroupBean bean, Model model,
 						  HttpServletRequest request)
