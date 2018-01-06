@@ -1,0 +1,36 @@
+@Chú ý:
+1. Mỗi user chỉ login ở 1 thời điểm duy nhất.
+2. Không tắt ngang trình duyệt khi đã login vào hệ thống. Phải logout trước khi tắt trình duyệt Nếu lỡ tắt ngang thì phải đợi hết session mới login được.
+
+
+@Lý
+1. Chỉnh sửa phần user: validate email, ngày sinh dạng datepicker
+2. Xây dựng trang tham số hệ thống.
+3. Cho phép disable 1 user (set enable = false là được, trong phần login mình đã check trạng thái rồi)
+
+@A.Luyện
+1. Chỉnh sửa css
+2. Thông báo lỗi trang login
+3. Danh sách quyền và nhóm quyền, bổ sung vào controller nếu thiếu.
+3. Phân quyền cho menu (site_bar.html)
+
+@Hà:
+1. Danh sách user đang login.
+2. Chức năng logout 1 user vào hệ thống.
+
+
+
+Các công việc khác.
+
+1. Phân quyền cho từng nút chức năng trong tất cả các file html để giới hạn quyền cho từng chức năng nhỏ.
+(ví dụ nếu có quyền xem danh sách nhưng không có quyền chỉnh sửa thì nút chỉnh sửa sẽ không hiển thị, không có quyền tạo thì nút tạo ko hiển thị...)
+
+2. Khởi tạo lại danh sách tham số của hệ thống, khi có sự thay đổi, để tránh việc khởi động lại server khi thay đổi tham số.
+
+3. Update ip login thời gian login của user.
+
+4. Tạo chức năng audit cho hệ thống, lưu vết dữ liệu khi có thay đổi trên hệ thống.
+
+5. Trang profile của user, hiển thị tên user, avatar theo từng user.
+
+6. Bổ sung phòng ban, chức vụ của từng user để tiện phân quyền.
