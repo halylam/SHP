@@ -74,7 +74,7 @@ public class ChuyenNganhController {
         model.addAttribute("listExport", listExport);
         return "portal/chuyennganh/chuyennganh_list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid ChuyenNganhModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -110,7 +110,7 @@ public class ChuyenNganhController {
         model.addAttribute("chuyenNganhModel", bean);
         return "portal/chuyennganh/chuyennganh_create";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "chuyenNganhModel") @Valid ChuyenNganhModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -157,6 +157,7 @@ public class ChuyenNganhController {
     /**
      * EDIT - POST
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(ChuyenNganhModel bean, Model model, Locale locale, BindingResult bindingResult) {
         ChuyenNganh entity = bean.getEntity();
@@ -198,7 +199,7 @@ public class ChuyenNganhController {
         }
         return "redirect:/portal/chuyennganh/list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUYENNGANH_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

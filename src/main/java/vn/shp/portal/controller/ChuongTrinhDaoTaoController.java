@@ -71,7 +71,7 @@ public class ChuongTrinhDaoTaoController {
         model.addAttribute("listExport", listExport);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid ChuongTrinhDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -106,7 +106,7 @@ public class ChuongTrinhDaoTaoController {
         model.addAttribute("chuongTrinhDaoTaoModel", bean);
         return "portal/chuongtrinhdaotao/chuongtrinhdaotao_create";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "chuongTrinhDaoTaoModel") @Valid ChuongTrinhDaoTaoModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -151,6 +151,7 @@ public class ChuongTrinhDaoTaoController {
     /**
      * EDIT - POST
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(ChuongTrinhDaoTaoModel bean, Model model, Locale locale, BindingResult bindingResult) {
         ChuongTrinhDaoTao entity = bean.getEntity();
@@ -191,7 +192,7 @@ public class ChuongTrinhDaoTaoController {
         }
         return "redirect:/portal/chuongtrinhdaotao/list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CHUONGTRINHDAOTAO_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

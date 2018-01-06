@@ -50,7 +50,7 @@ public class BoMonController {
     @Autowired
     BoMonService boMonService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         BoMonModel bean = new BoMonModel();
@@ -69,7 +69,7 @@ public class BoMonController {
         model.addAttribute("listExport", listExport);
         return "portal/bomon/bomon_list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid BoMonModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -104,7 +104,7 @@ public class BoMonController {
         model.addAttribute("boMonModel", bean);
         return "portal/bomon/bomon_create";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "boMonModel") @Valid BoMonModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -149,6 +149,7 @@ public class BoMonController {
     /**
      * EDIT - POST
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(BoMonModel bean, Model model, Locale locale, BindingResult bindingResult) {
         BoMon entity = bean.getEntity();
@@ -189,7 +190,7 @@ public class BoMonController {
         }
         return "redirect:/portal/bomon/list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BOMON_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

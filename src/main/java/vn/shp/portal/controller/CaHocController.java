@@ -49,7 +49,7 @@ public class CaHocController {
     @Autowired
     CaHocService caHocService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_HOCVIEN_LIST')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_LIST')")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         CaHocModel bean = new CaHocModel();
@@ -68,7 +68,7 @@ public class CaHocController {
         model.addAttribute("listExport", listExport);
         return "portal/cahoc/cahoc_list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid CaHocModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -103,7 +103,7 @@ public class CaHocController {
         model.addAttribute("caHocModel", bean);
         return "portal/cahoc/cahoc_create";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "caHocModel") @Valid CaHocModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -148,6 +148,7 @@ public class CaHocController {
     /**
      * EDIT - POST
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(CaHocModel bean, Model model, Locale locale, BindingResult bindingResult) {
         CaHoc entity = bean.getEntity();
@@ -188,7 +189,7 @@ public class CaHocController {
         }
         return "redirect:/portal/cahoc/list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CAHOC_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {

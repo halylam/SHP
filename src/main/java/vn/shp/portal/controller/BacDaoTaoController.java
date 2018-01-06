@@ -73,7 +73,7 @@ public class BacDaoTaoController {
         model.addAttribute("listExport", listExport);
         return "portal/bacdaotao/bacdaotao_list";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_LIST')")
     @RequestMapping(value = "/list", method = POST)
     public String postList(@ModelAttribute(value = "bean") @Valid BacDaoTaoModel bean, BindingResult bindingResult, Model model, HttpServletRequest request,
                            RedirectAttributes redirectAttributes)
@@ -109,7 +109,7 @@ public class BacDaoTaoController {
         model.addAttribute("bacDaoTaoModel", bean);
         return "portal/bacdaotao/bacdaotao_create";
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_CREATE')")
     @RequestMapping(value = "/create", method = POST)
     public String postCreate(@ModelAttribute(value = "bacDaoTaoModel") @Valid BacDaoTaoModel bean,
                              BindingResult bindingResult, Model model, HttpServletRequest request,
@@ -156,6 +156,7 @@ public class BacDaoTaoController {
     /**
      * EDIT - POST
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EDIT')")
     @RequestMapping(value = "/edit", method = POST)
     public String postEdit(BacDaoTaoModel bean, Model model, Locale locale, BindingResult bindingResult) {
         BacDaoTao entity = bean.getEntity();
@@ -198,6 +199,7 @@ public class BacDaoTaoController {
         return "redirect:/portal/bacdaotao/list";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_BACDAOTAO_EXPORT')")
     @Transactional(readOnly = true)
     @RequestMapping(value = "/exportXls/{list}", method = GET)
     public void postReportGeneral(@PathVariable("list") String list, Model model, Locale locale, HttpServletResponse response) {
