@@ -27,10 +27,11 @@ public class LoginSecurityService implements UserDetailsService {
     private PortalUserRepository userDao;
 
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+
         PortalUser user =  userDao.findByUsername(userId);
 
         if(user == null){
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Invalid username or password1111.");
         }
         //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

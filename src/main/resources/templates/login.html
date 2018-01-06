@@ -23,8 +23,8 @@
 
 			<div class="container login-body">
 
-				<div th:if="${param.error}" class="alert alert-error">
-					Invalid username and password.
+				<div class="alert alert-error" th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+					Reason: <span th:text="${errorMsg}">Wrong input!</span>
 				</div>
 				<div th:if="${param.logout}" class="alert alert-success">
 					You have been logged out.

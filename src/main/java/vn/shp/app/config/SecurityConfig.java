@@ -33,81 +33,56 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @Log4j
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	PortalUserService portalUserService;
+    @Autowired
+    PortalUserService portalUserService;
 
-	@Autowired
-	@Qualifier(value = "userProfile")
-	UserProfile userProfile;
+    @Autowired
+    @Qualifier(value = "userProfile")
+    UserProfile userProfile;
 
-	@Autowired
-	@Qualifier("loginSecurityService")
-	UserDetailsService userDetailsService;
+    @Autowired
+    @Qualifier("loginSecurityService")
+    UserDetailsService userDetailsService;
 
-	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		//auth.authenticationProvider(authenticationProvider());
-	}
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        //auth.authenticationProvider(authenticationProvider());
+    }
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		log.info("protected void configure(HttpSecurity http) throws Exception");
-		http
-				.authorizeRequests()
-				.antMatchers("/mcr/**").permitAll()
-				.anyRequest().authenticated()
-				.and()
-				.formLogin()
-				.loginPage("/login")
-				.usernameParameter("username").passwordParameter("password")
-				.permitAll()
-				.and()
-				//.csrf().and()
-				.logout()
-				.permitAll();
-		//passwordEncoder.
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        log.info("protected void configure(HttpSecurity http) throws Exception");
+        http
+                .authorizeRequests()
+                .antMatchers("/mcr/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .usernameParameter("username").passwordParameter("password")
+                .permitAll()
+                .and()
+                .csrf().and()
+                .logout()
+                .permitAll()
+                .and().sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
+        //passwordEncoder.
+    }
 
-//	@Override
-//	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-//		String username = authentication.getName();
-//		String password = (String) authentication.getCredentials();
-//
-//		List<GrantedAuthority> authoritiesRs = new ArrayList<GrantedAuthority>();
-//		PortalUser portalUser = portalUserService.findByUsername(username);
-//		if (!CollectionUtils.isEmpty(portalUser.getGroups())) {
-//			for (PortalGroup group : portalUser.getGroups()) {
-//				for (PortalRole role : group.getRoleGroupLst()) {
-//					GrantedAuthority grantedAuthorityImpl = new SimpleGrantedAuthority(role.getRoleCode());
-//					authoritiesRs.add(grantedAuthorityImpl);
-//				}
-//			}
-//		}
-//
-//		authoritiesRs.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
-////		return new UsernamePasswordAuthenticationToken(username, password, authoritiesRs);
-//	}
-
-//	@Override
-//	public boolean supports(Class<?> authentication) {
-//		return true;
-//	}
-
-	@Bean(name="passwordEncoder")
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean(name = "passwordEncoder")
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(userDetailsService);
-		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		return authenticationProvider;
-	}
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
 }
