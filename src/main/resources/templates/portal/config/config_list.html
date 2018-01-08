@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="portal/fragments/head :: head"></head>
+
+<body class="nav-md skin-brown">
+<div class="container body">
+	<div class="main_container">
+		<div class="col-md-3 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
+		<div class="top_nav" th:replace="portal/fragments/header :: topNav"></div>
+
+		<!-- Main-->
+		<div class="main_content" role="main">
+			<div class="container-fluid top-heading">
+				<h1 class="">Danh sách tham số hệ thống </h1>
+			</div>
+
+			<div class="container-fluid">
+
+				<section class="section bgTrans">
+					<div class="section-content">
+						<form th:object="${bean}" method="post" th:action="@{/portal/config/list}">
+							<!-- Content here -->
+							<section class="section"> <!-- Start section table -->
+								<div class="section-content">
+									<!-- Content here -->
+									<div class="table-shp">
+										<table class="table table1 bulk_action" id="myTable">
+											<thead>
+											<tr>
+												<th>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</th>
+												<th>Tên Tham số</th>
+												<th>Giá trị</th>
+												<th>Trạng Thái</th>
+												<th>Thao Tác</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="item,i : ${bean.data}">
+												<td>
+													<div class="checkbox checkbox-success">
+														<input id="checkbox1" type="checkbox" class="flat check-all">
+														<label for="checkbox1"></label>
+													</div>
+												</td>
+												<td><a th:href="@{/portal/config/edit/{id}(id=${item.id})}" th:title="${item.configName}"
+													th:text="${item.configName}">HV0001</a>
+												</td>
+												<td th:text="${item.configValue}">Họ Tên</td>
+												<td>
+													<span th:if="${item.enable == 'Y'}">Hoạt động</span>
+													<span th:if="${item.enable == 'N'}">Không hoạt động</span>
+												</td>
+												<td>
+													<a th:href="@{/portal/config/edit/{id}(id=${item.id})}">
+														<button class="btn btn-default btn-sm" type="button"
+															sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CONFIG_EDIT')">
+															<i class="fa fa-edit"></i>
+														</button>
+													</a>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<!-- End Content here -->
+								</div>
+
+							</section> <!-- End section table -->
+						</form>
+						<!-- End Content here -->
+					</div>
+
+					<div class="section-footer">
+						<div class="btn-group">
+							<a th:href="@{/portal/config/list}">
+								<button type="button" class="btn btn-default">Đóng</button>
+							</a>
+						</div>
+					</div>
+				</section> <!-- End section -->
+
+			</div>
+		</div>
+		<!-- /Main -->
+		<footer th:replace="portal/fragments/footer :: footer"></footer>
+	</div>
+</div>
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+<script>
+	$(document).ready(function () {
+		$('#myTable').DataTable();
+	});
+</script>
+</body>
+</html>
+

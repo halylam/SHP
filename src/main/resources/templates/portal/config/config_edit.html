@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="portal/fragments/head :: head"></head>
+
+<body class="nav-md skin-brown">
+<div class="container body">
+	<div class="main_container">
+		<div class="col-md-4 left_col" th:replace="portal/fragments/site_bar :: site_bar"></div>
+		<div class="top_nav" th:replace="portal/fragments/header :: topNav"></div>
+
+		<!-- Main-->
+		<div class="main_content" role="main">
+			<div class="container-fluid top-heading">
+				<h1 class="">Chỉnh sửa tham số hệ thống </h1>
+
+				<div class="pull-right hidden-xs">
+					<div class="btn-group">
+						<a th:href="@{/portal/config/list}">
+							<button type="button" class="btn btn-default">Danh Sách</button>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+
+				<section class="section bgTrans">
+					<div class="section-content">
+						<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
+						<form th:action="@{/portal/config/edit}" th:object="${portalConfigModel}" method="post" role="form" id="role-form">
+							<input type="hidden" th:field="*{entity.id}" />
+							<input type="hidden" th:field="*{entity.system}" />
+							<div class="box box-info">
+								<div class="border-bottom">
+									<div class="row">
+										<div class="col-sm-8">
+											<h5> Thông tin tham số hệ thống</h5>
+										</div>
+									</div>
+								</div>
+								<div class="box-body">
+									<!-- Content here -->
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="item form-group col-xs-12">
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Tên tham số <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input th:field="*{entity.configName}" id="txtConfigName"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text"
+														readonly="true">
+												</div>
+
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Giá trị Tham số <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<input id="txtEmail" th:field="*{entity.configValue}"
+														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
+												</div>
+
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<select class="input-sm col-sm-12 col-xs-12"
+														th:field="*{entity.enable}" required id="selTrangThai">
+														<option value="Y">Hoạt động</option>
+														<option value="N">Không hoạt động</option>
+													</select>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="box-footer">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<button class="btn btn-primary">Lưu</button>
+									</div>
+								</div>
+
+							</div>
+
+						</form>
+					</div>
+
+					<div class="section-footer">
+						<div class="btn-group">
+							<a th:href="@{/portal/config/list}">
+								<button type="button" class="btn btn-default">Danh Sách</button>
+							</a>
+						</div>
+					</div>
+				</section> <!-- End section -->
+
+			</div>
+		</div>
+		<!-- /Main -->
+		<footer th:replace="portal/fragments/footer :: footer"></footer>
+	</div>
+</div>
+
+<!-- .Popup detail view Task list -->
+<!--<div class="control-sidebar-bg"></div>-->
+<!---->
+<!-- Config template -->
+<script>
+	$(document).ready(function () {
+	});
+</script>
+</body>
+</html>
+

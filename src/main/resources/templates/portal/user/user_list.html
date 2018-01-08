@@ -92,6 +92,8 @@
 												<th>Email</th>
 												<th>Ngày sinh</th>
 												<th>Số điện thoại</th>
+												<th>Ngày Tạo</th>
+												<th>Người Tạo</th>
 												<th>Thao Tác</th>
 											</tr>
 											</thead>
@@ -110,6 +112,8 @@
 												<td th:text="${userItem.email}">Email</td>
 												<td th:text="${#dates.format(userItem.birthday, 'dd/MM/yyyy')}">Ngày sinh</td>
 												<td th:text="${userItem.mobile}">Số điện thoại</td>
+												<td th:text="${#dates.format(userItem.timeCreated, 'dd/MM/yyyy')}">Ngày sinh</td>
+												<td th:text="${userItem.userCreated}">Số điện thoại</td>
 												<td>
 													<a th:href="@{/portal/user/edit/{id}(id=${userItem.userId})}">
 														<button class="btn btn-default btn-sm" type="button"

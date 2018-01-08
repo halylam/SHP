@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.hcm.mcr35.excel.ExcelCreator;
 import vn.hcm.mcr35.excel.entity.ECell;
+import vn.shp.app.config.UserProfile;
 import vn.shp.app.entity.ChuyenNganh;
 import vn.shp.app.xlsEntity.ChuyenNganhXls;
 import vn.shp.app.xlsEntity.PortalUserXls;
@@ -61,6 +62,9 @@ public class PortalUserController  extends AbstractController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private UserProfile userProfile;
 
 //	@Autowired
 //	PortalTitleService portalTitleService;
@@ -208,6 +212,7 @@ public class PortalUserController  extends AbstractController {
 			user.setGroups(groupLst);
 			user.setEnabled(true);
 			user.setTimeCreated(new Date());
+			user.setUserCreated(userProfile.getUser().getUsername());
 
 			// save user
 			portalUserService.save(user);
@@ -266,8 +271,8 @@ public class PortalUserController  extends AbstractController {
 			}
 			List<PortalGroup> groupLst = bean.getGroupRightLst();
 			user.setGroups(groupLst);
-			user.setEnabled(true);
 			user.setTimeCreated(new Date());
+			user.setUserCreated(userProfile.getUser().getUsername());
 
 			// save user
 			portalUserService.save(user);

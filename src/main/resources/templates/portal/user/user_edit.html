@@ -58,7 +58,7 @@
 												</label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<input id="txtEmail" th:field="*{entity.email}" class="form-control col-md-7 col-xs-12"
-														placeholder="" required type="text">
+														placeholder="" required type="email">
 												</div>
 
 											</div>
@@ -85,8 +85,27 @@
 													class="required">*</span>
 												</label>
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<input id="txtDateOfBirth" th:field="*{entity.birthday}"
-														class="form-control col-md-7 col-xs-12" placeholder="" required type="text">
+													<div class="form-group">
+														<div class='input-group date'>
+															<input id="birthday" class="form-control col-md-7 col-xs-12"
+																th:field="*{entity.birthday}" placeholder="dd/mm/yyyy" required type="text"
+																data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+															<span class="input-group-addon">
+                                                        	<span class="glyphicon glyphicon-calendar"></span>
+                                                    		</span>
+														</div>
+													</div>
+												</div>
+
+												<label class="control-label col-md-2 col-sm-2 col-xs-12">Trạng thái <span
+													class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													<select class="input-sm col-sm-12 col-xs-12"
+														th:field="*{entity.enabled}" required id="selTrangThai">
+														<option value="true">Hoạt động</option>
+														<option value="false">Khóa</option>
+													</select>
 												</div>
 											</div>
 
@@ -212,7 +231,12 @@
 <!-- Config template -->
 <script>
 	$(document).ready(function () {
-		$('#myTable').DataTable();
+		$('#birthday').datepicker({
+			autoclose: true,
+			format: "dd/mm/yyyy",
+			todayBtn: false,
+			todayHighlight: true, language: "vi"
+		});
 	});
 </script>
 </body>

@@ -21,6 +21,7 @@ import vn.hcm.mcr35.excel.ExcelCreator;
 import vn.hcm.mcr35.excel.entity.ECell;
 import vn.shp.app.bean.RoleBean;
 import vn.shp.app.config.Constants;
+import vn.shp.app.config.UserProfile;
 import vn.shp.app.utils.Utils;
 import vn.shp.app.xlsEntity.PortalRoleXls;
 import vn.shp.portal.common.PageMode;
@@ -57,6 +58,9 @@ public class PortalRoleController  extends AbstractController {
 	@Autowired
 	private PortalRoleService portalRoleService;
 
+	@Autowired
+	private UserProfile userProfile;
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	//@PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_HOCVIEN_CREATE')")
@@ -77,7 +81,7 @@ public class PortalRoleController  extends AbstractController {
 				role.setRoleName(role.getRoleName().toUpperCase());
 				role.setStatus(Constants.RECORD_STATUS_OPEN);
 				role.setTimeCreated(new Date());
-				//role.setUserCreated();
+				role.setUserCreated(userProfile.getUser().getUsername());
 				portalRoleService.save(role);
 				MessageList messageList = new MessageList(Message.SUCCESS, "Thêm mới quyền thành công.");
 				model.addAttribute(CoreConstant.MSG_LST, messageList);
@@ -114,7 +118,7 @@ public class PortalRoleController  extends AbstractController {
 				role.setRoleName(role.getRoleName().toUpperCase());
 				role.setStatus(Constants.RECORD_STATUS_OPEN);
 				role.setTimeCreated(new Date());
-				//role.setUserCreated();
+				role.setUserCreated(userProfile.getUser().getUsername());
 				portalRoleService.save(role);
 				MessageList messageList = new MessageList(Message.SUCCESS, "Thêm mới quyền thành công.");
 				model.addAttribute(CoreConstant.MSG_LST, messageList);

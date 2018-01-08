@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.hcm.mcr35.excel.ExcelCreator;
 import vn.hcm.mcr35.excel.entity.ECell;
 import vn.shp.app.config.Constants;
+import vn.shp.app.config.UserProfile;
 import vn.shp.app.utils.Utils;
 import vn.shp.app.xlsEntity.PortalGroupXls;
 import vn.shp.app.xlsEntity.PortalRoleXls;
@@ -71,7 +72,7 @@ public class PortalGroupController  extends AbstractController{
 	PortalRoleService portalRoleService;
 
 	@Autowired
-	PortalUserService portalUserService;
+	private UserProfile userProfile;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -96,7 +97,7 @@ public class PortalGroupController  extends AbstractController{
 				group.setGroupName(group.getGroupName().toUpperCase());
 				group.setStatus(Constants.RECORD_STATUS_OPEN);
 				group.setTimeCreated(new Date());
-				//group.setUserCreated();
+				group.setUserCreated(userProfile.getUser().getUsername());
 
 				String[] chkRoleRight = request.getParameterValues("checkRoleRight");
 				this.createRoleList(chkRoleRight, bean);
@@ -150,7 +151,7 @@ public class PortalGroupController  extends AbstractController{
 				group.setGroupName(group.getGroupName().toUpperCase());
 				group.setStatus(Constants.RECORD_STATUS_OPEN);
 				group.setTimeCreated(new Date());
-				//group.setUserCreated();
+				group.setUserCreated(userProfile.getUser().getUsername());
 
 				String[] chkRoleRight = request.getParameterValues("checkRoleRight");
 				this.createRoleList(chkRoleRight, bean);

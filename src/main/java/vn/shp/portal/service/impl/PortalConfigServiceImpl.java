@@ -1,5 +1,7 @@
 package vn.shp.portal.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.shp.portal.entity.PortalConfig;
@@ -25,5 +27,9 @@ public class PortalConfigServiceImpl implements PortalConfigService {
 	@Override
 	public PortalConfig find(String system, String configName) {
 		return portalConfigRepository.find(system, configName);
+	}
+
+	public List<PortalConfig> findAll() {
+		return portalConfigRepository.findAll();
 	}
 }
