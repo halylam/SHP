@@ -4,10 +4,10 @@
 3. Tại database app_audit cho lưu vết. Mỗi thao tác của user sẽ được ghi vào database này.
 
 @Lý
-1. Chỉnh sửa phần user: validate email, ngày sinh dạng datepicker
-2. Xây dựng trang tham số hệ thống.
-3. Cho phép disable 1 user (set enable = false là được, trong phần login mình đã check trạng thái rồi)
-4. Bổ sung thông tin user thao tác vào entity (user created - Sử dung UserProfile)
+1. Chỉnh sửa phần user: validate email, ngày sinh dạng datepicker - LÝ DONE
+2. Xây dựng trang tham số hệ thống. - LÝ DONE
+3. Cho phép disable 1 user (set enable = false là được, trong phần login mình đã check trạng thái rồi) - LÝ DONE
+4. Bổ sung thông tin user thao tác vào entity (user created - Sử dung UserProfile) - LÝ DONE
 
 @A.Luyện
 1. Chỉnh sửa css
