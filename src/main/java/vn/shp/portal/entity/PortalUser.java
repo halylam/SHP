@@ -1,6 +1,7 @@
 package vn.shp.portal.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "PORTAL_USER", uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 @Data
+@Audited
 public class PortalUser implements Serializable {
 
 	public PortalUser(){}

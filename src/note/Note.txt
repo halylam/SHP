@@ -1,7 +1,7 @@
 @Chú ý:
 1. Mỗi user chỉ login ở 1 thời điểm duy nhất.
 2. Không tắt ngang trình duyệt khi đã login vào hệ thống. Phải logout trước khi tắt trình duyệt Nếu lỡ tắt ngang thì phải đợi hết session mới login được.
-
+3. Tại database app_audit cho lưu vết. Mỗi thao tác của user sẽ được ghi vào database này.
 
 @Lý
 1. Chỉnh sửa phần user: validate email, ngày sinh dạng datepicker

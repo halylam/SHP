@@ -16,12 +16,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "thoikhoabieu")
 @Data
+@Audited
 public class ThoiKhoaBieu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "thoikhoabieu_ID_SEQ")

@@ -15,10 +15,12 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "LOPHOC_HOCVIEN", uniqueConstraints=@UniqueConstraint(columnNames={"id_lophoc", "id_hocvien"}))
 @Data
+@Audited
 public class LopHocHocVien implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "LOPHOC_HOCVIEN_ID_SEQ")

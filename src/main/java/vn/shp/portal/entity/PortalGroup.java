@@ -1,6 +1,7 @@
 package vn.shp.portal.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "PORTAL_GROUP", uniqueConstraints = @UniqueConstraint(columnNames = "GROUP_CODE"))
 @Data
+@Audited
 public class PortalGroup {
 
 	@Id

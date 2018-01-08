@@ -19,12 +19,14 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "khoahoc", uniqueConstraints=@UniqueConstraint(columnNames="makhoahoc"))
 @Data
+@Audited
 public class KhoaHoc implements Serializable {
 
 	private static final long serialVersionUID = 1L;

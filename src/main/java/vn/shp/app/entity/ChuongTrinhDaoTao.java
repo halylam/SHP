@@ -17,11 +17,13 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "chuongtrinhdaotao", uniqueConstraints=@UniqueConstraint(columnNames="machuongtrinh"))
 @Data
+@Audited
 public class ChuongTrinhDaoTao implements Serializable {
 
 	private static final long serialVersionUID = 1L;

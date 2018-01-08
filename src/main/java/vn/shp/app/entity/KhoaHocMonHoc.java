@@ -1,6 +1,7 @@
 package vn.shp.app.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "KHOAHOC_MONHOC", uniqueConstraints=@UniqueConstraint(columnNames={"id_khoahoc", "id_monhoc"}))
 @Data
+@Audited
 public class KhoaHocMonHoc implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "KHOAHOC_MONHOC_ID_SEQ")

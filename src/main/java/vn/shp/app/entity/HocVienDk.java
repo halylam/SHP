@@ -1,6 +1,7 @@
 package vn.shp.app.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "HV_KH", uniqueConstraints=@UniqueConstraint(columnNames={"MA_HOC_VIEN", "MA_KHOA_HOC"}))
 @Data
+@Audited
 public class HocVienDk implements Serializable {
 
     @Id

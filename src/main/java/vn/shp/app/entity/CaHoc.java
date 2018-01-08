@@ -1,6 +1,7 @@
 package vn.shp.app.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cahoc", uniqueConstraints=@UniqueConstraint(columnNames="macahoc"))
 @Data
+@Audited
 public class CaHoc implements Serializable {
 
 	private static final long serialVersionUID = 1L;

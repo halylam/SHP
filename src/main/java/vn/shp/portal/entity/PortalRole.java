@@ -2,6 +2,7 @@ package vn.shp.portal.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "PORTAL_ROLE", uniqueConstraints=@UniqueConstraint(columnNames="ROLE_CODE"))
 @Data
+@Audited
 public class PortalRole {
 
 	@Id
