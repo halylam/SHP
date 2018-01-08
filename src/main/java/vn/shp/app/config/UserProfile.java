@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import vn.shp.portal.entity.PortalUser;
-import vn.shp.portal.service.PortalUserService;
+import vn.shp.app.entity.PortalUser;
+import vn.shp.app.service.PortalUserService;
 
 import java.util.List;
 

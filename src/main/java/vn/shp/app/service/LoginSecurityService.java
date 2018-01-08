@@ -2,19 +2,16 @@ package vn.shp.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import vn.shp.app.config.UserProfile;
-import vn.shp.portal.entity.PortalGroup;
-import vn.shp.portal.entity.PortalRole;
-import vn.shp.portal.entity.PortalUser;
-import vn.shp.portal.repository.PortalUserRepository;
+import vn.shp.app.entity.PortalGroup;
+import vn.shp.app.entity.PortalRole;
+import vn.shp.app.entity.PortalUser;
+import vn.shp.app.repository.PortalUserRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;

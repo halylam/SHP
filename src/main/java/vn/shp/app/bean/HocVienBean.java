@@ -6,7 +6,7 @@ import vn.shp.app.config.SystemConfig;
 import vn.shp.app.entity.HocVien;
 import vn.shp.app.entity.KinhNghiemLamViec;
 import vn.shp.app.entity.Location;
-import vn.shp.portal.entity.AlfFile;
+import vn.shp.app.entity.AlfFile;
 
 import java.util.ArrayList;
 import java.util.List;
