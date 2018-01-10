@@ -60,7 +60,7 @@
                             </a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-tags"></i> <span class="text-main">Quản lý</span> <span
+                    <li sec:authorize = "hasAnyRole(@Role.ROLE_ADMIN)"><a><i class="fa fa-tags"></i> <span class="text-main">Quản lý</span> <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li>
@@ -75,7 +75,7 @@
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-tags"></i> <span class="text-main">Admin</span> <span
+                    <li sec:authorize = "hasAnyRole(@Role.ROLE_ADMIN)"><a><i class="fa fa-tags"></i> <span class="text-main">Admin</span> <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="#"><i class="fa fa-id-card-o"></i> Quản lý user</a>
