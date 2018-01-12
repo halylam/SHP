@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <section class="section bgTrans">
                     <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-                    <form th:action="@{/portal/bomon/edit}" th:object="${boMonModel}" method="post" role="form" id="bomon-form">
+                    <form th:action="@{/portal/bomon/edit}" th:object="${boMonBean}" method="post" role="form" id="bomon-form">
                         <input type="hidden" th:field="*{entity.boMonId}" />
                         <div class="section-content">
                             <!-- Content here -->

@@ -26,7 +26,7 @@
 			<div class="container-fluid">
 				<section class="section bgTrans">
 					<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-					<form th:action="@{/portal/bacdaotao/edit}" th:object="${bacDaoTaoModel}" method="post" role="form" id="bacdaotao-form">
+					<form th:action="@{/portal/bacdaotao/edit}" th:object="${bacDaoTaoBean}" method="post" role="form" id="bacdaotao-form">
 						<input type="hidden" th:field="*{entity.bacDaoTaoId}" />
 						<div class="section-content">
 							<!-- Content here -->

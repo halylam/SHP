@@ -35,7 +35,7 @@
                             <div class="section-content">
                                 <!-- Content here -->
                                 <th:block th:replace="portal/fragments/message :: content(${messageLst})"/>
-                                <form th:action="@{/portal/chuongtrinhdaotao/edit}" th:object="${chuongTrinhDaoTaoModel}" method="post"
+                                <form th:action="@{/portal/chuongtrinhdaotao/edit}" th:object="${chuongTrinhDaoTaoBean}" method="post"
                                       role="form" id="chuongtrinhdaotao-form">
                                     <input type="hidden" th:field="*{entity.chuongTrinhDaoTaoId}"/>
 

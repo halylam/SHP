@@ -30,7 +30,7 @@
 
                 <section class="section bgTrans">
                     <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-                    <form th:action="@{/portal/chuyennganh/edit}" th:object="${chuyenNganhModel}" method="post" role="form"
+                    <form th:action="@{/portal/chuyennganh/edit}" th:object="${chuyenNganhBean}" method="post" role="form"
                         id="chuyennganh-form">
                         <input type="hidden" th:field="*{entity.chuyenNganhId}"/>
                         <div class="section-content">

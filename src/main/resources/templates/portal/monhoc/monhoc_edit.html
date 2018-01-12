@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <section class="section bgTrans">
                     <th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-                    <form th:action="@{/portal/monhoc/edit}" th:object="${monHocModel}" method="post" role="form"
+                    <form th:action="@{/portal/monhoc/edit}" th:object="${monHocBean}" method="post" role="form"
                         id="monhoc-form">
                         <input type="hidden" th:field="*{entity.monHocId}" />
                         <div class="section-content">

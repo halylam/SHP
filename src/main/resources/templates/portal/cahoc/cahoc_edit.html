@@ -26,7 +26,7 @@
 			<div class="container-fluid">
 				<section class="section bgTrans">
 					<th:block th:replace="portal/fragments/message :: content(${messageLst})" />
-					<form th:action="@{/portal/cahoc/edit}" th:object="${caHocModel}" method="post" role="form" id="cahoc-form">
+					<form th:action="@{/portal/cahoc/edit}" th:object="${caHocBean}" method="post" role="form" id="cahoc-form">
 						<input type="hidden" th:field="*{entity.caHocId}" />
 						<div class="section-content">
 							<!-- Content here -->
