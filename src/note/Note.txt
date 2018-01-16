@@ -13,7 +13,8 @@
 1. Chỉnh sửa css
 2. Thông báo lỗi trang login
 3. Danh sách quyền và nhóm quyền, bổ sung vào controller nếu thiếu.
-3. Phân quyền cho menu (site_bar.html)
+3. Phân quyền cho menu (site_bar.html)dậy
+5. Add thêm danh mục Học hàm, học vị, dân tộc, tôn giáo ...
 
 @Hà:
 1. Danh sách user đang login.
@@ -35,3 +36,12 @@ Các công việc khác.
 5. Trang profile của user, hiển thị tên user, avatar theo từng user.
 
 6. Bổ sung phòng ban, chức vụ của từng user để tiện phân quyền.
+
+
+Công việc đang pending.
+
+1. Xuất report theo mẫu SHP gửi
+2. 2 cổng thông tin cho Giảng viên và học viên
+3. Quản lý - Giảng viên, Học viên, ( ví dụ như số buổi dậy, giờ  của gv ..., số buổi học, nghỉ của học viên, điểm các môn dậy, để dựa vào cấp bằng...Cais này cùng như report )
+4. Tạo trang mới để giải quyết trường hợp đã lên TKB nhưng giảng viên bật đột xuất không dậy ...
+5.

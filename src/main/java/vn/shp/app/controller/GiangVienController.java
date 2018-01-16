@@ -65,7 +65,7 @@ public class GiangVienController  extends AbstractController {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_LIST')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, Role.ROLE_GIANGVIEN_LIST)")
     @RequestMapping(value = "/list", method = GET)
     public String getList(Model model, HttpServletRequest request) {
         GiangVienBean bean = new GiangVienBean();
@@ -75,7 +75,7 @@ public class GiangVienController  extends AbstractController {
         return "portal/giangvien/giangvien_list";
     }
     
-    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, 'ROLE_GIANGVIEN_CREATE')")
+    @PreAuthorize("hasAnyRole(Role.ROLE_ADMIN, Role.ROLE_GIANGVIEN_CREATE)")
     @RequestMapping(value = "/create", method = GET)
     public String getCreate(Model model) {
         GiangVienBean bean = new GiangVienBean();

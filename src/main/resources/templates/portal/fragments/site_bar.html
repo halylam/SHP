@@ -23,7 +23,7 @@
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span
+                    <li sec:authorize = "hasAnyRole(@Role.ROLE_GIANGVIEN_CREATE,@Role.ROLE_GIANGVIEN_EDIT,@Role.ROLE_GIANGVIEN_LIST)"><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a th:href="@{/portal/giangvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới</a>
