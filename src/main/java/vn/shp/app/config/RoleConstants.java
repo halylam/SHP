@@ -11,4 +11,8 @@ public class RoleConstants {
     public static final String ROLE_HOCVIEN_CREATE = "ROLE_HOCVIEN_CREATE";
     public static final String ROLE_HOCVIEN_EDIT="ROLE_HOCVIEN_EDIT";
     public static final String ROLE_HOCVIEN_LIST="ROLE_HOCVIEN_LIST";
+
+    public static final String ROLE_GIANGVIEN_CREATE = "ROLE_GIANGVIEN_CREATE";
+    public static final String ROLE_GIANGVIEN_EDIT="ROLE_GIANGVIEN_EDIT";
+    public static final String ROLE_GIANGVIEN_LIST="ROLE_GIANGVIEN_LIST";
 }

@@ -39,127 +39,136 @@
                             <!-- Content here -->
                             <div class="row">
                                 <div class="col-sm-12">
-                                        <div class="item form-group col-xs-12">
-                                            <h5> Thông tin Sinh viên </h5>
-                                            <i> Thông tin cá nhân </i>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã
-                                                học viên
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="firstname" class="form-control col-md-7 col-xs-12 disabled" th:field="*{entity.maHocVien}"
-                                                        readonly required type="text" >
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                                tên <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input id="firstname" class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTen}"
-                                                        required type="text">
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Giới
-                                                tính <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <!-- Input radio -->
-                                                <div class="radio checkbox-inline">
-                                                    <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M" required>
-                                                    <label style="margin-right: 25px;" for="radio1">Nam</label>
-                                                    <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F"  required>
-                                                    <label for="radio2">Nữ </label>
-                                                </div>
-                                                <!-- /Input radio -->
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.soDienThoai}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày
-                                                sinh <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-
-                                                <div class="form-group">
-                                                    <div class='input-group date' id='datetimepicker1'>
-                                                        <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngaySinh}"
-                                                               placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                                                        <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
-                                                SHP<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailShp}"
-                                                        required type="email">
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Email <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.email}"
-                                                        required type="email">
-                                            </div>
-
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">CMND/Passport
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.cmnd}"
-                                                        required type="text">
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Ngày cấp
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <div class="form-group">
-                                                    <div class='input-group date' id='datetimepicker1'>
-                                                        <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12" th:field="*{entity.ngayCapCmnd}"
-                                                               placeholder="dd/mm/yyyy" required type="text" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                                                        <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Tại <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.noiCapCmnd}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tôn giáo<span class="required">*</span>
+                                        <h5> Thông tin Sinh viên </h5>
+                                        <i> Thông tin cá nhân </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Mã
+                                            học viên
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maTonGiao}" required ="required">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12 disabled"
+                                                   th:field="*{entity.maHocVien}"
+                                                   readonly required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="firstname" class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.hoTen}"
+                                                   required type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Giới
+                                            tính <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <!-- Input radio -->
+                                            <div class="radio checkbox-inline">
+                                                <input id="radio1" type="radio" th:field="*{entity.gioiTinh}" value="M"
+                                                       required>
+                                                <label style="margin-right: 25px;" for="radio1">Nam</label>
+                                                <input id="radio2" type="radio" th:field="*{entity.gioiTinh}" value="F"
+                                                       required>
+                                                <label for="radio2">Nữ </label>
+                                            </div>
+                                            <!-- /Input radio -->
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Số ĐT <span
+                                                class="required">*</span>
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.soDienThoai}"
+                                                   required type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Ngày
+                                            sinh <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input id="txtNgaySinh" class="form-control col-md-7 col-xs-12"
+                                                           th:field="*{entity.ngaySinh}"
+                                                           placeholder="dd/mm/yyyy" required type="text"
+                                                           data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Email
+                                            SHP
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.emailShp}"
+                                                   type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Email
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.email}"
+                                                   type="email">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">CMND/Passport
+
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.cmnd}"
+                                                   type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Ngày cấp
+
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input id="txtNgayCapCmnd" class="form-control col-md-7 col-xs-12"
+                                                           th:field="*{entity.ngayCapCmnd}"
+                                                           placeholder="dd/mm/yyyy" type="text"
+                                                           data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Tại
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.noiCapCmnd}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Tôn
+                                            giáo
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maTonGiao}">
                                                 <option value=""></option>
                                                 <option th:each="item : ${lstTonGiao}"
                                                         th:value="${item.tonGiaoCode}"
@@ -167,11 +176,11 @@
                                             </select>
                                         </div>
 
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >Dân tộc<span class="required">*</span>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Dân tộc
                                         </label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maDanToc}" required ="required" >
-                                                <option value=""> </option>
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.maDanToc}">
+                                                <option value=""></option>
                                                 <option th:each="item : ${lstDanToc}"
                                                         th:value="${item.danTocCode}"
                                                         th:text="${item.danTocName}"></option>
@@ -179,286 +188,300 @@
                                         </div>
                                     </div>
 
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input  -->
-
-                                            <div class="radio checkbox-inline">
-                                                <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DH" required>
-                                                <label for="radDiHoc">
-                                                    Đi học
-                                                </label>
-                                            </div>
-                                            <!-- /Input option -->
-
-                                            <!-- Input option -->
-                                            <div class="radio checkbox-inline">
-                                                <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="DL" required>
-                                                <label for="radDiLam">
-                                                    Đi làm
-                                                </label>
-                                            </div>
-                                            <!-- /Input option -->
-                                            <!-- Input option -->
-                                            <div class="radio checkbox-inline">
-                                                <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}" value="TD" required>
-                                                <label for="radTuDo">
-                                                    Tự do
-                                                </label>
-                                            </div>
-                                            <!-- /Input option -->
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tình trạng cá nhân <span class="required">*</span>
-                                            </label>
-
-
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Trình độ
-                                                tiếng anh <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.trinhDoTiengAnh}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <i> Địa chỉ thường trú </i>
-                                        </div>
-
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhThuongTru}" required
-                                                        onchange="loadDist('selTinhThuongTru','selQuanThuongTru','selXaThuongTru')"
-                                                        id="selTinhThuongTru">
-                                                    <option value=""></option>
-                                                    <option th:each="item : ${locationCatalog}"
-                                                            th:value="${item.locCode}"
-                                                            th:text="${item.locName}"></option>
-                                                </select>
-
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanThuongTru" th:field="*{entity.quanThuongTru}" required
-                                                        onchange="loadDetail('selQuanThuongTru','selXaThuongTru')">
-
-                                                </select>
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaThuongTru" th:field="*{entity.xaThuongTru}" required>
-
-                                                </select>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
-                                                đường<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.diaChiThuongTru}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="item form-group col-xs-12">
-                                            <i> Địa chỉ tạm trú </i>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhTamTru}" required
-                                                        onchange="loadDist('selTinhTamTru','selQuanTamTru','selXaTamTru')"
-                                                        id="selTinhTamTru">
-                                                    <option value=""></option>
-                                                    <option th:each="item : ${locationCatalog}"
-                                                            th:value="${item.locCode}"
-                                                            th:text="${item.locName}"></option>
-                                                </select>
-
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selQuanTamTru"tinhTamTru th:field="*{entity.quanTamTru}" required
-                                                        onchange="loadDetail('selQuanTamTru','selXaTamTru')">
-
-                                                </select>
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selXaTamTru"quanTamTru th:field="*{entity.xaTamTru}" required>
-
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
-                                                đường<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.diaChiTamTru}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <i> Thông tin người giám hộ ( Bắt buộc đối với người dưới 25 tuổi )</i>
-                                        </div>
-
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                                tên người giám hộ 1<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh1}"
-                                                        required type="text">
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh1}"
-                                                        required type="email">
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh1}"
-                                                        required type="text">
-                                            </div>
-                                        </div>
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">
-                                            Quan hệ <span class="required">*</span>
+                                        <!-- Input  -->
+
+                                        <div class="radio checkbox-inline">
+                                            <input id="radDiHoc" type="radio" th:field="*{entity.tinhTrangCaNhan}"
+                                                   value="DH" required>
+                                            <label for="radDiHoc">
+                                                Đi học
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+
+                                        <!-- Input option -->
+                                        <div class="radio checkbox-inline">
+                                            <input id="radDiLam" type="radio" th:field="*{entity.tinhTrangCaNhan}"
+                                                   value="DL" required>
+                                            <label for="radDiLam">
+                                                Đi làm
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+                                        <!-- Input option -->
+                                        <div class="radio checkbox-inline">
+                                            <input id="radTuDo" type="radio" th:field="*{entity.tinhTrangCaNhan}"
+                                                   value="TD" required>
+                                            <label for="radTuDo">
+                                                Tự do
+                                            </label>
+                                        </div>
+                                        <!-- /Input option -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tình trạng cá nhân
+                                            <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh1}"
-                                                    required type="text">
+
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Trình độ
+                                            tiếng anh
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.trinhDoTiengAnh}"
+                                                   type="text">
                                         </div>
                                     </div>
-                                        <div class="item form-group col-xs-12">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                                tên người giám hộ 2
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh2}"
-                                                         type="text">
-                                            </div>
 
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Email
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh2}"
-                                                         type="email">
-                                            </div>
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ thường trú </i>
+                                    </div>
 
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Số ĐT
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh2}"
-                                                         type="text">
-                                            </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12"
+                                                    th:field="*{entity.tinhThuongTru}"
+                                                    onchange="loadDist('selTinhThuongTru','selQuanThuongTru','selXaThuongTru')"
+                                                    id="selTinhThuongTru">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
+
                                         </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Quận / huyện
+
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selQuanThuongTru"
+                                                    th:field="*{entity.quanThuongTru}"
+                                                    onchange="loadDetail('selQuanThuongTru','selXaThuongTru')">
+
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">P/Xã
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selXaThuongTru"
+                                                    th:field="*{entity.xaThuongTru}">
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Số nhà/
+                                            đường
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.diaChiThuongTru}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Địa chỉ tạm trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.tinhTamTru}"
+                                                    onchange="loadDist('selTinhTamTru','selQuanTamTru','selXaTamTru')"
+                                                    id="selTinhTamTru">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
+
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Quận / huyện
+
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selQuanTamTru" tinhTamTru
+                                                    th:field="*{entity.quanTamTru}"
+                                                    onchange="loadDetail('selQuanTamTru','selXaTamTru')">
+
+                                            </select>
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">P/Xã <span
+
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selXaTamTru" quanTamTru
+                                                    th:field="*{entity.xaTamTru}">
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Số nhà/
+                                            đường
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.diaChiTamTru}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Thông tin người giám hộ ( Bắt buộc đối với người dưới 25 tuổi )</i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên người giám hộ 1
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh1}"
+                                                   type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Email
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh1}"
+                                                   type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Số ĐT
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh1}"
+                                                   type="text">
+                                        </div>
+                                    </div>
                                     <div class="item form-group col-xs-12">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">
                                             Quan hệ
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh2}"
-                                                    type="text">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh1}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên người giám hộ 2
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.hoTenQh2}"
+                                                   type="text">
+                                        </div>
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Email
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.emailQh2}"
+                                                   type="email">
+                                        </div>
+
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Số ĐT
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.sdtQh2}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">
+                                            Quan hệ
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.loaiQh2}"
+                                                   type="text">
                                         </div>
                                     </div>
 
-                                        <div class="item form-group col-xs-12">
-                                            <h5> Quá trình học tập </h5>
+                                    <div class="item form-group col-xs-12">
+                                        <h5> Quá trình học tập </h5>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Trình
+                                            độ văn hóa </label>
+
+
+                                        <!-- /Input check -->
+
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường THCS
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.truongThcs}"
+                                                   type="text">
                                         </div>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
 
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input check -->
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Trình
-                                                độ văn hóa <span class="required">*</span></label>
 
+                                        <!-- /Input check -->
 
-                                            <!-- /Input check -->
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường THCS <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThcs}"
-                                                        required type="text">
-                                            </div>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường THPT
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.truongThpt}"
+                                                   type="text">
                                         </div>
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input check -->
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
+                                        <!-- Input check -->
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
 
 
-                                            <!-- /Input check -->
+                                        <!-- /Input check -->
 
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường THPT
-                                            </label>
-                                            <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12" th:field="*{entity.truongThpt}"
-                                                        required type="text">
-                                            </div>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
+                                            trường khác
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.truongKhac}"
+                                                   type="text">
                                         </div>
-                                        <div class="item form-group col-xs-12">
-                                            <!-- Input check -->
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12"></label>
+                                    </div>
+                                    <div class="item form-group col-xs-12">
 
-
-                                            <!-- /Input check -->
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Tên
-                                                trường khác
-                                            </label>
-                                            <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input class="form-control col-md-7 col-xs-12" th:field="*{entity.truongKhac}"
-                                                        type="text">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group col-xs-12">
-
-                                            <h5> Thông tin tài chính </h5>
-                                            <i> Thông tin người phụ trách nhiệm đóng học phí </i>
-                                        </div>
+                                        <h5> Thông tin tài chính </h5>
+                                        <i> Thông tin người phụ trách nhiệm đóng học phí </i>
+                                    </div>
                                     <!-- Option -->
                                     <div class="item form-group col-xs-12">
                                         <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-2 col-md-offset-2">
                                             <!-- Input radio -->
                                             <div class="radio checkbox-inline">
-                                                <input id="radNdhpHV" type="radio" th:field="*{entity.ndhp}" value="HV" >
+                                                <input id="radNdhpHV" type="radio" th:field="*{entity.ndhp}" value="HV">
                                                 <label style="margin-right: 25px;" for="radNdhpHV">Học viên</label>
-                                                <input  id="radNdhpKhac" type="radio" th:field="*{entity.ndhp}" value="KH">
+                                                <input id="radNdhpKhac" type="radio" th:field="*{entity.ndhp}"
+                                                       value="KH">
                                                 <label for="radNdhpKhac">Khác </label>
                                             </div>
                                             <!-- /Input radio -->
@@ -466,126 +489,144 @@
                                     </div>
 
                                     <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
-                                                tên <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpHoTen}" id="txtNdhpHoTen" disabled
-                                                        required type="text">
-                                            </div>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Họ
+                                            tên
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.ndhpHoTen}" id="txtNdhpHoTen" disabled
+                                                   type="text">
+                                        </div>
 
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số điện
-                                                thoại<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpSdt}" id="txtNdhpSdt" disabled
-                                                        required type="text">
-                                            </div>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Số điện
+                                            thoại
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" th:field="*{entity.ndhpSdt}"
+                                                   id="txtNdhpSdt" disabled
+                                                   type="text">
+                                        </div>
 
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >Email <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpEmail}" id="txtNdhpEmail" disabled
-                                                        required type="text">
-                                            </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Email
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.ndhpEmail}" id="txtNdhpEmail" disabled
+                                                   type="text">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <i> Địa chỉ tạm trú </i>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
+
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.ndhpTinh}"
+                                                    th:attrappend="${bean.entity.ndhp == 'HV'}?disabled='disabled'"
+                                                    onchange="loadDist('selNdhpTinh','selNdhpQuan','selNdhpXa')"
+                                                    id="selNdhpTinh">
+                                                <option value=""></option>
+                                                <option th:each="item : ${locationCatalog}"
+                                                        th:value="${item.locCode}"
+                                                        th:text="${item.locName}"></option>
+                                            </select>
 
                                         </div>
 
-                                        <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
-                                            <i> Địa chỉ tạm trú </i>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Quận / huyện
+
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selNdhpQuan" tinhTamTru
+                                                    th:field="*{entity.ndhpQuan}" disabled
+                                                    onchange="loadDetail('selNdhpQuan','selNdhpXa')">
+
+                                            </select>
                                         </div>
 
-                                        <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">TP/Tỉnh
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-3 col-sm-3 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.ndhpTinh}"
-                                                        th:attrappend="${bean.entity.ndhp == 'HV'}?disabled='disabled'"
-                                                        onchange="loadDist('selNdhpTinh','selNdhpQuan','selNdhpXa')"
-                                                        id="selNdhpTinh">
-                                                    <option value=""></option>
-                                                    <option th:each="item : ${locationCatalog}"
-                                                            th:value="${item.locCode}"
-                                                            th:text="${item.locName}"></option>
-                                                </select>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12">P/Xã
+                                        </label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <select class="input-sm col-sm-12 col-xs-12" id="selNdhpXa" quanTamTru
+                                                    th:field="*{entity.ndhpXa}" disabled>
 
-                                            </div>
-
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Quận / huyện
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selNdhpQuan"tinhTamTru th:field="*{entity.ndhpQuan}" disabled
-                                                        onchange="loadDetail('selNdhpQuan','selNdhpXa')">
-
-                                                </select>
-                                            </div>
-
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" >P/Xã <span
-                                                    class="required">*</span>
-                                            </label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <select class="input-sm col-sm-12 col-xs-12" id="selNdhpXa"quanTamTru th:field="*{entity.ndhpXa}" disabled>
-
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
-                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" >Số nhà/
-                                                đường<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                                <input  class="form-control col-md-7 col-xs-12"  th:field="*{entity.ndhpDiaChi}" id="txtNdhpDiaChi" disabled
-                                                        required type="text">
-                                            </div>
+                                            </select>
                                         </div>
 
-                                        <div class="item form-group col-xs-12">
-                                            <i> Hình thức đóng học phí </i>
-                                            <p> 1. Đối với khóa Topic & Short Coutses, Tiếng Anh </p>
+                                    </div>
+                                    <div class="item form-group col-xs-12" id="divNdhp" style="display: none;">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12">Số nhà/
+                                            đường
+                                        </label>
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12"
+                                                   th:field="*{entity.ndhpDiaChi}" id="txtNdhpDiaChi" disabled
+                                                   type="text">
                                         </div>
+                                    </div>
+
+                                    <div class="item form-group col-xs-12">
+                                        <i> Hình thức đóng học phí </i>
+                                        <p> 1. Đối với khóa Topic & Short Coutses, Tiếng Anh </p>
+                                    </div>
 
                                     <!-- Option -->
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học
+                                            phí </label>
                                         <div class="col-md-10 col-sm-10 col-xs-12">
                                             <!-- Input radio -->
                                             <div class="radio checkbox-inline">
-                                                <input id="radHp1ChuaDong" type="radio" th:field="*{entity.hp1}" VALUE="CHUA_DONG">
-                                                <label style="margin-right: 25px;" for="radHp1ChuaDong"> Chưa đóng </label>
-                                                <input id="radHp1TronKhoa" type="radio" th:field="*{entity.hp1}" VALUE="TRON_KHOA">
-                                                <label style="margin-right: 25px;" for="radHp1TronKhoa"> Đóng trọn khóa </label>
-                                                <input  id="radHp1NhieuDot" type="radio" th:field="*{entity.hp1}" value="NHIEU_DOT">
-                                                <label for="radHp1NhieuDot"> Chia thành nhiều đợt  </label>
+                                                <input id="radHp1ChuaDong" type="radio" th:field="*{entity.hp1}"
+                                                       VALUE="CHUA_DONG">
+                                                <label style="margin-right: 25px;" for="radHp1ChuaDong"> Chưa
+                                                    đóng </label>
+                                                <input id="radHp1TronKhoa" type="radio" th:field="*{entity.hp1}"
+                                                       VALUE="TRON_KHOA">
+                                                <label style="margin-right: 25px;" for="radHp1TronKhoa"> Đóng trọn
+                                                    khóa </label>
+                                                <input id="radHp1NhieuDot" type="radio" th:field="*{entity.hp1}"
+                                                       value="NHIEU_DOT">
+                                                <label for="radHp1NhieuDot"> Chia thành nhiều đợt </label>
                                             </div>
                                             <!-- /Input radio -->
                                         </div>
                                     </div>
 
                                     <div class="item form-group col-xs-12">
-                                            <p> 2. Đối với khóa học 2 năm </p>
-                                        </div>
+                                        <p> 2. Đối với khóa học 2 năm </p>
+                                    </div>
 
                                     <!-- Option -->
                                     <div class="item form-group col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học phí <span class="required">*</span></label>
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="firstname">Học
+                                            phí </label>
                                         <div class="col-md-10 col-sm-10 col-xs-12">
                                             <!-- Input radio -->
                                             <div class="radio checkbox-inline">
-                                                <input id="radHp2ChuaDong" type="radio" th:field="*{entity.hp2}" VALUE="CHUA_DONG">
-                                                <label style="margin-right: 25px;" for="radHp2ChuaDong"> Chưa đóng </label>
+                                                <input id="radHp2ChuaDong" type="radio" th:field="*{entity.hp2}"
+                                                       VALUE="CHUA_DONG">
+                                                <label style="margin-right: 25px;" for="radHp2ChuaDong"> Chưa
+                                                    đóng </label>
 
-                                                <input id="radHp2TronKhoa" type="radio" th:field="*{entity.hp2}" VALUE="TRON_KHOA">
-                                                <label style="margin-right: 25px;" for="radHp2TronKhoa"> Đóng trọn khóa </label>
+                                                <input id="radHp2TronKhoa" type="radio" th:field="*{entity.hp2}"
+                                                       VALUE="TRON_KHOA">
+                                                <label style="margin-right: 25px;" for="radHp2TronKhoa"> Đóng trọn
+                                                    khóa </label>
 
-                                                <input  id="radHp2NhieuDot" type="radio" th:field="*{entity.hp2}" value="NHIEU_DOT">
-                                                <label style="margin-right: 25px;" for="radHp2NhieuDot"> Chia thành nhiều đợt  </label>
+                                                <input id="radHp2NhieuDot" type="radio" th:field="*{entity.hp2}"
+                                                       value="NHIEU_DOT">
+                                                <label style="margin-right: 25px;" for="radHp2NhieuDot"> Chia thành
+                                                    nhiều đợt </label>
 
-                                                <input  id="radHp2HocKy" type="radio" th:field="*{entity.hp2}" value="HOC_KY">
-                                                <label for="radHp2HocKy"> Đóng theo học kỳ  </label>
+                                                <input id="radHp2HocKy" type="radio" th:field="*{entity.hp2}"
+                                                       value="HOC_KY">
+                                                <label for="radHp2HocKy"> Đóng theo học kỳ </label>
                                             </div>
                                             <!-- /Input radio -->
                                         </div>
@@ -633,21 +674,21 @@
             todayHighlight: true, language: "vi"
         });
 
-        $('#radNdhpHV').change(function() {
+        $('#radNdhpHV').change(function () {
             $('div[id^="divNdhp"]').each(function () {
                 $(this).hide();
             });
 
             $('input[id^="txtNdhp"]').each(function () {
-                $(this).attr("disabled","disabled");
+                $(this).attr("disabled", "disabled");
             });
 
             $('select[id^="selNdhp"]').each(function () {
-                $(this).attr("disabled","disabled");
+                $(this).attr("disabled", "disabled");
             });
         });
 
-        $('#radNdhpKhac').change(function() {
+        $('#radNdhpKhac').change(function () {
             $('div[id^="divNdhp"]').each(function () {
                 $(this).show();
             });
