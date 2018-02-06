@@ -101,23 +101,23 @@ public class HocVien implements Serializable {
     @Column(name = "TINH_THUONG_TRU", length = 10)
     private String tinhThuongTru;
 
-    @OneToOne
-    @JoinColumn(name = "TINH_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "TINH_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location tinhThuongTruLoc;
 
 
     @Column(name = "QUAN_THUONG_TRU", length = 10)
     private String quanThuongTru;
 
-    @OneToOne
-    @JoinColumn(name = "QUAN_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "QUAN_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location quanThuongTruLoc;
 
     @Column(name = "XA_THUONG_TRU", length = 10)
     private String xaThuongTru;
 
-    @OneToOne
-    @JoinColumn(name = "XA_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "XA_THUONG_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location xaThuongTruLoc;
 
     @Column(name = "DIA_CHI_THUONG_TRU", length = 250)
@@ -126,22 +126,22 @@ public class HocVien implements Serializable {
     @Column(name = "TINH_TAM_TRU", length = 10)
     private String tinhTamTru;
 
-    @OneToOne
-    @JoinColumn(name = "TINH_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "TINH_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location tinhTamTruLoc;
 
     @Column(name = "QUAN_TAM_TRU", length = 10)
     private String quanTamTru;
 
-    @OneToOne
-    @JoinColumn(name = "QUAN_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "QUAN_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location quanTamTruLoc;
 
     @Column(name = "XA_TAM_TRU", length = 10)
     private String xaTamTru;
 
-    @OneToOne
-    @JoinColumn(name = "XA_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "XA_TAM_TRU", referencedColumnName = "LOC_CODE", updatable = false, insertable = false, nullable=true)
     private Location xaTamTruLoc;
 
     @Column(name = "DIA_CHI_TAM_TRU", length = 250)
@@ -225,15 +225,15 @@ public class HocVien implements Serializable {
     @Column(name = "MA_TON_GIAO", length = 10)
     private String maTonGiao;
 
-    @OneToOne
-    @JoinColumn(name = "MA_TON_GIAO", referencedColumnName = "ma", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "MA_TON_GIAO", referencedColumnName = "ma", updatable = false, insertable = false, nullable=true)
     private TonGiao tonGiao;
 
     @Column(name = "MA_DAN_TOC", length = 10)
     private String maDanToc;
 
-    @OneToOne
-    @JoinColumn(name = "MA_DAN_TOC", referencedColumnName = "ma", updatable = false, insertable = false)
+    @OneToOne(optional=true)
+    @JoinColumn(name = "MA_DAN_TOC", referencedColumnName = "ma", updatable = false, insertable = false, nullable=true)
     private DanToc danToc;
 
     public void update(HocVien hv){
