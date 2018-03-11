@@ -507,7 +507,7 @@
                                         </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
                                             <select class="input-sm col-sm-12 col-xs-12" th:field="*{entity.ndhpTinh}"
-                                                    th:attrappend="${bean.entity.ndhp == 'HV'}?disabled='disabled'"
+
                                                     onchange="loadDist('selNdhpTinh','selNdhpQuan','selNdhpXa')"
                                                     id="selNdhpTinh">
                                                 <option value=""></option>

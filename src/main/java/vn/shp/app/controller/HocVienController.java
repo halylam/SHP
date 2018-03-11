@@ -410,8 +410,10 @@ public class HocVienController extends AbstractController {
             content = content.replaceAll(Constants.PRI_NOI_CAP_CMND, Utils.nullCheck(entity.getNoiCapCmnd()));
             content = content.replaceAll(Constants.PRI_TDTA, Utils.nullCheck(entity.getTrinhDoTiengAnh()));
 
-            content = content.replaceAll(Constants.PRI_DC_THUONG_TRU, Utils.nullCheck(entity.getDiaChiThuongTru()) + ", " + entity.getXaThuongTruLoc().getLocName() + ", " + entity.getQuanThuongTruLoc().getLocName() + ", " + entity.getTinhThuongTruLoc().getLocName());
-            content = content.replaceAll(Constants.PRI_DC_TAM_TRU, Utils.nullCheck(entity.getDiaChiTamTru()) + ", " + entity.getXaTamTruLoc().getLocName() + ", " + entity.getQuanTamTruLoc().getLocName() + ", " + entity.getTinhTamTruLoc().getLocName());
+            if (Utils.isAllNotNullOrEmpty(entity.getDiaChiThuongTru(), entity.getXaThuongTruLoc(), entity.getQuanThuongTruLoc(), entity.getTinhThuongTruLoc()))
+                content = content.replaceAll(Constants.PRI_DC_THUONG_TRU, Utils.nullCheck(entity.getDiaChiThuongTru()) + ", " + entity.getXaThuongTruLoc().getLocName() + ", " + entity.getQuanThuongTruLoc().getLocName() + ", " + entity.getTinhThuongTruLoc().getLocName());
+            if (Utils.isAllNotNullOrEmpty(entity.getDiaChiTamTru(), entity.getXaTamTruLoc(), entity.getQuanTamTruLoc(), entity.getTinhTamTruLoc()))
+                content = content.replaceAll(Constants.PRI_DC_TAM_TRU, Utils.nullCheck(entity.getDiaChiTamTru()) + ", " + entity.getXaTamTruLoc().getLocName() + ", " + entity.getQuanTamTruLoc().getLocName() + ", " + entity.getTinhTamTruLoc().getLocName());
 
             String xmlKnlv = "";
             List<KinhNghiemLamViec> lstKnlv = kinhNghiemLamViecService.findAllByMaLienKetAndLoaiLienKet(entity.getId(), Constants.HOC_VIEN);
