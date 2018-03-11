@@ -101,6 +101,31 @@ public class HocVienController extends AbstractController {
     public String postCreate(Model model, HocVienBean bean) {
         HocVien entity = bean.getEntity();
         if (entity != null && entity.getId() == null) {
+            if("".equals(entity.getMaDanToc())){
+                entity.setMaDanToc(null);
+            }
+            if("".equals(entity.getMaTonGiao())){
+                entity.setMaTonGiao(null);
+            }
+            if("".equals(entity.getTinhThuongTru())){
+                entity.setTinhThuongTru(null);
+            }
+            if("".equals(entity.getQuanThuongTru())){
+                entity.setQuanThuongTru(null);
+            }
+            if("".equals(entity.getXaThuongTru())){
+                entity.setXaThuongTru(null);
+            }
+
+            if("".equals(entity.getTinhTamTru())){
+                entity.setTinhTamTru(null);
+            }
+            if("".equals(entity.getQuanTamTru())){
+                entity.setQuanTamTru(null);
+            }
+            if("".equals(entity.getXaTamTru())){
+                entity.setXaTamTru(null);
+            }
             entity.setMaHocVien(String.valueOf(System.currentTimeMillis()));
             entity.setNgayTao(new Date());
             entity.setNgayCapNhat(new Date());
@@ -196,6 +221,31 @@ public class HocVienController extends AbstractController {
         dbEntity.update(entity);
         dbEntity.setNgayCapNhat(new Date());
         dbEntity.setNgayCapNhat(new Date());
+        if("".equals(dbEntity.getMaDanToc())){
+            dbEntity.setMaDanToc(null);
+        }
+        if("".equals(dbEntity.getMaTonGiao())){
+            dbEntity.setMaTonGiao(null);
+        }
+        if("".equals(dbEntity.getTinhThuongTru())){
+            dbEntity.setTinhThuongTru(null);
+        }
+        if("".equals(dbEntity.getQuanThuongTru())){
+            dbEntity.setQuanThuongTru(null);
+        }
+        if("".equals(dbEntity.getXaThuongTru())){
+            dbEntity.setXaThuongTru(null);
+        }
+
+        if("".equals(dbEntity.getTinhTamTru())){
+            dbEntity.setTinhTamTru(null);
+        }
+        if("".equals(dbEntity.getQuanTamTru())){
+            dbEntity.setQuanTamTru(null);
+        }
+        if("".equals(dbEntity.getXaTamTru())){
+            dbEntity.setXaTamTru(null);
+        }
         hocVienService.save(dbEntity);
 
         if (entity.getId() != null) {

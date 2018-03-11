@@ -13,17 +13,17 @@
         <div id="sidebar-menu">
             <div class="menu_section">
                 <ul class="nav side-menu">
-                    <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_CREATE,@Role.ROLE_HOCVIEN_EDIT,@Role.ROLE_HOCVIEN_LIST, @Role.ROLE_ADMIN)"S>
+                    <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_CREATE,@Role.ROLE_HOCVIEN_EDIT,@Role.ROLE_HOCVIEN_LIST)"  >
                         <a><i class="fa fa-home"></i> <span class="text-main">Học Viên</span> <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_CREATE,@Role.ROLE_HOCVIEN_EDIT,@Role.ROLE_ADMIN)"><a th:href="@{/portal/hocvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới </a>
+                            <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_CREATE,@Role.ROLE_HOCVIEN_EDIT)"><a th:href="@{/portal/hocvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới </a>
                             </li>
-                            <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_LIST,@Role.ROLE_ADMIN)"><a th:href="@{/portal/hocvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
+                            <li sec:authorize = "hasAnyRole(@Role.ROLE_HOCVIEN_LIST)"><a th:href="@{/portal/hocvien/list}"><i class="fa fa-star-o"></i> Danh sách </a></li>
 
                         </ul>
                     </li>
-                    <li sec:authorize = "hasAnyRole(@Role.ROLE_GIANGVIEN_CREATE,@Role.ROLE_GIANGVIEN_EDIT,@Role.ROLE_GIANGVIEN_LIST,@Role.ROLE_ADMIN)"><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span
+                    <li sec:authorize = "hasAnyRole(@Role.ROLE_GIANGVIEN_CREATE,@Role.ROLE_GIANGVIEN_EDIT,@Role.ROLE_GIANGVIEN_LIST)"><a><i class="fa fa-edit"></i> <span class="text-main"> Giảng viên </span> <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a th:href="@{/portal/giangvien/create}"><i class="fa fa-star-o"></i> Đăng ký mới</a>

@@ -225,14 +225,14 @@ public class HocVien implements Serializable {
     @Column(name = "MA_TON_GIAO", length = 10)
     private String maTonGiao;
 
-    @OneToOne(optional=true)
+    @ManyToOne(optional=true)
     @JoinColumn(name = "MA_TON_GIAO", referencedColumnName = "ma", updatable = false, insertable = false, nullable=true)
     private TonGiao tonGiao;
 
     @Column(name = "MA_DAN_TOC", length = 10)
     private String maDanToc;
 
-    @OneToOne(optional=true)
+    @ManyToOne(optional=true)
     @JoinColumn(name = "MA_DAN_TOC", referencedColumnName = "ma", updatable = false, insertable = false, nullable=true)
     private DanToc danToc;
 
